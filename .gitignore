@@ -50,3 +50,10 @@ pnpm-debug.log*
 .temp/
 .eslintcache
 coverage/
+
+# Python (scripts de imagem)
+__pycache__/
+*.pyc
+
+# Assets brutos de marca (variação de nome)
+/brand-assets/
