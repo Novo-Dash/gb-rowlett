@@ -6,60 +6,73 @@
    Nenhum hex: tudo em tokens.css.
    ════════════════════════════════════════════════════════════════════ */
 
-/* ════════ NAV — o cartão flutuante ════════ */
+/* ════════ NAV — a barra marinho, reta, de borda a borda ════════
+   Pedido do João Vitor (9 out 2026): sem o cartão branco flutuante, mais simples;
+   o azul é a cor principal da GB. Selo à esquerda (abre o formulário), telefone e
+   menu à direita; no celular o telefone mora dentro do menu. O menu abre a própria
+   barra para baixo, em três colunas de links, sem cartões. */
 .nav {
-  --bar: 52px;
+  --bar: var(--nav-h);
   position: fixed;
   inset: 0 0 auto;
   z-index: 60;
-  display: grid;
-  justify-items: center;
-  padding: 6px 10px 0;
   pointer-events: none;
   transition: transform 0.5s var(--ease);
 }
 .nav[data-hidden],
 html.bk-open .nav {
-  transform: translateY(calc(-100% - 12px));
+  transform: translateY(-100%);
 }
 .nav__card {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 880px;
-  overflow: hidden;
-  border: 1px solid rgb(var(--navy-rgb) / 0.08);
-  border-radius: var(--r-nav);
-  background: rgb(var(--paper-rgb) / 0.94);
-  box-shadow: 0 10px 30px -14px rgb(var(--navy-rgb) / 0.28);
-  -webkit-backdrop-filter: blur(14px) saturate(1.4);
-  backdrop-filter: blur(14px) saturate(1.4);
+  background: var(--navy);
+  color: var(--on-dark);
+  box-shadow: 0 1px 0 rgb(var(--paper-rgb) / 0.08), 0 10px 30px -18px rgb(0 0 0 / 0.6);
   pointer-events: auto;
 }
-@supports not (backdrop-filter: blur(1px)) {
-  .nav__card {
-    background: rgb(var(--paper-rgb) / 0.96);
-  }
-}
 .nav__bar {
-  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 8px;
+  width: min(100%, calc(var(--max) + 2 * var(--gutter)));
   height: var(--bar);
-  padding: 0 4px 0 2px;
+  margin-inline: auto;
+  padding: 0 calc(var(--gutter) - 6px);
+}
+.nav__brand {
+  order: 0;
+  display: inline-flex;
+  align-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  margin-right: auto;
+}
+/* o selo redondo da academia (o mesmo do Instagram) */
+.nav__logo {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: contain;
+}
+.nav__actions {
+  order: 1;
+  display: flex;
+  align-items: center;
 }
 .nav__burger {
+  order: 2;
   display: grid;
   place-content: center;
   gap: 6px;
   width: 44px;
   height: 44px;
-  color: var(--ink);
+  color: var(--paper);
 }
 .nav__burger i {
   display: block;
-  width: 22px;
+  width: 24px;
   height: 2px;
   background: currentColor;
   transition: transform 0.3s var(--ease);
@@ -70,49 +83,6 @@ html.bk-open .nav {
 .nav[data-open] .nav__burger i:last-child {
   transform: translateY(-4px) rotate(-45deg);
 }
-.nav__brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 44px;
-  min-height: 44px;
-  margin-right: auto;
-}
-/* o selo redondo da academia (o mesmo do Instagram) */
-.nav__logo {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  object-fit: contain;
-}
-/* celular: o selo à esquerda (abre o formulário) e o menu à direita; o telefone
-   sai da barra e fica dentro do menu (grupo Visit) */
-@media (max-width: 767px) {
-  .nav__brand {
-    order: 0;
-    margin-left: 4px;
-  }
-  .nav__burger {
-    order: 2;
-  }
-  .nav .nav__actions {
-    display: none;
-  }
-}
-@media (min-width: 768px) {
-  .nav__brand {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin: 0;
-    transform: translate(-50%, -50%);
-  }
-}
-.nav__actions {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
 .nav__call {
   display: inline-flex;
   align-items: center;
@@ -121,7 +91,7 @@ html.bk-open .nav {
   min-width: 44px;
   height: 44px;
   padding: 0 12px;
-  color: var(--ink);
+  color: var(--paper);
   font-family: var(--f-display);
   font-weight: 700;
   font-style: italic;
@@ -134,13 +104,20 @@ html.bk-open .nav {
   width: 19px;
   height: 19px;
   flex: none;
-  color: var(--red);
+  color: var(--red-hi);
 }
 @media (hover: hover) and (pointer: fine) {
   .nav__call:hover {
-    color: var(--red);
+    color: var(--red-hi);
   }
 }
+/* celular: só o selo e o menu; o telefone fica dentro do menu */
+@media (max-width: 767px) {
+  .nav .nav__actions {
+    display: none;
+  }
+}
+/* o menu: a barra abre para baixo, três colunas de links sobre o mesmo marinho */
 .nav__menu {
   display: grid;
   grid-template-rows: 0fr;
@@ -155,17 +132,19 @@ html.bk-open .nav {
 }
 .nav__cards {
   display: grid;
-  gap: 8px;
-  padding: 4px 8px 8px;
+  gap: 4px;
+  width: min(100%, calc(var(--max) + 2 * var(--gutter)));
+  margin-inline: auto;
+  padding: 4px var(--gutter) 20px;
+  border-top: 1px solid rgb(var(--paper-rgb) / 0.12);
 }
 .nav__group {
   display: grid;
-  gap: 6px;
-  padding: 14px 16px 12px;
-  border-radius: var(--r);
-  background: var(--paper-2);
+  align-content: start;
+  gap: 2px;
+  padding: 14px 0 6px;
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(12px);
   transition: transform 0.4s var(--ease), opacity 0.3s var(--ease);
 }
 .nav[data-open] .nav__group {
@@ -173,20 +152,14 @@ html.bk-open .nav {
   transform: none;
   transition-delay: calc(0.1s + var(--k) * 0.06s);
 }
-.nav__group--dark {
-  background: var(--navy);
-  color: var(--paper);
-}
 .nav__label {
+  margin-bottom: 4px;
   font-family: var(--f-display);
   font-weight: 700;
   font-style: italic;
   font-size: var(--t-label);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--red);
-}
-.nav__group--dark .nav__label {
   color: var(--red-hi);
 }
 .nav__link {
@@ -196,9 +169,10 @@ html.bk-open .nav {
   gap: 12px;
   width: 100%;
   min-height: 44px;
+  border-bottom: 1px solid rgb(var(--paper-rgb) / 0.08);
   font-size: 1rem;
   font-weight: 500;
-  color: inherit;
+  color: var(--paper);
   text-align: left;
 }
 .nav__link svg {
@@ -218,29 +192,19 @@ html.bk-open .nav {
   position: fixed;
   inset: 0;
   z-index: 1;
-  background: rgb(var(--navy-rgb) / 0.18);
+  background: rgb(0 0 0 / 0.35);
   pointer-events: auto;
 }
 @media (min-width: 640px) {
   .nav__cards {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-  .nav__group {
-    align-content: start;
-    min-height: 196px;
+    column-gap: clamp(24px, calc(var(--u) * 4), 72px);
   }
 }
 @media (min-width: 1024px) {
-  .nav {
-    --bar: 60px;
-    padding-top: 10px;
-  }
-  .nav__bar {
-    padding: 0 8px;
-  }
   .nav__logo {
-    width: 52px;
-    height: 52px;
+    width: 56px;
+    height: 56px;
   }
 }
 
@@ -357,23 +321,76 @@ html.bk-open .nav {
 .hero__act {
   display: grid;
   gap: 12px;
+  width: min(100%, 440px);
   margin-top: 22px;
 }
-/* a oferta: pequena, discreta, logo abaixo do botão */
-.hero__note {
-  font-size: 0.875rem;
-  line-height: 1.4;
-  color: rgb(var(--paper-rgb) / 0.78);
-  text-wrap: balance;
+/* a oferta em DESTAQUE (pedido do João Vitor): vidro marinho com a régua vermelha,
+   o preço grande na display, os dois benefícios ao lado; logo acima do botão */
+.hero__offer {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 18px;
+  row-gap: 4px;
+  width: 100%;
+  padding: 14px 18px 14px 16px;
+  border-left: 4px solid var(--red);
+  border-radius: var(--r);
+  background: rgb(var(--navy-rgb) / 0.72);
+  box-shadow: 0 18px 40px -24px rgb(0 0 0 / 0.7), inset 0 0 0 1px rgb(var(--paper-rgb) / 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  text-align: left;
 }
-/* o triângulo em linha com o texto: acompanha a primeira palavra mesmo centralizado */
-.hero__note svg {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  margin-right: 8px;
-  vertical-align: 0.1em;
-  color: var(--red-glow);
+.hero__offer-label {
+  grid-column: 1 / -1;
+  color: var(--red-hi);
+}
+.hero__offer-price {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.hero__offer-price b {
+  font-size: clamp(2.6rem, 9vw, 3.4rem);
+  line-height: 0.9;
+  color: var(--paper);
+}
+.hero__offer-per {
+  max-width: 7.5em;
+  font-size: 0.9375rem;
+  line-height: 1.15;
+  color: rgb(var(--paper-rgb) / 0.85);
+}
+.hero__offer-perks {
+  display: grid;
+  gap: 4px;
+  justify-self: end;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--paper);
+}
+.hero__offer-perks span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.hero__offer-perks svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  color: var(--red-hi);
+}
+@media (max-width: 400px) {
+  .hero__offer {
+    grid-template-columns: 1fr;
+  }
+  .hero__offer-perks {
+    justify-self: start;
+    grid-auto-flow: column;
+    gap: 14px;
+  }
 }
 @media (max-width: 639px) {
   .hero__copy {
@@ -420,13 +437,20 @@ html.bk-open .nav {
 /* ligado ao scroll: as linhas SOBEM DE BAIXO, uma depois da outra.
    --qi = progresso da linha (0 → 1), escalonado por --i; ease-out no quadrado. */
 html.motion .hero__need-l {
-  --qi: clamp(0, calc(var(--s, 0) * 1.9 - var(--i) * 0.28), 1);
+  --qi: clamp(0, calc(var(--s, 0) * 2.6 - var(--i) * 0.34), 1);
   opacity: var(--qi);
   transform: translateY(calc((1 - var(--qi)) * (1 - var(--qi)) * 1.1em));
 }
+/* o botão chega logo depois da última linha (antes ficava meio apagado até o fim da
+   cena: "o botão demora para aparecer"); no hover ou no foco, inteiro na hora */
 html.motion .hero__explore {
-  opacity: clamp(0, (var(--s, 0) - 0.75) * 5, 1);
-  translate: 0 calc((1 - clamp(0, (var(--s, 0) - 0.75) * 5, 1)) * 24px);
+  opacity: clamp(0, (var(--s, 0) - 0.45) * 6, 1);
+  translate: 0 calc((1 - clamp(0, (var(--s, 0) - 0.45) * 6, 1)) * 18px);
+}
+html.motion .hero__explore:hover,
+html.motion .hero__explore:focus-visible {
+  opacity: 1;
+  translate: none;
 }
 .hero__explore {
   margin-top: clamp(32px, calc(var(--u) * 3.4), 56px);
@@ -459,7 +483,8 @@ html:not(.motion) .hero__deep {
     margin-inline: auto;
   }
   .hero__act {
-    justify-items: center;
+    justify-items: stretch;
+    margin-inline: auto;
   }
 }
 @media (min-width: 1024px) {
@@ -501,8 +526,9 @@ html:not(.motion) .hero__deep {
     margin-inline: auto;
   }
   .hero__act {
-    justify-items: center;
+    justify-items: stretch;
     margin-top: 28px;
+    margin-inline: auto;
   }
   .hero__need {
     width: min(100%, calc(var(--u) * 52), 960px);
@@ -1572,6 +1598,137 @@ html.motion .programs__wrap[data-in] .pcard__btn {
   object-fit: cover;
   transition: transform 0.9s var(--ease);
 }
+/* a foto é um botão que amplia: cursor de lupa, o ícone de ampliar no canto */
+.build__zoom {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: zoom-in;
+}
+.build__plus {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgb(var(--navy-rgb) / 0.78);
+  color: var(--paper);
+  opacity: 0.85;
+  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.build__plus svg {
+  width: 16px;
+  height: 16px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .build__plus {
+    opacity: 0;
+  }
+  .build__zoom:hover .build__plus,
+  .build__zoom:focus-visible .build__plus {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+/* a galeria em tela cheia */
+.lbx {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  padding: 56px 16px 24px;
+  background: rgb(0 0 0 / 0.94);
+  outline: none;
+  animation: lbx-in 0.25s var(--ease) both;
+}
+@keyframes lbx-in {
+  from {
+    opacity: 0;
+  }
+}
+.lbx__fig {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  max-height: 100%;
+  pointer-events: none;
+}
+.lbx__img {
+  width: auto;
+  max-width: min(100%, 1200px);
+  height: auto;
+  max-height: calc(100svh - 140px);
+  border-radius: var(--r);
+  object-fit: contain;
+  pointer-events: auto;
+}
+.lbx__cap {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  max-width: 60ch;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  color: rgb(var(--paper-rgb) / 0.85);
+  text-align: center;
+}
+.lbx__cap .label {
+  flex: none;
+  color: var(--red-hi);
+}
+.lbx__btn,
+.lbx__close {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgb(var(--paper-rgb) / 0.12);
+  color: var(--paper);
+  transition: background-color 0.2s var(--ease);
+}
+.lbx__btn svg,
+.lbx__close svg {
+  width: 20px;
+  height: 20px;
+}
+.lbx__btn {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.lbx__btn--prev {
+  left: clamp(8px, 2vw, 32px);
+}
+.lbx__btn--prev svg {
+  transform: rotate(180deg);
+}
+.lbx__btn--next {
+  right: clamp(8px, 2vw, 32px);
+}
+.lbx__close {
+  top: 12px;
+  right: 12px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .lbx__btn:hover,
+  .lbx__close:hover {
+    background: var(--red);
+  }
+}
+@media (max-width: 639px) {
+  .lbx__btn {
+    top: auto;
+    bottom: 16px;
+    transform: none;
+  }
+}
 /* o véu marinho a 18% que sai no hover/foco; as vizinhas caem a 45% */
 .build__veil {
   position: absolute;
@@ -1677,10 +1834,9 @@ html.motion .build__why .rise {
   }
 }
 
-/* ════════ [V] HORÁRIOS — o quadro de horários (mecanismo Like Water v2, linguagem GB) ════════
-   Horários na lateral, dias no topo, uma aula por célula. Um quadro branco com o cabeçalho
-   marinho; a coluna de hoje acesa de cima a baixo; o hover acende linha e coluna. Um vermelho
-   só (o da marca): as turmas se distinguem pelo nome. Cantos retos. */
+/* ════════ [V] HORÁRIOS — o formato da GB Charleston: abas + um card por turma ════════
+   Régua de cada card na cor oficial do programa GB (GBK verde, GB1 azul) e o selo
+   oficial no canto. O card inteiro é o botão. */
 .sc {
   padding: clamp(72px, calc(var(--u) * 8), 150px) 0 clamp(56px, calc(var(--u) * 6), 110px);
 }
@@ -1690,378 +1846,217 @@ html.motion .build__why .rise {
 }
 .sc__head {
   display: grid;
-  justify-items: center;
-  text-align: center;
+  gap: 16px;
 }
-.sc__title {
-  max-width: 16em;
+.sc__aside {
+  display: grid;
+  gap: 10px;
 }
 .sc__summary {
-  margin-top: 16px;
   color: var(--muted);
   letter-spacing: 0.14em;
 }
-/* o filtro: chips de canto reto; o escolhido em vermelho */
-.sc__filters {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-}
-.sc__chip {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 0 18px;
-  border-radius: var(--r);
-  background: var(--paper);
-  box-shadow: inset 0 0 0 1px var(--line-strong);
-  color: var(--ink);
-  font-family: var(--f-display);
-  font-weight: 700;
-  font-style: italic;
-  font-size: 0.9375rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  transition:
-    background-color 0.25s var(--ease),
-    color 0.25s var(--ease),
-    box-shadow 0.25s var(--ease);
-}
-@media (hover: hover) and (pointer: fine) {
-  .sc__chip:hover {
-    box-shadow: inset 0 0 0 1px var(--red);
-  }
-}
-.sc__chip[aria-pressed='true'] {
-  background: var(--red);
-  color: var(--paper);
-  box-shadow: none;
-}
-/* o quadro */
-.sc__board {
-  overflow: hidden;
-  border-radius: var(--r);
-  background: var(--paper);
-  box-shadow:
-    0 0 0 1px var(--line),
-    0 30px 60px -40px rgb(var(--navy-rgb) / 0.5);
-}
-.sc__table {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed;
-}
-.sc__table thead th {
-  padding: 16px 14px;
-  background: var(--red);
-  color: var(--paper);
-  text-align: left;
-  vertical-align: top;
-  font-weight: 400;
-}
-.sc__corner {
-  width: 116px;
-}
-.sc__corner .label,
-.sc__date {
-  display: block;
-  font-size: var(--t-label);
-  letter-spacing: 0.16em;
-  color: var(--paper); /* branco cheio: 5,9:1 sobre o vermelho */
-}
-.sc__dayname {
-  display: block;
-  margin-bottom: 4px;
-  font-style: italic;
-  font-size: 1.5rem;
-  line-height: 1;
-  color: var(--paper);
-  text-decoration: none;
-}
-/* hoje: a célula em vermelho mais fundo e a régua branca no pé */
-.sc__table thead th.is-today {
-  background: var(--red-deep);
-  box-shadow: inset 0 -4px 0 var(--paper);
-}
-.sc__day.is-closed {
-  width: 84px;
-}
-.sc__table tbody th,
-.sc__table td {
-  padding: 6px;
-  border-top: 1px solid var(--line);
-  vertical-align: top;
-  transition: background-color 0.2s var(--ease);
-}
-.sc__table td + td,
-.sc__table th + td {
-  border-left: 1px solid var(--line);
-}
-.sc__time {
-  padding: 16px 0 0 14px !important;
-  text-align: left;
-  font-style: italic;
-  font-size: 1.0625rem;
-  color: var(--muted);
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-}
-.sc__table td.is-today {
-  background: rgb(var(--red-rgb) / 0.04);
-}
-.sc__table tr.is-hover th,
-.sc__table tr.is-hover td,
-.sc__table td.is-hover {
-  background: var(--paper-2);
-}
-.sc__table tr.is-hover .sc__time {
-  color: var(--ink);
-}
-.sc__closed {
-  vertical-align: middle !important;
-  text-align: center;
-  background: repeating-linear-gradient(135deg, transparent 0 10px, rgb(var(--navy-rgb) / 0.04) 10px 11px);
-}
-.sc__closed .label {
-  display: inline-block;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  letter-spacing: 0.3em;
-  color: var(--muted);
-}
-/* uma aula: a barra vermelha à esquerda, o nome em Cn, a idade/nível; é um botão */
-.sc__class {
-  position: relative;
-  display: grid;
-  width: 100%;
-  gap: 2px;
-  min-height: 44px;
-  padding: 9px 10px 9px 16px;
-  border-radius: var(--r);
-  text-align: left;
-  transition:
-    background-color 0.2s var(--ease),
-    opacity 0.3s var(--ease),
-    box-shadow 0.2s var(--ease),
-    transform 0.2s var(--ease);
-}
-.sc__class::before {
-  content: '';
-  position: absolute;
-  left: 4px;
-  top: 9px;
-  bottom: 9px;
-  width: 3px;
-  background: var(--red);
-}
-.sc__class + .sc__class {
-  margin-top: 4px;
-}
-.sc__name {
-  font-family: var(--f-display);
-  font-weight: 700;
-  font-style: italic;
-  font-size: 1rem;
-  line-height: 1.1;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: var(--ink);
-}
-.sc__sub {
-  font-size: 0.8125rem;
-  line-height: 1.3;
-  color: var(--muted);
-}
-@media (hover: hover) and (pointer: fine) {
-  .sc__class:hover {
-    background: var(--paper);
-    box-shadow: 0 8px 18px -10px rgb(var(--navy-rgb) / 0.45);
-  }
-}
-.sc__class:active {
-  transform: scale(0.98);
-}
-.sc__class.is-dim {
-  opacity: 0.2;
-}
-html.motion .sc__board {
-  transform: translateY(22px);
-  transition: transform 1s var(--ease);
-}
-html.motion .sc__board[data-in] {
-  transform: none;
-}
-/* celular: os dias como abas, um dia por vez */
-.sc__list {
-  display: none;
-}
+/* as abas: sublinhado na cor do público (azul GB, verde GBK) */
 .sc__tabs {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 2px;
-  padding: 3px;
-  border-radius: var(--r);
-  background: var(--paper-2);
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--line-strong);
+  scrollbar-width: none;
+}
+.sc__tabs::-webkit-scrollbar {
+  display: none;
 }
 .sc__tab {
   position: relative;
-  min-height: 44px;
-  border-radius: var(--r);
+  flex: none;
+  min-height: 48px;
+  padding: 0 18px 4px;
   font-family: var(--f-display);
   font-weight: 700;
   font-style: italic;
   font-size: 1rem;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--ink-2);
+  color: var(--muted);
+  transition: color 0.2s var(--ease);
+}
+.sc__tab::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: var(--navy);
+  transform: scaleX(0);
+  transition: transform 0.3s var(--ease);
+}
+.sc__tab--kids::after {
+  background: var(--gbk);
+}
+.sc__tab--adults::after {
+  background: var(--gb1);
 }
 .sc__tab[aria-selected='true'] {
-  background: var(--red);
-  color: var(--paper);
+  color: var(--ink);
 }
-.sc__dot {
-  position: absolute;
-  top: 7px;
-  right: calc(50% - 18px);
-  width: 6px;
-  height: 6px;
-  background: var(--red);
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+.sc__tab[aria-selected='true']::after {
+  transform: none;
 }
-.sc__tab[aria-selected='true'] .sc__dot {
+@media (hover: hover) and (pointer: fine) {
+  .sc__tab:hover {
+    color: var(--ink-2);
+  }
+}
+.sc__grid {
+  display: grid;
+  gap: 16px;
+}
+/* o card: régua de 6px na cor do programa, nome + selo, idade, horários, "Claim" */
+.sccard {
+  --c: var(--navy);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 26px 22px 20px;
+  border-radius: var(--r);
   background: var(--paper);
+  text-align: left;
+  box-shadow:
+    0 0 0 1px var(--line),
+    0 22px 40px -32px rgb(var(--navy-rgb) / 0.5);
+  transition:
+    transform 0.3s var(--ease),
+    box-shadow 0.3s var(--ease);
 }
-.sc__slots {
-  display: grid;
-  margin-top: 16px;
-  border-top: 1px solid var(--line);
+.sccard--gbk {
+  --c: var(--gbk);
 }
-.sc__slot {
-  display: grid;
-  grid-template-columns: 88px minmax(0, 1fr);
-  align-items: start;
+.sccard--gb1 {
+  --c: var(--gb1);
+}
+.sccard::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 6px;
+  background: var(--c);
+}
+.sccard__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
   gap: 12px;
-  padding: 8px 0;
+}
+.sccard__name {
+  font-size: clamp(1.375rem, 5.4vw, 1.75rem);
+  line-height: 0.98;
+  color: var(--ink);
+}
+.sccard__badge {
+  flex: none;
+  width: 72px;
+  height: auto;
+  margin-top: 4px;
+}
+.sccard__sub {
+  margin: 8px 0 16px;
+  color: var(--c);
+}
+.sccard__rows {
+  display: grid;
+}
+.sccard__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 0;
   border-bottom: 1px solid var(--line);
 }
-.sc__slot .sc__time {
-  padding: 12px 0 0 !important;
+.sccard__row:last-child {
+  border-bottom: 0;
 }
-/* o pé: a nota, a pendência, o botão centralizado */
+.sccard__days {
+  color: var(--muted);
+  letter-spacing: 0.12em;
+}
+.sccard__time {
+  font-size: 1.375rem;
+  line-height: 1;
+  color: var(--ink);
+  white-space: nowrap;
+}
+/* o "Claim" sempre visível (nada de esperar o hover); no hover ele anda */
+.sccard__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 16px;
+  color: var(--c);
+  letter-spacing: 0.14em;
+}
+.sccard__cta svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s var(--ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  .sccard:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 0 0 1px var(--line-strong),
+      0 30px 50px -30px rgb(var(--navy-rgb) / 0.55);
+  }
+  .sccard:hover .sccard__cta svg {
+    transform: translateX(4px);
+  }
+}
+.sccard:active {
+  transform: scale(0.99);
+}
+html.motion .sc__grid .rise {
+  transition-delay: calc(var(--i) * 80ms);
+}
 .sc__foot {
   display: grid;
   justify-items: center;
-  gap: 14px;
+  gap: 8px;
   text-align: center;
 }
 .sc__note {
-  max-width: 60ch;
+  max-width: 62ch;
   font-size: 1rem;
   line-height: 1.55;
   color: var(--ink-2);
 }
-@media (max-width: 1023px) {
-  .sc__board {
-    display: none;
-  }
-  .sc__list {
-    display: block;
+.sc__closed {
+  color: var(--muted);
+}
+@media (min-width: 720px) {
+  .sc__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
-@media (max-width: 639px) {
-  .sc__filters {
-    justify-content: flex-start;
-  }
-  .sc__head {
-    justify-items: start;
-    text-align: left;
-  }
-  .sc__chip {
-    padding: 0 14px;
-    font-size: 0.875rem;
-  }
-  .sc__foot {
-    justify-items: stretch;
-    text-align: left;
-  }
-}
-
-/* desktop: o quadro inteiro numa tela (100svh, pedido do Adryan). O cabeçalho e o
-   filtro dividem a linha de cima, a nota e o botão dividem a de baixo, e as
-   linhas do quadro crescem ou encolhem com a altura da tela. Em telas muito
-   baixas a seção passa de uma tela em vez de cortar o quadro. */
 @media (min-width: 1024px) {
-  .sc {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 100svh;
-    padding: calc(var(--nav-h) + clamp(12px, 2.4svh, 28px)) 0 clamp(20px, 3svh, 36px);
-  }
-  .sc__in {
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-areas:
-      'head filters'
-      'board board'
-      'foot foot';
-    align-items: end;
-    column-gap: 32px;
-    row-gap: clamp(14px, 2.2svh, 26px);
-  }
   .sc__head {
-    grid-area: head;
-    justify-items: start;
-    text-align: left;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: end;
+    column-gap: 48px;
   }
-  .sc .sc__title {
-    max-width: none;
-    font-size: clamp(1.9rem, min(calc(var(--u) * 2.6), 4.6svh), 3.4rem);
+  .sc__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(16px, calc(var(--u) * 1.6), 28px);
   }
-  .sc__summary {
-    margin-top: 10px;
+  .sccard {
+    padding: 30px clamp(22px, calc(var(--u) * 2), 32px) 24px;
   }
-  .sc__filters {
-    grid-area: filters;
-    justify-content: flex-end;
-  }
-  .sc__board {
-    grid-area: board;
-  }
-  .sc__table thead th {
-    padding: clamp(8px, 1.3svh, 14px) 12px;
-  }
-  .sc__dayname {
-    font-size: 1.25rem;
-  }
-  /* cada linha de horário divide a altura que sobra da tela */
-  .sc__table tbody tr {
-    height: clamp(44px, calc((100svh - 480px) / 9), 72px);
-  }
-  .sc__table tbody th,
-  .sc__table td {
-    padding: 3px 4px;
-    vertical-align: middle;
-  }
-  .sc__time {
-    padding: 0 0 0 12px !important;
-    vertical-align: middle !important;
-  }
-  .sc__class {
-    min-height: 40px;
-    padding: 5px 8px 6px 14px;
-  }
-  .sc__class::before {
-    top: 7px;
-    bottom: 7px;
-  }
-  /* sem botão: a nota numa linha só, centralizada embaixo do quadro */
-  .sc__foot {
-    grid-area: foot;
-  }
-  .sc__note {
-    max-width: none;
-    white-space: nowrap;
+  .sccard__name {
+    font-size: clamp(1.5rem, calc(var(--u) * 1.8), 2rem);
   }
 }
 
@@ -2444,7 +2439,13 @@ html.motion .ready__cols .rise {
 }
 
 /* ════════ [IX] COMO RESERVAR — três passos lado a lado, a faixa embaixo ════════ */
+/* a seção em MARINHO (pedido do João Vitor: "o azul é a cor principal da GB, o
+   vermelho é o accent"); o card do passo atual, o botão e o tatame seguem vermelhos */
 .how {
+  background:
+    radial-gradient(120% 70% at 50% 0%, rgb(var(--paper-rgb) / 0.06), transparent 60%),
+    var(--navy);
+  color: var(--on-dark);
   --x0: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
   --bh: clamp(64px, 11svh, 124px);
   position: relative;
@@ -2711,6 +2712,37 @@ html.motion .ready__cols .rise {
   .how__b {
     font-size: clamp(1rem, calc(var(--u) * 1.05), 1.125rem);
   }
+}
+
+/* no marinho: título branco, cards feitos brancos, os que faltam em contorno claro */
+.how .how__title {
+  color: var(--paper);
+}
+.how__step {
+  box-shadow:
+    0 0 0 1px rgb(var(--paper-rgb) / 0.12),
+    0 26px 44px -30px rgb(0 0 0 / 0.6);
+}
+.how__step.is-next {
+  box-shadow: inset 0 0 0 1.5px rgb(var(--paper-rgb) / 0.28);
+}
+.how__step.is-next .how__n {
+  -webkit-text-stroke-color: rgb(var(--paper-rgb) / 0.55);
+}
+.how__step.is-next .how__t {
+  color: rgb(var(--paper-rgb) / 0.8);
+}
+.how__step.is-next .how__b {
+  color: rgb(var(--paper-rgb) / 0.62);
+}
+.how__step.is-next .how__chip {
+  box-shadow: inset 0 0 0 1px rgb(var(--paper-rgb) / 0.35);
+  color: rgb(var(--paper-rgb) / 0.75);
+}
+.how__step.is-now {
+  box-shadow:
+    0 0 0 1px rgb(var(--red-rgb) / 0.5),
+    0 34px 56px -28px rgb(0 0 0 / 0.65);
 }
 
 /* ════════ [X] ABERTURA — a única banda escura ════════ */

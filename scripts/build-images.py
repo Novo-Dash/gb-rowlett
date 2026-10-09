@@ -59,6 +59,10 @@ IMAGES = [
 
 # Fotos de celular e de câmera convivem: a mesma curva (contraste +6, saturação −8).
 # As da obra ficam cruas (são prova); as dos programas já chegaram tratadas. O logo não é foto.
+# a galeria da obra amplia as fotos INTEIRAS (sem o recorte 4:5): <nome>-full.avif/.webp, lado maior 1600px
+FULL = {"build-1": f"{O}/IMG_0704.HEIC", "build-2": f"{O}/IMG_1605.HEIC", "build-3": f"{O}/IMG_1604.HEIC",
+        "build-4": f"{O}/IMG_1602.HEIC", "build-5": f"{O}/IMG_0712.HEIC"}
+
 RAW = {"hero-d", "hero-w", "film-m", "parents-1", "parents-2", "parents-3", "p-lc1", "p-lc2", "p-juniors", "p-adults", "logo", "build-1", "build-2", "build-3", "build-4", "build-5", "opening", "visit"}
 
 
@@ -95,6 +99,12 @@ def main():
             made.append(w)
         manifest[name] = {"ratio": list(ratio), "widths": made}
         print(f"{name:10s} {ratio} {made}  (origem {im.width}px)")
+    for name, src in FULL.items():
+        im = ImageOps.exif_transpose(Image.open(BRAND / src)).convert("RGB")
+        im.thumbnail((1600, 1600), Image.LANCZOS)
+        im.save(OUT / f"{name}-full.webp", "WEBP", quality=80, method=6)
+        im.save(OUT / f"{name}-full.avif", "AVIF", quality=56, speed=5)
+        print(f"{name}-full {im.size}")
     (ROOT / "src" / "data" / "media.json").write_text(json.dumps(manifest, indent=1), encoding="utf-8")
 
 

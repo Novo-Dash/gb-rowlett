@@ -150,7 +150,8 @@ export const hero = {
     { text: 'never trained.', accent: true },
   ],
   lead: 'Kids from 4, teens and adults. No experience needed. The official Gracie Barra curriculum, led by Andre Carepa, 27 years in jiu-jitsu.',
-  offerLine: 'Founding Members pay $87 every two weeks. No enrollment fee.',
+  /** A oferta em destaque no hero (pedido do João Vitor: "a oferta está muito pequena"). */
+  offer: { label: 'Founding Members', price: '$87', per: 'every two weeks', perks: ['No enrollment fee', 'Uniform included'] },
   cta: 'Claim my Founding Member spot',
   /** Cena 2: a frase da oferta. `w` = largura em em (AdihausDIN Cn Bold Italic,
       scripts/fit-lines.py). As duas linhas grandes usam a mesma largura (a da mais
@@ -287,6 +288,12 @@ export const build = {
     { id: 'doors', image: 'build-4', title: 'New walls and a doorway, drywall still unpainted' },
     { id: 'front', image: 'build-5', title: 'The storefront with the Gracie Barra Jiu-Jitsu & Self-Defense sign installed' },
   ] as const,
+  /** A galeria em tela cheia. */
+  zoom: 'View photo',
+  galleryLabel: 'The build, in photos',
+  prev: 'Previous photo',
+  next: 'Next photo',
+  close: 'Close',
   /** As razões de "why us", só o título (tópicos). */
   plates: ['Beginners are the plan, not the exception.', 'One trip for the whole family.'],
   cta: 'Claim my Founding Member spot',
@@ -336,23 +343,22 @@ export const adultTimesSentence = (() => {
 
 export const scheduleCopy = {
   eyebrow: 'The schedule',
-  title: [{ text: 'Classes from 6 AM to 6:30 PM.' }, { text: 'Pick the one that fits your week.', br: true }],
-  summary: (c: typeof scheduleCounts) => `${c.total} classes a week · ${c.adults} adults · ${c.lc1} Little Champions 1 · ${c.lc2Juniors} LC2 + Juniors`,
+  title: [{ text: 'Our schedule.' }],
+  lead: 'Classes from 6 AM to 6:30 PM, six days a week. Pick the time that keeps you consistent.',
+  summary: (c: typeof scheduleCounts) => `${c.total} classes a week · ${c.adults} adults · ${c.lc1 + c.lc2Juniors} kids`,
   note: (n: number) => `${n} adult classes a week, including 6 AM on Tue/Thu for anyone who has to be at work by 8.`,
-  caption: 'Weekly class schedule by day and time. Each class opens the founding pre-registration with that class picked.',
-  filterLabel: 'Show',
-  filters: [
+  tabsLabel: 'Schedule by program',
+  /** O formato da GB Charleston: abas por público, um card por turma, o selo oficial do programa GB. */
+  tabs: [
     { id: 'all', label: 'All classes' },
+    { id: 'kids', label: 'Kids' },
     { id: 'adults', label: 'Adults + Teens' },
-    { id: 'lc1', label: 'Ages 4–6' },
-    { id: 'lc2-juniors', label: 'Ages 7–14' },
-  ] as Array<{ id: 'all' | SlotKey; label: string }>,
-  timeLabel: 'Time',
-  closed: 'Closed',
-  sunday: { short: 'Sun', long: 'Sunday' },
-  todayLabel: 'Today',
-  dayLabel: 'Day',
+  ] as const,
+  /** Selo oficial GB de cada turma: GBK (kids, verde) e GB1 (adultos, azul). */
+  badge: { adults: 'gb1', lc1: 'gbk', 'lc2-juniors': 'gbk' } as Record<SlotKey, 'gb1' | 'gbk'>,
+  cardAction: 'Claim a spot',
   slotAction: 'Claim a spot in this class',
+  sundayClosed: 'Sunday closed',
 }
 
 /* ── VI · Para os pais ─────────────────────────────────────────────── */

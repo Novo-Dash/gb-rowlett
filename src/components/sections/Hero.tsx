@@ -25,7 +25,7 @@ import { hero, site } from '@/data/site'
 import { clamp01, docTop, prefersReducedMotion, useScrollTick } from '@/motion/scroll'
 import { Cta } from '../ui/Cta'
 import { Eyebrow } from '../ui/Eyebrow'
-import { Tri } from '../ui/Icons'
+import { Check } from '../ui/Icons'
 import { Lines } from '../ui/Lines'
 import { Pic } from '../ui/Pic'
 
@@ -120,14 +120,25 @@ export function Hero() {
             {hero.lead}
           </p>
           <div className="hero__act rise rise--load" data-hero-cta="" style={{ ['--d' as string]: '380ms' }}>
+            {/* a oferta em destaque, logo acima do botão */}
+            <p className="hero__offer">
+              <span className="hero__offer-label label">{hero.offer.label}</span>
+              <span className="hero__offer-price">
+                <b className="d">{hero.offer.price}</b>
+                <span className="hero__offer-per">{hero.offer.per}</span>
+              </span>
+              <span className="hero__offer-perks">
+                {hero.offer.perks.map((p) => (
+                  <span key={p}>
+                    <Check />
+                    {p}
+                  </span>
+                ))}
+              </span>
+            </p>
             <Cta origin="hero" size="block">
               {hero.cta}
             </Cta>
-            {/* a oferta embaixo do botão, pequena e discreta */}
-            <p className="hero__note">
-              <Tri />
-              <span>{hero.offerLine}</span>
-            </p>
           </div>
         </div>
       </div>
