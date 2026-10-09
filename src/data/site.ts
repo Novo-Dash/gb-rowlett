@@ -462,7 +462,6 @@ export const footer = {
   emailLabel: 'Email',
   mapTitle: [{ text: 'Right here in Rowlett' }],
   mapIframeTitle: 'Map: Gracie Barra Rowlett, 3503 Rowlett Rd, Bldg K, Suite 302, Rowlett, TX 75088',
-  facadeAlt: 'The Gracie Barra Rowlett storefront with the sign installed',
   marquee: 'Gracie Barra Rowlett',
   copyright: '© 2026 Gracie Barra Rowlett',
   affiliation: 'Gracie Barra affiliate',

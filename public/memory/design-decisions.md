@@ -189,3 +189,4 @@ A tabela viva é a §20 do `prd-GBR-001.md` (23 itens). Resumo do que trava o mo
   - **How to reserve:** seção BRANCA de novo; os cards e o tatame atrás da faixa em AZUL (card do passo atual em marinho, números e selos em marinho, o tatame marinho); só o botão segue vermelho.
   - **Oferta do hero em preto e azul:** vidro preto, etiqueta "Founding Members" em pílula azul GB, $87 grande à esquerda, filete, benefícios com check em círculo azul. Sem vermelho nem marinho.
   - **Galeria da obra sem abrir a foto:** sai a galeria em tela cheia; no desktop com mouse a fila vira um acordeão e a foto apontada CRESCE (≈ metade da fila), as outras se apertam. Fotos da obra agora também em 1280px. No celular/toque a fila segue estática.
+- **Mapa do rodapé (Adryan):** sai a foto da fachada e o pino triangular por cima do mapa; o mapa do Google fica em COR (sem o filtro cinza), só com o próprio marcador do endereço. A imagem "visit" (só usada ali) saiu do site e do script.

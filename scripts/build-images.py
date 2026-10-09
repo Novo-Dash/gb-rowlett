@@ -54,12 +54,11 @@ IMAGES = [
     # abertura: fachada 16/9 a 30%
     ("opening",    f"{O}/IMG_0713.HEIC",   (16, 9), [960, 1440, 1920], (0.5, 0.35), 48),
     # fachada 1/1 encostada no pino do mapa
-    ("visit",      f"{O}/IMG_0712.HEIC",   (1, 1),  [420, 560],   (0.5, 0.42)),
 ]
 
 # Fotos de celular e de câmera convivem: a mesma curva (contraste +6, saturação −8).
 # As da obra ficam cruas (são prova); as dos programas já chegaram tratadas. O logo não é foto.
-RAW = {"hero-d", "hero-w", "film-m", "parents-1", "parents-2", "parents-3", "p-lc1", "p-lc2", "p-juniors", "p-adults", "logo", "build-1", "build-2", "build-3", "build-4", "build-5", "opening", "visit"}
+RAW = {"hero-d", "hero-w", "film-m", "parents-1", "parents-2", "parents-3", "p-lc1", "p-lc2", "p-juniors", "p-adults", "logo", "build-1", "build-2", "build-3", "build-4", "build-5", "opening"}
 
 
 def crop_to(im: Image.Image, ratio, focus):

@@ -17,7 +17,6 @@ import { trackCall, trackCta, trackDirections, trackEmail } from '@/track'
 import { Eyebrow } from '../ui/Eyebrow'
 import { Lines } from '../ui/Lines'
 import { LogoOutline, Mail, Phone, Route } from '../ui/Icons'
-import { Pic } from '../ui/Pic'
 
 export function Footer() {
   const { open } = useBooking()
@@ -63,14 +62,8 @@ export function Footer() {
             </ul>
           </div>
 
+          {/* o mapa do Google, em cor, sem foto nem pino por cima (o próprio mapa marca o endereço) */}
           <div className="foot__map">
-            <span className="foot__thumb">
-              <Pic name="visit" alt={footer.facadeAlt} sizes="220px" />
-            </span>
-            <svg className="foot__pin" viewBox="0 0 40 46" aria-hidden="true">
-              <path className="foot__pin-out" d="M20 44 L3 6 H37 Z" />
-              <path className="foot__pin-in" d="M20 31 L11 12 H29 Z" />
-            </svg>
             <iframe title={footer.mapIframeTitle} src={site.mapsEmbedSrc} loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
           </div>
         </div>
