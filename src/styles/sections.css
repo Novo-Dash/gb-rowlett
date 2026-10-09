@@ -2348,7 +2348,7 @@ html.motion .ready__cols .rise {
 /* ════════ [IX] COMO RESERVAR — três passos lado a lado, a faixa embaixo ════════ */
 .how {
   --x0: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
-  --bh: clamp(44px, 8svh, 84px);
+  --bh: clamp(64px, 11svh, 124px);
   position: relative;
 }
 .how__stage {
@@ -2367,9 +2367,11 @@ html.motion .ready__cols .rise {
 .how__title {
   max-width: none;
 }
-/* os passos em CARDS: branco, régua no topo, o número e o "step n/3" na mesma
-   linha, título e texto. Aceso: régua vermelha, número cheio, sombra. Apagado:
-   régua cinza, número em contorno, conteúdo esmaecido. */
+/* os passos em CARDS, três estados:
+   · feito: branco, sombra, número vermelho, selo "✓ Done";
+   · agora: VERMELHO (o degradê do botão), texto branco, selo "Now" branco, sobe;
+   · depois: vazado, contorno tracejado, número em contorno, texto apagado.
+   Sem movimento: todos como "feito", sem selo. */
 .how__steps {
   display: grid;
   gap: 12px;
@@ -2381,54 +2383,51 @@ html.motion .ready__cols .rise {
   flex-direction: column;
   gap: 8px;
   padding: 18px 18px 20px;
-  overflow: hidden;
   border-radius: var(--r);
   background: var(--paper);
   box-shadow:
     0 0 0 1px var(--line),
     0 26px 44px -34px rgb(var(--navy-rgb) / 0.55);
   transition:
+    background-color 0.5s var(--ease),
     box-shadow 0.5s var(--ease),
-    transform 0.5s var(--ease);
-}
-.how__step::before {
-  content: '';
-  position: absolute;
-  inset: 0 0 auto;
-  height: 4px;
-  background: var(--line-strong);
-  transition: background-color 0.5s var(--ease);
-}
-.how__step.is-on::before {
-  background: var(--red);
+    transform 0.6s var(--ease-spring);
 }
 .how__top {
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
 }
 .how__n {
   font-size: clamp(2.6rem, 11vw, 3.2rem);
   line-height: 0.82;
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--line-strong);
+  color: var(--red);
   transition:
     color 0.5s var(--ease),
     -webkit-text-stroke-color 0.5s var(--ease);
 }
-.how__step.is-on .how__n {
-  color: var(--red);
-  -webkit-text-stroke-color: var(--red);
+.how__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px 5px;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition:
+    background-color 0.5s var(--ease),
+    color 0.5s var(--ease);
 }
-.how__of {
-  color: var(--muted);
+.how__chip svg {
+  width: 12px;
+  height: 12px;
 }
 .how__t {
   font-size: clamp(1.3rem, 5.6vw, 1.6rem);
   line-height: 0.98;
   color: var(--ink);
   text-wrap: balance;
+  transition: color 0.5s var(--ease);
 }
 .how__b {
   max-width: 46ch;
@@ -2436,26 +2435,55 @@ html.motion .ready__cols .rise {
   line-height: 1.5;
   color: var(--ink-2);
   text-wrap: pretty;
+  transition: color 0.5s var(--ease);
 }
 .how__pend {
   margin-top: 2px;
 }
-/* o que ainda não chegou fica apagado e sem sombra; o passo do momento sobe */
-html.motion .how__step:not(.is-on) {
-  box-shadow: 0 0 0 1px var(--line);
+/* feito */
+.how__step.is-done .how__chip {
+  background: var(--red-wash);
+  color: var(--red);
 }
-html.motion .how__step:not(.is-on) > :not(.how__top),
-html.motion .how__step:not(.is-on) .how__of {
-  opacity: 0.42;
-}
-html.motion .how__step > * {
-  transition: opacity 0.5s var(--ease);
-}
-html.motion .how__step.is-now {
-  transform: translateY(-4px);
+/* agora: o card vermelho */
+.how__step.is-now {
+  background: linear-gradient(180deg, var(--btn-top), var(--btn-bottom));
   box-shadow:
-    0 0 0 1px var(--line-strong),
-    0 34px 54px -32px rgb(var(--navy-rgb) / 0.6);
+    0 0 0 1px rgb(var(--red-rgb) / 0.4),
+    0 34px 56px -30px rgb(var(--red-rgb) / 0.75);
+  transform: translateY(-6px);
+}
+.how__step.is-now .how__n,
+.how__step.is-now .how__t {
+  color: var(--paper);
+}
+.how__step.is-now .how__b {
+  color: rgb(var(--paper-rgb) / 0.88);
+}
+.how__step.is-now .how__chip {
+  background: var(--paper);
+  color: var(--red);
+}
+/* depois: vazado */
+.how__step.is-next {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--line-strong);
+  background-image: none;
+}
+.how__step.is-next .how__n {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--line-strong);
+}
+.how__step.is-next .how__t,
+.how__step.is-next .how__b {
+  color: var(--muted);
+}
+.how__step.is-next .how__chip {
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  color: var(--muted);
+}
+.how__step.is-next .how__pend {
+  opacity: 0.5;
 }
 
 /* O DIVISOR DA SEÇÃO: o tatame vermelho de borda a borda, colado na borda de
@@ -2466,17 +2494,22 @@ html.motion .how__step.is-now {
   display: flex;
   align-items: center;
   margin-top: clamp(28px, 4.4svh, 56px);
-  padding-block: clamp(22px, 4.4svh, 56px);
+  padding-block: clamp(26px, 5svh, 64px) clamp(44px, 7svh, 88px);
+  overflow: hidden;
   background:
     linear-gradient(180deg, rgb(0 0 0 / 0.12), transparent 30%),
     var(--red);
 }
+/* levemente em diagonal: gira pela ponta da direita e passa da borda esquerda */
 .how__belt {
   position: relative;
   flex: 1;
   height: var(--bh);
+  margin-left: -6vw;
   margin-right: var(--x0);
   border-radius: 0 3px 3px 0;
+  transform: rotate(-1.3deg);
+  transform-origin: 100% 50%;
   background:
     linear-gradient(180deg, rgb(var(--paper-rgb) / 0.85), transparent 30%, rgb(0 0 0 / 0.05) 72%, rgb(0 0 0 / 0.12)),
     repeating-linear-gradient(180deg, transparent 0 calc(var(--bh) / 8 - 1px), rgb(0 0 0 / 0.08) calc(var(--bh) / 8 - 1px) calc(var(--bh) / 8)),
@@ -2542,7 +2575,7 @@ html.motion .how__mat {
 }
 @media (max-width: 767px) {
   .how {
-    --bh: 40px;
+    --bh: 54px;
   }
   html.motion .how__steps {
     gap: 8px;
@@ -2559,7 +2592,7 @@ html.motion .how__mat {
     line-height: 1.4;
   }
   html.motion .how__mat {
-    padding-block: 16px;
+    padding-block: 20px;
   }
 }
 @media (min-width: 900px) {

@@ -4,17 +4,19 @@
 
               WHAT HAPPENS NEXT
            HOW TO RESERVE YOUR SPOT.
-     ┌▀▀▀▀▀▀▀▀▀▀┐  ┌▀▀▀▀▀▀▀▀▀▀┐  ┌──────────┐
-     │01  1/3   │  │02  2/3   │  │⌗03  3/3  │   (card aceso × card apagado)
-     │título    │  │título    │  │título    │
-     │texto     │  │texto     │  │texto     │
-     └──────────┘  └──────────┘  └──────────┘
+     ┌──────────┐  ┏━━━━━━━━━━┓  ┌┄┄┄┄┄┄┄┄┄┄┐
+     │01  ✓Done │  ┃02    Now ┃  ┆⌗03  Next ┆   feito · agora (VERMELHO) · depois
+     │título    │  ┃título    ┃  ┆título    ┆
+     │texto     │  ┃texto     ┃  ┆texto     ┆
+     └──────────┘  ┗━━━━━━━━━━┛  └┄┄┄┄┄┄┄┄┄┄┘
               [ Claim my Founding Member spot ]
      ▓▓▓ tatame vermelho ═══ a faixa branca ═══▐█▌▌ ▏═ ▓▓▓  ← o divisor da seção
 
-   A cena fica no palco (sticky CSS) enquanto a rolagem anda: a cada
-   passo alcançado o card acende (régua vermelha, número cheio, sombra)
-   e a ponteira preta da faixa ganha um grau (os três encaixes vazios já
+   A cena fica no palco (sticky CSS) enquanto a rolagem anda. O passo do
+   momento é o card VERMELHO (o degradê do botão, texto branco); os feitos
+   ficam brancos com o número vermelho e "✓ Done"; os que faltam ficam
+   vazados, em contorno tracejado. A cada passo a ponteira preta ganha um
+   grau (os três encaixes vazios já
    aparecem, então se vê o que falta). Sem movimento (ou reduced motion):
    tudo aceso, a faixa com os três graus, sem palco preso.
    ════════════════════════════════════════════════════════════════════ */
@@ -24,6 +26,7 @@ import { reserve } from '@/data/site'
 import { clamp01, docTop, useScrollTick } from '@/motion/scroll'
 import { Cta } from '../ui/Cta'
 import { Eyebrow } from '../ui/Eyebrow'
+import { Check } from '../ui/Icons'
 import { Lines } from '../ui/Lines'
 import { Pending } from '../ui/Pending'
 
@@ -67,25 +70,31 @@ export function Reserve() {
         </div>
 
         <ol className="shell how__steps">
-          {steps.map((s, i) => (
-            <li key={s.n} className={['how__step', on(i) && 'is-on', live && i === step && 'is-now'].filter(Boolean).join(' ')} aria-current={live && i === step ? 'step' : undefined}>
-              <div className="how__top">
-                <span className="how__n d" aria-hidden="true">
-                  {s.n}
-                </span>
-                <span className="how__of label" aria-hidden="true">
-                  Step {i + 1}/{total}
-                </span>
-              </div>
-              <h3 className="how__t d">{s.title}</h3>
-              <p className="how__b">{s.body}</p>
-              {'pending' in s && s.pending ? (
-                <p className="how__pend">
-                  <Pending>{s.pending}</Pending>
-                </p>
-              ) : null}
-            </li>
-          ))}
+          {steps.map((s, i) => {
+            const state = !live ? 'done' : i < step ? 'done' : i === step ? 'now' : 'next'
+            return (
+              <li key={s.n} className={`how__step is-${state}`} aria-current={state === 'now' ? 'step' : undefined}>
+                <div className="how__top">
+                  <span className="how__n d" aria-hidden="true">
+                    {s.n}
+                  </span>
+                  {live ? (
+                    <span className="how__chip label" aria-hidden="true">
+                      {state === 'done' ? <Check /> : null}
+                      {reserve.status[state]}
+                    </span>
+                  ) : null}
+                </div>
+                <h3 className="how__t d">{s.title}</h3>
+                <p className="how__b">{s.body}</p>
+                {'pending' in s && s.pending ? (
+                  <p className="how__pend">
+                    <Pending tone={state === 'now' ? 'red' : undefined}>{s.pending}</Pending>
+                  </p>
+                ) : null}
+              </li>
+            )
+          })}
         </ol>
 
         <div className="shell how__cta">

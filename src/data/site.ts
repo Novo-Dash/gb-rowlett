@@ -403,6 +403,8 @@ export const reserve = {
     },
   ],
   meter: 'steps',
+  /** O selo de cada card conforme a rolagem: feito, agora, depois. */
+  status: { done: 'Done', now: 'Now', next: 'Next' },
   cta: 'Claim my Founding Member spot',
 }
 
