@@ -370,7 +370,7 @@ html.motion .stamp__ring {
   font-family: var(--f-display);
   font-weight: 700;
   font-style: italic;
-  font-size: calc(var(--size) * 0.075);
+  font-size: max(12px, calc(var(--size) * 0.075)); /* mínimo absoluto da página */
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
