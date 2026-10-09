@@ -330,12 +330,9 @@ function LiveStep1({
   }
   // turma de kids escolhida PELA PESSOA: o campo da criança aparece, a tela rola até ele e o
   // foco entra (a turma que já chega marcada pelo card não rola: o topo do formulário fica à vista)
-  const firstPick = useRef(true)
+  const initial = useRef(data.calendarId)
   useEffect(() => {
-    if (firstPick.current) {
-      firstPick.current = false
-      return
-    }
+    if (data.calendarId === initial.current) return
     if (!needsChild) return
     const el = childRef.current
     el?.scrollIntoView({ block: 'center', behavior: 'smooth' })
