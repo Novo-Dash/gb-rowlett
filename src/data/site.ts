@@ -393,6 +393,7 @@ export const parents = {
 export const ready = {
   eyebrow: 'No experience',
   title: [{ text: 'Never trained?' }, { text: "That's the starting line.", br: true }],
+  form: 'Gracie Barra Rowlett · First class',
   needLabel: 'You need',
   need: ['comfortable clothes', 'to show up', 'curiosity', 'respect for your training partners', 'the courage to walk in the first time'],
   dontLabel: "You don't need",
