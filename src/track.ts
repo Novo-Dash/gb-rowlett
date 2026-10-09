@@ -25,7 +25,6 @@ export type CtaOrigin =
   | 'reserve'
   | 'opening'
   | 'faq'
-  | 'sticky'
   | 'footer'
   | 'menu'
 

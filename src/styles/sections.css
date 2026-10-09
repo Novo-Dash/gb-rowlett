@@ -798,29 +798,6 @@ html.motion .foot__track {
   }
 }
 
-/* ════════ BARRA FIXA (celular) ════════ */
-.sticky {
-  position: fixed;
-  inset: auto 0 0;
-  z-index: 55;
-  padding: 10px var(--gutter) calc(10px + env(safe-area-inset-bottom));
-  background: rgb(var(--paper-rgb) / 0.96);
-  box-shadow: 0 -1px 0 var(--line);
-  transform: translateY(110%);
-  transition: transform 0.5s var(--ease);
-}
-.sticky[data-show] {
-  transform: none;
-}
-html.bk-open .sticky {
-  transform: translateY(110%);
-}
-@media (min-width: 1024px) {
-  .sticky {
-    display: none;
-  }
-}
-
 /* ════════ CTA inverso (o talão do ingresso): branco com a seta vermelha ════════ */
 .cta--inverse {
   color: var(--red);
@@ -2634,20 +2611,24 @@ html.motion .ready__cols .rise {
   margin-top: clamp(22px, 3.6svh, 44px);
 }
 
-/* com movimento: a cena fica no palco (sticky) por 0,5 tela a cada passo = ~1,5 tela */
-html.motion .how {
-  height: calc(100svh + 3 * 50svh);
-}
-html.motion .how__stage {
-  position: sticky;
-  top: 0;
-  height: 100svh;
-  justify-content: flex-start;
-  padding: calc(var(--nav-h) + clamp(8px, 3svh, 40px)) 0 0;
-}
-/* no palco o tatame encosta na borda de baixo da tela */
-html.motion .how__mat {
-  margin-top: auto;
+/* com movimento e espaço: a cena fica no palco (sticky) por 0,5 tela a cada
+   passo = ~1,5 tela. Só onde cabe numa tela: largura de 900px (cards lado a
+   lado) e altura de 760px. No celular e em telas baixas a seção rola normal. */
+@media (min-width: 900px) and (min-height: 760px) {
+  html.motion .how {
+    height: calc(100svh + 3 * 50svh);
+  }
+  html.motion .how__stage {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    justify-content: flex-start;
+    padding: calc(var(--nav-h) + clamp(8px, 3svh, 40px)) 0 0;
+  }
+  /* no palco o tatame encosta na borda de baixo da tela */
+  html.motion .how__mat {
+    margin-top: auto;
+  }
 }
 @media (max-width: 767px) {
   .how {

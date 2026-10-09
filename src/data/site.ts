@@ -472,8 +472,6 @@ export const footer = {
   madeByHref: 'https://novodash.com',
 }
 
-export const stickyCta = { label: 'Claim my Founding spot', region: 'Claim a Founding Member spot' }
-
 /* ── Formulário (kit nd, fluxo da Rowlett) ─────────────────────────── */
 export const form = {
   title: 'Hold my spot',

@@ -18,7 +18,9 @@
    vazados, em contorno tracejado. A cada passo a ponteira preta ganha um
    grau (os três encaixes vazios já
    aparecem, então se vê o que falta). Sem movimento (ou reduced motion):
-   tudo aceso, a faixa com os três graus, sem palco preso.
+   tudo aceso, a faixa com os três graus, sem palco preso. Celular e telas
+   baixas: sem palco preso (não caberia); cada card acende quando chega ao
+   meio da tela e a faixa fecha a seção logo depois do botão.
    ════════════════════════════════════════════════════════════════════ */
 
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -36,7 +38,8 @@ export function Reserve() {
   const [live, setLive] = useState(false)
   const [step, setStep] = useState(0)
   const root = useRef<HTMLElement>(null)
-  const geo = useRef({ top: 0, run: 1 })
+  const list = useRef<HTMLOListElement>(null)
+  const geo = useRef({ top: 0, run: 1, pinned: true, cards: [] as number[] })
   const last = useRef(0)
 
   useEffect(() => setLive(document.documentElement.classList.contains('motion')), [])
@@ -46,11 +49,23 @@ export function Reserve() {
     if (!el) return
     geo.current.top = docTop(el)
     geo.current.run = Math.max(1, el.offsetHeight - window.innerHeight)
+    // o palco só prende quando cabe numa tela (o CSS decide pela largura e altura)
+    const stage = el.firstElementChild as HTMLElement | null
+    geo.current.pinned = !!stage && getComputedStyle(stage).position === 'sticky'
+    geo.current.cards = Array.from(list.current?.children ?? []).map((c) => docTop(c as HTMLElement))
   }, [])
 
-  const tick = useCallback((y: number) => {
-    const p = clamp01((y - geo.current.top) / geo.current.run)
-    const next = Math.min(total - 1, Math.floor(p * total))
+  const tick = useCallback((y: number, vh: number) => {
+    const g = geo.current
+    let next = 0
+    if (g.pinned) {
+      next = Math.min(total - 1, Math.floor(clamp01((y - g.top) / g.run) * total))
+    } else {
+      // sem palco: o card acende quando o topo dele passa de 62% da tela
+      g.cards.forEach((top, i) => {
+        if (top < y + vh * 0.62) next = i
+      })
+    }
     if (next !== last.current) {
       last.current = next
       setStep(next)
@@ -68,7 +83,7 @@ export function Reserve() {
           <Lines id="how-title" className="d h2 how__title" parts={reserve.title} />
         </div>
 
-        <ol className="shell how__steps">
+        <ol ref={list} className="shell how__steps">
           {steps.map((s, i) => {
             const state = !live ? 'done' : i < step ? 'done' : i === step ? 'now' : 'next'
             return (

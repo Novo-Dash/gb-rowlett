@@ -1,7 +1,6 @@
 import { BookingProvider } from '@/nd/Booking'
 import { Nav } from '@/components/layout/Nav'
 import { Footer } from '@/components/layout/Footer'
-import { StickyCta } from '@/components/layout/StickyCta'
 import { Hero } from '@/components/sections/Hero'
 import { Marquee } from '@/components/sections/Marquee'
 import { Offer } from '@/components/sections/Offer'
@@ -48,7 +47,6 @@ export default function App() {
           <Faq />
         </main>
         <Footer />
-        <StickyCta />
       </div>
     </BookingProvider>
   )

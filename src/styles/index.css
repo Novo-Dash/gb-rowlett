@@ -88,8 +88,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   overflow-x: clip;
-  /* conteúdo nunca fica atrás da barra fixa */
-  padding-bottom: var(--sticky-h);
 }
 
 /* Resets com especificidade ZERO (:where) — nunca vencem um componente. */
