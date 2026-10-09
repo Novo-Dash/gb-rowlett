@@ -1,0 +1,78 @@
+/* ════════════════════════════════════════════════════════════════════
+   GB Rowlett — tokens. O ÚNICO arquivo da página com hex.
+   Escopo: .gbr (a raiz da página). Valores do preset Grand Opening GB §2,
+   lidos do código da Lindale v2 (base.css) em 9 out 2026.
+
+   Receita: branco + tinta + UM vermelho (com os dois irmãos para fundo
+   escuro) + UM marinho (com o irmão noite). Nenhuma terceira cor. A cor
+   viva vem das fotos (tatame, kimonos).
+   ════════════════════════════════════════════════════════════════════ */
+
+.gbr {
+  /* O pattern das seções brancas: o triângulo GB em contorno marinho a 8,5%,
+     grade intercalada de 220px (dois logos por bloco). */
+  --pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' fill='none' stroke='%2319286d' stroke-opacity='0.085'%3E%3Cpath transform='translate(28 30) scale(0.0510)' d='M837.405 483.729H556.004L484.971 592.954H766.372L793.692 650.297H233.623L515.024 218.858L665.286 434.578H812.816L515.024 14.061L15.0596 754.061H1004.06L837.405 483.729Z' stroke-width='27' stroke-linejoin='miter'/%3E%3Cpath transform='translate(138 140) scale(0.0510)' d='M837.405 483.729H556.004L484.971 592.954H766.372L793.692 650.297H233.623L515.024 218.858L665.286 434.578H812.816L515.024 14.061L15.0596 754.061H1004.06L837.405 483.729Z' stroke-width='27' stroke-linejoin='miter'/%3E%3C/svg%3E");
+
+  /* ── Cor ── */
+  --paper: #ffffff; /* uniforme, não papel */
+  --paper-2: #f3f2ee;
+  --line: #e3e1db;
+  --line-strong: #cbc8c0;
+  --ink: #0d0e12;
+  --ink-2: #34353b; /* corpo — nunca cinza claro */
+  --muted: #65666d; /* 5,6:1 sobre branco */
+  --red: #c8102e; /* vermelho GB · 5,9:1 sobre branco · só ação e destaque */
+  --red-deep: #9e0b23; /* degradê do botão, borda do pino, erro */
+  --red-hi: #ff5a6b; /* vermelho para TEXTO PEQUENO sobre o marinho */
+  --red-glow: #f2213b; /* vermelho vivo para DISPLAY sobre o marinho (4,3:1) e a luz dos cards */
+  --red-wash: #fef1f2; /* fundo do marcador de pendência */
+  --navy: #19286d; /* azul-marinho GB: footer, pedido, pattern */
+  --night: #0b1233; /* a única banda escura do corpo (abertura) */
+  --on-dark: #f4f5fa;
+  --on-dark-2: rgb(244 245 250 / 0.74);
+  --navy-rgb: 11 18 51; /* para véus e sombras: rgb(var(--navy-rgb) / a) */
+  --glow-rgb: 242 33 59;
+  --paper-rgb: 255 255 255;
+  --red-rgb: 200 16 46;
+  --btn-top: #e3232a; /* degradê vertical do botão */
+  --btn-bottom: #c3141b;
+  --btn-pulse: #d71920;
+  --belt-black: #121316; /* a ponteira da faixa */
+  --belt-white: #f8f7f2; /* o tecido da faixa */
+
+  /* ── Tipo ── */
+  --f-body: 'AdihausDIN', 'AdihausDIN Fallback', system-ui, sans-serif;
+  --f-display: 'AdihausDIN Cn', 'AdihausDIN Cn Fallback', 'Arial Narrow', sans-serif;
+  --t-h1: clamp(2.75rem, min(12.6vw, 9svh), 7.4rem);
+  --t-h2: clamp(2.4rem, 9.4vw, 5.4rem);
+  --t-h3: clamp(1.5rem, 5.4vw, 2rem);
+  --t-statement: clamp(2.3rem, min(9.8vw, 7svh), 5.6rem);
+  --t-body: 1.0625rem; /* 17px */
+  --t-small: 0.9375rem;
+  --t-label: 0.78rem; /* 12,5px — mínimo absoluto da página é 12px */
+
+  /* ── Espaço e grade — quadro desenhado em 1920 ── */
+  --gutter: clamp(16px, 5vw, 64px);
+  --max: 1920px;
+  --u: min(1vw, 19.2px);
+  --nav-h: 64px;
+  --sticky-h: 0px;
+  --r: 2px; /* cantos retos: atlético, não "app" */
+  --r-nav: 14px; /* a única exceção: o cartão flutuante da nav */
+
+  /* ── Movimento ── */
+  --ease: cubic-bezier(0.19, 1, 0.22, 1); /* expo-out: a curva da página */
+  --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1); /* só o tranco da faixa e o pouso dos cards */
+}
+
+@media (max-width: 1023px) {
+  .gbr {
+    --sticky-h: calc(72px + env(safe-area-inset-bottom));
+  }
+}
+@media (min-width: 1024px) {
+  .gbr {
+    --nav-h: 80px;
+  }
+}

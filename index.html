@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+    <title>Gracie Barra Rowlett · Jiu-Jitsu for Kids & Adults · Opening Soon in Rowlett, TX</title>
+    <meta name="description" content="A new Gracie Barra academy in Rowlett, TX. Kids from 4, teens and adults, no experience needed. Founding Members pay $87 every two weeks with no enrollment fee." />
+    <!-- Modo prospect: fora do índice. O pré-render troca para index,follow no build em modo client. -->
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="canonical" href="https://gbrowlett.com/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Gracie Barra Rowlett" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://gbrowlett.com/" />
+    <meta property="og:title" content="Gracie Barra Rowlett · Opening Soon · Founding Members" />
+    <meta property="og:description" content="A new Gracie Barra academy in Rowlett, TX. Kids from 4, teens and adults, no experience needed. Founding Members pay $87 every two weeks with no enrollment fee." />
+    <meta property="og:image" content="https://gbrowlett.com/og.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="The Gracie Barra Rowlett storefront with the sign installed. Opening soon in Rowlett, TX." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Gracie Barra Rowlett · Opening Soon · Founding Members" />
+    <meta name="twitter:description" content="Kids from 4, teens and adults, no experience needed. Founding Members pay $87 every two weeks with no enrollment fee." />
+    <meta name="twitter:image" content="https://gbrowlett.com/og.jpg" />
+
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/img/logo-112.webp" type="image/webp" sizes="112x112" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- Movimento só para quem não pediu reduced motion. Sem esta classe a
+         página nasce no estado final (nada escondido esperando JS). Decidido
+         aqui, no parse, para nunca divergir entre o pré-render e a hidratação. -->
+    <script>
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion')
+    </script>
+
+    <!-- Fontes self-hosted (AdihausDIN), só as faces críticas -->
+    <link rel="preload" href="/fonts/AdihausDIN-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/AdihausDIN-Medium.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/AdihausDIN-CnBold.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/AdihausDIN-CnBoldItalic.woff2" as="font" type="font/woff2" crossorigin />
+
+    <link rel="dns-prefetch" href="https://services.leadconnectorhq.com" />
+
+    <!--
+      Schema da academia. Só dado CONFIRMADO entra aqui. Ficam FORA de propósito:
+        · aggregateRating / review — a academia não abriu, não há avaliação.
+        · openingHoursSpecification / foundingDate — só com a data de abertura confirmada.
+        · sameAs — Instagram ainda não confirmado.
+      O FAQPage sai do próprio componente (só perguntas com resposta confirmada).
+    -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsActivityLocation",
+        "@id": "https://gbrowlett.com/#academy",
+        "name": "Gracie Barra Rowlett",
+        "description": "A new Gracie Barra jiu-jitsu academy opening in Rowlett, Texas, with classes for kids from 4, teens and adults. No experience needed. Founding Members pay $87 every two weeks with no enrollment fee.",
+        "url": "https://gbrowlett.com/",
+        "image": "https://gbrowlett.com/og.jpg",
+        "logo": "https://gbrowlett.com/img/logo-160.webp",
+        "telephone": "+1-945-385-9359",
+        "email": "info@gbrowlett.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "3503 Rowlett Rd, Bldg K, Suite 302",
+          "addressLocality": "Rowlett",
+          "addressRegion": "TX",
+          "postalCode": "75088",
+          "addressCountry": "US"
+        },
+        "areaServed": { "@type": "City", "name": "Rowlett" },
+        "parentOrganization": { "@type": "Organization", "name": "Gracie Barra" },
+        "sport": "Brazilian Jiu-Jitsu",
+        "knowsLanguage": "en-US"
+      }
+    </script>
+    <!-- nd:tracking:slot — o pré-render injeta o bloco do kit aqui, só em modo client e só com IDs reais. -->
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

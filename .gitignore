@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Build
+dist/
+dist-server/
+*.local
+
+# Env & secrets (NUNCA versionar)
+.env
+.env.*
+!.env.example
+
+# Ferramentas de IA
+.claude/
+.cursor/
+.aider*
+CLAUDE.md
+
+# Artes brutas de marca (fotos do Drive, TTFs, logos-fonte, vídeos brutos).
+# Os derivados publicados vivem em public/ e SÃO versionados.
+brand/
+
+# Logs / cache / editor / OS
+*.log
+logs/
+.cache/
+.tmp/
+.vercel
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
