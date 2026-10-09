@@ -1715,7 +1715,7 @@ html.motion .build__why .rise {
 }
 .sc__table thead th {
   padding: 16px 14px;
-  background: var(--navy);
+  background: var(--red);
   color: var(--paper);
   text-align: left;
   vertical-align: top;
@@ -1729,7 +1729,7 @@ html.motion .build__why .rise {
   display: block;
   font-size: var(--t-label);
   letter-spacing: 0.16em;
-  color: var(--on-dark-2);
+  color: var(--paper); /* branco cheio: 5,9:1 sobre o vermelho */
 }
 .sc__dayname {
   display: block;
@@ -1740,12 +1740,10 @@ html.motion .build__why .rise {
   color: var(--paper);
   text-decoration: none;
 }
-/* hoje: o rótulo em vermelho claro e a régua vermelha no pé da célula */
+/* hoje: a célula em vermelho mais fundo e a régua branca no pé */
 .sc__table thead th.is-today {
-  box-shadow: inset 0 -4px 0 var(--red-glow);
-}
-.sc__table thead th.is-today .sc__date {
-  color: var(--red-hi);
+  background: var(--red-deep);
+  box-shadow: inset 0 -4px 0 var(--paper);
 }
 .sc__day.is-closed {
   width: 84px;
@@ -1880,7 +1878,7 @@ html.motion .sc__board[data-in] {
   color: var(--ink-2);
 }
 .sc__tab[aria-selected='true'] {
-  background: var(--navy);
+  background: var(--red);
   color: var(--paper);
 }
 .sc__dot {
@@ -1893,7 +1891,7 @@ html.motion .sc__board[data-in] {
   clip-path: polygon(50% 0, 100% 100%, 0 100%);
 }
 .sc__tab[aria-selected='true'] .sc__dot {
-  background: var(--red-glow);
+  background: var(--paper);
 }
 .sc__slots {
   display: grid;
