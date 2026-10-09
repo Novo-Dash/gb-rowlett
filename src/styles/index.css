@@ -172,15 +172,18 @@ body {
   line-height: 0.9;
   text-wrap: balance;
 }
+/* Títulos retos, sem itálico (pedido do Adryan) */
+.h1,
+.h2 {
+  font-style: normal;
+}
 .h1 {
   font-size: var(--t-h1);
   line-height: 0.88;
-  font-style: italic;
   letter-spacing: -0.012em;
 }
 .h2 {
   font-size: var(--t-h2);
-  font-style: italic;
 }
 /* H2 de duas frases: um degrau abaixo, para caber em três linhas no desktop */
 .h2--long {
@@ -251,6 +254,11 @@ body {
 }
 .dup--thin::after {
   -webkit-text-stroke-width: max(1px, 0.008em);
+}
+/* nos títulos o trecho vermelho fica sem o contorno atrás (pedido do Adryan) */
+.h1 .dup::after,
+.h2 .dup::after {
+  content: none;
 }
 
 /* ── Movimento genérico. Tudo escopado em html.motion (classe posta no <head>
