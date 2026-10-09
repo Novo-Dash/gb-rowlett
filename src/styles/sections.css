@@ -1563,74 +1563,33 @@ html.motion .build__cell {
 html.motion .build__row[data-in] .build__cell {
   clip-path: inset(0);
 }
-/* as três razões em CARDS: branco, régua vermelha no topo, o número num quadrado
-   vermelho, título em Cn e texto em corpo; mesma altura lado a lado; sobe no hover */
+/* as três razões em TÓPICOS: só o título, com o triângulo GB vermelho como
+   marcador; filetes finos separam (embaixo no celular, ao lado no desktop) */
 .build__why {
   display: grid;
-  gap: 16px;
   margin: 0 0 clamp(36px, calc(var(--u) * 4), 72px);
+  border-top: 1px solid var(--line-strong);
 }
 .why {
-  position: relative;
-  display: grid;
-  grid-template-rows: auto 1fr;
-  align-content: start;
-  gap: 14px;
-  padding: 26px 22px 26px;
-  border-radius: var(--r);
-  background: var(--paper);
-  box-shadow:
-    0 0 0 1px var(--line),
-    0 26px 44px -34px rgb(var(--navy-rgb) / 0.55);
-  transition:
-    transform 0.5s var(--ease),
-    box-shadow 0.5s var(--ease);
-}
-.why::before {
-  content: '';
-  position: absolute;
-  inset: 0 0 auto;
-  height: 4px;
-  background: var(--red);
-}
-@media (hover: hover) and (pointer: fine) {
-  .why:hover {
-    transform: translateY(-4px);
-    box-shadow:
-      0 0 0 1px var(--line-strong),
-      0 34px 56px -32px rgb(var(--navy-rgb) / 0.6);
-  }
-}
-/* o número e o título na mesma linha */
-.why__head {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 14px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
 }
-.why__n {
-  display: grid;
-  place-items: center;
+.why__mark {
   flex: none;
-  width: 44px;
-  height: 44px;
-  background: var(--red);
-  color: var(--paper);
-  font-style: italic;
-  font-size: 1.25rem;
-  line-height: 1;
+  width: 0.62em;
+  height: 0.62em;
+  color: var(--red);
+  transform: translateY(0.02em);
 }
 .why__t {
   font-style: italic;
-  font-size: clamp(1.375rem, 5.2vw, 1.75rem);
-  line-height: 0.98;
+  font-size: clamp(1.375rem, 5.4vw, 1.75rem);
+  line-height: 1.02;
   color: var(--ink);
   text-wrap: balance;
-}
-.why__b {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--ink-2);
-  text-wrap: pretty;
 }
 html.motion .build__why .rise {
   transition-delay: calc(var(--i) * 110ms);
@@ -1661,14 +1620,20 @@ html.motion .build__why .rise {
   }
   .build__why {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(16px, calc(var(--u) * 1.6), 28px);
+    border-bottom: 1px solid var(--line-strong);
   }
   .why {
-    gap: 16px;
-    padding: 32px clamp(24px, calc(var(--u) * 2.2), 40px) 34px;
+    padding: 26px clamp(20px, calc(var(--u) * 2.2), 40px) 28px;
+    border-bottom: 0;
+  }
+  .why:first-child {
+    padding-left: 0;
+  }
+  .why + .why {
+    border-left: 1px solid var(--line);
   }
   .why__t {
-    font-size: clamp(1.5rem, calc(var(--u) * 1.7), 2rem);
+    font-size: clamp(1.5rem, calc(var(--u) * 1.75), 2.125rem);
   }
 }
 

@@ -290,20 +290,8 @@ export const build = {
     { id: 'doors', image: 'build-4', title: 'New walls and a doorway, drywall still unpainted' },
     { id: 'front', image: 'build-5', title: 'The storefront with the Gracie Barra Jiu-Jitsu & Self-Defense sign installed' },
   ] as const,
-  plates: [
-    {
-      title: 'Beginners are the plan, not the exception.',
-      body: 'No experience needed, at any age. The classes start where you are.',
-    },
-    {
-      title: 'The official curriculum, taught by someone you can meet.',
-      body: "Every Gracie Barra academy teaches the official curriculum, and this one is no exception. What's specific to Rowlett is who teaches it: Andre Carepa, 27 years in jiu-jitsu.",
-    },
-    {
-      title: 'One trip for the whole family.',
-      body: 'On Tuesdays and Thursdays the classes run back to back: 4:30 for ages 4–6, 5:30 for ages 7–14, 6:30 for teens and adults. One drive, everybody trains.',
-    },
-  ],
+  /** As três razões de "why us", só o título (tópicos). */
+  plates: ['Beginners are the plan, not the exception.', 'The official curriculum, taught by someone you can meet.', 'One trip for the whole family.'],
   cta: 'Claim my Founding Member spot',
 }
 

@@ -6,9 +6,8 @@
    a 18% em repouso. Hover: as outras quatro caem a 45%, a apontada sobe,
    cresce e perde o véu (CSS puro, sem estado). As fotos da obra são
    prova: sem filtro que as faça parecer render. As três razões de "why us"
-   ficam ACIMA das fotos, em três cards de mesma altura (régua vermelha,
-   número num quadrado vermelho, título, texto); o botão fica centralizado
-   embaixo da fila.
+   ficam ACIMA das fotos como tópicos: só o título, com o triângulo GB
+   vermelho de marcador; o botão fica centralizado embaixo da fila.
    ════════════════════════════════════════════════════════════════════ */
 
 import { useRef } from 'react'
@@ -23,7 +22,7 @@ import { Pic } from '../ui/Pic'
 
 export function Build() {
   const row = useRef<HTMLUListElement>(null)
-  const plates = useRef<HTMLOListElement>(null)
+  const plates = useRef<HTMLUListElement>(null)
   useInView(row)
   useInView(plates)
 
@@ -46,21 +45,16 @@ export function Build() {
         </div>
       </div>
 
-      {/* as três razões, ACIMA das fotos, em cards: número + título + texto */}
+      {/* as três razões, ACIMA das fotos, em tópicos: só o título */}
       <div className="shell">
-        <ol ref={plates} className="build__why">
+        <ul ref={plates} className="build__why">
           {build.plates.map((p, i) => (
-            <li key={p.title} className="why rise" style={{ ['--i' as string]: i }}>
-              <div className="why__head">
-                <span className="why__n d" aria-hidden="true">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <h3 className="why__t d">{p.title}</h3>
-              </div>
-              <p className="why__b">{p.body}</p>
+            <li key={p} className="why rise" style={{ ['--i' as string]: i }}>
+              <Tri className="why__mark" />
+              <h3 className="why__t d">{p}</h3>
             </li>
           ))}
-        </ol>
+        </ul>
       </div>
 
       <ul ref={row} className="build__row" aria-label="The build, in photos">
