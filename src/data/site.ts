@@ -367,14 +367,13 @@ export const parents = {
   /** Quem fala em cada balão (a pergunta é do pai; a resposta, da academia). */
   asker: 'A parent asks',
   answerer: 'Gracie Barra Rowlett',
-  /** [TROCAR] `image` é o fundo de cada card. Fotos provisórias da academia até chegarem as definitivas. */
+  /** [TROCAR] `image` é o fundo de cada card. Fotos provisórias da academia até chegarem as definitivas
+      (sem aviso na página, pedido do Adryan; a pendência fica no design-decisions.md). */
   items: [
     { q: 'Is it safe?', a: "There's no striking in jiu-jitsu, and a tap always means stop. Kids train by age group: a 4-year-old never trains with a 12-year-old.", image: 'p-lc1' as const },
     { q: 'Will it make my child aggressive?', a: 'Jiu-jitsu is built on leverage and control, not hitting, and kids practice staying calm when something is hard.', image: 'p-juniors' as const },
     { q: "Will the coach know my child's name?", a: "You're joining before we open, so you're among the first families we get to know.", image: 'p-adults' as const },
   ],
-  whereParentsPending: 'Where parents stay during class',
-  photoPending: 'Card photos: final images and kids photo authorization to confirm',
   cta: 'Claim a spot for my child',
 }
 

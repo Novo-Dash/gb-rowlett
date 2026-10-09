@@ -2146,12 +2146,6 @@ html.motion .parents__cards[data-in] .chat__typing i:nth-child(3) {
   margin-top: clamp(28px, calc(var(--u) * 3.6), 56px);
   text-align: center;
 }
-.parents__pend {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-}
 @media (min-width: 768px) {
   .chat {
     min-height: clamp(520px, 62vw, 600px);

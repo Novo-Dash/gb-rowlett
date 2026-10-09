@@ -26,7 +26,6 @@ import { Cta } from '../ui/Cta'
 import { Eyebrow } from '../ui/Eyebrow'
 import { Tri } from '../ui/Icons'
 import { Lines } from '../ui/Lines'
-import { Pending } from '../ui/Pending'
 import { Pic } from '../ui/Pic'
 
 export function Parents() {
@@ -71,10 +70,6 @@ export function Parents() {
         </ul>
 
         <div className="parents__foot">
-          <p className="parents__pend">
-            <Pending>{parents.whereParentsPending}</Pending>
-            <Pending>{parents.photoPending}</Pending>
-          </p>
           <div className="parents__cta">
             <Cta origin="faq" who="child" size="block">
               {parents.cta}
