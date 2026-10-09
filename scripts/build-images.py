@@ -29,10 +29,10 @@ F = "drive/fotos"
 # nome, origem (relativa a brand/), (w, h), larguras, foco (x, y), [q_avif]
 IMAGES = [
     # hero (Adryan, 9 out 2026): a fachada com a chegada do tatame. Três recortes de direção de
-    # arte: celular quadrado, desktop 16:9 e ultrawide ~2,4:1 (telas com proporção ≥ 2:1).
+    # arte: celular em pé (5:9, a fachada), desktop 16:9 e ultrawide ~2,4:1 (telas com proporção ≥ 2:1).
     ("hero-d",     "hero/desktop.webp",    (16, 9), [1280, 1920], (0.5, 0.5), 50),
     ("hero-w",     "hero/ultrawide.webp",  (425, 152), [1920, 2550], (0.5, 0.5), 50),
-    ("film-m",     "hero/mobile.webp",     (1, 1),  [540, 760, 1080], (0.5, 0.5), 46),
+    ("film-m",     "hero/mobile.webp",     (5, 9),  [420, 600],   (0.5, 0.5), 46),
     ("logo",       "logo/gb-mark.png",     (1, 1),  [112, 160],   (0.5, 0.5)),
     # programas 3/4: fotos novas do Adryan (9 out 2026), já tratadas, 394px de origem
     ("p-lc1",      "programs/p-lc1.webp",     (3, 4),  [360, 600],   (0.5, 0.5)),

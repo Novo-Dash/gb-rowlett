@@ -17,7 +17,6 @@ import { trackCall, trackCta, trackDirections, trackEmail } from '@/track'
 import { Eyebrow } from '../ui/Eyebrow'
 import { Lines } from '../ui/Lines'
 import { LogoOutline, Mail, Phone, Route } from '../ui/Icons'
-import { Pending } from '../ui/Pending'
 import { Pic } from '../ui/Pic'
 
 export function Footer() {
@@ -34,9 +33,6 @@ export function Footer() {
               <br />
               {site.address.line2}
             </address>
-            <p>
-              <Pending>{footer.landmarkPending}</Pending>
-            </p>
             <ul className="foot__acts">
               <li>
                 <a className="foot__line" href={site.directionsHref} target="_blank" rel="noopener noreferrer" onClick={trackDirections}>
@@ -81,7 +77,7 @@ export function Footer() {
 
         <div className="foot__grid">
           <div className="foot__brand">
-            <img src="/img/logo-160.webp" alt={site.name} width={96} height={96} loading="lazy" decoding="async" />
+            <img src="/img/badge-112.webp" srcSet="/img/badge-112.webp 1x, /img/badge-150.webp 2x" alt={site.name} width={88} height={88} loading="lazy" decoding="async" />
             <p className="foot__about">{footer.about}</p>
             {site.socials.instagram ? (
               <a className="foot__social" href={site.socials.instagram} target="_blank" rel="noopener noreferrer">

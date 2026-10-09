@@ -462,7 +462,6 @@ export const footer = {
   emailLabel: 'Email',
   mapTitle: [{ text: 'Right here in Rowlett' }],
   mapIframeTitle: 'Map: Gracie Barra Rowlett, 3503 Rowlett Rd, Bldg K, Suite 302, Rowlett, TX 75088',
-  landmarkPending: 'Landmark, parking, nearby cities (suggested: Garland, Sachse, Rockwall)',
   facadeAlt: 'The Gracie Barra Rowlett storefront with the sign installed',
   marquee: 'Gracie Barra Rowlett',
   copyright: '© 2026 Gracie Barra Rowlett',
@@ -538,5 +537,6 @@ export const publishWarnings: string[] = [
   'Step 2 of "How to reserve": how soon the confirmation text goes out.',
   'For parents: where parents stay during class.',
   'For parents: kids photo authorization for the card photos. Card 2 shows another academy sign (Austin Land Village, TX).',
+  'Footer: landmark, parking and nearby cities (suggested: Garland, Sachse, Rockwall).',
   'Schedule: the flyer legend mentions GB2 (white belt 2 stripes+), but the grid has no GB2 class, so none is published.',
 ]

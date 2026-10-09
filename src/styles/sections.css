@@ -85,7 +85,21 @@ html.bk-open .nav {
   border-radius: 50%;
   object-fit: contain;
 }
-@media (min-width: 520px) {
+/* celular: o selo à esquerda (abre o formulário) e o menu à direita; o telefone
+   sai da barra e fica dentro do menu (grupo Visit) */
+@media (max-width: 767px) {
+  .nav__brand {
+    order: 0;
+    margin-left: 4px;
+  }
+  .nav__burger {
+    order: 2;
+  }
+  .nav .nav__actions {
+    display: none;
+  }
+}
+@media (min-width: 768px) {
   .nav__brand {
     position: absolute;
     left: 50%;
@@ -347,18 +361,18 @@ html.bk-open .nav {
 }
 /* a oferta: pequena, discreta, logo abaixo do botão */
 .hero__note {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
   font-size: 0.875rem;
   line-height: 1.4;
   color: rgb(var(--paper-rgb) / 0.78);
+  text-wrap: balance;
 }
+/* o triângulo em linha com o texto: acompanha a primeira palavra mesmo centralizado */
 .hero__note svg {
+  display: inline-block;
   width: 8px;
   height: 8px;
-  flex: none;
-  margin-top: 0.42em;
+  margin-right: 8px;
+  vertical-align: 0.1em;
   color: var(--red-glow);
 }
 @media (max-width: 639px) {
@@ -420,6 +434,33 @@ html.motion .hero__explore {
 }
 html:not(.motion) .hero__deep {
   opacity: 0.6;
+}
+/* celular e tablet: o texto também CENTRALIZADO (pedido do Adryan), no meio da
+   tela, com o véu escuro em volta dele; a placa da fachada respira em cima */
+@media (max-width: 1023px) {
+  .hero__veil {
+    background:
+      radial-gradient(ellipse 120% 52% at 50% 58%, rgb(0 0 0 / 0.78), rgb(0 0 0 / 0.5) 62%, rgb(0 0 0 / 0.18) 100%),
+      linear-gradient(0deg, rgb(0 0 0 / 0.45), rgb(0 0 0 / 0) 35%);
+  }
+  .hero__scene--card {
+    align-items: center;
+    justify-content: center;
+  }
+  .hero .hero__copy {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+  }
+  .hero__title {
+    margin-inline: auto;
+  }
+  .hero__lead {
+    margin-inline: auto;
+  }
+  .hero__act {
+    justify-items: center;
+  }
 }
 @media (min-width: 1024px) {
   /* desktop: o texto CENTRALIZADO sobre a foto (pedido do Adryan, com a foto nova
@@ -666,9 +707,11 @@ html.motion .mq__track--rev {
   display: grid;
   gap: 40px;
 }
+/* o mesmo selo redondo da navbar */
 .foot__brand img {
   width: 88px;
   height: 88px;
+  border-radius: 50%;
 }
 .foot__about {
   margin: 18px 0 14px;

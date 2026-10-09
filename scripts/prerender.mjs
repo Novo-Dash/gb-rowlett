@@ -29,9 +29,9 @@ const { render, openingISO, uxMode, tracking, publishWarnings } = await import(p
 const appHtml = render()
 const client = uxMode === 'client'
 
-// LCP: a foto do hero no recorte mais perto da tela (quadrada no celular, 16:9 até a proporção 2:1, 2550×1080 acima)
+// LCP: a foto do hero no recorte mais perto da tela (em pé no celular, 16:9 até a proporção 2:1, 2550×1080 acima)
 let head = `    <link rel="preload" as="image" type="image/avif" media="(max-width: 767px)"
-      imagesrcset="/img/film-m-540.avif 540w, /img/film-m-760.avif 760w, /img/film-m-1080.avif 1080w" imagesizes="100vw" fetchpriority="high" />
+      imagesrcset="/img/film-m-420.avif 420w, /img/film-m-600.avif 600w" imagesizes="100vw" fetchpriority="high" />
     <link rel="preload" as="image" type="image/avif" media="(min-width: 768px) and (max-width: 1023px), (min-width: 1024px) and (max-aspect-ratio: 2359/1000)"
       imagesrcset="/img/hero-d-1280.avif 1280w, /img/hero-d-1920.avif 1920w" imagesizes="max(100vw, 178svh)" fetchpriority="high" />
     <link rel="preload" as="image" type="image/avif" media="(min-width: 1024px) and (min-aspect-ratio: 59/25)"

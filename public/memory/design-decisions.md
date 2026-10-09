@@ -169,3 +169,7 @@ A tabela viva é a §20 do `prd-GBR-001.md` (23 itens). Resumo do que trava o mo
 - **Abertura (Adryan):** sai o triângulo branco que descia no topo da seção; overlay mais leve (foto a 60%, véu 32→60% preto).
 - **Hero centralizado (Adryan):** a ultrawide foi refeita pelo Adryan sem o professor (2550×912); no desktop o texto fica centralizado sobre a foto, com o véu escuro no meio e as bordas mais claras. O 16:9 (com o professor) segue para telas até 2,36:1; o celular continua com o texto embaixo à esquerda.
 - **Fotos dos pais recortadas pelo Adryan (517×549):** as edições dele em public/img viraram as fontes em brand/parents e todos os tamanhos (AVIF e WebP) foram refeitos a partir delas.
+- **Hero no celular (Adryan):** foto própria em pé (600×1080, a fachada; brand/hero/mobile.webp → film-m 420/600) e o texto centralizado também no celular, com o véu escuro em volta do texto.
+- **Navbar no celular (Adryan):** abaixo de 768px o selo fica à esquerda (abre o formulário) e o menu à direita; o telefone sai da barra e fica só dentro do menu (grupo Visit).
+- **Rodapé com o selo da navbar (Adryan):** o selo redondo (badge) substitui o logo antigo no rodapé.
+- **Rodapé:** sai do site o aviso "Landmark, parking, nearby cities…" (Adryan); vai para publishWarnings.
