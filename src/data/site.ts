@@ -82,7 +82,7 @@ export const tiers: Tier[] = [
     order: 'I',
     label: 'The First 50',
     seats: 50,
-    claimed: null, // [CONFIRMAR] vagas já tomadas (§20 #2)
+    claimed: 3, // vagas já tomadas (Adryan, 9 out 2026); atualizar à mão conforme entram
     perk: { title: 'Gracie Barra uniform included', short: 'Uniform included' },
     perks: ['$87 every two weeks', 'No enrollment fee', 'Gracie Barra uniform included'],
     note: 'The first fifty people to join before the doors open.',
