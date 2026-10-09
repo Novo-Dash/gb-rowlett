@@ -398,7 +398,6 @@ export const ready = {
   need: ['comfortable clothes', 'to show up', 'curiosity', 'respect for your training partners', 'the courage to walk in the first time'],
   dontLabel: "You don't need",
   dont: ['experience', 'to be in shape', 'strength or flexibility', 'to know anyone', 'to feel ready first'],
-  statement: [{ text: 'Nobody gets in shape first.' }, { text: 'You train, and the shape follows.', accent: true, br: true }],
   photoAlt: 'Andre Carepa sitting on the mat with a training partner, mid-conversation, in front of the Gracie Barra wall',
   cta: 'Claim my Founding Member spot',
 }
@@ -409,7 +408,7 @@ export const reserve = {
   title: [{ text: 'How to reserve your spot.' }],
   steps: [
     { n: '01', title: 'Pre-register.', body: "Pick who's training and which class. About a minute." },
-    { n: '02', title: 'We confirm your spot.', body: 'By', pending: 'Phone call, SMS or e-mail, and how soon' },
+    { n: '02', title: 'We confirm your spot.', body: 'We reach out to confirm your spot and answer any question before the doors open.', pending: 'Confirmation channel (call, SMS or e-mail) and how soon' },
     {
       n: '03',
       title: 'Doors open.',

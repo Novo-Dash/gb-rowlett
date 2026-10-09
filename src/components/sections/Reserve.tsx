@@ -68,16 +68,16 @@ export function Reserve() {
     )
   }, [step, live])
 
+  /* o texto do passo e, na linha de baixo (nunca colado na frase), a pendência */
   const body = (s: (typeof steps)[number]) => (
-    <p className="how__b">
-      {s.body}
+    <>
+      <p className="how__b">{s.body}</p>
       {'pending' in s && s.pending ? (
-        <>
-          {' '}
+        <p className="how__pend">
           <Pending>{s.pending}</Pending>
-        </>
+        </p>
       ) : null}
-    </p>
+    </>
   )
 
   return (
@@ -103,7 +103,8 @@ export function Reserve() {
         {/* com movimento: uma linha ancorada, um passo por vez */}
         <div className="shell how__row">
           <p className="how__num d" aria-hidden="true">
-            <span className="how__reel" style={{ transform: `translateY(${(-step * 100) / total}%)` }}>
+            {/* cada número ocupa 1,4em de rolo e a janela mostra 1em: o seguinte nunca aparece */}
+            <span className="how__reel" style={{ transform: `translateY(${-step * 1.4}em)` }}>
               {steps.map((s) => (
                 <span key={s.n} data-n={s.n} />
               ))}

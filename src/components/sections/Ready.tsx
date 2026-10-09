@@ -9,10 +9,11 @@
    botão continuam na display. A caneta: quando as pranchetas entram,
    cada item ganha a marca desenhada em sequência — ✓ vermelho no que
    você precisa, ✗ marinho no que não precisa. A foto do Andre fica
-   presa como polaroid na primeira prancheta.
+   presa como polaroid na primeira prancheta. O triângulo GB vermelho,
+   grande, fica atrás das pranchetas para dar contraste.
 
    Tudo centralizado e, no desktop, numa tela só: cabeçalho, as duas
-   pranchetas, a frase e o botão. Reduced motion: as marcas já nascem
+   pranchetas e o botão. Reduced motion: as marcas já nascem
    desenhadas e as pranchetas já pousadas.
    ════════════════════════════════════════════════════════════════════ */
 
@@ -22,6 +23,7 @@ import { useInView } from '@/motion/inview'
 import { Cta } from '../ui/Cta'
 import { Eyebrow } from '../ui/Eyebrow'
 import { Lines } from '../ui/Lines'
+import { LogoMark } from '../ui/Icons'
 import { Pic } from '../ui/Pic'
 
 /* O ✓ à mão: um traço só, a subida mais longa que a descida. */
@@ -74,6 +76,8 @@ export function Ready() {
         </div>
 
         <div ref={desk} className="ready__desk">
+          {/* o triângulo GB vermelho, grande, atrás das pranchetas: o contraste da mesa */}
+          <LogoMark className="ready__mark" />
           <Clipboard kind="need" title={ready.needLabel} items={ready.need}>
             <figure className="clip__polaroid">
               <span className="clip__tape" aria-hidden="true" />
@@ -84,7 +88,6 @@ export function Ready() {
         </div>
 
         <div className="ready__close">
-          <Lines as="p" className="d ready__statement" parts={ready.statement} />
           <Cta origin="faq" who="me" size="block">
             {ready.cta}
           </Cta>

@@ -2054,12 +2054,37 @@ html.motion .parents__list .rise {
 }
 /* a mesa: as duas pranchetas */
 .ready__desk {
+  position: relative;
+  isolation: isolate;
   display: grid;
   width: 100%;
-  max-width: 1080px;
+  max-width: 1240px;
   gap: 48px;
   padding-top: 18px; /* o prendedor sobe acima da tábua */
   text-align: left;
+}
+/* o triângulo GB vermelho atrás das pranchetas */
+.ready__mark {
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  width: 170vw;
+  height: auto;
+  color: var(--red);
+  transform: translate(-50%, -46%);
+  pointer-events: none;
+}
+html.motion .ready__mark {
+  opacity: 0;
+  transform: translate(-50%, -40%) scale(0.92);
+  transition:
+    opacity 0.8s var(--ease),
+    transform 1.2s var(--ease);
+}
+html.motion .ready__desk[data-in] .ready__mark {
+  opacity: 1;
+  transform: translate(-50%, -46%);
 }
 .clip {
   --tilt: -1.6deg;
@@ -2281,12 +2306,6 @@ html.motion .ready__desk[data-in] .clip {
   justify-items: center;
   gap: 20px;
 }
-.ready__statement {
-  max-width: 18em;
-  font-style: italic;
-  font-size: clamp(1.75rem, 6.4vw, 2.75rem);
-  letter-spacing: -0.01em;
-}
 @media (min-width: 860px) {
   .ready__desk {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2312,24 +2331,41 @@ html.motion .ready__desk[data-in] .clip {
   .ready__title {
     font-size: clamp(2.6rem, min(calc(var(--u) * 4), 8svh), 4.6rem);
   }
+  .clip {
+    padding: 40px 18px 18px;
+  }
   .clip__paper {
-    padding: 20px 22px 14px 52px;
+    padding: 26px 30px 20px 64px;
+  }
+  .clip__paper::before {
+    left: 42px;
+  }
+  .clip__mark {
+    width: 34px;
+    height: 29px;
+    margin-left: -52px;
   }
   .clip__title {
-    font-size: clamp(2rem, min(2.6vw, 5svh), 2.6rem);
+    font-size: clamp(2.4rem, min(3.2vw, 6svh), 3.4rem);
   }
   .clip__list li {
     min-height: 0;
-    padding: clamp(5px, 0.9svh, 9px) 0 clamp(4px, 0.7svh, 7px);
-    font-size: clamp(1.25rem, min(1.6vw, 3.2svh), 1.6rem);
+    padding: clamp(6px, 1.2svh, 12px) 0 clamp(5px, 1svh, 10px);
+    font-size: clamp(1.45rem, min(2vw, 3.8svh), 2rem);
+  }
+  .clip__clamp {
+    width: min(42%, 200px);
+    height: 58px;
+    top: -20px;
   }
   .ready__close {
     grid-auto-flow: row;
     gap: clamp(14px, 2.4svh, 22px);
   }
-  .ready__statement {
-    font-size: clamp(1.9rem, min(calc(var(--u) * 3), 5.4svh), 3.2rem);
-    max-width: none;
+  /* desktop: o triângulo do tamanho da mesa, só atrás das pranchetas */
+  .ready__mark {
+    width: auto;
+    height: calc(100% + 40px);
   }
 }
 
@@ -2436,7 +2472,7 @@ html.motion .ready__desk[data-in] .clip {
   position: relative;
   isolation: isolate;
   display: block;
-  height: 1em;
+  height: 1.4em;
 }
 .how__reel > span::before {
   content: attr(data-n);
@@ -2490,8 +2526,12 @@ html.motion .ready__desk[data-in] .clip {
   color: var(--ink-2);
   text-wrap: pretty;
 }
-.how__step .how__cta {
-  margin-top: 8px;
+.how__pend {
+  margin-top: -2px;
+}
+.how__step .how__cta,
+.how__still .how__cta {
+  margin-top: 20px;
 }
 .how__meter {
   display: grid;

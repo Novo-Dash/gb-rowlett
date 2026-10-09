@@ -89,6 +89,16 @@ export const Play = ({ className }: P) => (
   </svg>
 )
 
+/** O triângulo GB cheio (o "G" do selo), na cor do texto. */
+export const LogoMark = ({ className }: P) => (
+  <svg viewBox="0 0 1019 763" className={className} aria-hidden="true" focusable="false">
+    <path
+      d="M837.405 483.729H556.004L484.971 592.954H766.372L793.692 650.297H233.623L515.024 218.858L665.286 434.578H812.816L515.024 14.061L15.0596 754.061H1004.06L837.405 483.729Z"
+      fill="currentColor"
+    />
+  </svg>
+)
+
 /** O selo GB em contorno (pattern, letreiro do footer). viewBox do logo-outline.svg. */
 export const LogoOutline = ({ className }: P) => (
   <svg viewBox="0 0 1019 763" className={className} aria-hidden="true" focusable="false">
