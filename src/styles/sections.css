@@ -2345,77 +2345,135 @@ html.motion .ready__cols .rise {
   }
 }
 
-/* ════════ [IX] COMO RESERVAR — a faixa no palco ════════ */
+/* ════════ [IX] COMO RESERVAR — três passos lado a lado, a faixa embaixo ════════ */
 .how {
-  --bh: clamp(60px, 11svh, 136px);
+  --x0: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
+  --bh: clamp(44px, 8svh, 84px);
   position: relative;
 }
 .how__stage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: clamp(72px, calc(var(--u) * 8), 150px) 0 clamp(64px, calc(var(--u) * 7), 130px);
   overflow: hidden;
 }
 .how__head {
   display: grid;
-  gap: 14px;
+  justify-items: center;
+  text-align: center;
 }
 .how__title {
-  max-width: 15ch;
+  max-width: none;
 }
-.how__mat {
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding-block: clamp(32px, 6svh, 88px);
-  overflow: hidden;
-  background: var(--red);
+/* os passos: um filete em cima, o número grande, o título e o texto */
+.how__steps {
+  display: grid;
+  gap: 22px;
+  margin-top: clamp(28px, 4.4svh, 64px);
 }
-.how__band {
-  position: relative;
-  flex: none;
-  width: calc(100% + 9vw);
-  margin-left: max(var(--gutter), calc((100% - var(--max)) / 2 + var(--gutter)));
-  transform: rotate(-1.4deg);
-  transform-origin: 0 50%;
+.how__step {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    'n t'
+    'n b'
+    'n p';
+  align-content: start;
+  column-gap: 16px;
+  row-gap: 6px;
+  padding-top: 16px;
+  border-top: 2px solid var(--line);
+  transition: border-color 0.5s var(--ease);
 }
-.how__fabric {
+.how__step.is-on {
+  border-top-color: var(--red);
+}
+.how__n {
+  grid-area: n;
+  font-size: clamp(3rem, 13vw, 3.6rem);
+  line-height: 0.82;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--line-strong);
+  transition:
+    color 0.5s var(--ease),
+    -webkit-text-stroke-color 0.5s var(--ease);
+}
+.how__step.is-on .how__n {
+  color: var(--red);
+  -webkit-text-stroke-color: var(--red);
+}
+.how__t {
+  grid-area: t;
+  font-size: clamp(1.4rem, 6vw, 1.75rem);
+  line-height: 0.98;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.how__b {
+  grid-area: b;
+  max-width: 46ch;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+.how__pend {
+  grid-area: p;
+  margin-top: 2px;
+}
+/* o que ainda não chegou fica apagado; o passo do momento sobe um pouco */
+html.motion .how__step:not(.is-on) .how__t,
+html.motion .how__step:not(.is-on) .how__b,
+html.motion .how__step:not(.is-on) .how__pend {
+  opacity: 0.4;
+}
+html.motion .how__t,
+html.motion .how__b,
+html.motion .how__pend {
+  transition: opacity 0.5s var(--ease);
+}
+
+/* a faixa branca, reta, de ponta a ponta: entra pela borda esquerda da tela e
+   termina na margem da direita; a ponteira preta perto da ponta com três
+   encaixes, e cada passo costura um grau */
+.how__belt {
   position: relative;
   height: var(--bh);
-  border-radius: 3px 0 0 3px;
+  margin: clamp(28px, 5svh, 64px) var(--x0) 0 0;
+  border-radius: 0 3px 3px 0;
   background:
     linear-gradient(180deg, rgb(var(--paper-rgb) / 0.85), transparent 30%, rgb(0 0 0 / 0.05) 72%, rgb(0 0 0 / 0.12)),
-    repeating-linear-gradient(180deg, transparent 0 calc(var(--bh) / 9 - 1px), rgb(0 0 0 / 0.09) calc(var(--bh) / 9 - 1px) calc(var(--bh) / 9)),
+    repeating-linear-gradient(180deg, transparent 0 calc(var(--bh) / 8 - 1px), rgb(0 0 0 / 0.08) calc(var(--bh) / 8 - 1px) calc(var(--bh) / 8)),
     repeating-linear-gradient(90deg, rgb(0 0 0 / 0.025) 0 1px, transparent 1px 3px),
     var(--belt-white);
   box-shadow:
-    0 0 0 1px rgb(0 0 0 / 0.08),
-    0 26px 30px -18px rgb(60 0 10 / 0.6);
-}
-.how__fabric::before {
-  content: '';
-  position: absolute;
-  top: 8%;
-  bottom: 8%;
-  left: calc(var(--bh) * 0.14);
-  border-left: 1.5px dashed rgb(0 0 0 / 0.22);
+    0 0 0 1px rgb(0 0 0 / 0.07),
+    0 24px 30px -20px rgb(var(--navy-rgb) / 0.5);
 }
 .how__bar {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: calc(var(--bh) * 0.5);
-  z-index: 1;
+  right: calc(var(--bh) * 0.5);
   display: flex;
   justify-content: flex-end;
-  gap: calc(var(--bh) * 0.14);
-  width: calc(var(--bh) * 2.4);
-  padding-right: calc(var(--bh) * 0.32);
+  gap: calc(var(--bh) * 0.16);
+  width: calc(var(--bh) * 2.8);
+  padding-right: calc(var(--bh) * 0.34);
   background:
     linear-gradient(180deg, rgb(var(--paper-rgb) / 0.12), transparent 38%, rgb(0 0 0 / 0.35)),
     var(--belt-black);
 }
+/* o encaixe vazio aparece: dá para ver o que falta */
+.how__slot {
+  position: relative;
+  width: calc(var(--bh) * 0.26);
+  box-shadow: inset 0 0 0 1px rgb(var(--paper-rgb) / 0.14);
+}
 .how__stripe {
-  width: calc(var(--bh) * 0.2);
-  height: 100%;
+  position: absolute;
+  inset: 0;
   background:
     linear-gradient(180deg, transparent 55%, rgb(0 0 0 / 0.16)),
     var(--belt-white);
@@ -2426,133 +2484,12 @@ html.motion .ready__cols .rise {
 .how__stripe[data-on] {
   transform: none;
 }
-.how__row {
-  display: none;
-}
-.how__num {
-  position: relative;
-  font-style: italic;
-  font-size: clamp(4rem, 19vw, 6rem);
-  line-height: 1;
-  height: 1em;
-  margin: -0.08em 0 -0.08em -0.04em;
-  padding: 0 0.08em 0 0.04em;
-  overflow: hidden;
-  color: var(--red);
-}
-.how__reel {
-  display: block;
-  transition: transform 0.7s var(--ease);
-}
-.how__reel > span {
-  position: relative;
-  isolation: isolate;
-  display: block;
-  height: 1.4em;
-}
-.how__reel > span::before {
-  content: attr(data-n);
-}
-.how__reel > span::after {
-  content: attr(data-n);
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  color: transparent;
-  -webkit-text-stroke: max(1px, 0.012em) var(--red);
-  transform: translate(0.05em, 0.05em);
-}
-.how__stack {
+.how__cta {
   display: grid;
+  justify-items: center;
+  margin-top: clamp(24px, 4svh, 48px);
 }
-.how__step {
-  grid-area: 1 / 1;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(24px);
-  transition:
-    opacity 0.45s var(--ease),
-    transform 0.6s var(--ease),
-    visibility 0s 0.6s;
-}
-.how__step.is-past {
-  transform: translateY(-28px);
-}
-.how__step.is-on {
-  opacity: 1;
-  visibility: visible;
-  transform: none;
-  transition:
-    opacity 0.6s var(--ease) 0.12s,
-    transform 0.8s var(--ease) 0.12s,
-    visibility 0s;
-}
-.how__t {
-  font-style: italic;
-  font-size: clamp(1.9rem, 7.6vw, 2.6rem);
-  line-height: 0.95;
-}
-.how__b {
-  max-width: 48ch;
-  font-size: clamp(1rem, calc(var(--u) * 1.25), 1.375rem);
-  line-height: 1.5;
-  color: var(--ink-2);
-  text-wrap: pretty;
-}
-.how__pend {
-  margin-top: -2px;
-}
-.how__step .how__cta,
-.how__still .how__cta {
-  margin-top: 20px;
-}
-.how__meter {
-  display: grid;
-  justify-items: end;
-  gap: 4px;
-  font-family: var(--f-display);
-  font-weight: 700;
-  font-style: italic;
-  font-size: var(--t-label);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.how__meter b {
-  font-size: clamp(1.75rem, 7vw, 2.25rem);
-  letter-spacing: 0;
-  line-height: 0.9;
-  color: var(--ink);
-}
-.how__list {
-  display: grid;
-  gap: 32px;
-}
-.how__list > li {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 18px;
-  padding-top: 20px;
-  border-top: 1px solid var(--line);
-}
-.how__list .how__t {
-  margin-bottom: 10px;
-}
-.how__listn {
-  font-style: italic;
-  font-size: 2.6rem;
-  line-height: 0.84;
-  color: var(--red);
-}
-html:not(.motion) .how__mat {
-  margin-bottom: clamp(36px, calc(var(--u) * 3.6), 56px);
-}
-.how__still > .how__cta {
-  margin-top: clamp(36px, calc(var(--u) * 3.6), 56px);
-}
+
 /* com movimento: a cena fica no palco (sticky) por 0,5 tela a cada passo = ~1,5 tela */
 html.motion .how {
   height: calc(100svh + 3 * 50svh);
@@ -2560,566 +2497,47 @@ html.motion .how {
 html.motion .how__stage {
   position: sticky;
   top: 0;
-  display: flex;
-  flex-direction: column;
   height: 100svh;
-  justify-content: center;
-  /* respiro embaixo: o conteúdo nunca encosta na borda da seção */
-  padding: var(--nav-h) 0 clamp(40px, 9svh, 104px);
+  padding: var(--nav-h) 0 clamp(20px, 4svh, 56px);
 }
-html.motion .how__head {
-  margin-bottom: clamp(24px, 5svh, 64px);
-}
-html.motion .how__mat {
-  margin-bottom: clamp(24px, 5svh, 64px);
-}
-html.motion .how__row {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  grid-template-areas:
-    'num meter'
-    'stack stack';
-  align-items: end;
-  row-gap: clamp(12px, 2.4svh, 24px);
-}
-html.motion .how__num {
-  grid-area: num;
-}
-html.motion .how__stack {
-  grid-area: stack;
-}
-html.motion .how__meter {
-  grid-area: meter;
-}
-html.motion .how__still {
-  display: none;
-}
-@media (min-width: 1024px) {
-  .how__title {
-    max-width: none;
-  }
-  .how__list {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 28px;
-  }
-  .how__list > li {
-    grid-template-columns: 1fr;
-  }
-  .how__t {
-    font-size: clamp(2.4rem, calc(var(--u) * 3.2), 4rem);
-  }
-  .how__step .how__t {
-    font-size: clamp(2.6rem, calc(var(--u) * 3.6), 4.4rem);
-  }
-  .how__step .how__b {
-    max-width: 66ch;
-    font-size: clamp(1.0625rem, calc(var(--u) * 1.15), 1.3125rem);
-  }
-  .how__num {
-    font-size: clamp(6rem, min(13vw, 26svh), 15rem);
-  }
-  .how__meter b {
-    font-size: clamp(2.25rem, calc(var(--u) * 2.6), 3.2rem);
-  }
-  html.motion .how__row {
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    grid-template-areas: 'num stack meter';
-    align-items: start;
-    /* o passo encostado no número: o texto começa rente ao "03" */
-    column-gap: clamp(20px, calc(var(--u) * 1.8), 36px);
+@media (max-width: 767px) {
+  html.motion .how__steps {
+    gap: 14px;
   }
   html.motion .how__step {
-    padding-top: 0.3em;
-    gap: 10px;
+    padding-top: 12px;
   }
-  html.motion .how__step .how__cta {
-    margin-top: 14px;
-  }
-}
-
-/* ════════ [IX · design pass] as versões B, C e D da faixa + o seletor ════════
-   Saem do código quando a versão for escolhida (ver Reserve.tsx). */
-.hb,
-.hd {
-  --x0: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
-}
-
-/* ── B · a faixa preta bordada ── */
-.hb__belt,
-.hb__row {
-  display: none;
-}
-html.motion .hb__belt {
-  --bh: clamp(52px, 8svh, 112px);
-  --bar: 1.35;
-  display: block;
-  margin-bottom: clamp(24px, 5svh, 56px);
-}
-.hb__fabric {
-  position: relative;
-  container-type: inline-size;
-  height: var(--bh);
-  /* a faixa vem de fora da tela pela esquerda e termina na margem da direita */
-  margin-right: var(--x0);
-  border-radius: 0 3px 3px 0;
-  background:
-    linear-gradient(180deg, rgb(var(--paper-rgb) / 0.1), transparent 30%, rgb(0 0 0 / 0.32)),
-    repeating-linear-gradient(180deg, transparent 0 calc(var(--bh) / 9 - 1px), rgb(var(--paper-rgb) / 0.06) calc(var(--bh) / 9 - 1px) calc(var(--bh) / 9)),
-    var(--belt-black);
-  box-shadow: 0 26px 34px -22px rgb(0 0 0 / 0.55);
-}
-.hb__line {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: calc(var(--bh) * (var(--bar) + 0.6));
-  display: flex;
-  align-items: center;
-  padding-left: var(--x0);
-  overflow: hidden;
-}
-.hb__emb {
-  position: relative;
-  display: inline-block;
-  white-space: nowrap;
-  font-style: italic;
-  text-transform: uppercase;
-  font-size: min(calc(var(--bh) * 0.56), 6.4cqi);
-  line-height: 1.1;
-  letter-spacing: 0.02em;
-}
-/* o cetim do bordado: linhas finas em diagonal, em branco, com o relevo embaixo */
-.hb__thread {
-  color: var(--paper);
-  filter: drop-shadow(0 1px 0 rgb(0 0 0 / 0.75));
-}
-@supports (background-clip: text) or (-webkit-background-clip: text) {
-  .hb__thread {
-    color: transparent;
-    background: repeating-linear-gradient(118deg, var(--paper) 0 1.4px, rgb(var(--paper-rgb) / 0.68) 1.4px 2.6px);
-    -webkit-background-clip: text;
-    background-clip: text;
+  html.motion .how__b {
+    font-size: 0.9375rem;
+    line-height: 1.45;
   }
 }
-.hb__needle {
-  position: absolute;
-  inset: -22% 0;
-  opacity: 0;
-  pointer-events: none;
-}
-.hb__needle::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: -1px;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(180deg, transparent, var(--paper) 22% 78%, transparent);
-  box-shadow: 0 0 10px rgb(var(--paper-rgb) / 0.8);
-}
-html.motion .hb__thread {
-  clip-path: inset(0 100% 0 0);
-}
-/* ponto a ponto: o clip e a agulha andam em degraus, juntos */
-html.motion .hb[data-in] .hb__thread {
-  animation: hb-stitch 1.15s steps(24, end) 0.15s both;
-}
-html.motion .hb[data-in] .hb__needle {
-  animation: hb-needle 1.15s steps(24, end) 0.15s both;
-}
-@keyframes hb-stitch {
-  from {
-    clip-path: inset(0 100% 0 0);
+@media (min-width: 900px) {
+  .how__steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(24px, calc(var(--u) * 3), 56px);
   }
-  to {
-    clip-path: inset(0 0 0 0);
-  }
-}
-@keyframes hb-needle {
-  0% {
-    opacity: 1;
-    transform: translateX(-100%);
-  }
-  96% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(0);
-  }
-}
-/* a ponteira vermelha da faixa preta, perto da ponta, com os graus brancos */
-.hb__bar {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: calc(var(--bh) * 0.32);
-  display: flex;
-  justify-content: flex-end;
-  gap: calc(var(--bh) * 0.14);
-  width: calc(var(--bh) * var(--bar));
-  padding-right: calc(var(--bh) * 0.26);
-  background:
-    linear-gradient(180deg, rgb(var(--paper-rgb) / 0.16), transparent 38%, rgb(0 0 0 / 0.3)),
-    var(--red);
-}
-.hb__stripe {
-  width: calc(var(--bh) * 0.18);
-  height: 100%;
-  background:
-    linear-gradient(180deg, transparent 55%, rgb(0 0 0 / 0.16)),
-    var(--belt-white);
-  transform: scaleY(0);
-  transform-origin: 50% 0;
-  transition: transform 0.55s var(--ease-spring) 0.9s;
-}
-.hb__stripe[data-on] {
-  transform: none;
-}
-html.motion .hb__row {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  column-gap: clamp(18px, calc(var(--u) * 3), 56px);
-  align-items: start;
-}
-.hb__count {
-  display: grid;
-  grid-template-columns: auto auto;
-  align-items: end;
-  column-gap: 6px;
-}
-.hb__count .label {
-  grid-column: 1 / -1;
-  margin-bottom: 6px;
-  color: var(--muted);
-}
-.hb__count b {
-  font-style: italic;
-  font-size: clamp(3rem, 13vw, 4.2rem);
-  line-height: 0.86;
-  color: var(--red);
-}
-.hb__of {
-  padding-bottom: 0.2em;
-  font-style: italic;
-  font-size: 1.125rem;
-  color: var(--muted);
-}
-.hb__stack {
-  display: grid;
-}
-.hb__step {
-  grid-area: 1 / 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(16px);
-  transition:
-    opacity 0.4s var(--ease),
-    transform 0.5s var(--ease),
-    visibility 0s 0.5s;
-}
-.hb__step.is-on {
-  opacity: 1;
-  visibility: visible;
-  transform: none;
-  transition:
-    opacity 0.6s var(--ease) 0.5s,
-    transform 0.8s var(--ease) 0.5s,
-    visibility 0s;
-}
-.hb__step .how__cta {
-  margin-top: 14px;
-}
-@media (max-width: 767px) {
-  html.motion .hb__row {
+  .how__step {
     grid-template-columns: minmax(0, 1fr);
-    row-gap: 14px;
+    grid-template-areas:
+      'n'
+      't'
+      'b'
+      'p';
+    row-gap: 10px;
+    padding-top: clamp(18px, 2.6svh, 28px);
   }
-  .hb__count {
-    grid-template-columns: auto auto 1fr;
+  .how__n {
+    margin-bottom: 8px;
+    font-size: clamp(4rem, min(calc(var(--u) * 6.4), 11svh), 7.5rem);
+    -webkit-text-stroke-width: 2px;
   }
-}
-@media (min-width: 768px) {
-  html.motion .hb__belt {
-    --bh: clamp(64px, 11svh, 112px);
-    --bar: 1.9;
+  .how__t {
+    font-size: clamp(1.6rem, calc(var(--u) * 2.1), 2.4rem);
   }
-}
-@media (min-width: 1024px) {
-  .hb__count b {
-    font-size: clamp(4rem, calc(var(--u) * 6), 7rem);
+  .how__b {
+    font-size: clamp(1rem, calc(var(--u) * 1.05), 1.1875rem);
   }
-  .hb__step .how__b {
-    max-width: 66ch;
-    font-size: clamp(1.0625rem, calc(var(--u) * 1.2), 1.375rem);
-  }
-  html.motion .hb__step {
-    padding-top: 1.6rem;
-  }
-}
-
-/* ── C · a faixa em pé (sem palco preso) ── */
-.hc {
-  padding: clamp(72px, calc(var(--u) * 8), 150px) 0;
-}
-.hc__body {
-  --rw: 28px;
-  display: grid;
-  grid-template-columns: var(--rw) minmax(0, 1fr);
-  column-gap: clamp(18px, calc(var(--u) * 3), 56px);
-  margin-top: clamp(28px, calc(var(--u) * 3.6), 56px);
-}
-.hc__rail {
-  position: relative;
-}
-.hc__cloth {
-  position: absolute;
-  inset: 0;
-  border-radius: 3px 3px 0 0;
-  background:
-    linear-gradient(90deg, rgb(var(--paper-rgb) / 0.85), transparent 30%, rgb(0 0 0 / 0.05) 72%, rgb(0 0 0 / 0.12)),
-    repeating-linear-gradient(90deg, transparent 0 calc(var(--rw) / 7 - 1px), rgb(0 0 0 / 0.08) calc(var(--rw) / 7 - 1px) calc(var(--rw) / 7)),
-    var(--belt-white);
-  box-shadow:
-    0 0 0 1px rgb(0 0 0 / 0.08),
-    16px 0 28px -22px rgb(var(--navy-rgb) / 0.55);
-}
-.hc__tip {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: calc(var(--rw) * 0.16);
-  height: calc(var(--rw) * 3.4);
-  padding-bottom: calc(var(--rw) * 0.36);
-  background:
-    linear-gradient(90deg, rgb(var(--paper-rgb) / 0.12), transparent 38%, rgb(0 0 0 / 0.35)),
-    var(--belt-black);
-  box-shadow: 0 14px 22px -12px rgb(0 0 0 / 0.5);
-}
-.hc__stripe {
-  height: calc(var(--rw) * 0.2);
-  background: var(--belt-white);
-  transform: scaleX(0);
-  transform-origin: 0 50%;
-  transition: transform 0.55s var(--ease-spring);
-}
-.hc__stripe[data-on] {
-  transform: none;
-}
-html.motion .hc__cloth {
-  clip-path: inset(0 0 calc(100% - var(--reach, 0px)) 0);
-}
-html.motion .hc__tip {
-  top: 0;
-  bottom: auto;
-  transform: translateY(var(--ty, 0px));
-}
-.hc__list {
-  display: grid;
-  gap: clamp(56px, 14svh, 150px);
-  padding-bottom: 6px;
-}
-.hc__step {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  column-gap: clamp(14px, calc(var(--u) * 2), 28px);
-}
-.hc__n {
-  font-style: italic;
-  font-size: clamp(2.6rem, 11vw, 3.4rem);
-  line-height: 0.84;
-  color: var(--red);
-}
-.hc__txt {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.hc__step .how__cta {
-  margin-top: 14px;
-}
-html.motion .hc__step {
-  opacity: 0.26;
-  transform: translateX(-8px);
-  transition:
-    opacity 0.6s var(--ease),
-    transform 0.7s var(--ease);
-}
-html.motion .hc__step.is-on {
-  opacity: 1;
-  transform: none;
-}
-@media (min-width: 1024px) {
-  .hc__in {
-    display: grid;
-    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-    width: min(100%, calc(var(--max) + 2 * var(--gutter)));
-    margin-inline: auto;
-  }
-  .hc__side .how__head {
-    position: sticky;
-    top: calc(var(--nav-h) + 48px);
-  }
-  .hc__body {
-    --rw: 40px;
-    margin-top: 0;
-  }
-  .hc__n {
-    font-size: clamp(3.6rem, calc(var(--u) * 5), 6rem);
-  }
-  .hc__txt .how__t {
-    font-size: clamp(2.2rem, calc(var(--u) * 3), 3.6rem);
-  }
-  .hc__txt .how__b {
-    max-width: 66ch;
-  }
-}
-
-/* ── D · a faixa que desenrola ── */
-.hd__track,
-.hd__foot {
-  display: none;
-}
-html.motion .how.hd {
-  height: calc(100svh + 190svh);
-}
-html.motion .hd__track {
-  display: block;
-  margin-bottom: clamp(16px, 3svh, 36px);
-  padding: 6px 0 36px;
-  overflow: hidden;
-}
-.hd__belt {
-  display: flex;
-  width: max-content;
-  /* a faixa entra pela borda esquerda da tela; o texto começa na margem */
-  padding-left: var(--x0);
-  background:
-    linear-gradient(180deg, rgb(var(--paper-rgb) / 0.85), transparent 18%, rgb(0 0 0 / 0.03) 80%, rgb(0 0 0 / 0.1)),
-    repeating-linear-gradient(180deg, transparent 0 15px, rgb(0 0 0 / 0.045) 15px 16px),
-    var(--belt-white);
-  box-shadow:
-    0 0 0 1px rgb(0 0 0 / 0.07),
-    0 30px 40px -28px rgb(var(--navy-rgb) / 0.55);
-  transform: translateX(var(--x, 0px));
-  will-change: transform;
-}
-.hd__segs {
-  display: flex;
-}
-.hd__seg {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: min(80vw, 540px);
-  padding: clamp(22px, 4svh, 44px) clamp(22px, 3vw, 48px) clamp(26px, 4.4svh, 48px);
-  opacity: 0.38;
-  transition: opacity 0.6s var(--ease);
-}
-.hd__seg:first-child {
-  padding-left: 0;
-}
-.hd__seg.is-on {
-  opacity: 1;
-}
-/* a costura entre um passo e outro */
-.hd__seg + .hd__seg::before {
-  content: '';
-  position: absolute;
-  top: 10%;
-  bottom: 10%;
-  left: 0;
-  border-left: 1.5px dashed rgb(0 0 0 / 0.22);
-}
-.hd__n {
-  font-style: italic;
-  font-size: clamp(2.6rem, 9vw, 4.2rem);
-  line-height: 0.84;
-  color: var(--red);
-}
-.hd__seg .how__t {
-  font-size: clamp(1.8rem, 7vw, 2.8rem);
-}
-.hd__seg .how__b {
-  font-size: clamp(1rem, calc(var(--u) * 1.1), 1.25rem);
-}
-.hd__tip {
-  display: flex;
-  flex: none;
-  justify-content: flex-end;
-  gap: clamp(10px, 1.2vw, 18px);
-  width: clamp(170px, 24vw, 340px);
-  margin-right: clamp(26px, 3vw, 48px);
-  padding-right: clamp(22px, 2.6vw, 40px);
-  background:
-    linear-gradient(180deg, rgb(var(--paper-rgb) / 0.12), transparent 38%, rgb(0 0 0 / 0.35)),
-    var(--belt-black);
-}
-.hd__stripe {
-  width: clamp(14px, 1.6vw, 24px);
-  background:
-    linear-gradient(180deg, transparent 55%, rgb(0 0 0 / 0.16)),
-    var(--belt-white);
-  transform: scaleY(0);
-  transform-origin: 50% 0;
-  transition: transform 0.55s var(--ease-spring);
-}
-.hd__stripe[data-on] {
-  transform: none;
-}
-html.motion .hd__foot {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-.hd__foot .how__meter {
-  justify-items: end;
-}
-@media (max-width: 767px) {
-  .hd__foot .how__meter {
-    display: none;
-  }
-}
-
-/* ── o seletor de versões (só no design pass, só em prospect, só com ?how=) ── */
-.howpick {
-  position: fixed;
-  z-index: 70;
-  top: 50%;
-  right: 6px;
-  display: grid;
-  gap: 4px;
-  padding: 5px;
-  border-radius: 12px;
-  background: rgb(var(--navy-rgb) / 0.94);
-  box-shadow: 0 18px 40px -18px rgb(0 0 0 / 0.6);
-  transform: translateY(-50%);
-}
-.howpick a {
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  font-family: var(--f-display);
-  font-weight: 700;
-  font-style: italic;
-  color: var(--paper);
-  text-decoration: none;
-}
-.howpick a[aria-current] {
-  background: var(--red);
 }
 
 /* ════════ [X] ABERTURA — a única banda escura ════════ */

@@ -1,47 +1,104 @@
 /* ════════════════════════════════════════════════════════════════════
-   [IX] Como reservar — DESIGN PASS: quatro versões da faixa, escolhidas
-   por link (?how=a|b|c|d#reserve). O pré-render e o padrão são a A (a
-   faixa no tatame); as outras trocam depois de montar, só no navegador.
-   Escolhida a versão, as outras e este seletor saem do código.
-     A · a faixa branca no tatame vermelho (atual)
-     B · a faixa preta bordada
-     C · a faixa em pé, sem palco preso
-     D · a faixa que desenrola para o lado
+   [IX] Como reservar — os três passos lado a lado e a faixa embaixo
+   (referência do Adryan, 9 out 2026).
+
+              WHAT HAPPENS NEXT
+           HOW TO RESERVE YOUR SPOT.
+     ━━━━━━━━━━━   ━━━━━━━━━━━   ───────────
+     01            02            ⌗03          (o que não chegou fica em contorno)
+     Pre-register  We confirm…   Doors open.
+     texto         texto         texto
+     ═══════════ a faixa branca ═════════════▐█▌▌ ▏═
+                    [ Claim my Founding Member spot ]
+
+   A cena fica no palco (sticky CSS) enquanto a rolagem anda: a cada
+   passo alcançado, o número enche de vermelho, o filete de cima acende
+   e a ponteira preta da faixa ganha um grau (os três encaixes vazios já
+   aparecem, então se vê o que falta). Sem movimento (ou reduced motion):
+   tudo aceso, a faixa com os três graus, sem palco preso.
    ════════════════════════════════════════════════════════════════════ */
 
-import { useEffect, useState } from 'react'
-import { UX } from '@/lib/ux'
-import { ReserveMat } from './reserve/Mat'
-import { ReserveRail } from './reserve/Rail'
-import { ReserveRoll } from './reserve/Roll'
-import { ReserveStitch } from './reserve/Stitch'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { reserve } from '@/data/site'
+import { clamp01, docTop, useScrollTick } from '@/motion/scroll'
+import { Cta } from '../ui/Cta'
+import { Eyebrow } from '../ui/Eyebrow'
+import { Lines } from '../ui/Lines'
+import { Pending } from '../ui/Pending'
 
-const V = { a: ReserveMat, b: ReserveStitch, c: ReserveRail, d: ReserveRoll }
-type Key = keyof typeof V
+const steps = reserve.steps
+const total = steps.length
 
 export function Reserve() {
-  const [v, setV] = useState<Key>('a')
-  const [pick, setPick] = useState(false)
-  useEffect(() => {
-    const q = new URLSearchParams(window.location.search).get('how')
-    if (q && q in V) {
-      setV(q as Key)
-      setPick(true)
+  const [live, setLive] = useState(false)
+  const [step, setStep] = useState(0)
+  const root = useRef<HTMLElement>(null)
+  const geo = useRef({ top: 0, run: 1 })
+  const last = useRef(0)
+
+  useEffect(() => setLive(document.documentElement.classList.contains('motion')), [])
+
+  const measure = useCallback(() => {
+    const el = root.current
+    if (!el) return
+    geo.current.top = docTop(el)
+    geo.current.run = Math.max(1, el.offsetHeight - window.innerHeight)
+  }, [])
+
+  const tick = useCallback((y: number) => {
+    const p = clamp01((y - geo.current.top) / geo.current.run)
+    const next = Math.min(total - 1, Math.floor(p * total))
+    if (next !== last.current) {
+      last.current = next
+      setStep(next)
     }
   }, [])
-  const C = V[v]
+  useScrollTick(tick, measure)
+
+  const on = (i: number) => !live || i <= step
+
   return (
-    <>
-      <C key={v} />
-      {pick && UX.prospect ? (
-        <nav className="howpick" aria-label="Reserve section versions">
-          {(Object.keys(V) as Key[]).map((k) => (
-            <a key={k} href={`?how=${k}#reserve`} aria-current={k === v ? 'true' : undefined}>
-              {k.toUpperCase()}
-            </a>
+    <section ref={root} id="reserve" className="how" aria-labelledby="how-title">
+      <div className="how__stage">
+        <div className="shell how__head">
+          <Eyebrow>{reserve.eyebrow}</Eyebrow>
+          <Lines id="how-title" className="d h2 how__title" parts={reserve.title} />
+        </div>
+
+        <ol className="shell how__steps">
+          {steps.map((s, i) => (
+            <li key={s.n} className={['how__step', on(i) && 'is-on', live && i === step && 'is-now'].filter(Boolean).join(' ')} aria-current={live && i === step ? 'step' : undefined}>
+              <span className="how__n d" aria-hidden="true">
+                {s.n}
+              </span>
+              <h3 className="how__t d">{s.title}</h3>
+              <p className="how__b">{s.body}</p>
+              {'pending' in s && s.pending ? (
+                <p className="how__pend">
+                  <Pending>{s.pending}</Pending>
+                </p>
+              ) : null}
+            </li>
           ))}
-        </nav>
-      ) : null}
-    </>
+        </ol>
+
+        {/* a faixa: entra pela borda esquerda e termina na margem da direita */}
+        <div className="how__belt" aria-hidden="true">
+          <span className="how__bar">
+            {steps.map((s, i) => (
+              <i key={s.n} className="how__slot">
+                <i className="how__stripe" data-on={on(i) ? '' : undefined} />
+              </i>
+            ))}
+          </span>
+        </div>
+
+        <div className="shell how__cta">
+          <Cta origin="reserve" size="block">
+            {reserve.cta}
+          </Cta>
+        </div>
+      </div>
+    </section>
   )
 }
