@@ -380,7 +380,6 @@ export const ready = {
   dontLabel: "You don't need",
   dont: ['experience', 'to be in shape', 'strength or flexibility', 'to know anyone', 'to feel ready first'],
   photoAlt: 'The head coach in a white Gracie Barra gi and black belt, arms crossed, in front of the red Gracie Barra triangle',
-  cta: 'Claim my Founding Member spot',
 }
 
 /* ── IX · Como reservar (3 graus na faixa) ─────────────────────────── */

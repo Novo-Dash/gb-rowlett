@@ -3,8 +3,9 @@
 
    Duas colunas de linhas-cartão: "You need" com o ✓ num círculo vermelho;
    "You don't need" com o ✕ num círculo em contorno e o item riscado. Tudo centralizado: no desktop as listas se
-   espelham em volta da foto, que fica no meio, colada na borda de baixo
-   da seção, com o botão dentro dela.
+   espelham em volta do coach recortado, que fica no meio, colado na borda
+   de baixo da seção e alto o bastante para a seção ter uma tela. Sem botão
+   (pedido do Adryan).
    (A primeira versão de volta, pedido do Adryan: a caderneta não
    conversava com a página. A frase de fechamento continua fora.)
    ════════════════════════════════════════════════════════════════════ */
@@ -12,7 +13,6 @@
 import { useRef } from 'react'
 import { ready } from '@/data/site'
 import { useInView } from '@/motion/inview'
-import { Cta } from '../ui/Cta'
 import { Eyebrow } from '../ui/Eyebrow'
 import { Check, Close } from '../ui/Icons'
 import { Lines } from '../ui/Lines'
@@ -43,15 +43,10 @@ export function Ready() {
               ))}
             </ul>
           </div>
-          {/* o coach recortado, sem fundo, de pé na borda de baixo da seção,
-              com o botão por cima da faixa preta */}
+          {/* o coach recortado, sem fundo, de pé na borda de baixo da seção; no
+              desktop ele cresce até a seção ter uma tela de altura */}
           <figure className="ready__photo">
-            <Pic name="coach" alt={ready.photoAlt} sizes="(min-width: 1024px) 30vw, 92vw" />
-            <div className="ready__cta">
-              <Cta origin="faq" who="me" size="block">
-                {ready.cta}
-              </Cta>
-            </div>
+            <Pic name="coach" alt={ready.photoAlt} sizes="(min-width: 1024px) 60svh, 92vw" />
           </figure>
           <div className="ready__col ready__col--dont">
             <h3 className="ready__label">{ready.dontLabel}</h3>

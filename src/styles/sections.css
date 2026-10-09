@@ -2221,7 +2221,7 @@ html.motion .parents__cards[data-in] .chat__typing i:nth-child(3) {
   }
 }
 
-/* ════════ [VII] SEM EXPERIÊNCIA — need / don't em volta da foto, o botão dentro dela ════════ */
+/* ════════ [VII] SEM EXPERIÊNCIA — need / don't em volta do coach recortado ════════ */
 .ready {
   /* sem respiro embaixo: a foto encosta na borda da seção */
   padding: clamp(64px, calc(var(--u) * 7), 130px) 0 0;
@@ -2343,37 +2343,30 @@ html.motion .ready__cols .rise {
   height: auto;
   filter: drop-shadow(0 24px 40px rgb(var(--navy-rgb) / 0.18));
 }
-.ready__cta {
-  position: absolute;
-  right: 14px;
-  bottom: clamp(18px, 6%, 36px);
-  left: 14px;
-  z-index: 1;
-  display: grid;
-  justify-items: center;
-}
-/* no celular o botão cabe numa linha dentro da foto */
-@media (max-width: 479px) {
-  .ready__cta {
-    right: 10px;
-    left: 10px;
-  }
-  .ready__cta .cta {
-    gap: 12px;
-    padding-left: 18px;
-    letter-spacing: 0.03em;
-  }
-}
+/* desktop: a seção tem uma tela de altura e o coach cresce até preenchê-la,
+   do fim do título até a borda de baixo */
 @media (min-width: 1024px) {
+  .ready {
+    min-height: 100svh;
+    padding-top: calc(var(--nav-h) + clamp(16px, 3svh, 40px));
+  }
+  .ready__head {
+    margin-bottom: clamp(8px, 1.6svh, 24px);
+  }
   .ready__cols {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 1fr);
-    gap: clamp(32px, calc(var(--u) * 4), 72px);
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: clamp(24px, calc(var(--u) * 2.4), 48px);
     align-items: center;
   }
   .ready__photo {
     order: 0;
     align-self: end;
+    width: auto;
     max-width: none;
+  }
+  .ready__photo img {
+    width: auto;
+    height: clamp(400px, calc(100svh - var(--nav-h) - 250px), 980px);
   }
   /* "You need" espelhada: encosta na foto pela direita */
   .ready__col--need {
@@ -2675,20 +2668,6 @@ html.motion .ready__cols .rise {
   color: var(--on-dark);
   overflow: hidden;
 }
-/* a ponta do triângulo descendo da seção anterior */
-.open::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 0;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 28px 28px 0 28px;
-  border-color: var(--paper) transparent transparent transparent;
-  transform: translateX(-50%);
-  z-index: 2;
-}
 .open__bg,
 .open__bg picture,
 .open__bg img {
@@ -2702,12 +2681,12 @@ html.motion .ready__cols .rise {
 }
 .open__bg img {
   object-fit: cover;
-  opacity: 0.3;
+  opacity: 0.6;
 }
 .open__veil {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgb(0 0 0 / 0.55), rgb(0 0 0 / 0.82));
+  background: linear-gradient(180deg, rgb(0 0 0 / 0.32), rgb(0 0 0 / 0.6));
 }
 .open__in {
   display: grid;

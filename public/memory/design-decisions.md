@@ -165,3 +165,5 @@ A tabela viva é a §20 do `prd-GBR-001.md` (23 itens). Resumo do que trava o mo
 - **Hero, composição inteira (Adryan mandou os frames do Figma):** a fachada, a porta e o caminhão têm de aparecer. Cada tela recebe o recorte mais perto da sua proporção: 16:9 (hero-d) até a proporção da própria 2550×1080 (2,36:1) e a 2550×1080 (hero-w) só a partir dela, para nunca cortar a fachada pelos lados; a foto fica centralizada (50% 50%), sem zoom de entrada, e o que sobra corta igual dos dois lados.
 - **Para os pais no celular (Adryan):** os cards voltam a ficar EMPILHADOS (sem carrossel); o 100vh vale para o desktop.
 - **Hero:** o recorte guarda a largura toda (fachada, porta, caminhão) e corta a sobra de altura quase toda embaixo (object-position 50% 15%), para a placa nunca sumir atrás da nav.
+- **No experience (Adryan):** sem botão; no desktop a seção tem uma tela e o coach recortado cresce até preenchê-la (altura = tela − nav − cabeçalho, 460–980px), colado na borda de baixo, com as listas em volta.
+- **Abertura (Adryan):** sai o triângulo branco que descia no topo da seção; overlay mais leve (foto a 60%, véu 32→60% preto).
