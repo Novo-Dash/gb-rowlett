@@ -39,11 +39,11 @@ export default function App() {
           <Offer />
           <Marquee />
           <Programs />
+          <Reserve />
           <Build />
           <Schedule />
           <Parents />
           <Ready />
-          <Reserve />
           <Opening />
           <Faq />
         </main>

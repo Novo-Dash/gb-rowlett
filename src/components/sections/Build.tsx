@@ -6,8 +6,8 @@
    a 18% em repouso. Hover: as outras quatro caem a 45%, a apontada sobe,
    cresce e perde o véu (CSS puro, sem estado). As fotos da obra são
    prova: sem filtro que as faça parecer render. As três razões de "why us"
-   ABREM a seção, acima do cabeçalho, como tópicos: só o título, com o
-   triângulo GB vermelho de marcador; o botão fica centralizado embaixo.
+   ficam ACIMA das fotos como tópicos: só o título, com o triângulo GB
+   vermelho de marcador; o botão fica centralizado embaixo da fila.
    ════════════════════════════════════════════════════════════════════ */
 
 import { useRef } from 'react'
@@ -28,18 +28,6 @@ export function Build() {
 
   return (
     <section id="build" className="build" aria-labelledby="build-title">
-      {/* as três razões abrem a seção, em tópicos: só o título */}
-      <div className="shell">
-        <ul ref={plates} className="build__why">
-          {build.plates.map((p, i) => (
-            <li key={p} className="why rise" style={{ ['--i' as string]: i }}>
-              <Tri className="why__mark" />
-              <p className="why__t d">{p}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-
       <div className="shell build__head">
         <div>
           <Eyebrow>{build.eyebrow}</Eyebrow>
@@ -55,6 +43,18 @@ export function Build() {
             {build.phase ? <span className="build__stage">{build.phase}</span> : <Pending>{build.phasePending}</Pending>}
           </p>
         </div>
+      </div>
+
+      {/* as três razões, ACIMA das fotos, em tópicos: só o título */}
+      <div className="shell">
+        <ul ref={plates} className="build__why">
+          {build.plates.map((p, i) => (
+            <li key={p} className="why rise" style={{ ['--i' as string]: i }}>
+              <Tri className="why__mark" />
+              <h3 className="why__t d">{p}</h3>
+            </li>
+          ))}
+        </ul>
       </div>
 
       <ul ref={row} className="build__row" aria-label="The build, in photos">

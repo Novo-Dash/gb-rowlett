@@ -1567,7 +1567,7 @@ html.motion .build__row[data-in] .build__cell {
    marcador; filetes finos separam (embaixo no celular, ao lado no desktop) */
 .build__why {
   display: grid;
-  margin: 0 0 clamp(48px, calc(var(--u) * 5.6), 96px);
+  margin: 0 0 clamp(36px, calc(var(--u) * 4), 72px);
   border-top: 1px solid var(--line-strong);
 }
 .why {
