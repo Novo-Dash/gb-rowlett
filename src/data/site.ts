@@ -109,38 +109,6 @@ export const spotsLeft = (t: Tier = openTier): number | null =>
   t.seats === null || t.claimed === null ? null : Math.max(0, t.seats - t.claimed)
 
 
-/* ── Nav ───────────────────────────────────────────────────────────── */
-export const nav = {
-  callLabel: 'Call or text Gracie Barra Rowlett',
-  logoLabel: 'Gracie Barra Rowlett — claim a Founding Member spot',
-  menuOpen: 'Open menu',
-  menuClose: 'Close menu',
-  menu: {
-    classes: {
-      label: 'Classes',
-      links: [
-        { label: 'Little Champions 1 · 4–6', program: 'lc1' as ProgramKey },
-        { label: 'Little Champions 2 · 7–9', program: 'lc2' as ProgramKey },
-        { label: 'Juniors · 10–14', program: 'juniors' as ProgramKey },
-        { label: 'Adults · All Levels', program: 'adults' as ProgramKey },
-      ],
-    },
-    schedule: {
-      label: 'Schedule',
-      links: [
-        { label: 'Weekly schedule', href: '#schedule' },
-        { label: 'The founding offer', href: '#offer' },
-        { label: 'Questions', href: '#faq' },
-      ],
-    },
-    visit: {
-      label: 'Visit',
-      directions: 'Get directions',
-      book: 'Claim a Founding spot',
-    },
-  },
-}
-
 /* ── I · Hero ──────────────────────────────────────────────────────── */
 export const hero = {
   eyebrow: 'Opening soon · Rowlett, TX',

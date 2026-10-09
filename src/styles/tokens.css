@@ -60,7 +60,7 @@
   --gutter: clamp(16px, 5vw, 64px);
   --max: 1920px;
   --u: min(1vw, 19.2px);
-  --nav-h: 64px;
+  --nav-h: 0px; /* sem navbar (pedido do Adryan): o respiro de topo das seções fica só no próprio clamp */
   --r: 8px; /* cantos levemente arredondados (pedido do Adryan) */
   --r-nav: 14px; /* a única exceção: o cartão flutuante da nav */
 
@@ -69,11 +69,6 @@
   --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1); /* só o tranco da faixa e o pouso dos cards */
 }
 
-@media (min-width: 1024px) {
-  .gbr {
-    --nav-h: 80px;
-  }
-}
 
 /* A barra de rolagem é do documento (fora do .gbr): as duas cores dela moram no :root.
    O polegar é o vermelho do botão; o trilho, o papel 2 da página. */

@@ -112,9 +112,13 @@ export function Hero() {
       {/* CENA 1 · o texto direto sobre a foto: embaixo à esquerda no celular, centralizado no desktop */}
       <div ref={card} className="hero__scene hero__scene--card on-dark">
         <div className="shell hero__copy">
-          <Eyebrow tone="light" className="hero__eb">
-            {hero.eyebrow}
-          </Eyebrow>
+          {/* o selo da academia à esquerda do "Opening soon" (a página não tem navbar) */}
+          <div className="hero__brand">
+            <img src="/img/badge-112.webp" srcSet="/img/badge-112.webp 1x, /img/badge-150.webp 2x" alt={site.name} width={56} height={56} className="hero__logo" />
+            <Eyebrow tone="light" className="hero__eb">
+              {hero.eyebrow}
+            </Eyebrow>
+          </div>
           <Lines as="h1" id="hero-title" onLoad className="d h1 hero__title" parts={hero.title} />
           <p className="hero__lead rise rise--load" style={{ ['--d' as string]: '300ms' }}>
             {hero.lead}

@@ -1,5 +1,4 @@
 import { BookingProvider } from '@/nd/Booking'
-import { Nav } from '@/components/layout/Nav'
 import { Footer } from '@/components/layout/Footer'
 import { Hero } from '@/components/sections/Hero'
 import { Marquee } from '@/components/sections/Marquee'
@@ -32,7 +31,6 @@ export default function App() {
         <a href="#main" className="skip">
           Skip to content
         </a>
-        <Nav />
         <main id="main">
           <Hero />
           <Offer />
