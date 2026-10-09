@@ -2595,7 +2595,7 @@ html.motion .how__still {
     font-size: clamp(2.6rem, calc(var(--u) * 3.6), 4.4rem);
   }
   .how__step .how__b {
-    max-width: 50ch;
+    max-width: 66ch;
     font-size: clamp(1.0625rem, calc(var(--u) * 1.15), 1.3125rem);
   }
   .how__num {
@@ -2837,7 +2837,7 @@ html.motion .hb__row {
     font-size: clamp(4rem, calc(var(--u) * 6), 7rem);
   }
   .hb__step .how__b {
-    max-width: 52ch;
+    max-width: 66ch;
     font-size: clamp(1.0625rem, calc(var(--u) * 1.2), 1.375rem);
   }
   html.motion .hb__step {
@@ -2960,6 +2960,9 @@ html.motion .hc__step.is-on {
   }
   .hc__txt .how__t {
     font-size: clamp(2.2rem, calc(var(--u) * 3), 3.6rem);
+  }
+  .hc__txt .how__b {
+    max-width: 66ch;
   }
 }
 
