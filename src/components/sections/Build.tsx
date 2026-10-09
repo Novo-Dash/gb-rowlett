@@ -6,8 +6,9 @@
    a 18% em repouso. Hover: as outras quatro caem a 45%, a apontada sobe,
    cresce e perde o véu (CSS puro, sem estado). As fotos da obra são
    prova: sem filtro que as faça parecer render. As três razões de "why us"
-   ficam ACIMA das fotos, em colunas limpas (número, fio, título, texto),
-   sem cartão nem sombra; o botão fica centralizado embaixo da fila.
+   ficam ACIMA das fotos, em três cards de mesma altura (régua vermelha,
+   número num quadrado vermelho, título, texto); o botão fica centralizado
+   embaixo da fila.
    ════════════════════════════════════════════════════════════════════ */
 
 import { useRef } from 'react'
@@ -45,7 +46,7 @@ export function Build() {
         </div>
       </div>
 
-      {/* as três razões, ACIMA das fotos: colunas limpas, número + fio + título + texto */}
+      {/* as três razões, ACIMA das fotos, em cards: número + título + texto */}
       <div className="shell">
         <ol ref={plates} className="build__why">
           {build.plates.map((p, i) => (

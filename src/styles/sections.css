@@ -1563,26 +1563,54 @@ html.motion .build__cell {
 html.motion .build__row[data-in] .build__cell {
   clip-path: inset(0);
 }
-/* as três razões: colunas limpas sobre a página, sem cartão; fio fino em cima,
-   o número em vermelho, o título em Cn, o texto em corpo */
+/* as três razões em CARDS: branco, régua vermelha no topo, o número num quadrado
+   vermelho, título em Cn e texto em corpo; mesma altura lado a lado; sobe no hover */
 .build__why {
   display: grid;
-  gap: 28px;
+  gap: 16px;
   margin: 0 0 clamp(36px, calc(var(--u) * 4), 72px);
-  counter-reset: why;
 }
 .why {
+  position: relative;
   display: grid;
+  grid-template-rows: auto auto 1fr;
   align-content: start;
-  gap: 10px;
-  padding-top: 18px;
-  border-top: 1px solid var(--line-strong);
+  gap: 14px;
+  padding: 26px 22px 26px;
+  border-radius: var(--r);
+  background: var(--paper);
+  box-shadow:
+    0 0 0 1px var(--line),
+    0 26px 44px -34px rgb(var(--navy-rgb) / 0.55);
+  transition:
+    transform 0.5s var(--ease),
+    box-shadow 0.5s var(--ease);
+}
+.why::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: var(--red);
+}
+@media (hover: hover) and (pointer: fine) {
+  .why:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 0 0 1px var(--line-strong),
+      0 34px 56px -32px rgb(var(--navy-rgb) / 0.6);
+  }
 }
 .why__n {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  background: var(--red);
+  color: var(--paper);
   font-style: italic;
-  font-size: 1rem;
-  letter-spacing: 0.04em;
-  color: var(--red);
+  font-size: 1.25rem;
+  line-height: 1;
 }
 .why__t {
   font-style: italic;
@@ -1592,7 +1620,6 @@ html.motion .build__row[data-in] .build__cell {
   text-wrap: balance;
 }
 .why__b {
-  max-width: 42ch;
   font-size: 1rem;
   line-height: 1.6;
   color: var(--ink-2);
@@ -1627,11 +1654,11 @@ html.motion .build__why .rise {
   }
   .build__why {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(32px, calc(var(--u) * 4), 72px);
+    gap: clamp(16px, calc(var(--u) * 1.6), 28px);
   }
   .why {
-    gap: 14px;
-    padding-top: 22px;
+    gap: 16px;
+    padding: 32px clamp(24px, calc(var(--u) * 2.2), 40px) 34px;
   }
   .why__t {
     font-size: clamp(1.75rem, calc(var(--u) * 2), 2.25rem);
@@ -2257,49 +2284,6 @@ html.motion .ready__desk[data-in] .clip {
     transition-delay: 0s;
   }
 }
-/* a polaroid do Andre, presa com fita no canto da primeira prancheta */
-.clip__polaroid {
-  position: absolute;
-  z-index: 2;
-  top: -26px;
-  right: -14px;
-  width: 104px;
-  padding: 6px 6px 18px;
-  background: var(--paper);
-  box-shadow: 0 12px 22px -10px rgb(0 0 0 / 0.5);
-  transform: rotate(5deg);
-}
-.clip__polaroid img {
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-}
-.clip__tape {
-  position: absolute;
-  z-index: 1;
-  top: -9px;
-  left: 50%;
-  width: 56px;
-  height: 18px;
-  background: rgb(var(--paper-rgb) / 0.6);
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.12);
-  transform: translateX(-50%) rotate(-5deg);
-}
-/* a linha do formulário nunca passa por baixo da polaroid */
-.clip--need .clip__form {
-  padding-right: 84px;
-}
-@media (max-width: 859px) {
-  .clip__polaroid {
-    width: 88px;
-    top: -22px;
-    right: -8px;
-  }
-}
-@media (min-width: 860px) {
-  .clip--need .clip__form {
-    padding-right: 100px;
-  }
-}
 /* o fecho: a frase e o botão, juntos, logo abaixo da mesa */
 .ready__close {
   display: grid;
@@ -2310,11 +2294,6 @@ html.motion .ready__desk[data-in] .clip {
   .ready__desk {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: clamp(40px, 5vw, 72px);
-  }
-  .clip__polaroid {
-    width: 124px;
-    top: -30px;
-    right: -26px;
   }
 }
 @media (min-width: 1024px) {

@@ -398,7 +398,6 @@ export const ready = {
   need: ['comfortable clothes', 'to show up', 'curiosity', 'respect for your training partners', 'the courage to walk in the first time'],
   dontLabel: "You don't need",
   dont: ['experience', 'to be in shape', 'strength or flexibility', 'to know anyone', 'to feel ready first'],
-  photoAlt: 'Andre Carepa sitting on the mat with a training partner, mid-conversation, in front of the Gracie Barra wall',
   cta: 'Claim my Founding Member spot',
 }
 
@@ -413,7 +412,6 @@ export const reserve = {
       n: '03',
       title: 'Doors open.',
       body: 'You start with the founding group. You get the address, what to wear, what to bring and what class looks like, in writing.',
-      pending: 'Welcome e-mail in GHL to confirm',
     },
   ],
   meter: 'steps',

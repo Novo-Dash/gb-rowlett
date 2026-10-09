@@ -8,8 +8,7 @@
    à mão (Caveat Brush) que só existe AQUI na página; título, frase e
    botão continuam na display. A caneta: quando as pranchetas entram,
    cada item ganha a marca desenhada em sequência — ✓ vermelho no que
-   você precisa, ✗ marinho no que não precisa. A foto do Andre fica
-   presa como polaroid na primeira prancheta. O triângulo GB vermelho,
+   você precisa, ✗ marinho no que não precisa. O triângulo GB vermelho,
    grande, fica atrás das pranchetas para dar contraste.
 
    Tudo centralizado e, no desktop, numa tela só: cabeçalho, as duas
@@ -24,7 +23,6 @@ import { Cta } from '../ui/Cta'
 import { Eyebrow } from '../ui/Eyebrow'
 import { Lines } from '../ui/Lines'
 import { LogoMark } from '../ui/Icons'
-import { Pic } from '../ui/Pic'
 
 /* O ✓ à mão: um traço só, a subida mais longa que a descida. */
 const Check = () => (
@@ -41,7 +39,7 @@ const Cross = () => (
   </svg>
 )
 
-function Clipboard({ kind, title, items, children }: { kind: 'need' | 'dont'; title: string; items: string[]; children?: React.ReactNode }) {
+function Clipboard({ kind, title, items }: { kind: 'need' | 'dont'; title: string; items: string[] }) {
   return (
     <div className={`clip clip--${kind}`}>
       <span className="clip__clamp" aria-hidden="true" />
@@ -58,7 +56,6 @@ function Clipboard({ kind, title, items, children }: { kind: 'need' | 'dont'; ti
             </li>
           ))}
         </ul>
-        {children}
       </div>
     </div>
   )
@@ -78,12 +75,7 @@ export function Ready() {
         <div ref={desk} className="ready__desk">
           {/* o triângulo GB vermelho, grande, atrás das pranchetas: o contraste da mesa */}
           <LogoMark className="ready__mark" />
-          <Clipboard kind="need" title={ready.needLabel} items={ready.need}>
-            <figure className="clip__polaroid">
-              <span className="clip__tape" aria-hidden="true" />
-              <Pic name="ready" alt={ready.photoAlt} sizes="160px" />
-            </figure>
-          </Clipboard>
+          <Clipboard kind="need" title={ready.needLabel} items={ready.need} />
           <Clipboard kind="dont" title={ready.dontLabel} items={ready.dont} />
         </div>
 
