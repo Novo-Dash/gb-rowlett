@@ -72,3 +72,11 @@
     --nav-h: 80px;
   }
 }
+
+/* A barra de rolagem é do documento (fora do .gbr): as duas cores dela moram no :root.
+   O polegar é o vermelho do botão; o trilho, o papel 2 da página. */
+:root {
+  --sb-thumb: #d71920;
+  --sb-thumb-hover: #a8101a;
+  --sb-track: #f3f2ee;
+}
