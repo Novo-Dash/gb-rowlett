@@ -2620,6 +2620,488 @@ html.motion .how__still {
   }
 }
 
+/* ════════ [IX · design pass] as versões B, C e D da faixa + o seletor ════════
+   Saem do código quando a versão for escolhida (ver Reserve.tsx). */
+.hb,
+.hd {
+  --x0: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
+}
+
+/* ── B · a faixa preta bordada ── */
+.hb__belt,
+.hb__row {
+  display: none;
+}
+html.motion .hb__belt {
+  --bh: clamp(52px, 8svh, 112px);
+  --bar: 1.35;
+  display: block;
+  margin-bottom: clamp(24px, 5svh, 56px);
+}
+.hb__fabric {
+  position: relative;
+  container-type: inline-size;
+  height: var(--bh);
+  /* a faixa vem de fora da tela pela esquerda e termina na margem da direita */
+  margin-right: var(--x0);
+  border-radius: 0 3px 3px 0;
+  background:
+    linear-gradient(180deg, rgb(var(--paper-rgb) / 0.1), transparent 30%, rgb(0 0 0 / 0.32)),
+    repeating-linear-gradient(180deg, transparent 0 calc(var(--bh) / 9 - 1px), rgb(var(--paper-rgb) / 0.06) calc(var(--bh) / 9 - 1px) calc(var(--bh) / 9)),
+    var(--belt-black);
+  box-shadow: 0 26px 34px -22px rgb(0 0 0 / 0.55);
+}
+.hb__line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: calc(var(--bh) * (var(--bar) + 0.6));
+  display: flex;
+  align-items: center;
+  padding-left: var(--x0);
+  overflow: hidden;
+}
+.hb__emb {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  font-style: italic;
+  text-transform: uppercase;
+  font-size: min(calc(var(--bh) * 0.56), 6.4cqi);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+}
+/* o cetim do bordado: linhas finas em diagonal, em branco, com o relevo embaixo */
+.hb__thread {
+  color: var(--paper);
+  filter: drop-shadow(0 1px 0 rgb(0 0 0 / 0.75));
+}
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .hb__thread {
+    color: transparent;
+    background: repeating-linear-gradient(118deg, var(--paper) 0 1.4px, rgb(var(--paper-rgb) / 0.68) 1.4px 2.6px);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+}
+.hb__needle {
+  position: absolute;
+  inset: -22% 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.hb__needle::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -1px;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, var(--paper) 22% 78%, transparent);
+  box-shadow: 0 0 10px rgb(var(--paper-rgb) / 0.8);
+}
+html.motion .hb__thread {
+  clip-path: inset(0 100% 0 0);
+}
+/* ponto a ponto: o clip e a agulha andam em degraus, juntos */
+html.motion .hb[data-in] .hb__thread {
+  animation: hb-stitch 1.15s steps(24, end) 0.15s both;
+}
+html.motion .hb[data-in] .hb__needle {
+  animation: hb-needle 1.15s steps(24, end) 0.15s both;
+}
+@keyframes hb-stitch {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes hb-needle {
+  0% {
+    opacity: 1;
+    transform: translateX(-100%);
+  }
+  96% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+}
+/* a ponteira vermelha da faixa preta, perto da ponta, com os graus brancos */
+.hb__bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: calc(var(--bh) * 0.32);
+  display: flex;
+  justify-content: flex-end;
+  gap: calc(var(--bh) * 0.14);
+  width: calc(var(--bh) * var(--bar));
+  padding-right: calc(var(--bh) * 0.26);
+  background:
+    linear-gradient(180deg, rgb(var(--paper-rgb) / 0.16), transparent 38%, rgb(0 0 0 / 0.3)),
+    var(--red);
+}
+.hb__stripe {
+  width: calc(var(--bh) * 0.18);
+  height: 100%;
+  background:
+    linear-gradient(180deg, transparent 55%, rgb(0 0 0 / 0.16)),
+    var(--belt-white);
+  transform: scaleY(0);
+  transform-origin: 50% 0;
+  transition: transform 0.55s var(--ease-spring) 0.9s;
+}
+.hb__stripe[data-on] {
+  transform: none;
+}
+html.motion .hb__row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: clamp(18px, calc(var(--u) * 3), 56px);
+  align-items: start;
+}
+.hb__count {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: end;
+  column-gap: 6px;
+}
+.hb__count .label {
+  grid-column: 1 / -1;
+  margin-bottom: 6px;
+  color: var(--muted);
+}
+.hb__count b {
+  font-style: italic;
+  font-size: clamp(3rem, 13vw, 4.2rem);
+  line-height: 0.86;
+  color: var(--red);
+}
+.hb__of {
+  padding-bottom: 0.2em;
+  font-style: italic;
+  font-size: 1.125rem;
+  color: var(--muted);
+}
+.hb__stack {
+  display: grid;
+}
+.hb__step {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  transition:
+    opacity 0.4s var(--ease),
+    transform 0.5s var(--ease),
+    visibility 0s 0.5s;
+}
+.hb__step.is-on {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity 0.6s var(--ease) 0.5s,
+    transform 0.8s var(--ease) 0.5s,
+    visibility 0s;
+}
+.hb__step .how__cta {
+  margin-top: 14px;
+}
+@media (max-width: 767px) {
+  html.motion .hb__row {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 14px;
+  }
+  .hb__count {
+    grid-template-columns: auto auto 1fr;
+  }
+}
+@media (min-width: 768px) {
+  html.motion .hb__belt {
+    --bh: clamp(64px, 11svh, 112px);
+    --bar: 1.9;
+  }
+}
+@media (min-width: 1024px) {
+  .hb__count b {
+    font-size: clamp(4rem, calc(var(--u) * 6), 7rem);
+  }
+  .hb__step .how__b {
+    max-width: 52ch;
+    font-size: clamp(1.0625rem, calc(var(--u) * 1.2), 1.375rem);
+  }
+  html.motion .hb__step {
+    padding-top: 1.6rem;
+  }
+}
+
+/* ── C · a faixa em pé (sem palco preso) ── */
+.hc {
+  padding: clamp(72px, calc(var(--u) * 8), 150px) 0;
+}
+.hc__body {
+  --rw: 28px;
+  display: grid;
+  grid-template-columns: var(--rw) minmax(0, 1fr);
+  column-gap: clamp(18px, calc(var(--u) * 3), 56px);
+  margin-top: clamp(28px, calc(var(--u) * 3.6), 56px);
+}
+.hc__rail {
+  position: relative;
+}
+.hc__cloth {
+  position: absolute;
+  inset: 0;
+  border-radius: 3px 3px 0 0;
+  background:
+    linear-gradient(90deg, rgb(var(--paper-rgb) / 0.85), transparent 30%, rgb(0 0 0 / 0.05) 72%, rgb(0 0 0 / 0.12)),
+    repeating-linear-gradient(90deg, transparent 0 calc(var(--rw) / 7 - 1px), rgb(0 0 0 / 0.08) calc(var(--rw) / 7 - 1px) calc(var(--rw) / 7)),
+    var(--belt-white);
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 0.08),
+    16px 0 28px -22px rgb(var(--navy-rgb) / 0.55);
+}
+.hc__tip {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: calc(var(--rw) * 0.16);
+  height: calc(var(--rw) * 3.4);
+  padding-bottom: calc(var(--rw) * 0.36);
+  background:
+    linear-gradient(90deg, rgb(var(--paper-rgb) / 0.12), transparent 38%, rgb(0 0 0 / 0.35)),
+    var(--belt-black);
+  box-shadow: 0 14px 22px -12px rgb(0 0 0 / 0.5);
+}
+.hc__stripe {
+  height: calc(var(--rw) * 0.2);
+  background: var(--belt-white);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.55s var(--ease-spring);
+}
+.hc__stripe[data-on] {
+  transform: none;
+}
+html.motion .hc__cloth {
+  clip-path: inset(0 0 calc(100% - var(--reach, 0px)) 0);
+}
+html.motion .hc__tip {
+  top: 0;
+  bottom: auto;
+  transform: translateY(var(--ty, 0px));
+}
+.hc__list {
+  display: grid;
+  gap: clamp(56px, 14svh, 150px);
+  padding-bottom: 6px;
+}
+.hc__step {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: clamp(14px, calc(var(--u) * 2), 28px);
+}
+.hc__n {
+  font-style: italic;
+  font-size: clamp(2.6rem, 11vw, 3.4rem);
+  line-height: 0.84;
+  color: var(--red);
+}
+.hc__txt {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.hc__step .how__cta {
+  margin-top: 14px;
+}
+html.motion .hc__step {
+  opacity: 0.26;
+  transform: translateX(-8px);
+  transition:
+    opacity 0.6s var(--ease),
+    transform 0.7s var(--ease);
+}
+html.motion .hc__step.is-on {
+  opacity: 1;
+  transform: none;
+}
+@media (min-width: 1024px) {
+  .hc__in {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    width: min(100%, calc(var(--max) + 2 * var(--gutter)));
+    margin-inline: auto;
+  }
+  .hc__side .how__head {
+    position: sticky;
+    top: calc(var(--nav-h) + 48px);
+  }
+  .hc__body {
+    --rw: 40px;
+    margin-top: 0;
+  }
+  .hc__n {
+    font-size: clamp(3.6rem, calc(var(--u) * 5), 6rem);
+  }
+  .hc__txt .how__t {
+    font-size: clamp(2.2rem, calc(var(--u) * 3), 3.6rem);
+  }
+}
+
+/* ── D · a faixa que desenrola ── */
+.hd__track,
+.hd__foot {
+  display: none;
+}
+html.motion .how.hd {
+  height: calc(100svh + 190svh);
+}
+html.motion .hd__track {
+  display: block;
+  margin-bottom: clamp(16px, 3svh, 36px);
+  padding: 6px 0 36px;
+  overflow: hidden;
+}
+.hd__belt {
+  display: flex;
+  width: max-content;
+  /* a faixa entra pela borda esquerda da tela; o texto começa na margem */
+  padding-left: var(--x0);
+  background:
+    linear-gradient(180deg, rgb(var(--paper-rgb) / 0.85), transparent 18%, rgb(0 0 0 / 0.03) 80%, rgb(0 0 0 / 0.1)),
+    repeating-linear-gradient(180deg, transparent 0 15px, rgb(0 0 0 / 0.045) 15px 16px),
+    var(--belt-white);
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 0.07),
+    0 30px 40px -28px rgb(var(--navy-rgb) / 0.55);
+  transform: translateX(var(--x, 0px));
+  will-change: transform;
+}
+.hd__segs {
+  display: flex;
+}
+.hd__seg {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(80vw, 540px);
+  padding: clamp(22px, 4svh, 44px) clamp(22px, 3vw, 48px) clamp(26px, 4.4svh, 48px);
+  opacity: 0.38;
+  transition: opacity 0.6s var(--ease);
+}
+.hd__seg:first-child {
+  padding-left: 0;
+}
+.hd__seg.is-on {
+  opacity: 1;
+}
+/* a costura entre um passo e outro */
+.hd__seg + .hd__seg::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  bottom: 10%;
+  left: 0;
+  border-left: 1.5px dashed rgb(0 0 0 / 0.22);
+}
+.hd__n {
+  font-style: italic;
+  font-size: clamp(2.6rem, 9vw, 4.2rem);
+  line-height: 0.84;
+  color: var(--red);
+}
+.hd__seg .how__t {
+  font-size: clamp(1.8rem, 7vw, 2.8rem);
+}
+.hd__seg .how__b {
+  font-size: clamp(1rem, calc(var(--u) * 1.1), 1.25rem);
+}
+.hd__tip {
+  display: flex;
+  flex: none;
+  justify-content: flex-end;
+  gap: clamp(10px, 1.2vw, 18px);
+  width: clamp(170px, 24vw, 340px);
+  margin-right: clamp(26px, 3vw, 48px);
+  padding-right: clamp(22px, 2.6vw, 40px);
+  background:
+    linear-gradient(180deg, rgb(var(--paper-rgb) / 0.12), transparent 38%, rgb(0 0 0 / 0.35)),
+    var(--belt-black);
+}
+.hd__stripe {
+  width: clamp(14px, 1.6vw, 24px);
+  background:
+    linear-gradient(180deg, transparent 55%, rgb(0 0 0 / 0.16)),
+    var(--belt-white);
+  transform: scaleY(0);
+  transform-origin: 50% 0;
+  transition: transform 0.55s var(--ease-spring);
+}
+.hd__stripe[data-on] {
+  transform: none;
+}
+html.motion .hd__foot {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.hd__foot .how__meter {
+  justify-items: end;
+}
+@media (max-width: 767px) {
+  .hd__foot .how__meter {
+    display: none;
+  }
+}
+
+/* ── o seletor de versões (só no design pass, só em prospect, só com ?how=) ── */
+.howpick {
+  position: fixed;
+  z-index: 70;
+  top: 50%;
+  right: 6px;
+  display: grid;
+  gap: 4px;
+  padding: 5px;
+  border-radius: 12px;
+  background: rgb(var(--navy-rgb) / 0.94);
+  box-shadow: 0 18px 40px -18px rgb(0 0 0 / 0.6);
+  transform: translateY(-50%);
+}
+.howpick a {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-style: italic;
+  color: var(--paper);
+  text-decoration: none;
+}
+.howpick a[aria-current] {
+  background: var(--red);
+}
+
 /* ════════ [X] ABERTURA — a única banda escura ════════ */
 .open {
   position: relative;
