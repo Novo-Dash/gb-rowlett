@@ -195,6 +195,7 @@ export const offer = {
   ticketCta: 'Claim a First 50 spot',
   /** O canhoto II: o preço é o mesmo; o que muda é o perk. */
   lockedSamePrice: 'Same $87 every two weeks · No enrollment fee',
+  comingSoon: 'Coming soon',
   priceLine: '$87',
   pricePer: 'every two weeks',
   enrollmentLine: 'No enrollment fee',

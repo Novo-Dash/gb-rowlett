@@ -1022,40 +1022,54 @@ html.motion .pass__pill--open i {
   background: linear-gradient(180deg, var(--btn-top), var(--btn-bottom));
   box-shadow: 0 24px 40px -26px rgb(0 0 0 / 0.6);
 }
+/* o canhoto: o mesmo quadrado do card I, marinho um degrau mais claro, conteúdo
+   borrado; o único nítido é o selo do centro (cadeado + "Coming soon") */
 .tk--next {
-  align-content: center;
-  background: var(--paper);
-  color: var(--ink);
+  overflow: hidden;
+  color: var(--paper);
+  background: var(--navy-2);
+  box-shadow: 0 24px 40px -26px rgb(0 0 0 / 0.6), inset 0 0 0 1px rgb(var(--paper-rgb) / 0.08);
 }
-.tk__big {
+.tk__blur {
   display: grid;
-  gap: 6px;
+  gap: 8px;
+  filter: blur(6px);
+  opacity: 0.85;
+  pointer-events: none;
+  user-select: none;
 }
-.tk--next .tk__amount {
-  color: var(--red);
+.tk--next .tk__bar {
+  background: rgb(var(--paper-rgb) / 0.18);
 }
-.tk--next .tk__per {
-  color: var(--ink-2);
-  opacity: 1;
+.tk__soon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
-.tk__same {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin-top: 10px;
-  padding-top: 12px;
-  border-top: 1px solid var(--line);
-  font-size: 1rem;
-  line-height: 1.4;
-  font-weight: 500;
-  color: var(--ink-2);
+.tk__lock {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  background: var(--paper);
+  color: var(--navy);
+  box-shadow: 0 18px 30px -16px rgb(0 0 0 / 0.6);
 }
-.tk__same svg {
-  width: 10px;
-  height: 10px;
-  flex: none;
-  margin-top: 0.35em;
-  color: var(--red);
+.tk__lock svg {
+  width: 30px;
+  height: 30px;
+}
+.tk__soont {
+  font-style: italic;
+  font-size: clamp(1.5rem, 6vw, 2rem);
+  letter-spacing: 0.02em;
+  color: var(--paper);
+  white-space: nowrap;
 }
 .tk__price {
   display: flex;
@@ -1188,14 +1202,25 @@ html.motion .pass__half--next .rise {
   --i: 1;
 }
 
+@media (max-width: 899px) {
+  .tk--next {
+    min-height: 260px;
+  }
+}
 @media (min-width: 900px) {
   /* desktop: as metades lado a lado, o picote vertical, os furos em cima e embaixo */
   .pass {
     grid-template-columns: minmax(0, 1.25fr) 0 minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
   }
   .pass__half {
+    grid-row: 1 / span 3;
+    grid-template-rows: subgrid;
     gap: 18px;
     padding: 24px clamp(20px, calc(var(--u) * 2.4), 40px) 28px;
+  }
+  .pass__perf {
+    grid-row: 1 / -1;
   }
   .pass__perf {
     width: 0;
@@ -1219,9 +1244,6 @@ html.motion .pass__half--next .rise {
   }
   .tk {
     padding: 28px clamp(22px, calc(var(--u) * 2.4), 40px) 26px;
-  }
-  .tk--next {
-    height: 100%;
   }
   .tk__stampwrap {
     right: -28px;

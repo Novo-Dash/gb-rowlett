@@ -27,6 +27,7 @@
   --red-glow: #f2213b; /* vermelho vivo para DISPLAY sobre o marinho (4,3:1) e a luz dos cards */
   --red-wash: #fef1f2; /* fundo do marcador de pendência */
   --navy: #19286d; /* azul-marinho GB: footer, pedido, pattern */
+  --navy-2: #24398f; /* marinho um degrau mais claro: o card travado dentro do ingresso */
   --night: #0b1233; /* a única banda escura do corpo (abertura) */
   --on-dark: #f4f5fa;
   --on-dark-2: rgb(244 245 250 / 0.74);

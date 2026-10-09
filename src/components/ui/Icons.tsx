@@ -68,6 +68,15 @@ export const Check = ({ className }: P) => (
   </svg>
 )
 
+/** Cadeado: corpo retangular e a alça em arco, no traço da casa. */
+export const Lock = ({ className }: P) => (
+  <svg {...base} className={className} strokeWidth={2}>
+    <path d="M5 11h14v10H5Z" />
+    <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+    <path d="M12 15v2" />
+  </svg>
+)
+
 export const Close = ({ className }: P) => (
   <svg {...base} className={className} strokeWidth={2}>
     <path d="M6 6l12 12M18 6L6 18" />

@@ -13,8 +13,9 @@
                                    (picote com os dois furos)
 
    O corpo é marinho; a metade I leva o card vermelho (degradê do botão)
-   com o botão BRANCO de seta vermelha; a metade II é o canhoto: card
-   branco, nítido, com o perk dele como número grande. O carimbo de dias
+   com o botão BRANCO de seta vermelha; a metade II é o canhoto: o MESMO
+   quadrado do card I, em marinho um degrau mais claro, com o conteúdo
+   borrado e "Coming soon" + cadeado no centro (pedido do Adryan). O carimbo de dias
    até a abertura morde o canto do card I quando a data existir; sem data,
    vira pendência no pé. No celular as metades empilham e o picote fica
    horizontal.
@@ -27,7 +28,7 @@ import { useInView } from '@/motion/inview'
 import { trackViewContent } from '@/track'
 import { Cta } from '../ui/Cta'
 import { Eyebrow } from '../ui/Eyebrow'
-import { Tri } from '../ui/Icons'
+import { Lock, Tri } from '../ui/Icons'
 import { Lines } from '../ui/Lines'
 import { Pending } from '../ui/Pending'
 import { Stamp } from '../ui/Stamp'
@@ -143,20 +144,42 @@ function OpenHalf({ tier, days }: { tier: Tier; days: number | null }) {
   )
 }
 
-/** O canhoto: o grupo seguinte. Nítido — o número grande é o perk, não o preço (que é o mesmo). */
+/** O canhoto: o grupo seguinte. Mesmo quadrado do card I, em marinho mais claro,
+    conteúdo borrado e "Coming soon" + cadeado no centro. O leitor de tela recebe o
+    conteúdo inteiro em sr-only (o borrado e o selo do centro são aria-hidden). */
 function NextHalf({ tier }: { tier: Tier }) {
   return (
     <div className="pass__half pass__half--next">
       <HalfHead tier={tier} pill={offer.lockedPill} tone="next" />
       <article className="tk tk--next rise" aria-label={`${tier.order} · ${tier.label}`}>
-        <p className="tk__big">
-          <span className="tk__amount d">{tier.perk.big ?? tier.perk.short}</span>
-          {tier.perk.bigSub ? <span className="tk__per">{tier.perk.bigSub}</span> : null}
+        <p className="sr-only">
+          {offer.comingSoon}. {tier.perk.title}. {offer.lockedSamePrice}.
         </p>
-        <p className="tk__same">
-          <Tri />
-          <span>{offer.lockedSamePrice}</span>
-        </p>
+        <div className="tk__blur" aria-hidden="true">
+          <p className="tk__price">
+            <span className="tk__amount d">{tier.perk.big ?? tier.perk.short}</span>
+            {tier.perk.bigSub ? <span className="tk__per">{tier.perk.bigSub}</span> : null}
+          </p>
+          <p className="tk__enroll d">{offer.enrollmentLine}</p>
+          <p className="tk__perk">
+            <Tri />
+            <span>{offer.lockedSamePrice}</span>
+          </p>
+          <div className="tk__seats">
+            <div className="tk__seatrow label">
+              <span>{tier.label}</span>
+            </div>
+            <div className="tk__bar">
+              <span />
+            </div>
+          </div>
+        </div>
+        <span className="tk__soon" aria-hidden="true">
+          <span className="tk__lock">
+            <Lock />
+          </span>
+          <span className="tk__soont d">{offer.comingSoon}</span>
+        </span>
       </article>
       <div className="pass__foot">
         <p className="pass__note">{tier.note}</p>
