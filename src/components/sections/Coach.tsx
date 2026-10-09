@@ -22,9 +22,6 @@ export function Coach() {
       <div className="shell coach__in">
         <figure className="coach__photo">
           <Pic name="coach" alt={coach.photoAlt} sizes="(min-width: 1024px) 36vw, 90vw" />
-          <figcaption>
-            <Pending>{coach.thenNowPending}</Pending>
-          </figcaption>
         </figure>
         <div className="coach__copy">
           <Eyebrow>{coach.eyebrow}</Eyebrow>

@@ -315,10 +315,10 @@ export interface Slot {
   t: string
   p: SlotKey
 }
-export const scheduleGroups: Record<SlotKey, { label: string; short: string; programs: ProgramKey[]; who: Who }> = {
-  adults: { label: 'Adults + Teens · Fundamentals / All Levels', short: 'Adults + Teens', programs: ['adults'], who: 'me' },
-  lc1: { label: 'Little Champions 1 (4–6)', short: 'LC1 · 4–6', programs: ['lc1'], who: 'child' },
-  'lc2-juniors': { label: 'LC2 + Juniors (7–14)', short: 'LC2 + Juniors · 7–14', programs: ['lc2', 'juniors'], who: 'child' },
+export const scheduleGroups: Record<SlotKey, { label: string; short: string; name: string; sub: string; programs: ProgramKey[]; who: Who }> = {
+  adults: { label: 'Adults + Teens · Fundamentals / All Levels', short: 'Adults + Teens', name: 'Adults + Teens', sub: 'All levels', programs: ['adults'], who: 'me' },
+  lc1: { label: 'Little Champions 1 (4–6)', short: 'LC1 · 4–6', name: 'Little Champions 1', sub: 'Ages 4–6', programs: ['lc1'], who: 'child' },
+  'lc2-juniors': { label: 'LC2 + Juniors (7–14)', short: 'LC2 + Juniors · 7–14', name: 'LC2 + Juniors', sub: 'Ages 7–14', programs: ['lc2', 'juniors'], who: 'child' },
 }
 export const schedule: { day: string; long: string; slots: Slot[] }[] = [
   { day: 'Mon', long: 'Monday', slots: [{ t: '12:00 PM', p: 'adults' }, { t: '5:15 PM', p: 'lc2-juniors' }, { t: '6:30 PM', p: 'adults' }] },
@@ -354,11 +354,23 @@ export const adultTimesSentence = (() => {
 export const scheduleCopy = {
   eyebrow: 'The schedule',
   title: [{ text: 'Classes from 6 AM to 6:30 PM.' }, { text: 'Pick the one that fits your week.', br: true }],
-  note: (n: number) => `${n} adult classes a week, including 6 AM on Tue/Thu for anyone who has to be at work by 8.`,
   summary: (c: typeof scheduleCounts) => `${c.total} classes a week · ${c.adults} adults · ${c.lc1} Little Champions 1 · ${c.lc2Juniors} LC2 + Juniors`,
-  legendLabel: 'Classes',
+  note: (n: number) => `${n} adult classes a week, including 6 AM on Tue/Thu for anyone who has to be at work by 8.`,
+  caption: 'Weekly class schedule by day and time. Each class opens the founding pre-registration with that class picked.',
+  filterLabel: 'Show',
+  filters: [
+    { id: 'all', label: 'All classes' },
+    { id: 'adults', label: 'Adults + Teens' },
+    { id: 'lc1', label: 'Ages 4–6' },
+    { id: 'lc2-juniors', label: 'Ages 7–14' },
+  ] as Array<{ id: 'all' | SlotKey; label: string }>,
+  timeLabel: 'Time',
+  closed: 'Closed',
+  sunday: { short: 'Sun', long: 'Sunday' },
   todayLabel: 'Today',
+  dayLabel: 'Day',
   slotAction: 'Claim a spot in this class',
+  cta: 'Claim my Founding Member spot',
   gb2Pending: 'Flyer legend mentions GB2 (white belt 2 stripes+) but the grid has no GB2 class: not published',
 }
 
@@ -404,7 +416,6 @@ export const coach = {
     { term: 'Why Rowlett', value: null as string | null, pending: 'Why Rowlett, in his words' },
   ],
   photoAlt: 'Andre Carepa kneeling on a blue mat in a white gi and black belt, in front of the Gracie Barra wall',
-  thenNowPending: 'Brown-belt photos (Fotos as Brown Belt) for a "then and now": files over 10 MB, still to be delivered',
   cta: 'Meet Andre as a Founding Member',
 }
 
