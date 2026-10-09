@@ -277,8 +277,6 @@ export const programs = {
   ] satisfies Program[],
 }
 
-export const programByKey = (key: ProgramKey) => programs.cards.find((p) => p.key === key)!
-
 /* ── IV · A obra (Why Us) ──────────────────────────────────────────── */
 export const build = {
   eyebrow: 'Behind the doors',
@@ -576,6 +574,3 @@ export const form = {
   close: 'Close',
   page: 'gbr-grand-opening',
 }
-
-/* Sem reviews: a academia não abriu. Nada renderiza, nada vai para o schema. */
-export const reviews = { rating: null as number | null, count: 0, items: [] as never[] }

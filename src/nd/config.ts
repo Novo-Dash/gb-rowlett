@@ -23,11 +23,8 @@ export const copy = {
 }
 export type Copy = typeof copy
 
-/** Classes and open starts: the Novo Dash app, straight (public, read-only, CDN-cached 60 s). */
-export const PROGRAMS_URL = 'https://clients.novodash.com/api/public/programs'
-
-/** Webhook 2: the shared n8n flow, fixed for every academy. */
-export const BOOKING_WEBHOOK = 'https://n8n.novodash.com/webhook/landing-page-booking'
+// GB Rowlett (pré-abertura): só o Webhook 1 (lead). Não há calendário nem Webhook 2
+// enquanto a academia não abre; os módulos programs.ts / webhook.ts do kit não embarcam.
 
 /** Webhook 1: the [ND] Primary Workflow inbound trigger of the academy's sub-account. */
 export const LEAD_WEBHOOK =

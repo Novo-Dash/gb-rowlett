@@ -17,8 +17,3 @@ export function Pending({ children, className }: { children: React.ReactNode; cl
     </span>
   )
 }
-
-/** Dado que só existe em prospect: em client, renderiza o fallback (ou nada). */
-export function Prospect({ children, fallback = null }: { children: React.ReactNode; fallback?: React.ReactNode }) {
-  return <>{UX.client ? fallback : children}</>
-}

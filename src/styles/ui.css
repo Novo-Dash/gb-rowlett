@@ -215,19 +215,6 @@ html.motion .cta::after {
     transform: translateY(0);
   }
 }
-/* enviando: o rótulo vira "Sending…" (texto vem do dado) e a seta gira */
-.cta[data-loading] {
-  pointer-events: none;
-}
-.cta[data-loading] .cta__icon svg {
-  animation: cta-spin 0.9s linear infinite;
-}
-@keyframes cta-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 /* ── Lines: palavra sobe de dentro da máscara ──
    Folga de .3em em cima e .08em embaixo para nunca cortar acento nem descendente. */
 .ln__m {
