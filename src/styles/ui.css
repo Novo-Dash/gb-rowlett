@@ -210,6 +210,11 @@ html.motion .cta::after {
   overflow: hidden;
   padding-block: 0.3em 0.08em;
   margin-block: -0.3em -0.08em;
+  /* folga dos lados também: o itálico inclina a letra para fora da caixa e a
+     máscara cortava a última (o T de ROWLETT). A margem negativa devolve o
+     espaço, então o texto não anda. */
+  padding-inline: 0.06em 0.16em;
+  margin-inline: -0.06em -0.16em;
   vertical-align: top;
 }
 .ln__w {
@@ -268,7 +273,8 @@ html.motion .ln--load .ln__accent::after {
   position: relative;
   height: 1em;
   line-height: 1;
-  overflow: hidden;
+  /* corta só em cima e embaixo (o rolo); dos lados o dígito itálico pode sair */
+  clip-path: inset(0 -0.4em);
   flex: 1 1 0;
 }
 .odo__strip {
