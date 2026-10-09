@@ -5,8 +5,9 @@
    e cinco fotos REAIS em fila de borda a borda, cantos retos, véu marinho
    a 18% em repouso. Hover: as outras quatro caem a 45%, a apontada sobe,
    cresce e perde o véu (CSS puro, sem estado). As fotos da obra são
-   prova: sem filtro que as faça parecer render. Embaixo, as três placas
-   de "why us" e o botão.
+   prova: sem filtro que as faça parecer render. As três razões de "why us"
+   ficam ACIMA das fotos, em colunas limpas (número, fio, título, texto),
+   sem cartão nem sombra; o botão fica centralizado embaixo da fila.
    ════════════════════════════════════════════════════════════════════ */
 
 import { useRef } from 'react'
@@ -21,7 +22,7 @@ import { Pic } from '../ui/Pic'
 
 export function Build() {
   const row = useRef<HTMLUListElement>(null)
-  const plates = useRef<HTMLUListElement>(null)
+  const plates = useRef<HTMLOListElement>(null)
   useInView(row)
   useInView(plates)
 
@@ -44,6 +45,21 @@ export function Build() {
         </div>
       </div>
 
+      {/* as três razões, ACIMA das fotos: colunas limpas, número + fio + título + texto */}
+      <div className="shell">
+        <ol ref={plates} className="build__why">
+          {build.plates.map((p, i) => (
+            <li key={p.title} className="why rise" style={{ ['--i' as string]: i }}>
+              <span className="why__n d" aria-hidden="true">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h3 className="why__t d">{p.title}</h3>
+              <p className="why__b">{p.body}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+
       <ul ref={row} className="build__row" aria-label="The build, in photos">
         {build.stages.map((s, i) => (
           <li key={s.id} className="build__cell" style={{ ['--k' as string]: i }}>
@@ -54,15 +70,6 @@ export function Build() {
       </ul>
 
       <div className="shell">
-        <ul ref={plates} className="build__plates">
-          {build.plates.map((p, i) => (
-            <li key={p.title} className="plate rise" style={{ ['--i' as string]: i }}>
-              <span className="plate__bar" aria-hidden="true" />
-              <h3 className="d h3 plate__t">{p.title}</h3>
-              <p className="plate__b">{p.body}</p>
-            </li>
-          ))}
-        </ul>
         <div className="build__cta">
           <Cta origin="build" size="block">
             {build.cta}

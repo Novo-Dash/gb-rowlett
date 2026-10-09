@@ -1563,39 +1563,48 @@ html.motion .build__cell {
 html.motion .build__row[data-in] .build__cell {
   clip-path: inset(0);
 }
-.build__plates {
+/* as três razões: colunas limpas sobre a página, sem cartão; fio fino em cima,
+   o número em vermelho, o título em Cn, o texto em corpo */
+.build__why {
   display: grid;
-  gap: 16px;
-  margin-top: clamp(32px, calc(var(--u) * 3.6), 64px);
+  gap: 28px;
+  margin: 0 0 clamp(36px, calc(var(--u) * 4), 72px);
+  counter-reset: why;
 }
-.plate {
-  position: relative;
-  padding: 22px 20px 24px 24px;
-  background: var(--paper);
-  box-shadow: 0 0 0 1px var(--line), 0 30px 50px -36px rgb(var(--navy-rgb) / 0.45);
+.why {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line-strong);
 }
-.plate__bar {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: var(--red);
-}
-.plate__t {
-  max-width: 16ch;
-}
-.plate__b {
-  margin-top: 12px;
+.why__n {
+  font-style: italic;
   font-size: 1rem;
-  line-height: 1.55;
+  letter-spacing: 0.04em;
+  color: var(--red);
+}
+.why__t {
+  font-style: italic;
+  font-size: clamp(1.5rem, 5.6vw, 1.875rem);
+  line-height: 0.98;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.why__b {
+  max-width: 42ch;
+  font-size: 1rem;
+  line-height: 1.6;
   color: var(--ink-2);
   text-wrap: pretty;
 }
+html.motion .build__why .rise {
+  transition-delay: calc(var(--i) * 110ms);
+}
 .build__cta {
   display: grid;
-  justify-items: start;
-  margin-top: clamp(28px, calc(var(--u) * 3), 48px);
+  justify-items: center;
+  margin-top: clamp(36px, calc(var(--u) * 4), 64px);
 }
 @media (min-width: 768px) {
   .build__row {
@@ -1616,12 +1625,16 @@ html.motion .build__row[data-in] .build__cell {
     align-items: end;
     column-gap: 48px;
   }
-  .build__plates {
+  .build__why {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 20px;
+    gap: clamp(32px, calc(var(--u) * 4), 72px);
   }
-  .plate {
-    padding: 28px 28px 30px 30px;
+  .why {
+    gap: 14px;
+    padding-top: 22px;
+  }
+  .why__t {
+    font-size: clamp(1.75rem, calc(var(--u) * 2), 2.25rem);
   }
 }
 
