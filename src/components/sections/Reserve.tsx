@@ -4,15 +4,16 @@
 
               WHAT HAPPENS NEXT
            HOW TO RESERVE YOUR SPOT.
-     ━━━━━━━━━━━   ━━━━━━━━━━━   ───────────
-     01            02            ⌗03          (o que não chegou fica em contorno)
-     Pre-register  We confirm…   Doors open.
-     texto         texto         texto
-     ═══════════ a faixa branca ═════════════▐█▌▌ ▏═
-                    [ Claim my Founding Member spot ]
+     ┌▀▀▀▀▀▀▀▀▀▀┐  ┌▀▀▀▀▀▀▀▀▀▀┐  ┌──────────┐
+     │01  1/3   │  │02  2/3   │  │⌗03  3/3  │   (card aceso × card apagado)
+     │título    │  │título    │  │título    │
+     │texto     │  │texto     │  │texto     │
+     └──────────┘  └──────────┘  └──────────┘
+              [ Claim my Founding Member spot ]
+     ▓▓▓ tatame vermelho ═══ a faixa branca ═══▐█▌▌ ▏═ ▓▓▓  ← o divisor da seção
 
    A cena fica no palco (sticky CSS) enquanto a rolagem anda: a cada
-   passo alcançado, o número enche de vermelho, o filete de cima acende
+   passo alcançado o card acende (régua vermelha, número cheio, sombra)
    e a ponteira preta da faixa ganha um grau (os três encaixes vazios já
    aparecem, então se vê o que falta). Sem movimento (ou reduced motion):
    tudo aceso, a faixa com os três graus, sem palco preso.
@@ -68,9 +69,14 @@ export function Reserve() {
         <ol className="shell how__steps">
           {steps.map((s, i) => (
             <li key={s.n} className={['how__step', on(i) && 'is-on', live && i === step && 'is-now'].filter(Boolean).join(' ')} aria-current={live && i === step ? 'step' : undefined}>
-              <span className="how__n d" aria-hidden="true">
-                {s.n}
-              </span>
+              <div className="how__top">
+                <span className="how__n d" aria-hidden="true">
+                  {s.n}
+                </span>
+                <span className="how__of label" aria-hidden="true">
+                  Step {i + 1}/{total}
+                </span>
+              </div>
               <h3 className="how__t d">{s.title}</h3>
               <p className="how__b">{s.body}</p>
               {'pending' in s && s.pending ? (
@@ -82,21 +88,24 @@ export function Reserve() {
           ))}
         </ol>
 
-        {/* a faixa: entra pela borda esquerda e termina na margem da direita */}
-        <div className="how__belt" aria-hidden="true">
-          <span className="how__bar">
-            {steps.map((s, i) => (
-              <i key={s.n} className="how__slot">
-                <i className="how__stripe" data-on={on(i) ? '' : undefined} />
-              </i>
-            ))}
-          </span>
-        </div>
-
         <div className="shell how__cta">
           <Cta origin="reserve" size="block">
             {reserve.cta}
           </Cta>
+        </div>
+
+        {/* o divisor da seção: o tatame vermelho de borda a borda, colado embaixo,
+            com a faixa branca atravessando (entra pela esquerda, termina na margem) */}
+        <div className="how__mat" aria-hidden="true">
+          <div className="how__belt">
+            <span className="how__bar">
+              {steps.map((s, i) => (
+                <i key={s.n} className="how__slot">
+                  <i className="how__stripe" data-on={on(i) ? '' : undefined} />
+                </i>
+              ))}
+            </span>
+          </div>
         </div>
       </div>
     </section>

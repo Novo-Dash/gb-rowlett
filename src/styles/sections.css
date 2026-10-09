@@ -2355,7 +2355,8 @@ html.motion .ready__cols .rise {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(72px, calc(var(--u) * 8), 150px) 0 clamp(64px, calc(var(--u) * 7), 130px);
+  /* sem respiro embaixo: o tatame é a borda da seção */
+  padding: clamp(72px, calc(var(--u) * 8), 150px) 0 0;
   overflow: hidden;
 }
 .how__head {
@@ -2366,32 +2367,49 @@ html.motion .ready__cols .rise {
 .how__title {
   max-width: none;
 }
-/* os passos: um filete em cima, o número grande, o título e o texto */
+/* os passos em CARDS: branco, régua no topo, o número e o "step n/3" na mesma
+   linha, título e texto. Aceso: régua vermelha, número cheio, sombra. Apagado:
+   régua cinza, número em contorno, conteúdo esmaecido. */
 .how__steps {
   display: grid;
-  gap: 22px;
-  margin-top: clamp(28px, 4.4svh, 64px);
+  gap: 12px;
+  margin-top: clamp(24px, 4svh, 56px);
 }
 .how__step {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  grid-template-areas:
-    'n t'
-    'n b'
-    'n p';
-  align-content: start;
-  column-gap: 16px;
-  row-gap: 6px;
-  padding-top: 16px;
-  border-top: 2px solid var(--line);
-  transition: border-color 0.5s var(--ease);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px 18px 20px;
+  overflow: hidden;
+  border-radius: var(--r);
+  background: var(--paper);
+  box-shadow:
+    0 0 0 1px var(--line),
+    0 26px 44px -34px rgb(var(--navy-rgb) / 0.55);
+  transition:
+    box-shadow 0.5s var(--ease),
+    transform 0.5s var(--ease);
 }
-.how__step.is-on {
-  border-top-color: var(--red);
+.how__step::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: var(--line-strong);
+  transition: background-color 0.5s var(--ease);
+}
+.how__step.is-on::before {
+  background: var(--red);
+}
+.how__top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
 }
 .how__n {
-  grid-area: n;
-  font-size: clamp(3rem, 13vw, 3.6rem);
+  font-size: clamp(2.6rem, 11vw, 3.2rem);
   line-height: 0.82;
   color: transparent;
   -webkit-text-stroke: 1.5px var(--line-strong);
@@ -2403,44 +2421,61 @@ html.motion .ready__cols .rise {
   color: var(--red);
   -webkit-text-stroke-color: var(--red);
 }
+.how__of {
+  color: var(--muted);
+}
 .how__t {
-  grid-area: t;
-  font-size: clamp(1.4rem, 6vw, 1.75rem);
+  font-size: clamp(1.3rem, 5.6vw, 1.6rem);
   line-height: 0.98;
   color: var(--ink);
   text-wrap: balance;
 }
 .how__b {
-  grid-area: b;
   max-width: 46ch;
-  font-size: 1rem;
-  line-height: 1.55;
+  font-size: 0.9375rem;
+  line-height: 1.5;
   color: var(--ink-2);
   text-wrap: pretty;
 }
 .how__pend {
-  grid-area: p;
   margin-top: 2px;
 }
-/* o que ainda não chegou fica apagado; o passo do momento sobe um pouco */
-html.motion .how__step:not(.is-on) .how__t,
-html.motion .how__step:not(.is-on) .how__b,
-html.motion .how__step:not(.is-on) .how__pend {
-  opacity: 0.4;
+/* o que ainda não chegou fica apagado e sem sombra; o passo do momento sobe */
+html.motion .how__step:not(.is-on) {
+  box-shadow: 0 0 0 1px var(--line);
 }
-html.motion .how__t,
-html.motion .how__b,
-html.motion .how__pend {
+html.motion .how__step:not(.is-on) > :not(.how__top),
+html.motion .how__step:not(.is-on) .how__of {
+  opacity: 0.42;
+}
+html.motion .how__step > * {
   transition: opacity 0.5s var(--ease);
 }
+html.motion .how__step.is-now {
+  transform: translateY(-4px);
+  box-shadow:
+    0 0 0 1px var(--line-strong),
+    0 34px 54px -32px rgb(var(--navy-rgb) / 0.6);
+}
 
-/* a faixa branca, reta, de ponta a ponta: entra pela borda esquerda da tela e
-   termina na margem da direita; a ponteira preta perto da ponta com três
-   encaixes, e cada passo costura um grau */
+/* O DIVISOR DA SEÇÃO: o tatame vermelho de borda a borda, colado na borda de
+   baixo, e a faixa branca reta atravessando (entra pela borda esquerda da tela
+   e termina na margem da direita), com a ponteira preta e três encaixes; cada
+   passo costura um grau. Depois dele começa a seção seguinte. */
+.how__mat {
+  display: flex;
+  align-items: center;
+  margin-top: clamp(28px, 4.4svh, 56px);
+  padding-block: clamp(22px, 4.4svh, 56px);
+  background:
+    linear-gradient(180deg, rgb(0 0 0 / 0.12), transparent 30%),
+    var(--red);
+}
 .how__belt {
   position: relative;
+  flex: 1;
   height: var(--bh);
-  margin: clamp(28px, 5svh, 64px) var(--x0) 0 0;
+  margin-right: var(--x0);
   border-radius: 0 3px 3px 0;
   background:
     linear-gradient(180deg, rgb(var(--paper-rgb) / 0.85), transparent 30%, rgb(0 0 0 / 0.05) 72%, rgb(0 0 0 / 0.12)),
@@ -2448,8 +2483,8 @@ html.motion .how__pend {
     repeating-linear-gradient(90deg, rgb(0 0 0 / 0.025) 0 1px, transparent 1px 3px),
     var(--belt-white);
   box-shadow:
-    0 0 0 1px rgb(0 0 0 / 0.07),
-    0 24px 30px -20px rgb(var(--navy-rgb) / 0.5);
+    0 0 0 1px rgb(0 0 0 / 0.08),
+    0 24px 28px -18px rgb(60 0 10 / 0.6);
 }
 .how__bar {
   position: absolute;
@@ -2487,7 +2522,7 @@ html.motion .how__pend {
 .how__cta {
   display: grid;
   justify-items: center;
-  margin-top: clamp(24px, 4svh, 48px);
+  margin-top: clamp(22px, 3.6svh, 44px);
 }
 
 /* com movimento: a cena fica no palco (sticky) por 0,5 tela a cada passo = ~1,5 tela */
@@ -2498,45 +2533,53 @@ html.motion .how__stage {
   position: sticky;
   top: 0;
   height: 100svh;
-  padding: var(--nav-h) 0 clamp(20px, 4svh, 56px);
+  justify-content: flex-start;
+  padding: calc(var(--nav-h) + clamp(8px, 3svh, 40px)) 0 0;
+}
+/* no palco o tatame encosta na borda de baixo da tela */
+html.motion .how__mat {
+  margin-top: auto;
 }
 @media (max-width: 767px) {
+  .how {
+    --bh: 40px;
+  }
   html.motion .how__steps {
-    gap: 14px;
+    gap: 8px;
   }
   html.motion .how__step {
-    padding-top: 12px;
+    gap: 4px;
+    padding: 12px 14px 14px;
+  }
+  html.motion .how__n {
+    font-size: 2.2rem;
   }
   html.motion .how__b {
-    font-size: 0.9375rem;
-    line-height: 1.45;
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+  html.motion .how__mat {
+    padding-block: 16px;
   }
 }
 @media (min-width: 900px) {
   .how__steps {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(24px, calc(var(--u) * 3), 56px);
+    gap: clamp(16px, calc(var(--u) * 1.8), 32px);
   }
   .how__step {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas:
-      'n'
-      't'
-      'b'
-      'p';
-    row-gap: 10px;
-    padding-top: clamp(18px, 2.6svh, 28px);
+    gap: 12px;
+    padding: clamp(22px, 3svh, 32px) clamp(22px, calc(var(--u) * 2), 36px) clamp(24px, 3.2svh, 36px);
   }
   .how__n {
-    margin-bottom: 8px;
-    font-size: clamp(4rem, min(calc(var(--u) * 6.4), 11svh), 7.5rem);
+    font-size: clamp(3.4rem, min(calc(var(--u) * 5), 9svh), 6rem);
     -webkit-text-stroke-width: 2px;
   }
   .how__t {
-    font-size: clamp(1.6rem, calc(var(--u) * 2.1), 2.4rem);
+    font-size: clamp(1.5rem, calc(var(--u) * 1.9), 2.2rem);
   }
   .how__b {
-    font-size: clamp(1rem, calc(var(--u) * 1.05), 1.1875rem);
+    font-size: clamp(1rem, calc(var(--u) * 1.05), 1.125rem);
   }
 }
 
