@@ -2165,16 +2165,20 @@ html.motion .parents__cards[data-in] .chat__typing i:nth-child(3) {
   }
 }
 
-/* ════════ [VII] SEM EXPERIÊNCIA — need / don't com a foto no meio ════════ */
+/* ════════ [VII] SEM EXPERIÊNCIA — need / don't em volta da foto, o botão dentro dela ════════ */
 .ready {
-  padding: clamp(64px, calc(var(--u) * 7), 130px) 0;
+  /* sem respiro embaixo: a foto encosta na borda da seção */
+  padding: clamp(64px, calc(var(--u) * 7), 130px) 0 0;
 }
 .ready__head {
-  margin-bottom: clamp(24px, calc(var(--u) * 3), 48px);
+  display: grid;
+  justify-items: center;
+  margin-bottom: clamp(28px, calc(var(--u) * 3.6), 56px);
+  text-align: center;
 }
 .ready__cols {
   display: grid;
-  gap: 24px;
+  gap: 28px;
 }
 .ready__label {
   margin-bottom: 14px;
@@ -2221,24 +2225,71 @@ html.motion .parents__cards[data-in] .chat__typing i:nth-child(3) {
 html.motion .ready__cols .rise {
   transition-delay: calc(var(--i) * 60ms);
 }
+/* a foto: por último no celular, no meio no desktop; sempre na borda de baixo */
 .ready__photo {
-  max-width: 420px;
+  position: relative;
+  order: 3;
+  justify-self: center;
+  width: 100%;
+  max-width: 460px;
+  overflow: hidden;
+  border-radius: var(--r) var(--r) 0 0;
 }
 .ready__photo img {
+  display: block;
   width: 100%;
-  border-radius: var(--r);
+  object-fit: cover;
+  object-position: 50% 100%;
+}
+/* o véu embaixo da foto dá leitura ao botão */
+.ready__photo::after {
+  content: '';
+  position: absolute;
+  inset: 45% 0 0;
+  background: linear-gradient(180deg, rgb(var(--navy-rgb) / 0), rgb(var(--navy-rgb) / 0.7));
+  pointer-events: none;
 }
 .ready__cta {
-  margin-top: clamp(32px, calc(var(--u) * 4), 64px);
+  position: absolute;
+  right: 14px;
+  bottom: clamp(18px, 6%, 36px);
+  left: 14px;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+}
+/* no celular o botão cabe numa linha dentro da foto */
+@media (max-width: 479px) {
+  .ready__cta {
+    right: 10px;
+    left: 10px;
+  }
+  .ready__cta .cta {
+    gap: 12px;
+    padding-left: 18px;
+    letter-spacing: 0.03em;
+  }
 }
 @media (min-width: 1024px) {
   .ready__cols {
     grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 1fr);
     gap: clamp(32px, calc(var(--u) * 4), 72px);
-    align-items: start;
+    align-items: center;
   }
   .ready__photo {
+    order: 0;
+    align-self: end;
     max-width: none;
+  }
+  /* "You need" espelhada: encosta na foto pela direita */
+  .ready__col--need {
+    text-align: right;
+  }
+  .ready__col--need li {
+    flex-direction: row-reverse;
+  }
+  .ready__col {
+    padding-bottom: clamp(40px, calc(var(--u) * 5), 96px);
   }
 }
 

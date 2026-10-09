@@ -2,7 +2,9 @@
    [VII] Sem experiência — "Never trained? That's the starting line."
 
    Duas colunas: "You need" com ▲ vermelho; "You don't need" com o ▲ em
-   contorno e o item riscado. A foto do tatame entre elas no desktop.
+   contorno e o item riscado. Tudo centralizado: no desktop as listas se
+   espelham em volta da foto, que fica no meio, colada na borda de baixo
+   da seção, com o botão dentro dela.
    (A primeira versão de volta, pedido do Adryan: a caderneta não
    conversava com a página. A frase de fechamento continua fora.)
    ════════════════════════════════════════════════════════════════════ */
@@ -39,8 +41,15 @@ export function Ready() {
               ))}
             </ul>
           </div>
+          {/* a foto encosta na borda de baixo da seção e leva o botão dentro
+              (vai virar o PNG recortado do professor, de pé sobre a borda) */}
           <figure className="ready__photo">
-            <Pic name="ready" alt={ready.photoAlt} sizes="(min-width: 1024px) 30vw, 90vw" />
+            <Pic name="ready" alt={ready.photoAlt} sizes="(min-width: 1024px) 30vw, 92vw" />
+            <div className="ready__cta">
+              <Cta origin="faq" who="me" size="block">
+                {ready.cta}
+              </Cta>
+            </div>
           </figure>
           <div className="ready__col ready__col--dont">
             <h3 className="ready__label label">{ready.dontLabel}</h3>
@@ -55,11 +64,6 @@ export function Ready() {
           </div>
         </div>
 
-        <div className="ready__cta">
-          <Cta origin="faq" who="me" size="block">
-            {ready.cta}
-          </Cta>
-        </div>
       </div>
     </section>
   )
