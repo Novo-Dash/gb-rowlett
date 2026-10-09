@@ -156,7 +156,7 @@
 .hero__seal {
   --size: clamp(68px, 19vw, 84px);
   position: absolute;
-  top: calc(var(--size) * -0.22);
+  top: calc(var(--size) * -0.34);
   right: calc(var(--gutter) * -0.6);
   z-index: 2;
   width: var(--size);
@@ -238,7 +238,7 @@ html.motion .hero__seal {
 @media (min-width: 1024px) {
   .hero__seal {
     --size: clamp(104px, calc(var(--u) * 8), 136px);
-    top: calc(var(--size) * -0.55);
+    top: calc(var(--size) * -0.9);
     right: calc(var(--size) * -0.6);
   }
 }
