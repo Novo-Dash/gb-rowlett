@@ -44,8 +44,10 @@ IMAGES = [
     ("build-3",    f"{O}/IMG_1604.HEIC",   (4, 5),  [360, 640],   (0.5, 0.5)),
     ("build-4",    f"{O}/IMG_1602.HEIC",   (4, 5),  [360, 640],   (0.5, 0.5)),
     ("build-5",    f"{O}/IMG_0712.HEIC",   (4, 5),  [360, 640],   (0.5, 0.42)),
-    # para os pais 4/5 (única foto de criança)
-    ("parents",    f"{F}/6T7A0276.JPG",    (4, 5),  [480, 800],   (0.5, 0.86)),
+    # para os pais 4/5: as fotos dos três cards (Adryan, 9 out 2026), já tratadas
+    ("parents-1",  "parents/1.webp",      (4, 5),  [360, 486],   (0.5, 0.5)),
+    ("parents-2",  "parents/2.webp",      (4, 5),  [360, 486],   (0.5, 0.5)),
+    ("parents-3",  "parents/3.webp",      (4, 5),  [360, 486],   (0.5, 0.5)),
     # sem experiência 4/5
     ("ready",      f"{D}/IMG_0213.HEIC",   (4, 5),  [480, 800],   (0.5, 0.45)),
     # abertura: fachada 16/9 a 30%
@@ -56,7 +58,7 @@ IMAGES = [
 
 # Fotos de celular e de câmera convivem: a mesma curva (contraste +6, saturação −8).
 # As da obra ficam cruas (são prova); as dos programas já chegaram tratadas. O logo não é foto.
-RAW = {"p-lc1", "p-lc2", "p-juniors", "p-adults", "logo", "build-1", "build-2", "build-3", "build-4", "build-5", "opening", "visit"}
+RAW = {"parents-1", "parents-2", "parents-3", "p-lc1", "p-lc2", "p-juniors", "p-adults", "logo", "build-1", "build-2", "build-3", "build-4", "build-5", "opening", "visit"}
 
 
 def crop_to(im: Image.Image, ratio, focus):

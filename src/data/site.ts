@@ -362,12 +362,11 @@ export const parents = {
   /** Quem fala em cada balão (a pergunta é do pai; a resposta, da academia). */
   asker: 'A parent asks',
   answerer: 'Gracie Barra Rowlett',
-  /** [TROCAR] `image` é o fundo de cada card. Fotos provisórias da academia até chegarem as definitivas
-      (sem aviso na página, pedido do Adryan; a pendência fica no design-decisions.md). */
+  /** `image` é o fundo de cada card (fotos definitivas do Adryan). */
   items: [
-    { q: 'Is it safe?', a: "There's no striking in jiu-jitsu, and a tap always means stop. Kids train by age group: a 4-year-old never trains with a 12-year-old.", image: 'p-lc1' as const },
-    { q: 'Will it make my child aggressive?', a: 'Jiu-jitsu is built on leverage and control, not hitting, and kids practice staying calm when something is hard.', image: 'p-juniors' as const },
-    { q: "Will the coach know my child's name?", a: "You're joining before we open, so you're among the first families we get to know.", image: 'p-adults' as const },
+    { q: 'Is it safe?', a: "There's no striking in jiu-jitsu, and a tap always means stop. Kids train by age group: a 4-year-old never trains with a 12-year-old.", image: 'parents-1' as const },
+    { q: 'Will it make my child aggressive?', a: 'Jiu-jitsu is built on leverage and control, not hitting, and kids practice staying calm when something is hard.', image: 'parents-2' as const },
+    { q: "Will the coach know my child's name?", a: "You're joining before we open, so you're among the first families we get to know.", image: 'parents-3' as const },
   ],
   cta: 'Claim a spot for my child',
 }
@@ -541,6 +540,6 @@ export const publishWarnings: string[] = [
   'Does the $87 hold for as long as the member keeps training? (pricing.permanent)',
   'Step 2 of "How to reserve": how soon the confirmation text goes out.',
   'For parents: where parents stay during class.',
-  'For parents: final photos for the three cards (stand-ins now) and kids photo authorization.',
+  'For parents: kids photo authorization for the card photos. Card 2 shows another academy sign (Austin Land Village, TX).',
   'Schedule: the flyer legend mentions GB2 (white belt 2 stripes+), but the grid has no GB2 class, so none is published.',
 ]
