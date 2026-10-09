@@ -19,7 +19,7 @@ interface CtaProps {
   who?: Who
   className?: string
   /** 'block' ocupa a largura toda no celular (320px mínimo no desktop). */
-  size?: 'block' | 'auto' | 'compact'
+  size?: 'block' | 'auto'
   /** Com href vira âncora (seta para baixo). */
   href?: string
 }

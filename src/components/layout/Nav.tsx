@@ -1,14 +1,16 @@
 /* ════════════════════════════════════════════════════════════════════
    Nav — o cartão branco flutuante (a gramática da Lindale v2).
 
-     ( ≡    [selo GB · Rowlett, TX]    ☎ (945) 385-9359   [Claim my spot →] )
+     ( ≡    [selo GB]    ☎ (945) 385-9359 )
 
    • Cartão de 880px máx, 52/60px, raio 14px (a ÚNICA exceção ao canto reto,
      por ser objeto flutuante), backdrop-filter (o único vidro da página).
    • Menu à esquerda abre o próprio cartão para baixo (grid 0fr → 1fr) em
      três cards: Classes (cada turma abre o formulário com ela marcada),
      Schedule (rola até a seção) e Visit (ligar, rota, reservar).
-   • Logo no centro abre o formulário. Telefone como ação escrita.
+   • Logo no centro abre o formulário. À direita, só o telefone, como ação
+     escrita e com o número sempre visível (pedido do Adryan: sem botão e sem
+     o nome escrito na nav).
    • Some rolando para baixo (depois de 1 tela) e volta rolando para cima;
      com o menu aberto, fica; com o formulário aberto (html.bk-open), some.
    ════════════════════════════════════════════════════════════════════ */
@@ -19,7 +21,6 @@ import { useBooking } from '@/nd/Booking'
 import { useScrollTick } from '@/motion/scroll'
 import { trackCall, trackCta, trackDirections } from '@/track'
 import type { ProgramKey } from '@/types'
-import { Cta } from '../ui/Cta'
 import { Arrow, Phone, Route } from '../ui/Icons'
 
 export function Nav() {
@@ -78,19 +79,14 @@ export function Nav() {
           {/* o selo abre o formulário: o caminho mais curto para a vaga */}
           <button type="button" className="nav__brand" aria-label={nav.logoLabel} onClick={() => book()}>
             <img src="/img/logo-112.webp" srcSet="/img/logo-112.webp 1x, /img/logo-160.webp 2x" alt="" width={56} height={56} className="nav__logo" />
-            <span className="nav__city" aria-hidden="true">
-              {site.network} · {site.city}, {site.state}
-            </span>
           </button>
 
           <div className="nav__actions">
+            {/* o telefone no lugar do botão: ação escrita, sempre com o número */}
             <a href={site.phoneHref} className="nav__call" aria-label={`${nav.callLabel}: ${site.phone}`} onClick={trackCall}>
               <Phone />
               <span className="nav__num">{site.phone}</span>
             </a>
-            <Cta origin="nav" size="compact">
-              {nav.cta}
-            </Cta>
           </div>
         </div>
 

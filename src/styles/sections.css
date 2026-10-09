@@ -83,16 +83,6 @@ html.bk-open .nav {
   height: 40px;
   object-fit: contain;
 }
-.nav__city {
-  display: none;
-  font-family: var(--f-display);
-  font-weight: 700;
-  font-style: italic;
-  font-size: var(--t-label);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--navy);
-}
 @media (min-width: 520px) {
   .nav__brand {
     position: absolute;
@@ -100,9 +90,6 @@ html.bk-open .nav {
     top: 50%;
     margin: 0;
     transform: translate(-50%, -50%);
-  }
-  .nav__city {
-    display: inline;
   }
 }
 .nav__actions {
@@ -117,23 +104,26 @@ html.bk-open .nav {
   gap: 8px;
   min-width: 44px;
   height: 44px;
+  padding: 0 12px;
   color: var(--ink);
-  font-size: 0.9375rem;
-  font-weight: 500;
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 1.125rem;
+  letter-spacing: 0.02em;
   white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 .nav__call svg {
   width: 19px;
   height: 19px;
   flex: none;
+  color: var(--red);
 }
-.nav__num {
-  display: none;
-}
-.nav .cta--compact {
-  gap: 10px;
-  padding: 0 5px 0 13px;
-  font-size: 0.875rem;
+@media (hover: hover) and (pointer: fine) {
+  .nav__call:hover {
+    color: var(--red);
+  }
 }
 .nav__menu {
   display: grid;
@@ -216,12 +206,6 @@ html.bk-open .nav {
   pointer-events: auto;
 }
 @media (min-width: 640px) {
-  .nav__num {
-    display: inline;
-  }
-  .nav__call {
-    padding: 0 14px;
-  }
   .nav__cards {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -241,11 +225,6 @@ html.bk-open .nav {
   .nav__logo {
     width: 46px;
     height: 46px;
-  }
-  .nav .cta--compact {
-    gap: 14px;
-    padding: 0 5px 0 16px;
-    font-size: 0.9375rem;
   }
 }
 
@@ -457,7 +436,7 @@ html.motion .hero__bite {
 }
 .hero__need {
   container-type: inline-size;
-  width: 84%;
+  width: 96%;
   font-style: italic;
   letter-spacing: -0.01em;
   text-shadow: 0 2px 28px rgb(var(--navy-rgb) / 0.45);
@@ -509,7 +488,7 @@ html:not(.motion) .hero__deep {
     margin-top: 28px;
   }
   .hero__need {
-    width: min(100%, calc(var(--u) * 44), 800px);
+    width: min(100%, calc(var(--u) * 52), 960px);
   }
   .hero__explore {
     min-width: 340px;

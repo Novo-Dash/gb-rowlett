@@ -137,19 +137,6 @@ html.motion .cta::after {
 .cta--block {
   width: 100%;
 }
-.cta--compact {
-  --cut: 10px;
-  --h: 44px;
-  --ic: 34px;
-  --icut: 8px;
-  gap: 14px;
-  padding: 0 5px 0 16px;
-  font-size: 0.9375rem;
-}
-.cta--compact .cta__icon svg {
-  width: 17px;
-  height: 17px;
-}
 @media (min-width: 640px) {
   .cta--block {
     width: auto;

@@ -113,7 +113,6 @@ export const spotsLeft = (t: Tier = openTier): number | null =>
 
 /* ── Nav ───────────────────────────────────────────────────────────── */
 export const nav = {
-  cta: 'Claim my spot',
   callLabel: 'Call or text Gracie Barra Rowlett',
   logoLabel: 'Gracie Barra Rowlett — claim a Founding Member spot',
   menuOpen: 'Open menu',
@@ -158,10 +157,11 @@ export const hero = {
   /** Cena 2: a frase da oferta. `w` = largura em em (AdihausDIN Cn Bold Italic,
       scripts/fit-lines.py). As duas linhas grandes usam a mesma largura (a da mais
       longa, "Pay less than everyone" = 8.094em), então saem no mesmo corpo; a
-      pequena usa 8.094 / 0.55 e sai a ~55% delas. */
+      pequena usa 17.4 e sai a ~47% delas (as grandes cresceram a pedido do Adryan,
+      a pequena ficou no tamanho de antes). */
   scene: {
     lines: [
-      { text: 'Join before we open.', w: 14.72 },
+      { text: 'Join before we open.', w: 17.4 },
       { text: 'Pay less than everyone', w: 8.094, big: true },
       { text: 'who joins after.', w: 8.094, big: true, accent: true },
     ],
