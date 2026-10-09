@@ -99,7 +99,7 @@ export function Hero() {
             sizes="100vw"
             className="hero__poster"
             art={[
-              { name: 'hero-w', media: '(min-width: 768px) and (min-aspect-ratio: 2/1)', sizes: '100vw' },
+              { name: 'hero-w', media: '(min-width: 1024px)', sizes: 'max(100vw, 236svh)' },
               { name: 'hero-d', media: '(min-width: 768px)', sizes: '100vw' },
             ]}
           />

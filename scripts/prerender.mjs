@@ -29,13 +29,13 @@ const { render, openingISO, uxMode, tracking, publishWarnings } = await import(p
 const appHtml = render()
 const client = uxMode === 'client'
 
-// LCP: a foto do hero (quadrada no celular, 16:9 a partir de 768px, ultrawide com proporção ≥ 2:1)
+// LCP: a foto do hero (quadrada no celular, 16:9 no tablet, a 2550×1080 do Adryan a partir de 1024px)
 let head = `    <link rel="preload" as="image" type="image/avif" media="(max-width: 767px)"
       imagesrcset="/img/film-m-540.avif 540w, /img/film-m-760.avif 760w, /img/film-m-1080.avif 1080w" imagesizes="100vw" fetchpriority="high" />
-    <link rel="preload" as="image" type="image/avif" media="(min-width: 768px) and (max-aspect-ratio: 1999/1000)"
+    <link rel="preload" as="image" type="image/avif" media="(min-width: 768px) and (max-width: 1023px)"
       imagesrcset="/img/hero-d-1280.avif 1280w, /img/hero-d-1920.avif 1920w" imagesizes="100vw" fetchpriority="high" />
-    <link rel="preload" as="image" type="image/avif" media="(min-width: 768px) and (min-aspect-ratio: 2/1)"
-      imagesrcset="/img/hero-w-1920.avif 1920w, /img/hero-w-2550.avif 2550w" imagesizes="100vw" fetchpriority="high" />
+    <link rel="preload" as="image" type="image/avif" media="(min-width: 1024px)"
+      imagesrcset="/img/hero-w-1920.avif 1920w, /img/hero-w-2550.avif 2550w" imagesizes="max(100vw, 236svh)" fetchpriority="high" />
 `
 if (openingISO) {
   head += `    <meta name="opening-at" content="${openingISO}" />

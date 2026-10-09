@@ -261,7 +261,7 @@ html.bk-open .nav {
   position: absolute;
   inset: 0;
   overflow: hidden;
-  background: var(--night);
+  background: rgb(0 0 0);
 }
 .hero__poster,
 .hero__poster img,
@@ -289,15 +289,15 @@ html.bk-open .nav {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(0deg, rgb(var(--navy-rgb) / 0.92) 0%, rgb(var(--navy-rgb) / 0.78) 34%, rgb(var(--navy-rgb) / 0.2) 62%, rgb(var(--navy-rgb) / 0) 78%),
-    rgb(var(--navy-rgb) / 0.12);
+    linear-gradient(0deg, rgb(0 0 0 / 0.92) 0%, rgb(0 0 0 / 0.78) 34%, rgb(0 0 0 / 0.2) 62%, rgb(0 0 0 / 0) 78%),
+    rgb(0 0 0 / 0.12);
   opacity: var(--k);
 }
-/* cena 2: o filme inteiro sob o marinho, para o texto centralizado */
+/* cena 2: o filme inteiro sob o preto, para o texto centralizado */
 .hero__deep {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 50%, rgb(var(--navy-rgb) / 0.55), rgb(var(--navy-rgb) / 0.82) 80%);
+  background: radial-gradient(ellipse at 50% 50%, rgb(0 0 0 / 0.55), rgb(0 0 0 / 0.82) 80%);
   opacity: var(--p);
 }
 .hero__scene {
@@ -388,7 +388,7 @@ html.bk-open .nav {
   width: 96%;
   font-style: italic;
   letter-spacing: -0.01em;
-  text-shadow: 0 2px 28px rgb(var(--navy-rgb) / 0.45);
+  text-shadow: 0 2px 28px rgb(0 0 0 / 0.45);
 }
 .hero__need-l {
   display: block;
@@ -425,8 +425,8 @@ html:not(.motion) .hero__deep {
   /* duas colunas: o texto na esquerda, sobre a parede; o professor na direita */
   .hero__veil {
     background:
-      linear-gradient(90deg, rgb(var(--navy-rgb) / 0.86) 0%, rgb(var(--navy-rgb) / 0.66) 34%, rgb(var(--navy-rgb) / 0.12) 56%, rgb(var(--navy-rgb) / 0) 66%),
-      rgb(var(--navy-rgb) / 0.1);
+      linear-gradient(90deg, rgb(0 0 0 / 0.86) 0%, rgb(0 0 0 / 0.66) 34%, rgb(0 0 0 / 0.12) 56%, rgb(0 0 0 / 0) 66%),
+      rgb(0 0 0 / 0.1);
   }
   .hero__scene--card {
     align-items: center;
@@ -438,7 +438,7 @@ html:not(.motion) .hero__deep {
   .hero__poster img,
   .hero__video {
     object-position: 75% 62%;
-    transform-origin: 75% 62%;
+    transform: none;
   }
   /* .hero .hero__copy: vence o width:100% do .shell */
   .hero .hero__copy {
