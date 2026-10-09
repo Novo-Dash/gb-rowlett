@@ -29,11 +29,13 @@ const { render, openingISO, uxMode, tracking, publishWarnings } = await import(p
 const appHtml = render()
 const client = uxMode === 'client'
 
-// LCP: poster do filme do hero (vertical no celular, 16:9 a partir de 768px)
+// LCP: a foto do hero (quadrada no celular, 16:9 a partir de 768px, ultrawide com proporção ≥ 2:1)
 let head = `    <link rel="preload" as="image" type="image/avif" media="(max-width: 767px)"
-      imagesrcset="/img/film-m-540.avif 540w, /img/film-m-760.avif 760w" imagesizes="100vw" fetchpriority="high" />
-    <link rel="preload" as="image" type="image/avif" media="(min-width: 768px)"
-      imagesrcset="/img/hero-d-1280.avif 1280w, /img/hero-d-1920.avif 1920w, /img/hero-d-2560.avif 2560w" imagesizes="100vw" fetchpriority="high" />
+      imagesrcset="/img/film-m-540.avif 540w, /img/film-m-760.avif 760w, /img/film-m-1080.avif 1080w" imagesizes="100vw" fetchpriority="high" />
+    <link rel="preload" as="image" type="image/avif" media="(min-width: 768px) and (max-aspect-ratio: 1999/1000)"
+      imagesrcset="/img/hero-d-1280.avif 1280w, /img/hero-d-1920.avif 1920w" imagesizes="100vw" fetchpriority="high" />
+    <link rel="preload" as="image" type="image/avif" media="(min-width: 768px) and (min-aspect-ratio: 2/1)"
+      imagesrcset="/img/hero-w-1920.avif 1920w, /img/hero-w-2550.avif 2550w" imagesizes="100vw" fetchpriority="high" />
 `
 if (openingISO) {
   head += `    <meta name="opening-at" content="${openingISO}" />

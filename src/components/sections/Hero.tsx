@@ -7,7 +7,8 @@
    sobre o véu marinho: eyebrow, H1 ("never trained." em vermelho vivo com
    duplicado), lead, o CTA e, embaixo dele, a linha da oferta pequena. No
    desktop o texto mora na coluna da esquerda, sobre a parede, e o professor
-   fica na coluna da direita (a foto é escolhida para isso: IMG_0201). Decisões do Adryan em
+   fica na coluna da direita. Foto (Adryan, 9 out 2026): a fachada com a chegada do tatame,
+   em três recortes (celular quadrado, desktop 16:9, ultrawide). Decisões do Adryan em
    9 out 2026: sem placa/ingresso branco, sem micro-itens, sem carimbo.
    CENA 2 · rolando, o filme assenta (escala 1,1 → 1), o marinho desce e a frase da oferta
    ("Join before we open." pequena; "Pay less than everyone / who joins
@@ -86,13 +87,22 @@ export function Hero() {
   }, [])
   useScrollTick(tick, measure)
 
-
   return (
     <section ref={root} id="top" className="hero" aria-labelledby="hero-title">
       {/* O filme das duas cenas: sticky, de ponta a ponta */}
       <div className="hero__sticky" aria-hidden="true">
         <div className="hero__media">
-          <Pic name="film-m" alt="" priority sizes="100vw" className="hero__poster" art={{ name: 'hero-d', media: '(min-width: 768px)', sizes: '100vw' }} />
+          <Pic
+            name="film-m"
+            alt=""
+            priority
+            sizes="100vw"
+            className="hero__poster"
+            art={[
+              { name: 'hero-w', media: '(min-width: 768px) and (min-aspect-ratio: 2/1)', sizes: '100vw' },
+              { name: 'hero-d', media: '(min-width: 768px)', sizes: '100vw' },
+            ]}
+          />
           <video ref={video} className="hero__video" muted loop playsInline preload="none" tabIndex={-1} disablePictureInPicture />
           <span className="hero__veil" />
           <span className="hero__deep" />
