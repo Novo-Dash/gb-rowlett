@@ -19,11 +19,9 @@ interface StampProps {
   srText?: string
   className?: string
   id?: string
-  /** Hero: o odômetro roda no load, sem esperar a entrada na tela. */
-  now?: boolean
 }
 
-export function Stamp({ ring, value, label, srText, className, id, now }: StampProps) {
+export function Stamp({ ring, value, label, srText, className, id }: StampProps) {
   const pid = `stamp-ring-${id ?? 'a'}`
   return (
     <p className={['stamp', className].filter(Boolean).join(' ')} data-pending={value === null ? '' : undefined}>
@@ -39,7 +37,7 @@ export function Stamp({ ring, value, label, srText, className, id, now }: StampP
         </text>
       </svg>
       <span className="stamp__core" aria-hidden="true">
-        {value === null ? <span className="stamp__n d">00</span> : <Odo value={value} className="stamp__n d" now={now} />}
+        {value === null ? <span className="stamp__n d">00</span> : <Odo value={value} className="stamp__n d" />}
         <span className="stamp__l">{label}</span>
       </span>
     </p>

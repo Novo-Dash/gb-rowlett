@@ -72,7 +72,7 @@ export type Tier = {
   /** O único número que o cliente atualiza na mão. null = [CONFIRMAR]. */
   claimed: number | null
   /** O perk DESTA faixa (o perk decresce, o preço não). */
-  perk: { title: string; short: string }
+  perk: { title: string; short: string; big?: string; bigSub?: string }
   perks: string[]
   /** Como a faixa se apresenta quando está aberta / travada. */
   note: string
@@ -95,7 +95,7 @@ export const tiers: Tier[] = [
     label: 'The Founding Class',
     seats: null, // [CONFIRMAR] limite de vagas (§20 #3)
     claimed: 0,
-    perk: { title: '50% off the Gracie Barra uniform', short: '50% off uniform' },
+    perk: { title: '50% off the Gracie Barra uniform', short: '50% off uniform', big: '50% off', bigSub: 'the Gracie Barra uniform' },
     perks: ['$87 every two weeks', 'No enrollment fee', '50% off the Gracie Barra uniform'],
     note: 'Opens when The First 50 is full.',
   },
@@ -110,8 +110,6 @@ export const openTier: Tier =
 export const spotsLeft = (t: Tier = openTier): number | null =>
   t.seats === null || t.claimed === null ? null : Math.max(0, t.seats - t.claimed)
 
-/** Em prospect o carimbo mostra o total (claimed assumido 0) com o marcador ao lado. */
-export const spotsLeftOrSeats = (t: Tier = openTier): number | null => spotsLeft(t) ?? t.seats
 
 /* ── Nav ───────────────────────────────────────────────────────────── */
 export const nav = {
@@ -157,18 +155,15 @@ export const hero = {
   lead: 'Kids from 4, teens and adults. No experience needed. The official Gracie Barra curriculum, led by Andre Carepa, 27 years in jiu-jitsu.',
   offerLine: 'Founding Members pay $87 every two weeks. No enrollment fee.',
   cta: 'Claim my Founding Member spot',
-  /** `needsCharge`: só entra depois de [CONFIRMAR cobrança]. */
-  micro: [
-    { text: 'Nothing charged today', needsCharge: true },
-    { text: 'Uniform included for the First 50' },
-    { text: 'Kids from 4' },
-  ],
-  stamp: { ring: 'Founding Member · First 50 · ', label: 'spots left', sr: 'First 50 spots left' },
-  /** Cena 2: as duas linhas na mesma largura (w = em, scripts/fit-lines.py). */
+  /** Cena 2: a frase da oferta. `w` = largura em em (AdihausDIN Cn Bold Italic,
+      scripts/fit-lines.py). As duas linhas grandes usam a mesma largura (a da mais
+      longa, "Pay less than everyone" = 8.094em), então saem no mesmo corpo; a
+      pequena usa 8.094 / 0.55 e sai a ~55% delas. */
   scene: {
     lines: [
-      { text: 'No experience', w: 4.834 },
-      { text: 'needed.', w: 2.631 },
+      { text: 'Join before we open.', w: 14.72 },
+      { text: 'Pay less than everyone', w: 8.094, big: true },
+      { text: 'who joins after.', w: 8.094, big: true, accent: true },
     ],
     cta: 'Explore the founding offer',
   },
@@ -185,10 +180,11 @@ export const marquee = {
 
 /* ── II · Oferta de fundação ───────────────────────────────────────── */
 export const offer = {
-  eyebrow: 'Founding Members',
-  title: [{ text: 'Join before we open.' }, { text: 'Pay less than everyone who joins after.', br: true }],
+  eyebrow: 'The founding offer',
+  title: [{ text: 'Founding Members' }],
   body: 'Founding Members pay $87 every two weeks with no enrollment fee. Once we open, the standard rate is $107 every two weeks plus a $47 enrollment fee. Adults train unlimited. Kids train 3 classes a week.',
   permanencePending: 'Does the $87 hold for as long as the member keeps training?',
+  passLabel: 'Founding Member pass: The First 50 and The Founding Class',
   openPill: 'Open now',
   lockedPill: 'Opens next',
   seatsLabel: (n: number) => `${n} seats`,
@@ -197,7 +193,8 @@ export const offer = {
   claimedPending: 'First 50 spots already taken: number to confirm',
   seatsPending: 'Founding Class seat limit to confirm',
   ticketCta: 'Claim a First 50 spot',
-  lockedSr: 'The Founding Class opens when The First 50 is full.',
+  /** O canhoto II: o preço é o mesmo; o que muda é o perk. */
+  lockedSamePrice: 'Same $87 every two weeks · No enrollment fee',
   priceLine: '$87',
   pricePer: 'every two weeks',
   enrollmentLine: 'No enrollment fee',

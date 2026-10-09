@@ -1,18 +1,23 @@
 /* ════════════════════════════════════════════════════════════════════
-   [II] A oferta de fundação — os ingressos (arquitetura da Collective,
-   linguagem GB).
+   [II] A oferta de fundação — UM ingresso na largura da seção, com os
+   dois grupos dentro dele (decisões do Adryan, 9 out 2026: são só dois
+   grupos, então é um ingresso só; e o canhoto não borra, porque o preço
+   é o mesmo — o que muda entre os grupos é o PERK).
 
-   Dois ingressos de cantos retos. O ABERTO é um ingresso vermelho
-   (degradê do botão): pastilha "Open now" com ponto pulsando, preço
-   grande, "No enrollment fee", o perk DESTA faixa, barra de vagas em
-   branco sobre red-deep, picote (linha tracejada com dois furos) e o
-   talão só com o botão BRANCO de seta vermelha. O TRAVADO é borrado a
-   5px com o triângulo marinho no centro (sr-only para leitor de tela):
-   o perk dele fica legível por trás do borrão. O carimbo de dias até a
-   abertura morde o canto do aberto (some sem data: pendência).
-   Aqui o desconto não decresce; o PERK decresce (uniforme → 50%).
-   Comparação sempre visível embaixo: a tabela normal riscando o preço
-   de fundador, não o contrário.
+     ┌─ I · The First 50 · Open now ──────┐┆┌─ II · The Founding Class ─┐
+     │ [card vermelho: $87, no enrollment, ┆│ [50% OFF                   │
+     │  uniforme incluído, vagas, botão]   ┆│  the Gracie Barra uniform  │
+     │                                     ┆│  Same $87 · no enrollment] │
+     │ After opening: $87 → $107 + $47     ┆│ Opens when the First 50…   │
+     └─────────────────────────────────────┘┆└────────────────────────────┘
+                                   (picote com os dois furos)
+
+   O corpo é marinho; a metade I leva o card vermelho (degradê do botão)
+   com o botão BRANCO de seta vermelha; a metade II é o canhoto: card
+   branco, nítido, com o perk dele como número grande. O carimbo de dias
+   até a abertura morde o canto do card I quando a data existir; sem data,
+   vira pendência no pé. No celular as metades empilham e o picote fica
+   horizontal.
    ════════════════════════════════════════════════════════════════════ */
 
 import { useRef } from 'react'
@@ -22,17 +27,19 @@ import { useInView } from '@/motion/inview'
 import { trackViewContent } from '@/track'
 import { Cta } from '../ui/Cta'
 import { Eyebrow } from '../ui/Eyebrow'
-import { Tri, TriOutline } from '../ui/Icons'
+import { Tri } from '../ui/Icons'
 import { Lines } from '../ui/Lines'
 import { Pending } from '../ui/Pending'
 import { Stamp } from '../ui/Stamp'
 
 export function Offer() {
   const root = useRef<HTMLElement>(null)
-  const list = useRef<HTMLDivElement>(null)
+  const pass = useRef<HTMLDivElement>(null)
   useInView(root, () => trackViewContent('offer'))
-  useInView(list)
+  useInView(pass)
   const days = useDaysLeft(site.openingISO)
+  const open = tiers.find((t) => t.id === openTier.id)!
+  const next = tiers.find((t) => t.id !== openTier.id)!
 
   return (
     <section ref={root} id="offer" className="offer" aria-labelledby="offer-title">
@@ -40,7 +47,7 @@ export function Offer() {
         <div className="offer__head">
           <div>
             <Eyebrow>{offer.eyebrow}</Eyebrow>
-            <Lines id="offer-title" className="d h2 h2--long offer__title" parts={offer.title} />
+            <Lines id="offer-title" className="d h2 offer__title" parts={offer.title} />
           </div>
           <div className="offer__aside">
             <p className="body offer__body">{offer.body}</p>
@@ -52,35 +59,38 @@ export function Offer() {
           </div>
         </div>
 
-        <div ref={list} className="tickets">
-          {tiers.map((t, i) => (t.id === openTier.id ? <OpenTicket key={t.id} tier={t} index={i} days={days} /> : <LockedTicket key={t.id} tier={t} index={i} />))}
+        <div ref={pass} className="pass on-dark" role="group" aria-label={offer.passLabel}>
+          <OpenHalf tier={open} days={days} />
+          <span className="pass__perf" aria-hidden="true" />
+          <NextHalf tier={next} />
         </div>
-
-        <p className="offer__compare">
-          <span className="label">{offer.compare.label}</span>
-          <s className="offer__was d">{offer.compare.founding}</s>
-          <b className="d">{offer.compare.standard}</b>
-          <span>{offer.compare.per}</span>
-          <span className="offer__plus">{offer.compare.plus}</span>
-        </p>
       </div>
     </section>
   )
 }
 
-function OpenTicket({ tier, index, days }: { tier: Tier; index: number; days: number | null }) {
+function HalfHead({ tier, pill, tone }: { tier: Tier; pill: string; tone: 'open' | 'next' }) {
+  return (
+    <p className="pass__head">
+      <span className="pass__order label">
+        <Tri />
+        <span className="tnum">{tier.order}</span> · {tier.label}
+      </span>
+      <span className={`pass__pill pass__pill--${tone} label`}>
+        {tone === 'open' ? <i aria-hidden="true" /> : null}
+        {pill}
+      </span>
+    </p>
+  )
+}
+
+function OpenHalf({ tier, days }: { tier: Tier; days: number | null }) {
   const left = spotsLeft(tier)
   const pct = tier.seats && tier.claimed !== null ? tier.claimed / tier.seats : 0
   return (
-    <article className="tk tk--open on-dark rise" style={{ ['--i' as string]: index }} aria-label={`${tier.order} · ${tier.label}`}>
-      <p className="tk__pill label">
-        <i aria-hidden="true" />
-        {offer.openPill}
-      </p>
-      <div className="tk__body">
-        <p className="tk__order label">
-          <span className="tnum">{tier.order}</span> · {tier.label}
-        </p>
+    <div className="pass__half pass__half--open">
+      <HalfHead tier={tier} pill={offer.openPill} tone="open" />
+      <article className="tk tk--open rise" aria-label={`${tier.order} · ${tier.label}`}>
         <p className="tk__price">
           <span className="tk__amount d">{offer.priceLine}</span>
           <span className="tk__per">{offer.pricePer}</span>
@@ -108,54 +118,50 @@ function OpenTicket({ tier, index, days }: { tier: Tier; index: number; days: nu
             <span style={{ ['--pct' as string]: pct }} />
           </div>
         </div>
+        <div className="tk__cta">
+          <Cta origin="ticket" size="block" className="cta--inverse">
+            {offer.ticketCta}
+          </Cta>
+        </div>
+        {days !== null ? (
+          <div className="tk__stampwrap">
+            <Stamp id="offer" className="tk__stamp" ring={offer.stamp.ring} value={days} label={offer.stamp.label} srText={`${days} ${offer.stamp.sr}`} />
+          </div>
+        ) : null}
+      </article>
+      <div className="pass__foot">
+        <p className="pass__compare">
+          <span className="label">{offer.compare.label}</span>
+          <s className="pass__was d">{offer.compare.founding}</s>
+          <b className="d">{offer.compare.standard}</b>
+          <span>{offer.compare.per}</span>
+          <span className="pass__plus">{offer.compare.plus}</span>
+        </p>
+        {days === null ? <Pending>{offer.stampPending}</Pending> : null}
       </div>
-      <div className="tk__perf" aria-hidden="true">
-        <span />
-        <span />
-      </div>
-      <div className="tk__stub">
-        <Cta origin="ticket" size="block" className="cta--inverse">
-          {offer.ticketCta}
-        </Cta>
-      </div>
-      <div className="tk__stampwrap">
-        <Stamp id="offer" className="tk__stamp" ring={offer.stamp.ring} value={days} label={offer.stamp.label} srText={days !== null ? `${days} ${offer.stamp.sr}` : undefined} />
-        {days === null ? <Pending className="tk__stamp-pending">{offer.stampPending}</Pending> : null}
-      </div>
-    </article>
+    </div>
   )
 }
 
-function LockedTicket({ tier, index }: { tier: Tier; index: number }) {
+/** O canhoto: o grupo seguinte. Nítido — o número grande é o perk, não o preço (que é o mesmo). */
+function NextHalf({ tier }: { tier: Tier }) {
   return (
-    <article className="tk tk--locked rise" style={{ ['--i' as string]: index }} aria-label={`${tier.order} · ${tier.label}`}>
-      <p className="sr-only">
-        {tier.order} · {tier.label}. {offer.lockedSr} {tier.perk.title}.
-      </p>
-      <p className="tk__pill tk__pill--navy label">{offer.lockedPill}</p>
-      <div className="tk__body tk__blur" aria-hidden="true">
-        <p className="tk__order label">
-          <span className="tnum">{tier.order}</span> · {tier.label}
+    <div className="pass__half pass__half--next">
+      <HalfHead tier={tier} pill={offer.lockedPill} tone="next" />
+      <article className="tk tk--next rise" aria-label={`${tier.order} · ${tier.label}`}>
+        <p className="tk__big">
+          <span className="tk__amount d">{tier.perk.big ?? tier.perk.short}</span>
+          {tier.perk.bigSub ? <span className="tk__per">{tier.perk.bigSub}</span> : null}
         </p>
-        <p className="tk__price">
-          <span className="tk__amount d">{offer.priceLine}</span>
-          <span className="tk__per">{offer.pricePer}</span>
-        </p>
-        <p className="tk__enroll d">{offer.enrollmentLine}</p>
-        <p className="tk__perk">
+        <p className="tk__same">
           <Tri />
-          <span>{tier.perk.title}</span>
+          <span>{offer.lockedSamePrice}</span>
         </p>
-        <p className="tk__note">{tier.note}</p>
+      </article>
+      <div className="pass__foot">
+        <p className="pass__note">{tier.note}</p>
+        {tier.seats === null ? <Pending>{offer.seatsPending}</Pending> : null}
       </div>
-      <span className="tk__lock" aria-hidden="true">
-        <TriOutline />
-      </span>
-      {tier.seats === null ? (
-        <p className="tk__seatpend">
-          <Pending>{offer.seatsPending}</Pending>
-        </p>
-      ) : null}
-    </article>
+    </div>
   )
 }

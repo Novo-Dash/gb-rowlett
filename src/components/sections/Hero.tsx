@@ -5,12 +5,13 @@
    cantos retos sob a nav, com as duas mordidas (triângulo GB, topo-esq.
    e base-dir.). O texto vai DIRETO sobre o filme, embaixo à esquerda,
    sobre o véu marinho: eyebrow, H1 ("never trained." em vermelho vivo com
-   duplicado), lead, a linha da oferta, CTA + micro-itens com ▲; o CARIMBO
-   de vagas restantes à direita (no lugar do selo do Google, que não
-   existe). Decisão do Adryan em 9 out 2026: sem placa/ingresso branco.
+   duplicado), lead, a linha da oferta e o CTA. Decisões do Adryan em
+   9 out 2026: sem placa/ingresso branco, sem micro-itens, sem carimbo.
    CENA 2 · rolando, o card ABRE até a tela (--k 1 → 0: recuos, mordidas
-   e triângulos encolhem juntos), o marinho desce e "No experience /
-   needed." entra pelos lados, com o botão apontando para a oferta.
+   e triângulos encolhem juntos), o marinho desce e a frase da oferta
+   ("Join before we open." pequena; "Pay less than everyone / who joins
+   after." grandes) SOBE DE BAIXO, linha a linha, com o botão apontando
+   para a oferta.
 
    Sem pin: o filme é sticky e o --k é escrito pelo barramento de scroll.
    Reduced motion: o card fica parado e a cena 2 aparece sobre o filme
@@ -18,15 +19,13 @@
    ════════════════════════════════════════════════════════════════════ */
 
 import { useCallback, useEffect, useRef } from 'react'
-import { hero, offer, pricing, site, spotsLeft, spotsLeftOrSeats } from '@/data/site'
+import { hero, site } from '@/data/site'
 import { clamp01, docTop, prefersReducedMotion, useScrollTick } from '@/motion/scroll'
 import { Cta } from '../ui/Cta'
 import { Eyebrow } from '../ui/Eyebrow'
 import { Tri } from '../ui/Icons'
 import { Lines } from '../ui/Lines'
-import { Pending } from '../ui/Pending'
 import { Pic } from '../ui/Pic'
-import { Stamp } from '../ui/Stamp'
 
 /** O vídeo entra depois do load, só com conexão boa e sem reduced motion. */
 function useLateFilm(ref: React.RefObject<HTMLVideoElement | null>) {
@@ -86,8 +85,6 @@ export function Hero() {
   }, [])
   useScrollTick(tick, measure)
 
-  const left = spotsLeftOrSeats()
-  const micro = hero.micro.filter((m) => !m.needsCharge || pricing.chargedToday === false)
 
   return (
     <section ref={root} id="top" className="hero" aria-labelledby="hero-title">
@@ -103,7 +100,7 @@ export function Hero() {
         <span className="hero__bite hero__bite--br" />
       </div>
 
-      {/* CENA 1 · o texto direto sobre o filme, embaixo à esquerda; o carimbo à direita */}
+      {/* CENA 1 · o texto direto sobre o filme, embaixo à esquerda */}
       <div ref={card} className="hero__scene hero__scene--card on-dark">
         <div className="shell hero__copy">
           <Eyebrow tone="light" className="hero__eb">
@@ -118,30 +115,9 @@ export function Hero() {
             <span>{hero.offerLine}</span>
           </p>
           <div className="hero__act rise rise--load" data-hero-cta="" style={{ ['--d' as string]: '420ms' }}>
-            <div className="hero__cta">
-              <Cta origin="hero" size="block">
-                {hero.cta}
-              </Cta>
-              <ul className="micro hero__micro" aria-label="Good to know">
-                {micro.map((m) => (
-                  <li key={m.text}>
-                    <Tri />
-                    {m.text}
-                  </li>
-                ))}
-                {pricing.chargedToday === null ? (
-                  <li>
-                    <Pending>Charge at pre-registration to confirm</Pending>
-                  </li>
-                ) : null}
-              </ul>
-            </div>
-          </div>
-          {/* o carimbo de vagas (no lugar do selo do Google, que não existe): filho da copy,
-              não do bloco animado — transform criaria outro bloco de contenção */}
-          <div className="hero__stampwrap">
-            <Stamp id="hero" now className="hero__stamp stamp--load" ring={hero.stamp.ring} value={left} label={hero.stamp.label} srText={left !== null ? `${left} ${hero.stamp.sr}` : undefined} />
-            {spotsLeft() === null ? <Pending className="hero__stamp-pending">{offer.claimedPending}</Pending> : null}
+            <Cta origin="hero" size="block">
+              {hero.cta}
+            </Cta>
           </div>
         </div>
       </div>
@@ -152,7 +128,12 @@ export function Hero() {
           <div className="shell hero__open">
             <p className="hero__need d">
               {hero.scene.lines.map((l, i) => (
-                <span key={l.text} className={i === 1 ? 'hero__need-big dup dup--glow dup--thin' : undefined} data-text={i === 1 ? l.text : undefined} style={{ ['--w' as string]: l.w }}>
+                <span
+                  key={l.text}
+                  className={['hero__need-l', 'big' in l && l.big && 'hero__need-big', 'accent' in l && l.accent && 'dup dup--glow dup--thin'].filter(Boolean).join(' ')}
+                  data-text={'accent' in l && l.accent ? l.text : undefined}
+                  style={{ ['--w' as string]: l.w, ['--i' as string]: i }}
+                >
                   {l.text}
                 </span>
               ))}

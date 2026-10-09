@@ -19,7 +19,7 @@ import { useScrollDepth } from '@/hooks/useScrollDepth'
 
 /**
  * Ordem da página = jornada mental do PRD §6:
- *   I Hero · letreiro · II Oferta · III Programas · IV Obra · V Horários ·
+ *   I Hero · II Oferta · letreiro · III Programas · IV Obra · V Horários ·
  *   VI Pais · VII Sem experiência · VIII Coach · IX Como reservar ·
  *   X Abertura (night) · XI Perguntas · XII Pedido (navy) · mapa + footer.
  * Todas as seções renderizam de uma vez (sem lazy por seção): o espaço de
@@ -38,8 +38,8 @@ export default function App() {
         <Nav />
         <main id="main">
           <Hero />
-          <Marquee />
           <Offer />
+          <Marquee />
           <Programs />
           <Build />
           <Schedule />

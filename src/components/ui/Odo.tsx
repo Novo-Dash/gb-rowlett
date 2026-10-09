@@ -23,16 +23,14 @@ interface OdoProps {
   /** Mínimo de dígitos (contador: 2). */
   pad?: number
   live?: boolean
-  /** Já nasce no valor final animando no load (hero): não espera a entrada na tela. */
-  now?: boolean
 }
 
-export function Odo({ value, className, pad = 1, live, now }: OdoProps) {
+export function Odo({ value, className, pad = 1, live }: OdoProps) {
   const ref = useRef<HTMLSpanElement>(null)
   useInView(ref)
   const str = String(Math.max(0, Math.floor(value))).padStart(pad, '0')
   return (
-    <span ref={ref} className={['odo', live && 'odo--live', className].filter(Boolean).join(' ')} data-in={now ? '' : undefined}>
+    <span ref={ref} className={['odo', live && 'odo--live', className].filter(Boolean).join(' ')}>
       <span className="sr-only">{str}</span>
       <span className="odo__size" aria-hidden="true">
         {str}

@@ -433,39 +433,9 @@ html.motion .hero__bite {
   gap: 18px;
   margin-top: 22px;
 }
-.hero__micro {
-  margin-top: 12px;
-  color: rgb(var(--paper-rgb) / 0.84);
-}
-.hero__stampwrap {
-  position: absolute;
-  right: calc(var(--gutter) * 0.5 + var(--bite) * 0.9);
-  bottom: 0;
-  display: grid;
-  justify-items: end;
-  gap: 6px;
-}
-.hero__stamp {
-  --size: clamp(96px, calc(var(--u) * 9), 150px);
-}
-.hero__stamp-pending {
-  max-width: 180px;
-}
 @media (max-width: 639px) {
   .hero__copy {
     padding-inline: calc(var(--ix) + var(--hp));
-  }
-  /* o carimbo flutua acima da copy, à direita (nunca sobre os micro-itens) */
-  .hero__stampwrap {
-    right: var(--ix);
-    bottom: auto;
-    top: calc(-1 * var(--size, 84px) - 24px);
-  }
-  .hero__stamp {
-    --size: 84px;
-  }
-  .hero__stamp-pending {
-    display: none;
   }
 }
 /* cena 2: centralizada (rola normalmente — nada trava) */
@@ -492,25 +462,25 @@ html.motion .hero__bite {
   letter-spacing: -0.01em;
   text-shadow: 0 2px 28px rgb(var(--navy-rgb) / 0.45);
 }
-.hero__need span {
+.hero__need-l {
   display: block;
   white-space: nowrap;
   font-size: calc(100cqi / var(--w));
   line-height: 0.96;
 }
-.hero__need-big {
-  margin-top: 0.04em;
+/* a linha pequena respira antes das duas grandes */
+.hero__need-l:first-child {
+  margin-bottom: 0.3em;
 }
-html.motion .hero__need {
-  --q: clamp(0, var(--s, 0), 1);
-  --e: calc(1 - var(--q) * (2 - var(--q)));
-  opacity: clamp(0, var(--s, 0) * 4, 1);
+.hero__need-big + .hero__need-big {
+  margin-top: 0.02em;
 }
-html.motion .hero__need span:first-child {
-  transform: translateX(calc(var(--e) * -70vw));
-}
-html.motion .hero__need-big {
-  transform: translateX(calc(var(--e) * 70vw));
+/* ligado ao scroll: as linhas SOBEM DE BAIXO, uma depois da outra.
+   --qi = progresso da linha (0 → 1), escalonado por --i; ease-out no quadrado. */
+html.motion .hero__need-l {
+  --qi: clamp(0, calc(var(--s, 0) * 1.9 - var(--i) * 0.28), 1);
+  opacity: var(--qi);
+  transform: translateY(calc((1 - var(--qi)) * (1 - var(--qi)) * 1.1em));
 }
 html.motion .hero__explore {
   opacity: clamp(0, (var(--s, 0) - 0.75) * 5, 1);
@@ -939,49 +909,69 @@ html.bk-open .sticky {
 .offer__body {
   max-width: 62ch;
 }
-.tickets {
-  display: grid;
-  gap: 16px;
-}
-.tk {
+/* ── o ingresso: corpo marinho na largura da seção, duas metades e o picote ──
+   Os furos são dois círculos na cor da página nas pontas do picote (o ingresso
+   não corta nada com máscara: a sombra continua embaixo). Sem padding no
+   ingresso: o picote encosta nas bordas e os furos mordem a borda de verdade. */
+.pass {
+  --hole: 28px;
   position: relative;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin-top: 8px;
   border-radius: var(--r);
+  background: var(--navy);
+  color: var(--on-dark);
+  box-shadow:
+    0 40px 70px -40px rgb(var(--navy-rgb) / 0.75),
+    0 2px 0 rgb(var(--navy-rgb) / 0.2);
 }
-.tk--open {
-  color: var(--paper);
-  background: linear-gradient(180deg, var(--btn-top), var(--btn-bottom));
-  box-shadow: 0 34px 60px -32px rgb(var(--navy-rgb) / 0.65);
+.pass__half {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  min-width: 0;
+  padding: 18px 16px 20px;
 }
-.tk--locked {
-  overflow: hidden;
-  background: var(--paper);
-  box-shadow: 0 0 0 1px var(--line);
+.pass__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
 }
-.tk__pill {
-  position: absolute;
-  top: -12px;
-  left: 20px;
-  z-index: 2;
+.pass__order {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 7px 12px;
+  color: var(--paper);
+  letter-spacing: 0.16em;
+}
+.pass__order svg {
+  width: 9px;
+  height: 9px;
+  color: var(--red-hi);
+}
+.pass__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
   border-radius: var(--r);
-  background: var(--paper);
-  color: var(--red);
   font-style: italic;
   letter-spacing: 0.14em;
-  box-shadow: 0 6px 16px -8px rgb(var(--navy-rgb) / 0.5);
 }
-.tk__pill i {
+.pass__pill--open {
+  background: var(--paper);
+  color: var(--red);
+}
+.pass__pill--open i {
   width: 8px;
   height: 8px;
   background: var(--red);
   clip-path: polygon(50% 0, 100% 100%, 0 100%);
 }
-html.motion .tk__pill i {
+html.motion .pass__pill--open i {
   animation: pill-pulse 1.6s var(--ease) infinite;
 }
 @keyframes pill-pulse {
@@ -990,28 +980,92 @@ html.motion .tk__pill i {
     opacity: 0.6;
   }
 }
-.tk__pill--navy {
-  background: var(--navy);
+.pass__pill--next {
+  box-shadow: inset 0 0 0 1px rgb(var(--paper-rgb) / 0.4);
   color: var(--paper);
 }
-.tk__body {
+/* o picote: tracejado + os dois furos (celular: horizontal, furos nas laterais) */
+.pass__perf {
+  position: relative;
+  height: 0;
+  margin: 0 calc(var(--hole) / 2 + 6px);
+  border-top: 2px dashed rgb(var(--paper-rgb) / 0.35);
+}
+.pass__perf::before,
+.pass__perf::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: var(--hole);
+  height: var(--hole);
+  border-radius: 50%;
+  background: var(--paper);
+  transform: translateY(-50%);
+}
+.pass__perf::before {
+  left: calc(-1 * var(--hole) - 6px);
+}
+.pass__perf::after {
+  right: calc(-1 * var(--hole) - 6px);
+}
+
+/* os dois cards dentro do ingresso */
+.tk {
+  position: relative;
   display: grid;
   gap: 8px;
-  padding: 32px 20px 22px;
+  padding: 22px 18px 20px;
+  border-radius: var(--r);
 }
-.tk__order {
-  letter-spacing: 0.16em;
-  opacity: 0.85;
+.tk--open {
+  color: var(--paper);
+  background: linear-gradient(180deg, var(--btn-top), var(--btn-bottom));
+  box-shadow: 0 24px 40px -26px rgb(0 0 0 / 0.6);
+}
+.tk--next {
+  align-content: center;
+  background: var(--paper);
+  color: var(--ink);
+}
+.tk__big {
+  display: grid;
+  gap: 6px;
+}
+.tk--next .tk__amount {
+  color: var(--red);
+}
+.tk--next .tk__per {
+  color: var(--ink-2);
+  opacity: 1;
+}
+.tk__same {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  font-size: 1rem;
+  line-height: 1.4;
+  font-weight: 500;
+  color: var(--ink-2);
+}
+.tk__same svg {
+  width: 10px;
+  height: 10px;
+  flex: none;
+  margin-top: 0.35em;
+  color: var(--red);
 }
 .tk__price {
   display: flex;
   align-items: baseline;
-  gap: 12px;
-  margin-top: 6px;
+  flex-wrap: wrap;
+  gap: 4px 12px;
 }
 .tk__amount {
   font-style: italic;
-  font-size: clamp(3.6rem, 14vw, 5.2rem);
+  font-size: clamp(3.4rem, 14vw, 5.2rem);
   line-height: 0.85;
 }
 .tk__per {
@@ -1031,7 +1085,7 @@ html.motion .tk__pill i {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  margin-top: 6px;
+  margin-top: 4px;
   font-size: 1.0625rem;
   line-height: 1.35;
   font-weight: 500;
@@ -1045,12 +1099,9 @@ html.motion .tk__pill i {
 .tk--open .tk__perk svg {
   color: var(--paper);
 }
-.tk--locked .tk__perk svg {
-  color: var(--red);
-}
 .tk__seats {
-  margin-top: 16px;
-  padding-top: 16px;
+  margin-top: 12px;
+  padding-top: 14px;
   border-top: 1px solid rgb(var(--paper-rgb) / 0.25);
 }
 .tk__seatrow {
@@ -1079,139 +1130,102 @@ html.motion .tk__bar span {
   transform: scaleX(0);
   transition: transform 1.2s var(--ease) 0.3s;
 }
-html.motion .tickets[data-in] .tk__bar span {
+html.motion .pass[data-in] .tk__bar span {
   transform: scaleX(var(--pct, 0));
 }
-/* picote: linha tracejada com dois furos nas laterais (na cor da página) */
-.tk__perf {
-  position: relative;
-  height: 0;
-  margin: 0 12px;
-  border-top: 1px dashed rgb(var(--paper-rgb) / 0.5);
-}
-.tk__perf span {
-  position: absolute;
-  top: -12px;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: var(--paper);
-}
-.tk__perf span:first-child {
-  left: -24px;
-}
-.tk__perf span:last-child {
-  right: -24px;
-}
-.tk__stub {
-  padding: 22px 20px 22px;
+.tk__cta {
+  margin-top: 14px;
 }
 .tk__stampwrap {
   position: absolute;
   right: -10px;
-  top: -34px;
-  display: grid;
-  justify-items: end;
-  gap: 6px;
+  top: -40px;
   pointer-events: none;
-}
-.tk__stampwrap .pending {
-  pointer-events: auto;
 }
 .tk__stamp {
   --size: clamp(92px, calc(var(--u) * 8), 128px);
 }
-.tk__stamp-pending {
-  max-width: 200px;
-}
-/* o travado: o conteúdo borrado é aria-hidden; o triângulo marinho é o único nítido */
-.tk__blur {
-  filter: blur(5px);
-  pointer-events: none;
-  user-select: none;
-  color: var(--ink);
-}
-.tk__note {
-  font-size: var(--t-small);
-  color: var(--ink-2);
-}
-.tk__lock {
-  position: absolute;
-  left: 50%;
-  top: 50%;
+/* o pé de cada metade */
+.pass__foot {
   display: grid;
-  place-items: center;
-  width: 68px;
-  height: 68px;
-  transform: translate(-50%, -50%);
-  background: var(--navy);
-  color: var(--paper);
-  box-shadow: 0 18px 30px -16px rgb(var(--navy-rgb) / 0.7);
+  gap: 10px;
 }
-.tk__lock svg {
-  width: 32px;
-  height: 32px;
-}
-.tk__seatpend {
-  position: absolute;
-  left: 20px;
-  bottom: 16px;
-}
-.offer__compare {
+.pass__compare {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 8px 12px;
-  margin-top: clamp(28px, calc(var(--u) * 3), 48px);
-  padding-top: 18px;
-  border-top: 1px solid var(--line-strong);
-  color: var(--ink-2);
+  gap: 6px 10px;
+  color: var(--on-dark-2);
 }
-.offer__compare .label {
-  color: var(--muted);
+.pass__compare .label {
+  color: var(--on-dark-2);
 }
-.offer__was {
+.pass__was {
   font-style: italic;
-  font-size: 1.6rem;
-  color: var(--muted);
-  text-decoration-color: var(--red);
+  font-size: 1.4rem;
+  color: var(--on-dark-2);
+  text-decoration-color: var(--red-hi);
   text-decoration-thickness: 3px;
 }
-.offer__compare b {
+.pass__compare b {
   font-style: italic;
-  font-size: 2.2rem;
+  font-size: 2rem;
   line-height: 0.9;
-  color: var(--ink);
+  color: var(--paper);
 }
-.offer__plus {
+.pass__plus {
   font-weight: 500;
 }
-html.motion .tickets .rise {
-  transition-delay: calc(var(--i) * 120ms);
+.pass__note {
+  font-size: var(--t-small);
+  line-height: 1.5;
+  color: var(--on-dark-2);
 }
-@media (min-width: 1024px) {
-  .offer__head {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    align-items: end;
-    column-gap: 48px;
+html.motion .pass .rise {
+  transition-delay: calc(var(--i, 0) * 120ms);
+}
+html.motion .pass__half--next .rise {
+  --i: 1;
+}
+
+@media (min-width: 900px) {
+  /* desktop: as metades lado a lado, o picote vertical, os furos em cima e embaixo */
+  .pass {
+    grid-template-columns: minmax(0, 1.25fr) 0 minmax(0, 1fr);
   }
-  .tickets {
-    grid-template-columns: 1.25fr 1fr;
-    gap: 24px;
-    max-width: 1100px;
+  .pass__half {
+    gap: 18px;
+    padding: 24px clamp(20px, calc(var(--u) * 2.4), 40px) 28px;
   }
-  .tk__body {
-    padding: 40px 32px 26px;
+  .pass__perf {
+    width: 0;
+    height: auto;
+    margin: calc(var(--hole) / 2 + 6px) 0;
+    border-top: 0;
+    border-left: 2px dashed rgb(var(--paper-rgb) / 0.35);
   }
-  .tk__stub {
-    padding: 26px 32px 30px;
+  .pass__perf::before,
+  .pass__perf::after {
+    top: auto;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
   }
-  .tk__perf {
-    margin: 0 16px;
+  .pass__perf::before {
+    top: calc(-1 * var(--hole) - 6px);
+  }
+  .pass__perf::after {
+    bottom: calc(-1 * var(--hole) - 6px);
+  }
+  .tk {
+    padding: 28px clamp(22px, calc(var(--u) * 2.4), 40px) 26px;
+  }
+  .tk--next {
+    height: 100%;
   }
   .tk__stampwrap {
     right: -28px;
-    top: -44px;
+    top: -48px;
   }
 }
 
@@ -2828,23 +2842,5 @@ html.motion .claim__list .rise {
     flex-wrap: wrap;
     align-items: center;
     gap: 16px 28px;
-  }
-}
-
-/* sem data confirmada o carimbo não existe: o marcador entra no fluxo do ingresso, não por cima do preço */
-.tk__stampwrap:has(.stamp[data-pending]) {
-  position: static;
-  padding: 0 20px 18px;
-  justify-items: start;
-}
-.tk__stampwrap:has(.stamp[data-pending]) .stamp {
-  display: none;
-}
-.tk__stampwrap:has(.stamp[data-pending]) .tk__stamp-pending {
-  max-width: none;
-}
-@media (min-width: 1024px) {
-  .tk__stampwrap:has(.stamp[data-pending]) {
-    padding: 0 32px 20px;
   }
 }

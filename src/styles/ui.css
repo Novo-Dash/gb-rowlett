@@ -383,8 +383,7 @@ html.motion .stamp {
   transition-delay: 0.35s;
 }
 html.motion .stamp[data-in],
-html.motion [data-in] .stamp,
-html.motion .stamp--load {
+html.motion [data-in] .stamp {
   scale: 1;
   rotate: -8deg;
   opacity: 1;

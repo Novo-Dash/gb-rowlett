@@ -80,6 +80,11 @@ Três direções dentro da gramática GB (card no filme, mordidas triangulares, 
 
 **Escolha do Adryan (9 out 2026): B · o ingresso** — depois revista: a placa branca lia como card, não como ingresso, e a versão com cabeça vermelha, picote e talão ficou pesada no celular. **Decisão final do Adryan: texto direto sobre a foto, sem card branco** (a direção A, com o véu marinho em degradê, o título branco e 'never trained.' em red-glow, o carimbo à direita). A cena 2 (o card abrindo até a tela, 'No experience / needed.' entrando pelos lados) é a mesma.
 
+**Ajustes do Adryan no hero (9 out 2026, depois do finalizador):**
+- A cena 2 troca "No experience / needed." pela frase da oferta: "Join before we open." (menor) + "Pay less than everyone" / "who joins after." (maiores, mesmo corpo, a última em red-glow com duplicado). As linhas **sobem de baixo**, uma depois da outra, em vez de entrar pelos lados.
+- Saem do hero os micro-itens ("Uniform included for the First 50", "Kids from 4", o marcador de cobrança) e o **carimbo de vagas** com o marcador "First 50 spots already taken". As vagas e o uniforme continuam ditos na oferta (ingresso) e no pedido.
+- Consequência registrada: a frase "Join before we open. Pay less than everyone who joins after." aparece na cena 2 e de novo como H2 da oferta logo abaixo. Mantida a pedido; se incomodar, o H2 da oferta é o candidato a mudar.
+
 ## 5. Paleta, tipo, movimento
 
 Ver `preset-grand-opening-gb.md` §2, §3, §8. Nenhum hex fora de `src/styles/tokens.css`. Nenhuma terceira cor. Um botão. Um raio (`2px`), uma exceção (nav, 14px). `html.motion` como único portão de movimento; só `transform` / `clip-path` / `opacity` / variáveis CSS.
@@ -103,3 +108,8 @@ O kit chega da Collective sem alterações em `attribution.ts`, `webhook.ts`, `t
 ## 7. Pendências do cliente
 
 A tabela viva é a §20 do `prd-GBR-001.md` (23 itens). Resumo do que trava o modo `client`: data de abertura, `claimed` do First 50, limite da Founding Class, permanência do $87, cobrança no pré-cadastro, contrato/pausa, preço de família, bio do Andre, canal de confirmação, onde os pais ficam, logo SVG, autorização das fotos, IDs do kit, texto de consentimento.
+
+- **Letreiro em X** movido para entre a oferta (Founding Members) e Programas, a pedido do Adryan: o hero passa a desembocar direto na oferta, e as fitas viram a costura entre o preço e as turmas.
+- **H2 da oferta** passa a ser só "Founding Members" (a frase "Join before we open. Pay less than everyone who joins after." ficou só na cena 2 do hero, sem repetir). O eyebrow da oferta vira "The founding offer" (rótulo já usado no menu e no footer) para não empilhar "Founding Members" duas vezes.
+- **A oferta vira UM ingresso** na largura da seção (pedido do Adryan: são só dois grupos, não três cartões no padrão da Collective). Corpo marinho com duas metades e o picote entre elas (tracejado + dois furos): a metade I traz o card vermelho com $87, no enrollment fee, uniforme, vagas e o botão, e a comparação "After opening" no pé; a metade II é o canhoto travado (card borrado + triângulo marinho, "Opens next", nota e a pendência do limite de vagas). No celular as metades empilham e o picote fica horizontal. O carimbo de dias morde o card I quando houver data; sem data, vira pendência no pé.
+- **A oferta vira UM ingresso** na largura da seção (pedido do Adryan: são só dois grupos, não três cartões no padrão da Collective). Corpo marinho com duas metades e o picote entre elas (tracejado + dois furos). Metade I: card vermelho com $87, no enrollment fee, uniforme incluído, vagas e o botão; a comparação "After opening" no pé. Metade II (o canhoto): **nítida, sem borrão nem cadeado** — o Adryan apontou que borrar um card com o mesmo preço não diz nada; o número grande do canhoto é o perk ("50% off · the Gracie Barra uniform") com "Same $87 every two weeks · No enrollment fee" embaixo, e no pé "Opens when The First 50 is full" + a pendência do limite de vagas. No celular as metades empilham e o picote fica horizontal. O carimbo de dias morde o card I quando houver data; sem data, vira pendência no pé.
