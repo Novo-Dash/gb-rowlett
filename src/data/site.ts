@@ -82,7 +82,7 @@ export const tiers: Tier[] = [
     order: 'I',
     label: 'The First 50',
     seats: 50,
-    claimed: null, // [CONFIRMAR] vagas já tomadas (§20 #2)
+    claimed: 3, // vagas já tomadas (Adryan, 9 out 2026); atualizar à mão conforme entram
     perk: { title: 'Gracie Barra uniform included', short: 'Uniform included' },
     perks: ['$87 every two weeks', 'No enrollment fee', 'Gracie Barra uniform included'],
     note: 'The first fifty people to join before the doors open.',
@@ -109,38 +109,6 @@ export const spotsLeft = (t: Tier = openTier): number | null =>
   t.seats === null || t.claimed === null ? null : Math.max(0, t.seats - t.claimed)
 
 
-/* ── Nav ───────────────────────────────────────────────────────────── */
-export const nav = {
-  callLabel: 'Call or text Gracie Barra Rowlett',
-  logoLabel: 'Gracie Barra Rowlett — claim a Founding Member spot',
-  menuOpen: 'Open menu',
-  menuClose: 'Close menu',
-  menu: {
-    classes: {
-      label: 'Classes',
-      links: [
-        { label: 'Little Champions 1 · 4–6', program: 'lc1' as ProgramKey },
-        { label: 'Little Champions 2 · 7–9', program: 'lc2' as ProgramKey },
-        { label: 'Juniors · 10–14', program: 'juniors' as ProgramKey },
-        { label: 'Adults · All Levels', program: 'adults' as ProgramKey },
-      ],
-    },
-    schedule: {
-      label: 'Schedule',
-      links: [
-        { label: 'Weekly schedule', href: '#schedule' },
-        { label: 'The founding offer', href: '#offer' },
-        { label: 'Questions', href: '#faq' },
-      ],
-    },
-    visit: {
-      label: 'Visit',
-      directions: 'Get directions',
-      book: 'Claim a Founding spot',
-    },
-  },
-}
-
 /* ── I · Hero ──────────────────────────────────────────────────────── */
 export const hero = {
   eyebrow: 'Opening soon · Rowlett, TX',
@@ -150,7 +118,8 @@ export const hero = {
     { text: 'never trained.', accent: true },
   ],
   lead: 'Kids from 4, teens and adults. No experience needed. The official Gracie Barra curriculum, led by Andre Carepa, 27 years in jiu-jitsu.',
-  offerLine: 'Founding Members pay $87 every two weeks. No enrollment fee.',
+  /** A oferta em destaque no hero (pedido do João Vitor: "a oferta está muito pequena"). */
+  offer: { label: 'Founding Members', price: '$87', per: 'every two weeks', perks: ['No enrollment fee', 'Uniform included'] },
   cta: 'Claim my Founding Member spot',
   /** Cena 2: a frase da oferta. `w` = largura em em (AdihausDIN Cn Bold Italic,
       scripts/fit-lines.py). As duas linhas grandes usam a mesma largura (a da mais
@@ -336,23 +305,22 @@ export const adultTimesSentence = (() => {
 
 export const scheduleCopy = {
   eyebrow: 'The schedule',
-  title: [{ text: 'Classes from 6 AM to 6:30 PM.' }, { text: 'Pick the one that fits your week.', br: true }],
-  summary: (c: typeof scheduleCounts) => `${c.total} classes a week · ${c.adults} adults · ${c.lc1} Little Champions 1 · ${c.lc2Juniors} LC2 + Juniors`,
+  title: [{ text: 'Our schedule.' }],
+  lead: 'Classes from 6 AM to 6:30 PM, six days a week. Pick the time that keeps you consistent.',
+  summary: (c: typeof scheduleCounts) => `${c.total} classes a week · ${c.adults} adults · ${c.lc1 + c.lc2Juniors} kids`,
   note: (n: number) => `${n} adult classes a week, including 6 AM on Tue/Thu for anyone who has to be at work by 8.`,
-  caption: 'Weekly class schedule by day and time. Each class opens the founding pre-registration with that class picked.',
-  filterLabel: 'Show',
-  filters: [
+  tabsLabel: 'Schedule by program',
+  /** O formato da GB Charleston: abas por público, um card por turma, o selo oficial do programa GB. */
+  tabs: [
     { id: 'all', label: 'All classes' },
+    { id: 'kids', label: 'Kids' },
     { id: 'adults', label: 'Adults + Teens' },
-    { id: 'lc1', label: 'Ages 4–6' },
-    { id: 'lc2-juniors', label: 'Ages 7–14' },
-  ] as Array<{ id: 'all' | SlotKey; label: string }>,
-  timeLabel: 'Time',
-  closed: 'Closed',
-  sunday: { short: 'Sun', long: 'Sunday' },
-  todayLabel: 'Today',
-  dayLabel: 'Day',
+  ] as const,
+  /** Selo oficial GB de cada turma: GBK (kids, verde) e GB1 (adultos, azul). */
+  badge: { adults: 'gb1', lc1: 'gbk', 'lc2-juniors': 'gbk' } as Record<SlotKey, 'gb1' | 'gbk'>,
+  cardAction: 'Claim a spot',
   slotAction: 'Claim a spot in this class',
+  sundayClosed: 'Sunday closed',
 }
 
 /* ── VI · Para os pais ─────────────────────────────────────────────── */
@@ -462,7 +430,6 @@ export const footer = {
   emailLabel: 'Email',
   mapTitle: [{ text: 'Right here in Rowlett' }],
   mapIframeTitle: 'Map: Gracie Barra Rowlett, 3503 Rowlett Rd, Bldg K, Suite 302, Rowlett, TX 75088',
-  facadeAlt: 'The Gracie Barra Rowlett storefront with the sign installed',
   marquee: 'Gracie Barra Rowlett',
   copyright: '© 2026 Gracie Barra Rowlett',
   affiliation: 'Gracie Barra affiliate',

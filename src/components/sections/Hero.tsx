@@ -25,7 +25,7 @@ import { hero, site } from '@/data/site'
 import { clamp01, docTop, prefersReducedMotion, useScrollTick } from '@/motion/scroll'
 import { Cta } from '../ui/Cta'
 import { Eyebrow } from '../ui/Eyebrow'
-import { Tri } from '../ui/Icons'
+import { Check } from '../ui/Icons'
 import { Lines } from '../ui/Lines'
 import { Pic } from '../ui/Pic'
 
@@ -112,21 +112,49 @@ export function Hero() {
       {/* CENA 1 · o texto direto sobre a foto: embaixo à esquerda no celular, centralizado no desktop */}
       <div ref={card} className="hero__scene hero__scene--card on-dark">
         <div className="shell hero__copy">
-          <Eyebrow tone="light" className="hero__eb">
-            {hero.eyebrow}
-          </Eyebrow>
+          {/* o selo da academia à esquerda do "Opening soon" (a página não tem navbar) */}
+          <div className="hero__brand">
+            <img src="/img/badge-112.webp" srcSet="/img/badge-112.webp 1x, /img/badge-150.webp 2x" alt={site.name} width={56} height={56} className="hero__logo" />
+            <Eyebrow tone="light" className="hero__eb">
+              {hero.eyebrow}
+            </Eyebrow>
+          </div>
           <Lines as="h1" id="hero-title" onLoad className="d h1 hero__title" parts={hero.title} />
           <p className="hero__lead rise rise--load" style={{ ['--d' as string]: '300ms' }}>
             {hero.lead}
           </p>
           <div className="hero__act rise rise--load" data-hero-cta="" style={{ ['--d' as string]: '380ms' }}>
+            {/* o selo da oferta (pedido do Adryan): anel "Founding Members" girando, $87 no centro */}
+            <p className="hero__seal">
+              <span className="sr-only">
+                {hero.offer.label}: {hero.offer.price} {hero.offer.per}
+              </span>
+              <svg className="hero__seal-ring" viewBox="0 0 200 200" aria-hidden="true">
+                <defs>
+                  <path id="hero-seal-ring" d="M100 100 m-80 0 a80 80 0 1 1 160 0 a80 80 0 1 1 -160 0" />
+                </defs>
+                <text>
+                  <textPath href="#hero-seal-ring" textLength="500" lengthAdjust="spacing">
+                    {`${hero.offer.label} · ${hero.offer.label} · `}
+                  </textPath>
+                </text>
+              </svg>
+              <span className="hero__seal-core" aria-hidden="true">
+                <b className="d">{hero.offer.price}</b>
+                <span>{hero.offer.per}</span>
+              </span>
+            </p>
             <Cta origin="hero" size="block">
               {hero.cta}
             </Cta>
-            {/* a oferta embaixo do botão, pequena e discreta */}
-            <p className="hero__note">
-              <Tri />
-              <span>{hero.offerLine}</span>
+            {/* os benefícios embaixo do botão */}
+            <p className="hero__perks">
+              {hero.offer.perks.map((p) => (
+                <span key={p}>
+                  <Check />
+                  {p}
+                </span>
+              ))}
             </p>
           </div>
         </div>

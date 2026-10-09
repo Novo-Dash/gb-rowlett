@@ -40,11 +40,11 @@ IMAGES = [
     ("p-juniors",  "programs/p-juniors.webp", (3, 4),  [360, 600],   (0.5, 0.5)),
     ("p-adults",   "programs/p-adults.webp",  (3, 4),  [360, 600],   (0.5, 0.5)),
     # a obra 4/5 — fotos reais de Obras GB (sem filtro que pareça render)
-    ("build-1",    f"{O}/IMG_0704.HEIC",   (4, 5),  [360, 640],   (0.5, 0.45)),
-    ("build-2",    f"{O}/IMG_1605.HEIC",   (4, 5),  [360, 640],   (0.5, 0.5)),
-    ("build-3",    f"{O}/IMG_1604.HEIC",   (4, 5),  [360, 640],   (0.5, 0.5)),
-    ("build-4",    f"{O}/IMG_1602.HEIC",   (4, 5),  [360, 640],   (0.5, 0.5)),
-    ("build-5",    f"{O}/IMG_0712.HEIC",   (4, 5),  [360, 640],   (0.5, 0.42)),
+    ("build-1",    f"{O}/IMG_0704.HEIC",   (4, 5),  [360, 640, 1280],   (0.5, 0.45)),
+    ("build-2",    f"{O}/IMG_1605.HEIC",   (4, 5),  [360, 640, 1280],   (0.5, 0.5)),
+    ("build-3",    f"{O}/IMG_1604.HEIC",   (4, 5),  [360, 640, 1280],   (0.5, 0.5)),
+    ("build-4",    f"{O}/IMG_1602.HEIC",   (4, 5),  [360, 640, 1280],   (0.5, 0.5)),
+    ("build-5",    f"{O}/IMG_0712.HEIC",   (4, 5),  [360, 640, 1280],   (0.5, 0.42)),
     # para os pais 4/5: as fotos dos três cards (Adryan, 9 out 2026), já tratadas
     ("parents-1",  "parents/1.webp",      (517, 549), [360, 517], (0.5, 0.5)),
     ("parents-2",  "parents/2.webp",      (517, 549), [360, 517], (0.5, 0.5)),
@@ -54,12 +54,11 @@ IMAGES = [
     # abertura: fachada 16/9 a 30%
     ("opening",    f"{O}/IMG_0713.HEIC",   (16, 9), [960, 1440, 1920], (0.5, 0.35), 48),
     # fachada 1/1 encostada no pino do mapa
-    ("visit",      f"{O}/IMG_0712.HEIC",   (1, 1),  [420, 560],   (0.5, 0.42)),
 ]
 
 # Fotos de celular e de câmera convivem: a mesma curva (contraste +6, saturação −8).
 # As da obra ficam cruas (são prova); as dos programas já chegaram tratadas. O logo não é foto.
-RAW = {"hero-d", "hero-w", "film-m", "parents-1", "parents-2", "parents-3", "p-lc1", "p-lc2", "p-juniors", "p-adults", "logo", "build-1", "build-2", "build-3", "build-4", "build-5", "opening", "visit"}
+RAW = {"hero-d", "hero-w", "film-m", "parents-1", "parents-2", "parents-3", "p-lc1", "p-lc2", "p-juniors", "p-adults", "logo", "build-1", "build-2", "build-3", "build-4", "build-5", "opening"}
 
 
 def crop_to(im: Image.Image, ratio, focus):
