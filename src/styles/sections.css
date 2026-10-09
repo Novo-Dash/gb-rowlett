@@ -2357,7 +2357,12 @@ html.motion .ready__cols .rise {
 /* desktop: a seção tem uma tela de altura e o coach cresce até preenchê-la,
    do fim do título até a borda de baixo */
 @media (min-width: 1024px) {
+  /* o conteúdo assenta no fundo: a sobra da tela fica em cima, nunca entre o
+     coach e a borda de baixo */
   .ready {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     min-height: 100svh;
     padding-top: calc(var(--nav-h) + clamp(16px, 3svh, 40px));
   }
