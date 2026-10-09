@@ -143,7 +143,7 @@
   margin-top: 22px;
 }
 /* o SELO azul (pedido do Adryan, "design similar ao da Collective, mas o nosso selo"):
-   disco cheio azul GB, dois filetes claros, o anel "Founding Members ·" girando (só o
+   disco cheio no azul GB da marca (--navy), dois filetes claros, o anel "Founding Members ·" girando (só o
    anel gira), $87 e "every two weeks" parados no centro, -8° fixo. Batido no canto
    de cima à direita do título, mordendo a primeira linha. */
 .hero__titlebox {
@@ -171,7 +171,7 @@
   overflow: visible;
 }
 .hero__seal-disc {
-  fill: var(--gb1);
+  fill: var(--navy); /* o azul GB da marca (o mesmo do rodapé e do ingresso) */
 }
 .hero__seal-line {
   fill: none;
