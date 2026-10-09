@@ -51,10 +51,12 @@ export function Build() {
         <ol ref={plates} className="build__why">
           {build.plates.map((p, i) => (
             <li key={p.title} className="why rise" style={{ ['--i' as string]: i }}>
-              <span className="why__n d" aria-hidden="true">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <h3 className="why__t d">{p.title}</h3>
+              <div className="why__head">
+                <span className="why__n d" aria-hidden="true">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h3 className="why__t d">{p.title}</h3>
+              </div>
               <p className="why__b">{p.body}</p>
             </li>
           ))}

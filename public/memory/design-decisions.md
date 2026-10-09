@@ -129,3 +129,4 @@ A tabela viva é a §20 do `prd-GBR-001.md` (23 itens). Resumo do que trava o mo
 - **Obra / why us em cards (Adryan):** as três razões deixam de ser texto solto e viram cards de mesma altura (branco, régua vermelha de 4px no topo, número num quadrado vermelho, título em Cn, texto em corpo, sombra marinho embaixo; sobem 4px no hover). Continuam acima da fila de fotos.
 - **Caderneta sem polaroid (Adryan):** a foto presa na primeira prancheta saiu (com a imagem `ready`, o recorte no `build-images.py` e o CSS). A seção fica sem foto, desvio consciente da regra "toda seção tem imagem" (PRD §0.8); a imagem da seção passa a ser o triângulo GB vermelho atrás das pranchetas.
 - **Como reservar:** removida a pendência "Welcome e-mail in GHL to confirm" do passo 3 (pedido do Adryan). O item §20 #10 continua na tabela do PRD.
+- **Cards do why us:** número e título na mesma linha (quadrado vermelho à esquerda, título ao lado), o card ficou mais baixo.
