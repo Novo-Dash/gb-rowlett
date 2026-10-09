@@ -190,11 +190,6 @@ body {
   line-height: 0.95;
   font-style: italic;
 }
-.statement {
-  font-size: var(--t-statement);
-  font-style: italic;
-  letter-spacing: -0.012em;
-}
 .body {
   color: var(--ink-2);
   line-height: 1.6;

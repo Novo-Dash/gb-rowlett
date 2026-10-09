@@ -47,7 +47,6 @@
   --t-h1: clamp(2.75rem, min(12.6vw, 9svh), 7.4rem);
   --t-h2: clamp(2.4rem, 9.4vw, 5.4rem);
   --t-h3: clamp(1.5rem, 5.4vw, 2rem);
-  --t-statement: clamp(2.3rem, min(9.8vw, 7svh), 5.6rem);
   --t-body: 1.0625rem; /* 17px */
   --t-small: 0.9375rem;
   --t-label: 0.78rem; /* 12,5px — mínimo absoluto da página é 12px */

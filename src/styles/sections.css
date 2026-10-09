@@ -2535,9 +2535,6 @@ html.motion .ready__cols .rise {
   text-wrap: pretty;
   transition: color 0.5s var(--ease);
 }
-.how__pend {
-  margin-top: 2px;
-}
 /* feito */
 .how__step.is-done .how__chip {
   background: var(--red-wash);
@@ -2579,9 +2576,6 @@ html.motion .ready__cols .rise {
 .how__step.is-next .how__chip {
   box-shadow: inset 0 0 0 1px var(--line-strong);
   color: var(--muted);
-}
-.how__step.is-next .how__pend {
-  opacity: 0.5;
 }
 
 /* O DIVISOR DA SEÇÃO: o tatame vermelho de borda a borda, colado na borda de
