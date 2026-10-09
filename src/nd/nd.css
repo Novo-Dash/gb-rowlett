@@ -215,7 +215,7 @@
 
 @media (prefers-reduced-motion: reduce) { .nd-spinner { animation-duration: 2s; } .nd-button, .nd-progress span { transition: none; } }
 
-/* ── GB Rowlett: o kit na linguagem da página (cantos retos, Cn, triângulo) ── */
+/* ── GB Rowlett: o kit na linguagem da página (cantos levemente arredondados, Cn itálica, triângulo) ── */
 .gbr .nd,
 .nd {
   --nd-accent: var(--red);
@@ -235,6 +235,15 @@
   --nd-radius: var(--r);
   --nd-button-radius: var(--r);
   --nd-dialog-radius: var(--r);
+}
+/* a fonte principal sempre em itálico, como no resto da página */
+.nd-wordmark,
+.nd-panel-title,
+.nd-title,
+.nd-label,
+.nd-button,
+.nd-link {
+  font-style: italic;
 }
 /* celular: diálogo em tela cheia, inputs de 16px (sem zoom do iOS) */
 @media (max-width: 639px) {

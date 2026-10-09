@@ -23,7 +23,6 @@ import { schedule, scheduleCopy, scheduleCounts, scheduleGroups, type Slot, type
 import { useBooking } from '@/nd/Booking'
 import { useInView } from '@/motion/inview'
 import { trackCta } from '@/track'
-import { Cta } from '../ui/Cta'
 import { Eyebrow } from '../ui/Eyebrow'
 import { Lines } from '../ui/Lines'
 
@@ -204,11 +203,6 @@ export function Schedule() {
 
         <div className="sc__foot">
           <p className="sc__note">{scheduleCopy.note(scheduleCounts.adults)}</p>
-          <div className="sc__cta">
-            <Cta origin="faq" size="block">
-              {scheduleCopy.cta}
-            </Cta>
-          </div>
         </div>
       </div>
     </section>

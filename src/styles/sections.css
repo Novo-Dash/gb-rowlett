@@ -1931,9 +1931,6 @@ html.motion .sc__board[data-in] {
   line-height: 1.55;
   color: var(--ink-2);
 }
-.sc__cta {
-  margin-top: 8px;
-}
 @media (max-width: 1023px) {
   .sc__board {
     display: none;
@@ -1957,6 +1954,84 @@ html.motion .sc__board[data-in] {
   .sc__foot {
     justify-items: stretch;
     text-align: left;
+  }
+}
+
+/* desktop: o quadro inteiro numa tela (100svh, pedido do Adryan). O cabeçalho e o
+   filtro dividem a linha de cima, a nota e o botão dividem a de baixo, e as
+   linhas do quadro crescem ou encolhem com a altura da tela. Em telas muito
+   baixas a seção passa de uma tela em vez de cortar o quadro. */
+@media (min-width: 1024px) {
+  .sc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100svh;
+    padding: calc(var(--nav-h) + clamp(12px, 2.4svh, 28px)) 0 clamp(20px, 3svh, 36px);
+  }
+  .sc__in {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'head filters'
+      'board board'
+      'foot foot';
+    align-items: end;
+    column-gap: 32px;
+    row-gap: clamp(14px, 2.2svh, 26px);
+  }
+  .sc__head {
+    grid-area: head;
+    justify-items: start;
+    text-align: left;
+  }
+  .sc .sc__title {
+    max-width: none;
+    font-size: clamp(1.9rem, min(calc(var(--u) * 2.6), 4.6svh), 3.4rem);
+  }
+  .sc__summary {
+    margin-top: 10px;
+  }
+  .sc__filters {
+    grid-area: filters;
+    justify-content: flex-end;
+  }
+  .sc__board {
+    grid-area: board;
+  }
+  .sc__table thead th {
+    padding: clamp(8px, 1.3svh, 14px) 12px;
+  }
+  .sc__dayname {
+    font-size: 1.25rem;
+  }
+  /* cada linha de horário divide a altura que sobra da tela */
+  .sc__table tbody tr {
+    height: clamp(44px, calc((100svh - 480px) / 9), 72px);
+  }
+  .sc__table tbody th,
+  .sc__table td {
+    padding: 3px 4px;
+    vertical-align: middle;
+  }
+  .sc__time {
+    padding: 0 0 0 12px !important;
+    vertical-align: middle !important;
+  }
+  .sc__class {
+    min-height: 40px;
+    padding: 5px 8px 6px 14px;
+  }
+  .sc__class::before {
+    top: 7px;
+    bottom: 7px;
+  }
+  /* sem botão: a nota numa linha só, centralizada embaixo do quadro */
+  .sc__foot {
+    grid-area: foot;
+  }
+  .sc__note {
+    max-width: none;
+    white-space: nowrap;
   }
 }
 
@@ -2189,6 +2264,7 @@ html.motion .parents__cards[data-in] .chat__typing i:nth-child(3) {
   gap: 14px;
   margin-bottom: 16px;
   font-family: var(--f-display);
+  font-style: italic;
   font-weight: 700;
   font-size: 1.25rem;
   letter-spacing: 0.08em;
@@ -2685,6 +2761,7 @@ html.motion .how__mat {
   gap: 8px;
   padding: 16px 4px 14px;
   border: 1px solid rgb(var(--paper-rgb) / 0.18);
+  border-radius: var(--r);
   background: rgb(0 0 0 / 0.5);
 }
 .odometer__n {

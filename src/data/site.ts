@@ -353,7 +353,6 @@ export const scheduleCopy = {
   todayLabel: 'Today',
   dayLabel: 'Day',
   slotAction: 'Claim a spot in this class',
-  cta: 'Claim my Founding Member spot',
 }
 
 /* ── VI · Para os pais ─────────────────────────────────────────────── */

@@ -58,7 +58,7 @@
   --u: min(1vw, 19.2px);
   --nav-h: 64px;
   --sticky-h: 0px;
-  --r: 2px; /* cantos retos: atlético, não "app" */
+  --r: 8px; /* cantos levemente arredondados (pedido do Adryan) */
   --r-nav: 14px; /* a única exceção: o cartão flutuante da nav */
 
   /* ── Movimento ── */
