@@ -425,19 +425,19 @@ html:not(.motion) .hero__deep {
   /* duas colunas: o texto na esquerda, sobre a parede; o professor na direita */
   .hero__veil {
     background:
-      linear-gradient(90deg, rgb(0 0 0 / 0.86) 0%, rgb(0 0 0 / 0.66) 34%, rgb(0 0 0 / 0.12) 56%, rgb(0 0 0 / 0) 66%),
-      rgb(0 0 0 / 0.1);
+      linear-gradient(90deg, rgb(0 0 0 / 0.72) 0%, rgb(0 0 0 / 0.5) 30%, rgb(0 0 0 / 0.1) 50%, rgb(0 0 0 / 0) 60%),
+      linear-gradient(0deg, rgb(0 0 0 / 0.35), rgb(0 0 0 / 0) 40%);
   }
   .hero__scene--card {
     align-items: center;
     padding: calc(var(--nav-h) + 24px) 0 48px;
   }
-  /* a fachada à esquerda (sob o texto) e a chegada do tatame à direita: a foto e o
-     zoom de entrada ancoram em 75% 62%, perto de quem carrega o tatame, para ele
-     nunca sair pela borda de baixo, nem no ultrawide */
+  /* a composição do Adryan inteira (fachada, porta e caminhão): cada tela recebe o
+     recorte que mantém a largura toda; o pouco que sobra de altura corta quase
+     todo embaixo (o chão), nunca a placa; sem zoom de entrada */
   .hero__poster img,
   .hero__video {
-    object-position: 75% 62%;
+    object-position: 50% 15%;
     transform: none;
   }
   /* .hero .hero__copy: vence o width:100% do .shell */
@@ -2012,8 +2012,8 @@ html.motion .sc__board[data-in] {
 }
 
 /* ════════ [VI] PARA OS PAIS — três cards, a pergunta e a resposta em balões ════════ */
-/* a seção cabe numa tela (100svh, pedido do Adryan): no desktop os cards dividem
-   a altura que sobra; no celular viram uma fila que desliza para o lado */
+/* a seção cabe numa tela no desktop (100svh, pedido do Adryan): os cards dividem
+   a altura que sobra; no celular os cards ficam empilhados */
 .parents {
   display: flex;
   flex-direction: column;
@@ -2024,21 +2024,10 @@ html.motion .sc__board[data-in] {
 .parents__title {
   max-width: 14em;
 }
-/* celular: a fila deslizante, um card e a pontinha do próximo */
 .parents__cards {
   display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: min(84%, 360px);
-  gap: 12px;
-  margin: clamp(18px, 3svh, 40px) calc(-1 * var(--gutter)) 0;
-  padding: 0 var(--gutter) 18px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-padding-inline: var(--gutter);
-  scrollbar-width: none;
-}
-.parents__cards::-webkit-scrollbar {
-  display: none;
+  gap: 14px;
+  margin-top: clamp(18px, 3svh, 40px);
 }
 .chat {
   position: relative;
@@ -2046,9 +2035,8 @@ html.motion .sc__board[data-in] {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  height: clamp(400px, calc(100svh - 330px), 560px);
+  min-height: clamp(420px, 112vw, 520px);
   padding: 18px 16px;
-  scroll-snap-align: start;
   overflow: hidden;
   border-radius: var(--r);
   background: var(--navy);
@@ -2217,23 +2205,14 @@ html.motion .parents__cards[data-in] .chat__typing i:nth-child(3) {
   margin-top: clamp(12px, 2.2svh, 32px);
   text-align: center;
 }
-@media (min-width: 768px) {
-  .parents__cards {
-    grid-auto-columns: min(46%, 420px);
-  }
-}
 @media (min-width: 1024px) {
   .parents__cards {
-    grid-auto-flow: row;
-    grid-auto-columns: auto;
-    margin-inline: 0;
-    padding: 0;
-    overflow: visible;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: clamp(16px, calc(var(--u) * 1.6), 28px);
   }
   .chat {
     /* a altura que sobra da tela depois do cabeçalho e do botão */
+    min-height: 0;
     height: clamp(380px, calc(100svh - 400px), 680px);
     padding: 22px 20px;
   }

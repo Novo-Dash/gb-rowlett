@@ -99,8 +99,8 @@ export function Hero() {
             sizes="100vw"
             className="hero__poster"
             art={[
-              { name: 'hero-w', media: '(min-width: 1024px)', sizes: 'max(100vw, 236svh)' },
-              { name: 'hero-d', media: '(min-width: 768px)', sizes: '100vw' },
+              { name: 'hero-w', media: '(min-width: 1024px) and (min-aspect-ratio: 59/25)', sizes: 'max(100vw, 236svh)' },
+              { name: 'hero-d', media: '(min-width: 768px)', sizes: 'max(100vw, 178svh)' },
             ]}
           />
           <video ref={video} className="hero__video" muted loop playsInline preload="none" tabIndex={-1} disablePictureInPicture />
