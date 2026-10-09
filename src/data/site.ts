@@ -290,8 +290,8 @@ export const build = {
     { id: 'doors', image: 'build-4', title: 'New walls and a doorway, drywall still unpainted' },
     { id: 'front', image: 'build-5', title: 'The storefront with the Gracie Barra Jiu-Jitsu & Self-Defense sign installed' },
   ] as const,
-  /** As três razões de "why us", só o título (tópicos). */
-  plates: ['Beginners are the plan, not the exception.', 'The official curriculum, taught by someone you can meet.', 'One trip for the whole family.'],
+  /** As razões de "why us", só o título (tópicos). */
+  plates: ['Beginners are the plan, not the exception.', 'One trip for the whole family.'],
   cta: 'Claim my Founding Member spot',
 }
 

@@ -860,6 +860,14 @@ html.bk-open .sticky {
 .offer__body {
   max-width: 62ch;
 }
+/* desktop: o texto do preço na coluna 2, na mesma linha do título */
+@media (min-width: 1024px) {
+  .offer__head {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: end;
+    column-gap: 48px;
+  }
+}
 /* ── o ingresso: corpo marinho na largura da seção, duas metades e o picote ──
    Os furos são dois círculos na cor da página nas pontas do picote (o ingresso
    não corta nada com máscara: a sombra continua embaixo). Sem padding no
@@ -1619,7 +1627,7 @@ html.motion .build__why .rise {
     column-gap: 48px;
   }
   .build__why {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     border-bottom: 1px solid var(--line-strong);
   }
   .why {
