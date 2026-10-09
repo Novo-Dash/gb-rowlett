@@ -17,3 +17,5 @@ export const uxMode = UX.mode
 export const tracking = client.tracking
 /** Pendências fora da página: o build de publicação (client) imprime. */
 export const publishWarnings = warnings
+/** O que o build client confere antes de publicar (webhook do lead e IDs de tracking). */
+export const ghl = client.ghl

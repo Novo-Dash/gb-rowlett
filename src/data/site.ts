@@ -521,6 +521,31 @@ export const form = {
   error: "That didn't go through. Call or text (945) 385-9359 and we'll hold your spot.",
   close: 'Close',
   page: 'gbr-grand-opening',
+  /** Com turmas ativas no GHL (Location ID configurado): o agendamento da especificação
+      (dados + turma ao vivo → dia e horário). Texto neutro: não promete aula grátis. */
+  live: {
+    title: 'Book your first class',
+    loading: 'Loading classes…',
+    classLabel: 'Choose your class',
+    child: "Your child's first name",
+    childHint: 'The child who will be training. You stay as the contact.',
+    childError: "Please enter your child's first name.",
+    classError: 'Please choose a class.',
+    continue: 'Continue',
+    nextNote: 'Next: pick the day and time of your first class.',
+    pickTitle: 'Pick your time',
+    noTimes: "We can't show open times for this class right now. Confirm and we'll call or text you with a day and a time.",
+    confirm: 'Confirm my class',
+    bookedTitle: "You're booked",
+    bookedText: (first: string) => `${first ? `${first}, a` : 'A'} confirmation is on its way to your phone and email.`,
+    requestTitle: 'We have your request',
+    requestText: (first: string) => `${first ? `Thanks, ${first}. ` : ''}We'll call or text you to set your class.`,
+    another: { child: '+ Book another child', class: '+ Book another class' },
+    done: 'Done',
+    allSet: 'All set',
+    prevMonth: 'Previous month',
+    nextMonth: 'Next month',
+  },
 }
 
 /* ════════════════════════════════════════════════════════════════════

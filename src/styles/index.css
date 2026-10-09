@@ -74,6 +74,14 @@ body {
   margin: 0;
 }
 
+/* /book: a landing pré-renderizada não pinta; o React monta a página do formulário */
+html.is-book .gbr {
+  display: none;
+}
+html.is-book body {
+  background: var(--nd-surface, #f3f2ee);
+}
+
 /* ── Raiz ── */
 .gbr {
   position: relative;

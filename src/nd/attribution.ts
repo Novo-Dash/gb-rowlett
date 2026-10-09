@@ -80,8 +80,8 @@ export function prefillFromUrl() {
 }
 
 export function formatPhone(raw: string) {
-  const digits = raw.replace(/\D/g, '')
-  const ten = (digits.length === 11 && digits.startsWith('1') ? digits.slice(1) : digits).slice(0, 10)
+  // o 1 do país sai ANTES do corte em 10: "1 702 237 9931" não perde o último dígito
+  const ten = raw.replace(/\D/g, '').replace(/^1(?=\d{10})/, '').slice(0, 10)
   if (ten.length < 4) return ten
   if (ten.length < 7) return `(${ten.slice(0, 3)}) ${ten.slice(3)}`
   return `(${ten.slice(0, 3)}) ${ten.slice(3, 6)}-${ten.slice(6)}`
@@ -93,3 +93,6 @@ export function toE164(raw: string) {
   if (digits.length === 11 && digits.startsWith('1')) return `+${digits}`
   return digits ? `+${digits}` : ''
 }
+
+/** 10 digits with a real area code (2-9): what Twilio accepts for an SMS. */
+export const isValidPhone = (raw: string) => /^[2-9]\d{9}$/.test(raw.replace(/\D/g, '').replace(/^1(?=\d{10})/, ''))

@@ -236,6 +236,9 @@
   --nd-button-radius: var(--r);
   --nd-dialog-radius: var(--r);
 }
+/* os ícones da página (sem tamanho próprio) dentro do resumo do agendamento */
+.nd-details svg { width: 18px; height: 18px; }
+.nd-details a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 /* a fonte principal sempre em itálico, como no resto da página */
 .nd-wordmark,
 .nd-panel-title,

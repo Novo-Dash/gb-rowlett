@@ -25,9 +25,17 @@ const serverEntry = path.join(root, 'dist-server', 'entry-server.js')
 const tpl = fs.readFileSync(path.join(dist, 'index.html'), 'utf8')
 if (!tpl.includes('<div id="root"></div>')) throw new Error('prerender: <div id="root"></div> não encontrado em dist/index.html')
 
-const { render, openingISO, uxMode, tracking, publishWarnings } = await import(pathToFileURL(serverEntry).href)
+const { render, openingISO, uxMode, tracking, publishWarnings, ghl } = await import(pathToFileURL(serverEntry).href)
 const appHtml = render()
 const client = uxMode === 'client'
+
+// Publicação sem o webhook do lead = leads que somem do CRM em silêncio (especificação do
+// calendário, §0 item 4). O build client PARA até o uuid do [ND] Primary Workflow entrar.
+if (client && (!ghl?.locationId || !ghl?.leadWebhookUuid)) {
+  console.error(`\n\x1b[31m✖ build client bloqueado: falta ${!ghl?.locationId ? 'o locationId' : 'o leadWebhookUuid (trigger do [ND] Primary Workflow)'} em src/nd/client.ts\x1b[0m\n`)
+  process.exit(1)
+}
+const missingTracking = client ? ['pixel', 'ga4', 'ads', 'adsLeadLabel', 'adsBookedLabel'].filter((k) => !tracking?.[k]) : []
 
 // LCP: a foto do hero no recorte mais perto da tela (em pé no celular, 16:9 até a proporção 2:1, 2550×1080 acima)
 let head = `    <link rel="preload" as="image" type="image/avif" media="(max-width: 767px)"
@@ -80,7 +88,7 @@ if (client && tracking && (tracking.pixel || tracking.ga4 || tracking.ads || tra
 const entry = tpl.match(/<script type="module" crossorigin src="([^"]+)"><\/script>/)
 if (!entry) throw new Error('prerender: script de entrada não encontrado')
 const preloads = [...tpl.matchAll(/<link rel="modulepreload" crossorigin href="([^"]+)">/g)].map((m) => m[1])
-const loader = `<script>(function(){var q=window.__gbq=[];document.addEventListener('click',function(e){if(window.__gbh)return;var t=e.target.closest&&e.target.closest('button');if(t)q.push(t)},true);var d=0;function go(){if(d)return;d=1;${JSON.stringify(preloads)}.forEach(function(h){var l=document.createElement('link');l.rel='modulepreload';l.crossOrigin='';l.href=h;document.head.appendChild(l)});var s=document.createElement('script');s.type='module';s.crossOrigin='';s.src=${JSON.stringify(entry[1])};document.head.appendChild(s)}function later(){requestAnimationFrame(function(){setTimeout(go,0)})}var i=document.querySelector('.hero__poster img');if(!i||i.complete)later();else{var f=function(){(i.decode?i.decode():Promise.resolve()).then(later,later)};i.addEventListener('load',f,{once:true});i.addEventListener('error',later,{once:true})}setTimeout(go,2000)})()</script>`
+const loader = `<script>(function(){var q=window.__gbq=[];document.addEventListener('click',function(e){if(window.__gbh)return;var t=e.target.closest&&e.target.closest('button');if(t)q.push(t)},true);var d=0;function go(){if(d)return;d=1;${JSON.stringify(preloads)}.forEach(function(h){var l=document.createElement('link');l.rel='modulepreload';l.crossOrigin='';l.href=h;document.head.appendChild(l)});var s=document.createElement('script');s.type='module';s.crossOrigin='';s.src=${JSON.stringify(entry[1])};document.head.appendChild(s)}function later(){requestAnimationFrame(function(){setTimeout(go,0)})}var i=document.documentElement.classList.contains('is-book')?null:document.querySelector('.hero__poster img');if(!i||i.complete)later();else{var f=function(){(i.decode?i.decode():Promise.resolve()).then(later,later)};i.addEventListener('load',f,{once:true});i.addEventListener('error',later,{once:true})}setTimeout(go,2000)})()</script>`
 
 let page = tpl
   .replace(entry[0], '')
@@ -114,10 +122,11 @@ const write = (name, html) => {
 write('index.html', page)
 fs.rmSync(path.join(root, 'dist-server'), { recursive: true, force: true })
 // Publicação: as pendências que saíram da página voltam aqui, como aviso (não trava o build).
-if (client && publishWarnings?.length) {
+const warnings = [...(publishWarnings ?? []), ...(missingTracking.length ? [`Tracking off: ${missingTracking.join(', ')} empty in src/nd/client.ts (no row in conversoes_tracking yet).`] : [])]
+if (client && warnings.length) {
   const bar = '─'.repeat(72)
-  console.warn(`\n\x1b[33m${bar}\n  ATENÇÃO, ainda sem confirmar (${publishWarnings.length}) · src/data/site.ts → publishWarnings\n${bar}\x1b[0m`)
-  publishWarnings.forEach((w, i) => console.warn(`\x1b[33m  ${i + 1}. ${w}\x1b[0m`))
+  console.warn(`\n\x1b[33m${bar}\n  ATENÇÃO, ainda sem confirmar (${warnings.length}) · src/data/site.ts → publishWarnings\n${bar}\x1b[0m`)
+  warnings.forEach((w, i) => console.warn(`\x1b[33m  ${i + 1}. ${w}\x1b[0m`))
   console.warn(`\x1b[33m${bar}\x1b[0m\n`)
 }
 console.log(`prerender: index.html ${(page.length / 1024).toFixed(1)} KB (raiz ${(appHtml.length / 1024).toFixed(1)} KB) · modo ${client ? 'client' : 'prospect'}`)

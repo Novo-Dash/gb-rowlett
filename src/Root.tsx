@@ -1,5 +1,6 @@
 import { StrictMode, useEffect } from 'react'
 import App from './App'
+import { BookPage } from './nd/Booking'
 
 declare global {
   interface Window {
@@ -27,6 +28,15 @@ export function Root() {
     <StrictMode>
       <App />
       <HydrationReplay />
+    </StrictMode>
+  )
+}
+
+/** A rota /book: só o formulário (o mesmo do modal), com a identidade da página. */
+export function BookRoot() {
+  return (
+    <StrictMode>
+      <BookPage />
     </StrictMode>
   )
 }
