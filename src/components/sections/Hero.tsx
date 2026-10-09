@@ -99,7 +99,7 @@ export function Hero() {
             sizes="100vw"
             className="hero__poster"
             art={[
-              { name: 'hero-w', media: '(min-width: 1024px) and (min-aspect-ratio: 59/25)', sizes: 'max(100vw, 236svh)' },
+              { name: 'hero-w', media: '(min-width: 1024px) and (min-aspect-ratio: 59/25)', sizes: 'max(100vw, 280svh)' },
               { name: 'hero-d', media: '(min-width: 768px)', sizes: 'max(100vw, 178svh)' },
             ]}
           />
@@ -109,7 +109,7 @@ export function Hero() {
         </div>
       </div>
 
-      {/* CENA 1 · o texto direto sobre o filme, embaixo à esquerda */}
+      {/* CENA 1 · o texto direto sobre a foto: embaixo à esquerda no celular, centralizado no desktop */}
       <div ref={card} className="hero__scene hero__scene--card on-dark">
         <div className="shell hero__copy">
           <Eyebrow tone="light" className="hero__eb">

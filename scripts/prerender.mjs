@@ -35,7 +35,7 @@ let head = `    <link rel="preload" as="image" type="image/avif" media="(max-wid
     <link rel="preload" as="image" type="image/avif" media="(min-width: 768px) and (max-width: 1023px), (min-width: 1024px) and (max-aspect-ratio: 2359/1000)"
       imagesrcset="/img/hero-d-1280.avif 1280w, /img/hero-d-1920.avif 1920w" imagesizes="max(100vw, 178svh)" fetchpriority="high" />
     <link rel="preload" as="image" type="image/avif" media="(min-width: 1024px) and (min-aspect-ratio: 59/25)"
-      imagesrcset="/img/hero-w-1920.avif 1920w, /img/hero-w-2550.avif 2550w" imagesizes="max(100vw, 236svh)" fetchpriority="high" />
+      imagesrcset="/img/hero-w-1920.avif 1920w, /img/hero-w-2550.avif 2550w" imagesizes="max(100vw, 280svh)" fetchpriority="high" />
 `
 if (openingISO) {
   head += `    <meta name="opening-at" content="${openingISO}" />

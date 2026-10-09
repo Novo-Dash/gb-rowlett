@@ -167,3 +167,5 @@ A tabela viva é a §20 do `prd-GBR-001.md` (23 itens). Resumo do que trava o mo
 - **Hero:** o recorte guarda a largura toda (fachada, porta, caminhão) e corta a sobra de altura quase toda embaixo (object-position 50% 15%), para a placa nunca sumir atrás da nav.
 - **No experience (Adryan):** sem botão; no desktop a seção tem uma tela e o coach recortado cresce até preenchê-la (altura = tela − nav − cabeçalho, 460–980px), colado na borda de baixo, com as listas em volta.
 - **Abertura (Adryan):** sai o triângulo branco que descia no topo da seção; overlay mais leve (foto a 60%, véu 32→60% preto).
+- **Hero centralizado (Adryan):** a ultrawide foi refeita pelo Adryan sem o professor (2550×912); no desktop o texto fica centralizado sobre a foto, com o véu escuro no meio e as bordas mais claras. O 16:9 (com o professor) segue para telas até 2,36:1; o celular continua com o texto embaixo à esquerda.
+- **Fotos dos pais recortadas pelo Adryan (517×549):** as edições dele em public/img viraram as fontes em brand/parents e todos os tamanhos (AVIF e WebP) foram refeitos a partir delas.

@@ -31,7 +31,7 @@ IMAGES = [
     # hero (Adryan, 9 out 2026): a fachada com a chegada do tatame. Três recortes de direção de
     # arte: celular quadrado, desktop 16:9 e ultrawide ~2,4:1 (telas com proporção ≥ 2:1).
     ("hero-d",     "hero/desktop.webp",    (16, 9), [1280, 1920], (0.5, 0.5), 50),
-    ("hero-w",     "hero/ultrawide.webp",  (85, 36), [1920, 2550], (0.5, 0.5), 50),
+    ("hero-w",     "hero/ultrawide.webp",  (425, 152), [1920, 2550], (0.5, 0.5), 50),
     ("film-m",     "hero/mobile.webp",     (1, 1),  [540, 760, 1080], (0.5, 0.5), 46),
     ("logo",       "logo/gb-mark.png",     (1, 1),  [112, 160],   (0.5, 0.5)),
     # programas 3/4: fotos novas do Adryan (9 out 2026), já tratadas, 394px de origem
@@ -46,9 +46,9 @@ IMAGES = [
     ("build-4",    f"{O}/IMG_1602.HEIC",   (4, 5),  [360, 640],   (0.5, 0.5)),
     ("build-5",    f"{O}/IMG_0712.HEIC",   (4, 5),  [360, 640],   (0.5, 0.42)),
     # para os pais 4/5: as fotos dos três cards (Adryan, 9 out 2026), já tratadas
-    ("parents-1",  "parents/1.webp",      (4, 5),  [360, 486],   (0.5, 0.5)),
-    ("parents-2",  "parents/2.webp",      (4, 5),  [360, 486],   (0.5, 0.5)),
-    ("parents-3",  "parents/3.webp",      (4, 5),  [360, 486],   (0.5, 0.5)),
+    ("parents-1",  "parents/1.webp",      (517, 549), [360, 517], (0.5, 0.5)),
+    ("parents-2",  "parents/2.webp",      (517, 549), [360, 517], (0.5, 0.5)),
+    ("parents-3",  "parents/3.webp",      (517, 549), [360, 517], (0.5, 0.5)),
     # sem experiência: o recorte do coach sem fundo (PNG/WebP com alfa), de pé na borda da seção
     ("coach",      "coach/coach.webp",     (599, 616), [480, 800, 1198], (0.5, 0.5)),
     # abertura: fachada 16/9 a 30%

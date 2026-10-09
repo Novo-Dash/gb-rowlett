@@ -422,14 +422,17 @@ html:not(.motion) .hero__deep {
   opacity: 0.6;
 }
 @media (min-width: 1024px) {
-  /* duas colunas: o texto na esquerda, sobre a parede; o professor na direita */
+  /* desktop: o texto CENTRALIZADO sobre a foto (pedido do Adryan, com a foto nova
+     sem o professor); o véu escurece o meio, onde mora o texto, e as bordas
+     deixam a fachada e o caminhão aparecerem */
   .hero__veil {
     background:
-      linear-gradient(90deg, rgb(0 0 0 / 0.72) 0%, rgb(0 0 0 / 0.5) 30%, rgb(0 0 0 / 0.1) 50%, rgb(0 0 0 / 0) 60%),
+      radial-gradient(ellipse 62% 70% at 50% 54%, rgb(0 0 0 / 0.72), rgb(0 0 0 / 0.46) 60%, rgb(0 0 0 / 0.2) 100%),
       linear-gradient(0deg, rgb(0 0 0 / 0.35), rgb(0 0 0 / 0) 40%);
   }
   .hero__scene--card {
     align-items: center;
+    justify-content: center;
     padding: calc(var(--nav-h) + 24px) 0 48px;
   }
   /* a composição do Adryan inteira (fachada, porta e caminhão): cada tela recebe o
@@ -442,22 +445,22 @@ html:not(.motion) .hero__deep {
   }
   /* .hero .hero__copy: vence o width:100% do .shell */
   .hero .hero__copy {
-    --x0: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
-    width: calc(var(--x0) + min(42vw, 760px));
-    max-width: none;
-    margin-inline: 0;
-    padding-left: var(--x0);
-    padding-right: 0;
+    display: grid;
+    justify-items: center;
+    width: min(100%, 1180px);
+    margin-inline: auto;
+    text-align: center;
   }
   .hero__title {
-    max-width: 11em;
+    max-width: 15em;
     font-size: clamp(3rem, min(calc(var(--u) * 4.4), 9svh), 5.8rem);
   }
   .hero__lead {
-    max-width: 40ch;
+    max-width: 52ch;
+    margin-inline: auto;
   }
   .hero__act {
-    justify-items: start;
+    justify-items: center;
     margin-top: 28px;
   }
   .hero__need {
@@ -465,6 +468,14 @@ html:not(.motion) .hero__deep {
   }
   .hero__explore {
     min-width: 340px;
+  }
+}
+
+/* ultrawide (a foto 2550×912 do Adryan): ela é mais larga que a tela, então sobra
+   largura; a sobra sai quase toda pela direita (o caminhão) e a placa fica inteira */
+@media (min-width: 1024px) and (min-aspect-ratio: 59/25) {
+  .hero__poster img {
+    object-position: 15% 50%;
   }
 }
 
