@@ -83,12 +83,6 @@ export const Close = ({ className }: P) => (
   </svg>
 )
 
-export const Play = ({ className }: P) => (
-  <svg viewBox="0 0 24 24" className={className} aria-hidden="true" focusable="false">
-    <path d="M8 5.5v13l11-6.5z" fill="currentColor" />
-  </svg>
-)
-
 /** O triângulo GB cheio (o "G" do selo), na cor do texto. */
 export const LogoMark = ({ className }: P) => (
   <svg viewBox="0 0 1019 763" className={className} aria-hidden="true" focusable="false">

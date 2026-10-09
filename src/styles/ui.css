@@ -418,51 +418,6 @@ html.motion [data-in] .stamp {
   color: var(--paper);
 }
 
-/* ── Slot de vídeo ── */
-.vslot {
-  position: relative;
-  overflow: hidden;
-  border-radius: var(--r);
-  background: var(--night);
-}
-.vslot video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.vslot--empty {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 24px;
-  text-align: center;
-  background: var(--navy);
-  color: var(--on-dark);
-}
-.vslot__play {
-  display: grid;
-  place-items: center;
-  width: 56px;
-  height: 56px;
-  border: 1px solid rgb(var(--paper-rgb) / 0.3);
-  color: rgb(var(--paper-rgb) / 0.5);
-}
-.vslot__play svg {
-  width: 24px;
-  height: 24px;
-}
-.vslot__label {
-  color: var(--paper);
-}
-.vslot__brief {
-  max-width: 26ch;
-  font-size: var(--t-small);
-  line-height: 1.4;
-  color: var(--on-dark-2);
-}
-
 /* ── Micro-itens com ▲ ── */
 .micro {
   display: flex;

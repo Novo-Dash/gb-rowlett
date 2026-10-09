@@ -2574,7 +2574,8 @@ html.motion .how__stage {
   flex-direction: column;
   height: 100svh;
   justify-content: center;
-  padding: var(--nav-h) 0 0;
+  /* respiro embaixo: o conteúdo nunca encosta na borda da seção */
+  padding: var(--nav-h) 0 clamp(40px, 9svh, 104px);
 }
 html.motion .how__head {
   margin-bottom: clamp(24px, 5svh, 64px);
@@ -2618,11 +2619,11 @@ html.motion .how__still {
     font-size: clamp(2.4rem, calc(var(--u) * 3.2), 4rem);
   }
   .how__step .how__t {
-    font-size: clamp(2.8rem, calc(var(--u) * 4.2), 5.2rem);
+    font-size: clamp(2.6rem, calc(var(--u) * 3.6), 4.4rem);
   }
   .how__step .how__b {
-    max-width: 52ch;
-    font-size: clamp(1.125rem, calc(var(--u) * 1.4), 1.625rem);
+    max-width: 50ch;
+    font-size: clamp(1.0625rem, calc(var(--u) * 1.15), 1.3125rem);
   }
   .how__num {
     font-size: clamp(6rem, min(13vw, 26svh), 15rem);
@@ -2634,11 +2635,15 @@ html.motion .how__still {
     grid-template-columns: auto minmax(0, 1fr) auto;
     grid-template-areas: 'num stack meter';
     align-items: start;
-    column-gap: clamp(32px, calc(var(--u) * 5), 112px);
+    /* o passo encostado no número: o texto começa rente ao "03" */
+    column-gap: clamp(20px, calc(var(--u) * 1.8), 36px);
   }
   html.motion .how__step {
-    padding-top: 0.25em;
-    gap: 18px;
+    padding-top: 0.3em;
+    gap: 10px;
+  }
+  html.motion .how__step .how__cta {
+    margin-top: 14px;
   }
 }
 
@@ -2667,21 +2672,16 @@ html.motion .how__still {
 }
 .open__bg,
 .open__bg picture,
-.open__bg img,
-.claim__bg,
-.claim__bg picture,
-.claim__bg img {
+.open__bg img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
 }
-.open__bg,
-.claim__bg {
+.open__bg {
   z-index: -1;
 }
-.open__bg img,
-.claim__bg img {
+.open__bg img {
   object-fit: cover;
   opacity: 0.3;
 }
@@ -2946,116 +2946,5 @@ html.motion .faq__list[data-in] .faq__item {
   .faq__a p {
     padding: 0 clamp(16px, calc(var(--u) * 2.2), 28px) 28px calc(clamp(16px, calc(var(--u) * 2.2), 28px) + 3ch + clamp(14px, calc(var(--u) * 2), 28px));
     font-size: clamp(1rem, calc(var(--u) * 1.1), 1.125rem);
-  }
-}
-
-/* ════════ [XII] O PEDIDO — marinho + foto a 30% ════════ */
-.claim {
-  position: relative;
-  isolation: isolate;
-  padding: clamp(72px, calc(var(--u) * 8), 150px) 0;
-  background: var(--navy);
-  color: var(--on-dark);
-  overflow: hidden;
-}
-.claim__veil {
-  position: absolute;
-  inset: 0;
-  background: rgb(var(--navy-rgb) / 0.3);
-}
-.claim__in {
-  display: grid;
-  gap: 40px;
-}
-.claim__title {
-  color: var(--paper);
-  max-width: 11em;
-}
-.claim__pend {
-  margin-top: 12px;
-}
-.claim__list {
-  display: grid;
-  margin-top: clamp(24px, calc(var(--u) * 3), 40px);
-  max-width: 34rem;
-  border-top: 1px solid rgb(var(--paper-rgb) / 0.15);
-}
-.claim__item {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  min-height: 48px;
-  padding: 10px 0;
-  border-bottom: 1px solid rgb(var(--paper-rgb) / 0.15);
-  font-size: 1.0625rem;
-  color: rgb(var(--paper-rgb) / 0.9);
-}
-.claim__ok {
-  display: grid;
-  place-items: center;
-  flex: none;
-  width: 20px;
-  height: 20px;
-  color: var(--red-hi);
-}
-.claim__ok svg {
-  width: 20px;
-  height: 20px;
-}
-html.motion .claim__list .rise {
-  transition-delay: calc(var(--i) * 90ms);
-}
-.claim__compare {
-  margin-top: 14px;
-  font-size: var(--t-small);
-  color: var(--on-dark-2);
-}
-.claim__act {
-  display: grid;
-  gap: 14px;
-  margin-top: clamp(24px, calc(var(--u) * 3), 40px);
-}
-.claim__call {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  font-size: 1rem;
-  color: var(--paper);
-}
-.claim__call b {
-  margin-left: 6px;
-  font-weight: 500;
-  text-decoration: underline;
-  text-decoration-color: var(--red-hi);
-  text-underline-offset: 4px;
-}
-.claim__micro {
-  margin-top: 10px;
-  font-size: 0.8125rem;
-  color: var(--on-dark-2);
-}
-.claim__media {
-  display: grid;
-  justify-items: start;
-}
-.claim__video {
-  width: 100%;
-  max-width: 22rem;
-  box-shadow: 0 0 0 1px rgb(var(--paper-rgb) / 0.2);
-}
-@media (min-width: 1024px) {
-  .claim__in {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    align-items: center;
-    gap: clamp(40px, calc(var(--u) * 5), 96px);
-  }
-  .claim__media {
-    justify-items: end;
-  }
-  .claim__act {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 16px 28px;
   }
 }

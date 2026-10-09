@@ -38,8 +38,6 @@ export const site = {
   /** O filme do hero: o b-roll da obra existe (IMG_1600/1601.MOV em Obras GB) mas
       ainda não chegou em brand/video (>10 MB no conector). Poster AVIF até lá. (§20 #19) */
   heroFilm: { mobile: null as string | null, desktop: null as string | null },
-  /** Vídeo vertical do pedido. [CONFIRMAR existe] (§20 #19) */
-  finalVideo: { src: null as string | null, poster: null as string | null },
   /** Embed do Maps no endereço exato (destino final do redirect, responde 200). */
   mapsEmbedSrc:
     'https://www.google.com/maps/embed?origin=mfe&pb=!1m3!2m1!1s3503+Rowlett+Rd+Bldg+K+Suite+302,+Rowlett,+TX+75088!6i16',
@@ -458,28 +456,6 @@ export const faq = {
     { q: 'How much does a family pay?', a: null, pending: 'Family price, with the number (§20 #7)' },
   ] satisfies FaqItem[],
   cta: 'Claim my Founding Member spot',
-}
-
-/* ── XII · O pedido ────────────────────────────────────────────────── */
-export const claim = {
-  eyebrow: 'Founding Members',
-  title: 'Join before the doors open.',
-  spotsLine: (n: number) => `${n} First 50 spots left.`,
-  spotsPending: 'Spots left: First 50 claimed count to confirm',
-  benefits: [
-    { text: '$87 every two weeks' },
-    { text: 'No enrollment fee' },
-    { text: 'Gracie Barra uniform included (First 50)' },
-    { text: 'Adults unlimited, kids 3 classes a week' },
-    { text: 'Nothing charged today', needsCharge: true },
-  ],
-  compare: 'After opening: $107 plus a $47 enrollment fee.',
-  cta: 'Claim my Founding Member spot',
-  callLine: 'Tap to call or text',
-  micro: 'No spam, and no call unless you want one.',
-  videoBrief: 'Vertical 9:16 b-roll: Andre inviting the founding group in, or the room coming together',
-  videoPendingLabel: 'Video pending',
-  photoAlt: 'The main room of the academy under construction, concrete floor and new drywall',
 }
 
 /* ── Mapa + Footer ─────────────────────────────────────────────────── */

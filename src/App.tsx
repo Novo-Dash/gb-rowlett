@@ -13,14 +13,13 @@ import { Ready } from '@/components/sections/Ready'
 import { Reserve } from '@/components/sections/Reserve'
 import { Opening } from '@/components/sections/Opening'
 import { Faq } from '@/components/sections/Faq'
-import { Claim } from '@/components/sections/Claim'
 import { useScrollDepth } from '@/hooks/useScrollDepth'
 
 /**
  * Ordem da página = jornada mental do PRD §6:
  *   I Hero · II Oferta · letreiro · III Programas · IV Obra · V Horários ·
  *   VI Pais · VII Sem experiência · IX Como reservar ·
- *   X Abertura (night) · XI Perguntas · XII Pedido (navy) · mapa + footer.
+ *   X Abertura (night) · XI Perguntas · mapa + footer.
  * Todas as seções renderizam de uma vez (sem lazy por seção): o espaço de
  * cada bloco existe desde a primeira pintura, então nada entra empurrando
  * o conteúdo (CLS 0). Nenhum pin.
@@ -47,7 +46,6 @@ export default function App() {
           <Reserve />
           <Opening />
           <Faq />
-          <Claim />
         </main>
         <Footer />
         <StickyCta />

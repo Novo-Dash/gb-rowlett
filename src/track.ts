@@ -25,7 +25,6 @@ export type CtaOrigin =
   | 'reserve'
   | 'opening'
   | 'faq'
-  | 'claim'
   | 'sticky'
   | 'footer'
   | 'menu'
@@ -48,10 +47,6 @@ export function trackCta(origin: CtaOrigin, program?: string) {
 export const trackCall = () => clarity('event', 'call_click')
 export const trackDirections = () => clarity('event', 'directions_click')
 export const trackEmail = () => clarity('event', 'email_click')
-export const trackVideoPlay = (id: string) => {
-  clarity('set', 'video_id', id)
-  clarity('event', 'video_play')
-}
 export const trackScrollDepth = (pct: 25 | 50 | 75 | 100) => {
   clarity('set', 'scroll_depth', String(pct))
   clarity('event', 'scroll_depth')
