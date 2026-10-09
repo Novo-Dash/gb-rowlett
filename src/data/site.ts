@@ -181,7 +181,6 @@ export const offer = {
   eyebrow: 'The founding offer',
   title: [{ text: 'Founding Members' }],
   body: 'Founding Members pay $87 every two weeks with no enrollment fee. Once we open, the standard rate is $107 every two weeks plus a $47 enrollment fee. Adults train unlimited. Kids train 3 classes a week.',
-  permanencePending: 'Does the $87 hold for as long as the member keeps training?',
   passLabel: 'Founding Member pass: The First 50 and The Founding Class',
   openPill: 'Open now',
   lockedPill: 'Opens next',
@@ -189,7 +188,6 @@ export const offer = {
   takenLabel: (c: number, s: number) => `${c} of ${s} taken`,
   leftLabel: (n: number) => `${n} left`,
   claimedPending: 'First 50 spots already taken: number to confirm',
-  seatsPending: 'Founding Class seat limit to confirm',
   ticketCta: 'Claim a First 50 spot',
   /** O canhoto II: o preço é o mesmo; o que muda é o perk. */
   lockedSamePrice: 'Same $87 every two weeks · No enrollment fee',
@@ -199,7 +197,6 @@ export const offer = {
   enrollmentLine: 'No enrollment fee',
   compare: { label: 'After opening', founding: '$87', standard: '$107', per: 'every two weeks', plus: '+ $47 enrollment fee' },
   stamp: { ring: 'Doors open in · ', label: 'days', sr: 'days to opening' },
-  stampPending: 'Opening date to confirm: the day counter appears when the date is set',
 }
 
 /* ── III · Programas ───────────────────────────────────────────────── */
@@ -357,7 +354,6 @@ export const scheduleCopy = {
   dayLabel: 'Day',
   slotAction: 'Claim a spot in this class',
   cta: 'Claim my Founding Member spot',
-  gb2Pending: 'Flyer legend mentions GB2 (white belt 2 stripes+) but the grid has no GB2 class: not published',
 }
 
 /* ── VI · Para os pais ─────────────────────────────────────────────── */
@@ -395,7 +391,7 @@ export const reserve = {
   title: [{ text: 'How to reserve your spot.' }],
   steps: [
     { n: '01', title: 'Pre-register.', body: "Pick who's training and which class. About a minute." },
-    { n: '02', title: 'We confirm your spot.', body: 'We reach out to confirm your spot and answer any question before the doors open.', pending: 'Confirmation channel (call, SMS or e-mail) and how soon' },
+    { n: '02', title: 'We confirm your spot.', body: 'We text you to confirm your spot and answer any question before the doors open.' },
     {
       n: '03',
       title: 'Doors open.',
@@ -532,3 +528,20 @@ export const form = {
   close: 'Close',
   page: 'gbr-grand-opening',
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   AVISOS DE PUBLICAÇÃO — pendências que saíram da página a pedido do
+   Adryan, mas não estão resolvidas. Não aparecem em nenhum modo; o build
+   de publicação (npm run build:client) imprime esta lista no terminal.
+   Resolveu um item? Tire daqui.
+   ════════════════════════════════════════════════════════════════════ */
+export const publishWarnings: string[] = [
+  'Opening date: set site.openingISO. Until then the offer has no day counter and never switches off by itself.',
+  'Opening countdown runs to a PROVISIONAL date (opening.countdownISO, 30 days from 9 Oct 2026): replace it with the real opening.',
+  'Founding Class seat limit (tiers: seats).',
+  'Does the $87 hold for as long as the member keeps training? (pricing.permanent)',
+  'Step 2 of "How to reserve": how soon the confirmation text goes out.',
+  'For parents: where parents stay during class.',
+  'For parents: final photos for the three cards (stand-ins now) and kids photo authorization.',
+  'Schedule: the flyer legend mentions GB2 (white belt 2 stripes+), but the grid has no GB2 class, so none is published.',
+]

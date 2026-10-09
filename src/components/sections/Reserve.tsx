@@ -28,7 +28,6 @@ import { Cta } from '../ui/Cta'
 import { Eyebrow } from '../ui/Eyebrow'
 import { Check } from '../ui/Icons'
 import { Lines } from '../ui/Lines'
-import { Pending } from '../ui/Pending'
 
 const steps = reserve.steps
 const total = steps.length
@@ -87,11 +86,6 @@ export function Reserve() {
                 </div>
                 <h3 className="how__t d">{s.title}</h3>
                 <p className="how__b">{s.body}</p>
-                {'pending' in s && s.pending ? (
-                  <p className="how__pend">
-                    <Pending tone={state === 'now' ? 'red' : undefined}>{s.pending}</Pending>
-                  </p>
-                ) : null}
               </li>
             )
           })}

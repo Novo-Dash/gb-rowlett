@@ -9,7 +9,8 @@
 // • <meta name="opening-at"> + script de uma linha: passada a data de abertura,
 //   html.offer-off antes da primeira pintura. Sem data confirmada, nada entra.
 // • Modo client (VITE_UX_MODE=client): robots index,follow + bloco de tracking
-//   do kit nd (só com IDs reais). Modo prospect: noindex, sem tracking.
+//   do kit nd (só com IDs reais) + a lista de pendências (publishWarnings) no
+//   terminal. Modo prospect: noindex, sem tracking.
 // Os .br/.gz do index são refeitos aqui (o plugin de compressão roda antes).
 // ─────────────────────────────────────────────────────────────────────────────
 import fs from 'node:fs'
@@ -24,7 +25,7 @@ const serverEntry = path.join(root, 'dist-server', 'entry-server.js')
 const tpl = fs.readFileSync(path.join(dist, 'index.html'), 'utf8')
 if (!tpl.includes('<div id="root"></div>')) throw new Error('prerender: <div id="root"></div> não encontrado em dist/index.html')
 
-const { render, openingISO, uxMode, tracking } = await import(pathToFileURL(serverEntry).href)
+const { render, openingISO, uxMode, tracking, publishWarnings } = await import(pathToFileURL(serverEntry).href)
 const appHtml = render()
 const client = uxMode === 'client'
 
@@ -110,4 +111,11 @@ const write = (name, html) => {
 }
 write('index.html', page)
 fs.rmSync(path.join(root, 'dist-server'), { recursive: true, force: true })
+// Publicação: as pendências que saíram da página voltam aqui, como aviso (não trava o build).
+if (client && publishWarnings?.length) {
+  const bar = '─'.repeat(72)
+  console.warn(`\n\x1b[33m${bar}\n  ATENÇÃO, ainda sem confirmar (${publishWarnings.length}) · src/data/site.ts → publishWarnings\n${bar}\x1b[0m`)
+  publishWarnings.forEach((w, i) => console.warn(`\x1b[33m  ${i + 1}. ${w}\x1b[0m`))
+  console.warn(`\x1b[33m${bar}\x1b[0m\n`)
+}
 console.log(`prerender: index.html ${(page.length / 1024).toFixed(1)} KB (raiz ${(appHtml.length / 1024).toFixed(1)} KB) · modo ${client ? 'client' : 'prospect'}`)

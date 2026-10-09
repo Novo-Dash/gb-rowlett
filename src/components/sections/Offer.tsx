@@ -22,7 +22,7 @@
    ════════════════════════════════════════════════════════════════════ */
 
 import { useRef } from 'react'
-import { offer, openTier, pricing, site, spotsLeft, tiers, type Tier } from '@/data/site'
+import { offer, openTier, site, spotsLeft, tiers, type Tier } from '@/data/site'
 import { useDaysLeft } from '@/hooks/useCountdown'
 import { useInView } from '@/motion/inview'
 import { trackViewContent } from '@/track'
@@ -52,11 +52,6 @@ export function Offer() {
           </div>
           <div className="offer__aside">
             <p className="body offer__body">{offer.body}</p>
-            {pricing.permanent === null ? (
-              <p className="offer__pend">
-                <Pending>{offer.permanencePending}</Pending>
-              </p>
-            ) : null}
           </div>
         </div>
 
@@ -138,7 +133,6 @@ function OpenHalf({ tier, days }: { tier: Tier; days: number | null }) {
           <span>{offer.compare.per}</span>
           <span className="pass__plus">{offer.compare.plus}</span>
         </p>
-        {days === null ? <Pending tone="red">{offer.stampPending}</Pending> : null}
       </div>
     </div>
   )
@@ -183,7 +177,6 @@ function NextHalf({ tier }: { tier: Tier }) {
       </article>
       <div className="pass__foot">
         <p className="pass__note">{tier.note}</p>
-        {tier.seats === null ? <Pending tone="navy">{offer.seatsPending}</Pending> : null}
       </div>
     </div>
   )

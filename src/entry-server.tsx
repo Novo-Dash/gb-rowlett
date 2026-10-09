@@ -1,7 +1,7 @@
 // Pré-render da "/" no build (scripts/prerender.mjs). Nada de window aqui.
 import { renderToString } from 'react-dom/server'
 import { Root } from './Root'
-import { site } from './data/site'
+import { publishWarnings as warnings, site } from './data/site'
 import { UX } from './lib/ux'
 import client from './nd/client'
 
@@ -15,3 +15,5 @@ export const openingISO = site.openingISO
 export const uxMode = UX.mode
 /** IDs do kit (vazios em prospect): o pré-render só injeta o bloco quando há ID. */
 export const tracking = client.tracking
+/** Pendências fora da página: o build de publicação (client) imprime. */
+export const publishWarnings = warnings

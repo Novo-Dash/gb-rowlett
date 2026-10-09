@@ -26,7 +26,6 @@ import { trackCta } from '@/track'
 import { Cta } from '../ui/Cta'
 import { Eyebrow } from '../ui/Eyebrow'
 import { Lines } from '../ui/Lines'
-import { Pending } from '../ui/Pending'
 
 type Filter = 'all' | SlotKey
 type Day = (typeof schedule)[number]
@@ -205,7 +204,6 @@ export function Schedule() {
 
         <div className="sc__foot">
           <p className="sc__note">{scheduleCopy.note(scheduleCounts.adults)}</p>
-          <Pending>{scheduleCopy.gb2Pending}</Pending>
           <div className="sc__cta">
             <Cta origin="faq" size="block">
               {scheduleCopy.cta}
