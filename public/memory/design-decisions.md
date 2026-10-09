@@ -88,6 +88,18 @@ Ver `preset-grand-opening-gb.md` §2, §3, §8. Nenhum hex fora de `src/styles/t
 
 O kit chega da Collective sem alterações em `attribution.ts`, `webhook.ts`, `tracking.ts`, `programs.ts`, `types.ts`, `config.ts`, `nd.css`. O que muda é o **fluxo** em `Booking.tsx`: pré-cadastro em 3 passos (quem treina → programa → contato), `leadOnly` sempre, sem calendário (a academia não abriu), payload com `who, programs[], tier, women_interest, cta_origin, page`. Webhook `PLACEHOLDER` em prospect: não dispara e avisa no console.
 
+## 6b. O que o finalizador (ETAPA 3) mudou — 9 out 2026
+
+- **Removido como código morto:** `useScrollProgress` (só `useScrollTick` é usado), `programByKey`, o componente `Prospect`, o stub `reviews` do contrato (não há selo do Google nem componente que o leia), o token `--ease-io`, o estado `.cta[data-loading]` (o envio usa o `.nd-button` do kit), `public/img/logo-outline.svg` (o letreiro usa o SVG inline `LogoOutline`), a pasta vazia `public/video`.
+- **Kit `nd`:** `programs.ts` e `webhook.ts` não embarcam. O pré-cadastro não tem calendário nem Webhook 2 (a academia não abriu); o Webhook 1 mora em `Booking.tsx` com o payload do PRD §11. `config.ts` perdeu `PROGRAMS_URL` e `BOOKING_WEBHOOK`. Quando a academia abrir e o agendamento entrar, os dois módulos voltam da Collective sem alteração.
+- **`@base-ui/react` saiu do `package.json`:** o PRD o listava como primitivo sem estilo para Dialog/Accordion, mas o diálogo do kit (foco preso, `inert`, Esc) e o FAQ (`grid-template-rows` + `inert`) não precisaram dele. Zero dependência ociosa.
+- **Mínimo de 12px:** o rótulo do carimbo ("spots left" / "days") ganhou `max(12px, …)`. **Exceção registrada:** o texto do anel do carimbo (SVG, `aria-hidden`, repetido) fica abaixo de 12px em telas pequenas; é ornamento, não informação — o valor lido vai em `sr-only`.
+- **Responsividade** (375/390/768/1024/1280/1440): sem overflow horizontal, um único `h1`, nenhum alvo < 44px. O H2 de duas frases (oferta, obra, horários) usa `.h2--long`, um degrau abaixo, para caber em três linhas no desktop.
+- **A11y:** `Lines` em `<p>` não leva `aria-label` (proibido): o texto real vai em `sr-only`. Cards de programa e horários perderam o `aria-label` (nome acessível = texto visível + ação em `sr-only`, sem "label-content-name-mismatch"). Passos fora de cena em "Como reservar" ficam `inert` enquanto o palco está vivo. Textos pequenos sobre marinho subiram para ≥ 4,5:1 (footer a 64%, rótulo do slot de vídeo em branco).
+- **SEO:** `og.jpg` 1200×630 gerado de `IMG_0713` (fachada) por `scripts/build-og.py`; `robots.txt` e `sitemap.xml` escritos pelo pré-render conforme o modo; `FAQPage` só com as 5 respostas confirmadas. O `noindex` do prospect é regra do PRD §5, não resto de migração: some no `build:client`.
+- **Tamanho:** `dist/assets` 596 KB (JS + CSS, com .br/.gz); o resto do `dist` são imagens e os prints de `public/memory` (quantizados a 256 cores).
+- **Dúvidas, nada apagado no escuro:** `src/nd/types.ts` mantém os campos `programOverrides` / `retiredSlots` / `showDuration` do contrato do kit, embora só `client.ts` os preencha; `api/capi.ts` (CAPI) fica apesar do Pixel vazio em prospect — ambos são contrato do kit, não lixo.
+
 ## 7. Pendências do cliente
 
 A tabela viva é a §20 do `prd-GBR-001.md` (23 itens). Resumo do que trava o modo `client`: data de abertura, `claimed` do First 50, limite da Founding Class, permanência do $87, cobrança no pré-cadastro, contrato/pausa, preço de família, bio do Andre, canal de confirmação, onde os pais ficam, logo SVG, autorização das fotos, IDs do kit, texto de consentimento.

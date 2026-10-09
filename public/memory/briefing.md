@@ -41,6 +41,9 @@ Tese visual: **equipe atlética no dia da estreia** — uniforme novo, placa de 
 
 - F0 concluída: código da Collective e da Lindale v2 lido; 20 prints `prints/ref-*.png` (1440 e 390); 53 fotos do Drive baixadas e triadas (`brand/drive`, fora do git); PRD e preset na raiz.
 - Modo **prospect** (`VITE_UX_MODE` ausente): pendências visíveis, webhook `PLACEHOLDER`, tracking desligado, `noindex`.
-- F1 Fundação, F2 Átomos, F3 Infra e F4 Layout concluídas (tsc limpo, dev server sem erro de console). Nav, Footer com mapa e pino, barra fixa, letreiro em X e o formulário de pré-cadastro em 3 passos funcionam.
-- **PARADA: design pass do hero.** Três direções em `prints/hero-{a,b,c}-*.png` (cena 1, meio da abertura e cena 2, em 1440 e 390), vivas em `http://127.0.0.1:5175/?hero=a|b|c`. Aguardando a escolha do Adryan para seguir à F5 (seções II–XII).
-- 23 pendências do cliente/Novo Dash na tabela §20 do PRD; as 🔴 travam o modo `client`.
+- F1–F7 concluídas e o finalizador (ETAPA 3) rodado. Hero na direção **B · o ingresso** (escolha do Adryan). Doze seções, formulário de pré-cadastro em 3 passos (webhook PLACEHOLDER em prospect), pré-render da `/`, JS adiado até o poster pintar.
+- **Régua (Lighthouse mobile, build local):** prospect → Perf 97 · A11y 100 · BP 100 · SEO 69 (só o `noindex` do modo) · LCP 2,5 s · CLS 0 · TBT 40 ms. Client → **Perf 98 · A11y 100 · BP 100 · SEO 100 · LCP 2,3 s · CLS 0 · TBT 10 ms**. Grep em client: zero `[CONFIRMAR]`, zero `<Pending` renderizados. axe: zero violações reais (as restantes são peças fotografadas no meio da transição).
+- Prints de entrega: `prints/gbr-*.png` (cada seção em 1440 e 390, página inteira em 375/390/768/1024/1440, reduced motion, formulário enviado).
+- Repositório git local iniciado (`main`), 5 commits (base + 4 fases do finalizador). `dist/` e `brand/` fora do git; `.env.example` versionado.
+- 23 pendências do cliente/Novo Dash na tabela §20 do PRD; as 🔴 travam o modo `client` (`npm run build:client`).
+- Para rodar: `npm install && npm run dev` · build prospect `npm run build` · build de lançamento `npm run build:client` · imagens `npm run images` (pillow-heif) · fontes `npm run fonts`.
