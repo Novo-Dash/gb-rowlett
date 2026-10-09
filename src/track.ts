@@ -22,7 +22,6 @@ export type CtaOrigin =
   | `program-${string}`
   | `slot-${string}`
   | 'build'
-  | 'coach'
   | 'reserve'
   | 'opening'
   | 'faq'

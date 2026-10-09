@@ -48,8 +48,6 @@ IMAGES = [
     ("parents",    f"{F}/6T7A0276.JPG",    (4, 5),  [480, 800],   (0.5, 0.86)),
     # sem experiência 4/5
     ("ready",      f"{D}/IMG_0213.HEIC",   (4, 5),  [480, 800],   (0.5, 0.45)),
-    # coach 4/5
-    ("coach",      f"{D}/IMG_0190.HEIC",   (4, 5),  [480, 800],   (0.5, 0.3)),
     # abertura: fachada 16/9 a 30%
     ("opening",    f"{O}/IMG_0713.HEIC",   (16, 9), [960, 1440, 1920], (0.5, 0.35), 48),
     # pedido: vertical 9/16 da obra

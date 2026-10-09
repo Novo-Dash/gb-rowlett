@@ -10,7 +10,6 @@ import { Build } from '@/components/sections/Build'
 import { Schedule } from '@/components/sections/Schedule'
 import { Parents } from '@/components/sections/Parents'
 import { Ready } from '@/components/sections/Ready'
-import { Coach } from '@/components/sections/Coach'
 import { Reserve } from '@/components/sections/Reserve'
 import { Opening } from '@/components/sections/Opening'
 import { Faq } from '@/components/sections/Faq'
@@ -20,7 +19,7 @@ import { useScrollDepth } from '@/hooks/useScrollDepth'
 /**
  * Ordem da página = jornada mental do PRD §6:
  *   I Hero · II Oferta · letreiro · III Programas · IV Obra · V Horários ·
- *   VI Pais · VII Sem experiência · VIII Coach · IX Como reservar ·
+ *   VI Pais · VII Sem experiência · IX Como reservar ·
  *   X Abertura (night) · XI Perguntas · XII Pedido (navy) · mapa + footer.
  * Todas as seções renderizam de uma vez (sem lazy por seção): o espaço de
  * cada bloco existe desde a primeira pintura, então nada entra empurrando
@@ -45,7 +44,6 @@ export default function App() {
           <Schedule />
           <Parents />
           <Ready />
-          <Coach />
           <Reserve />
           <Opening />
           <Faq />

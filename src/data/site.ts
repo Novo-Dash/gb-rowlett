@@ -403,23 +403,6 @@ export const ready = {
   cta: 'Claim my Founding Member spot',
 }
 
-/* ── VIII · Coach ──────────────────────────────────────────────────── */
-export const coach = {
-  eyebrow: 'Who teaches',
-  name: 'Andre Carepa',
-  lead: '27 years in jiu-jitsu.',
-  /** Ficha. value null = <Pending>. (§20 #8) */
-  sheet: [
-    { term: 'Belt', value: null as string | null, pending: 'Belt (black belt in the photos: confirm in writing)' },
-    { term: 'Lineage', value: null as string | null, pending: 'Lineage' },
-    { term: 'Teaching since', value: null as string | null, pending: 'Year he started teaching' },
-    { term: 'Kids and beginner classes', value: null as string | null, pending: 'Does Andre teach the kids and beginner classes himself?' },
-    { term: 'Why Rowlett', value: null as string | null, pending: 'Why Rowlett, in his words' },
-  ],
-  photoAlt: 'Andre Carepa kneeling on a blue mat in a white gi and black belt, in front of the Gracie Barra wall',
-  cta: 'Meet Andre as a Founding Member',
-}
-
 /* ── IX · Como reservar (3 graus na faixa) ─────────────────────────── */
 export const reserve = {
   eyebrow: 'What happens next',
@@ -512,7 +495,6 @@ export const footer = {
     { label: 'The founding offer', href: '#offer' },
     { label: 'Classes', href: '#programs' },
     { label: 'Schedule', href: '#schedule' },
-    { label: 'Who teaches', href: '#coach' },
     { label: 'Questions', href: '#faq' },
   ],
   directions: 'Get directions',
