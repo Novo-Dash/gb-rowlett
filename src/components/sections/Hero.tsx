@@ -1,14 +1,13 @@
 /* ════════════════════════════════════════════════════════════════════
-   Hero — o ingresso no filme (direção B do design pass, escolhida pelo
-   Adryan em 9 out 2026; gramática da Lindale v2, leitura nova).
+   Hero — o card no filme (gramática da Lindale v2, leitura da Rowlett).
 
    CENA 1 · o card: o poster (ou o b-roll, quando chegar) num card de
    cantos retos sob a nav, com as duas mordidas (triângulo GB, topo-esq.
-   e base-dir.). A copy mora numa PLACA BRANCA com o fio vermelho e o
-   canto mordido — o ingresso de fundador — encostada na base do card:
-   eyebrow, H1 ("never trained." em vermelho com duplicado), lead, a
-   linha da oferta, CTA + micro-itens com ▲. O CARIMBO de vagas restantes
-   (no lugar do selo do Google, que não existe) morde o canto da placa.
+   e base-dir.). O texto vai DIRETO sobre o filme, embaixo à esquerda,
+   sobre o véu marinho: eyebrow, H1 ("never trained." em vermelho vivo com
+   duplicado), lead, a linha da oferta, CTA + micro-itens com ▲; o CARIMBO
+   de vagas restantes à direita (no lugar do selo do Google, que não
+   existe). Decisão do Adryan em 9 out 2026: sem placa/ingresso branco.
    CENA 2 · rolando, o card ABRE até a tela (--k 1 → 0: recuos, mordidas
    e triângulos encolhem juntos), o marinho desce e "No experience /
    needed." entra pelos lados, com o botão apontando para a oferta.
@@ -104,45 +103,45 @@ export function Hero() {
         <span className="hero__bite hero__bite--br" />
       </div>
 
-      {/* CENA 1 · o ingresso na base do card */}
-      <div ref={card} className="hero__scene hero__scene--card">
+      {/* CENA 1 · o texto direto sobre o filme, embaixo à esquerda; o carimbo à direita */}
+      <div ref={card} className="hero__scene hero__scene--card on-dark">
         <div className="shell hero__copy">
-          <div className="hero__ticketwrap">
-            <div className="hero__ticket">
-              <span className="hero__perf" aria-hidden="true" />
-              <Eyebrow className="hero__eb">{hero.eyebrow}</Eyebrow>
-              <Lines as="h1" id="hero-title" onLoad className="d h1 hero__title" parts={hero.title} />
-              <p className="hero__lead rise rise--load" style={{ ['--d' as string]: '300ms' }}>
-                {hero.lead}
-              </p>
-              <p className="hero__offer rise rise--load" style={{ ['--d' as string]: '360ms' }}>
-                <Tri />
-                <span>{hero.offerLine}</span>
-              </p>
-              <div className="hero__act rise rise--load" data-hero-cta="" style={{ ['--d' as string]: '420ms' }}>
-                <Cta origin="hero" size="block">
-                  {hero.cta}
-                </Cta>
-                <ul className="micro hero__micro" aria-label="Good to know">
-                  {micro.map((m) => (
-                    <li key={m.text}>
-                      <Tri />
-                      {m.text}
-                    </li>
-                  ))}
-                  {pricing.chargedToday === null ? (
-                    <li>
-                      <Pending>Charge at pre-registration to confirm</Pending>
-                    </li>
-                  ) : null}
-                </ul>
-              </div>
+          <Eyebrow tone="light" className="hero__eb">
+            {hero.eyebrow}
+          </Eyebrow>
+          <Lines as="h1" id="hero-title" onLoad className="d h1 hero__title" parts={hero.title} />
+          <p className="hero__lead rise rise--load" style={{ ['--d' as string]: '300ms' }}>
+            {hero.lead}
+          </p>
+          <p className="hero__offer rise rise--load" style={{ ['--d' as string]: '360ms' }}>
+            <Tri />
+            <span>{hero.offerLine}</span>
+          </p>
+          <div className="hero__act rise rise--load" data-hero-cta="" style={{ ['--d' as string]: '420ms' }}>
+            <div className="hero__cta">
+              <Cta origin="hero" size="block">
+                {hero.cta}
+              </Cta>
+              <ul className="micro hero__micro" aria-label="Good to know">
+                {micro.map((m) => (
+                  <li key={m.text}>
+                    <Tri />
+                    {m.text}
+                  </li>
+                ))}
+                {pricing.chargedToday === null ? (
+                  <li>
+                    <Pending>Charge at pre-registration to confirm</Pending>
+                  </li>
+                ) : null}
+              </ul>
             </div>
-            {/* o carimbo morde o canto do ingresso */}
-            <div className="hero__stampwrap">
-              <Stamp id="hero" now className="hero__stamp stamp--load" ring={hero.stamp.ring} value={left} label={hero.stamp.label} srText={left !== null ? `${left} ${hero.stamp.sr}` : undefined} />
-              {spotsLeft() === null ? <Pending className="hero__stamp-pending">{offer.claimedPending}</Pending> : null}
-            </div>
+          </div>
+          {/* o carimbo de vagas (no lugar do selo do Google, que não existe): filho da copy,
+              não do bloco animado — transform criaria outro bloco de contenção */}
+          <div className="hero__stampwrap">
+            <Stamp id="hero" now className="hero__stamp stamp--load" ring={hero.stamp.ring} value={left} label={hero.stamp.label} srText={left !== null ? `${left} ${hero.stamp.sr}` : undefined} />
+            {spotsLeft() === null ? <Pending className="hero__stamp-pending">{offer.claimedPending}</Pending> : null}
           </div>
         </div>
       </div>

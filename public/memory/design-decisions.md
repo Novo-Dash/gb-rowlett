@@ -78,7 +78,7 @@ Três direções dentro da gramática GB (card no filme, mordidas triangulares, 
 | **b** | **O ingresso** | a copy vive numa placa branca com fio vermelho e canto mordido, encostada na base do card; a foto fica limpa; o carimbo morde o canto da placa | tinta sobre branco (contraste máximo), liga o hero ao objeto da oferta (o ingresso), funciona com qualquer foto | a placa esconde parte do filme; no celular a foto fica em ~35% da tela |
 | **c** | **O placar** | coluna branca à esquerda com o título em tinta e um placar de 3 colunas ($87 / $0 / $107 + $47); o card com a foto à direita; no celular o card vai para cima (46svh) e a copy embaixo | a oferta já está na primeira tela como placar; leitura mais "equipe atlética" | o card estreito corta a foto (precisa de corte próprio ou b-roll); no celular o CTA cai abaixo da dobra |
 
-**Escolha do Adryan (9 out 2026): B · o ingresso.** A e C saíram do código. O que fica da B: a foto limpa (véu uniforme a 22%, sem degradê), a placa branca com fio vermelho e canto mordido, o título em tinta, o carimbo mordendo o canto da placa. A cena 2 (o card abrindo até a tela, "No experience / needed." entrando pelos lados) é a mesma.
+**Escolha do Adryan (9 out 2026): B · o ingresso** — depois revista: a placa branca lia como card, não como ingresso, e a versão com cabeça vermelha, picote e talão ficou pesada no celular. **Decisão final do Adryan: texto direto sobre a foto, sem card branco** (a direção A, com o véu marinho em degradê, o título branco e 'never trained.' em red-glow, o carimbo à direita). A cena 2 (o card abrindo até a tela, 'No experience / needed.' entrando pelos lados) é a mesma.
 
 ## 5. Paleta, tipo, movimento
 

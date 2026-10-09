@@ -264,7 +264,7 @@ html.bk-open .nav {
   --sv: 0px;
   --hp: clamp(28px, calc(var(--u) * 4.4), 84px);
   position: relative;
-  color: var(--ink);
+  color: var(--paper);
   overflow-x: clip;
 }
 @media (max-width: 639px) {
@@ -322,11 +322,14 @@ html.bk-open .nav {
 .hero__video[data-on] {
   opacity: 1;
 }
-/* cena 1: a foto fica limpa (a copy mora na placa); só um véu leve e uniforme */
+/* cena 1: overlay leve e uniforme no filme inteiro + um reforço embaixo,
+   só o necessário para o texto (que mora embaixo, à esquerda) */
 .hero__veil {
   position: absolute;
   inset: 0;
-  background: rgb(var(--navy-rgb) / 0.22);
+  background:
+    linear-gradient(0deg, rgb(var(--navy-rgb) / 0.7) 0%, rgb(var(--navy-rgb) / 0.34) 42%, rgb(var(--navy-rgb) / 0) 68%),
+    rgb(var(--navy-rgb) / 0.34);
   opacity: var(--k);
 }
 /* cena 2: o filme inteiro sob o marinho, para o texto centralizado */
@@ -373,50 +376,36 @@ html.motion .hero__bite {
 .hero__scene--card {
   margin-top: min(-600px, -100lvh);
   align-items: flex-end;
-  padding: calc(var(--nav-h) + var(--bite)) 0 calc(var(--ib) + var(--hp) * 0.6);
+  padding: calc(var(--nav-h) + var(--bite)) 0 calc(var(--ib) + var(--hp));
 }
 .hero__copy {
   position: relative;
-  padding-inline: calc(var(--gutter) * 0.5 + var(--hp) * 0.5);
+  /* a borda do card fica meia margem para fora da grade; o texto entra --hp */
+  padding-inline: calc(var(--gutter) * 0.5 + var(--hp));
   /* recua e some enquanto o card abre (depois do LCP: pode mexer na opacidade) */
   transform: translateY(calc(var(--p) * -80px));
   opacity: clamp(0, 1 - var(--p) * 1.8, 1);
 }
-/* o ingresso: placa branca, fio vermelho no topo, canto mordido; sombra marinho embaixo */
-.hero__ticketwrap {
-  position: relative;
-  max-width: 640px;
-}
-.hero__ticket {
-  position: relative;
-  padding: clamp(22px, calc(var(--u) * 2.4), 40px) clamp(20px, calc(var(--u) * 2.4), 40px) clamp(20px, calc(var(--u) * 2.2), 36px);
-  color: var(--ink);
-  background: var(--paper);
-  box-shadow: 0 30px 60px -30px rgb(var(--navy-rgb) / 0.6), 0 2px 0 rgb(var(--navy-rgb) / 0.08);
-  clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%);
-}
-.hero__perf {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 4px;
-  background: var(--red);
-}
+/* o texto sobre o filme: branco, embaixo à esquerda; o carimbo à direita, antes da mordida */
 .hero__eb {
-  margin-bottom: 10px;
+  margin-bottom: 14px;
 }
 .hero__title {
-  color: var(--ink);
+  color: var(--paper);
   max-width: 12em;
-  font-size: clamp(2.3rem, min(10.2vw, 7.6svh), 4.6rem);
+}
+.hero__title .ln__accent {
+  color: var(--red-glow);
+}
+.hero__title .ln__accent::after {
+  -webkit-text-stroke-color: var(--red-glow);
 }
 .hero__lead {
-  margin-top: 14px;
-  max-width: 40ch;
-  font-size: clamp(1rem, calc(var(--u) * 1.1), 1.25rem);
-  line-height: 1.4;
-  color: var(--ink-2);
+  margin-top: 16px;
+  max-width: 36ch;
+  font-size: clamp(1.0625rem, calc(var(--u) * 1.3), 1.5rem);
+  line-height: 1.35;
+  color: rgb(var(--paper-rgb) / 0.92);
   text-wrap: pretty;
 }
 .hero__offer {
@@ -430,51 +419,47 @@ html.motion .hero__bite {
   font-size: clamp(1.0625rem, calc(var(--u) * 1.25), 1.375rem);
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  color: var(--ink);
+  color: var(--paper);
 }
 .hero__offer svg {
   width: 12px;
   height: 12px;
   flex: none;
   margin-top: 0.22em;
-  color: var(--red);
+  color: var(--red-glow);
 }
 .hero__act {
   display: grid;
-  gap: 12px;
-  margin-top: 20px;
+  gap: 18px;
+  margin-top: 22px;
 }
 .hero__micro {
-  color: var(--ink-2);
+  margin-top: 12px;
+  color: rgb(var(--paper-rgb) / 0.84);
 }
-.hero__micro svg {
-  color: var(--red);
-}
-/* o carimbo de vagas morde o canto do ingresso */
 .hero__stampwrap {
   position: absolute;
-  right: -84px;
-  top: -40px;
+  right: calc(var(--gutter) * 0.5 + var(--bite) * 0.9);
+  bottom: 0;
   display: grid;
-  justify-items: start;
+  justify-items: end;
   gap: 6px;
 }
 .hero__stamp {
   --size: clamp(96px, calc(var(--u) * 9), 150px);
 }
 .hero__stamp-pending {
-  max-width: 150px;
+  max-width: 180px;
 }
 @media (max-width: 639px) {
   .hero__copy {
-    padding-inline: var(--ix);
+    padding-inline: calc(var(--ix) + var(--hp));
   }
-  .hero__ticket {
-    padding: 18px 16px 16px;
-  }
+  /* o carimbo flutua acima da copy, à direita (nunca sobre os micro-itens) */
   .hero__stampwrap {
-    right: 4px;
-    top: -44px;
+    right: var(--ix);
+    bottom: auto;
+    top: calc(-1 * var(--size, 84px) - 24px);
   }
   .hero__stamp {
     --size: 84px;
@@ -539,19 +524,19 @@ html:not(.motion) .hero__deep {
   opacity: 0.6;
 }
 @media (min-width: 1024px) {
-  .hero__ticketwrap {
-    max-width: 760px;
-  }
   .hero__title {
-    font-size: clamp(2.8rem, min(calc(var(--u) * 4.2), 8.6svh), 5.2rem);
-    max-width: 11em;
+    max-width: 12em;
+    font-size: clamp(3.4rem, min(calc(var(--u) * 5.6), 10.5svh), 7.2rem);
+  }
+  .hero__lead {
+    max-width: 44ch;
   }
   .hero__act {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    gap: 14px 28px;
-    margin-top: 24px;
+    align-items: flex-start;
+    gap: 20px 40px;
+    margin-top: 28px;
   }
   .hero__need {
     width: min(100%, calc(var(--u) * 44), 800px);
