@@ -409,8 +409,10 @@ export const opening = {
   eyebrow: 'Opening day',
   title: [{ text: 'The doors open in' }],
   units: ['days', 'hours', 'min', 'sec'] as const,
-  noDate: 'Opening date coming soon. Founding Members hear it first.',
-  noDatePending: 'Opening date and first classes (§20 #1) · "hear it first" notice to confirm',
+  /** [CONFIRMAR] contador PROVISÓRIO de 30 dias (pedido do Adryan em 09/10/2026), só nesta seção:
+      não liga a data de abertura do site (site.openingISO), que segue null. Trocar pela data real. */
+  countdownISO: '2026-11-08T09:00:00-06:00',
+  countdownPending: 'Provisional 30-day countdown · confirm the real opening date',
   register: [
     { term: 'Address', value: '3503 Rowlett Rd, Bldg K, Suite 302' },
     { term: 'First classes', value: null as string | null, pending: 'First classes date' },

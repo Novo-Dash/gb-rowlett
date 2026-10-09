@@ -1567,7 +1567,7 @@ html.motion .build__row[data-in] .build__cell {
    marcador; filetes finos separam (embaixo no celular, ao lado no desktop) */
 .build__why {
   display: grid;
-  margin: 0 0 clamp(36px, calc(var(--u) * 4), 72px);
+  margin: 0 0 clamp(48px, calc(var(--u) * 5.6), 96px);
   border-top: 1px solid var(--line-strong);
 }
 .why {
@@ -2617,7 +2617,7 @@ html.motion .how__still {
   position: relative;
   isolation: isolate;
   padding: clamp(72px, calc(var(--u) * 8), 150px) 0;
-  background: var(--night);
+  background: rgb(0 0 0);
   color: var(--on-dark);
   overflow: hidden;
 }
@@ -2653,7 +2653,7 @@ html.motion .how__still {
 .open__veil {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgb(var(--navy-rgb) / 0.4), rgb(var(--navy-rgb) / 0.75));
+  background: linear-gradient(180deg, rgb(0 0 0 / 0.55), rgb(0 0 0 / 0.82));
 }
 .open__in {
   display: grid;
@@ -2681,7 +2681,7 @@ html.motion .how__still {
   gap: 8px;
   padding: 16px 4px 14px;
   border: 1px solid rgb(var(--paper-rgb) / 0.18);
-  background: rgb(var(--navy-rgb) / 0.4);
+  background: rgb(0 0 0 / 0.5);
 }
 .odometer__n {
   font-style: italic;
@@ -2692,15 +2692,8 @@ html.motion .how__still {
 .odometer__l {
   color: var(--on-dark-2);
 }
-.open__nodate {
-  display: grid;
-  justify-items: center;
-  gap: 12px;
-  max-width: 28em;
-}
-.open__soon {
-  color: var(--paper);
-  font-size: clamp(1.6rem, 6vw, 2.4rem);
+.open__prov {
+  margin-top: -12px;
 }
 .open__register {
   display: grid;

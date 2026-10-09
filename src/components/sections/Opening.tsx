@@ -3,8 +3,8 @@
    com a fachada a 30% ao fundo. "The doors open in" em red-glow com
    duplicado, o odômetro de dias/horas/min/seg (rolos de dígito, HTML já
    nasce no valor, largura reservada) e o registro em <dl> de 4 colunas.
-   Sem data confirmada: o odômetro não aparece; aparece "Opening date
-   coming soon. Founding Members hear it first." com a pendência.
+   Fundo e véu em preto. Sem data confirmada, o odômetro conta até a data
+   PROVISÓRIA de 30 dias (opening.countdownISO), com a pendência embaixo.
    ════════════════════════════════════════════════════════════════════ */
 
 import { opening, site } from '@/data/site'
@@ -17,7 +17,8 @@ import { Pending } from '../ui/Pending'
 import { Pic } from '../ui/Pic'
 
 export function Opening() {
-  const t = useCountdown(site.openingISO)
+  const iso = site.openingISO ?? opening.countdownISO
+  const t = useCountdown(iso)
   const values = t ? [t.days, t.hours, t.minutes, t.seconds] : null
 
   return (
@@ -32,24 +33,20 @@ export function Opening() {
           <Lines id="opening-title" className="d h2 open__title" parts={[{ text: opening.title[0].text, accent: true }]} />
         </div>
 
-        {site.openingISO ? (
-          <div className="odometer" role="timer" aria-live="off" aria-label={`${opening.title[0].text} ${t ? `${t.days} days ${t.hours} hours ${t.minutes} minutes` : ''}`}>
-            {opening.units.map((u, i) => (
-              <div key={u} className="odometer__unit">
-                <span className="odometer__n d">
-                  <Odo value={values ? values[i] : 0} pad={2} live />
-                </span>
-                <span className="odometer__l label">{u}</span>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="open__nodate">
-            <p className="d h3 open__soon">{opening.noDate}</p>
-            <p>
-              <Pending>{opening.noDatePending}</Pending>
-            </p>
-          </div>
+        <div className="odometer" role="timer" aria-live="off" aria-label={`${opening.title[0].text} ${t ? `${t.days} days ${t.hours} hours ${t.minutes} minutes` : ''}`}>
+          {opening.units.map((u, i) => (
+            <div key={u} className="odometer__unit">
+              <span className="odometer__n d">
+                <Odo value={values ? values[i] : 0} pad={2} live />
+              </span>
+              <span className="odometer__l label">{u}</span>
+            </div>
+          ))}
+        </div>
+        {site.openingISO ? null : (
+          <p className="open__prov">
+            <Pending tone="red">{opening.countdownPending}</Pending>
+          </p>
         )}
 
         <dl className="open__register">
