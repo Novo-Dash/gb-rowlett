@@ -49,8 +49,8 @@ IMAGES = [
     ("parents-1",  "parents/1.webp",      (4, 5),  [360, 486],   (0.5, 0.5)),
     ("parents-2",  "parents/2.webp",      (4, 5),  [360, 486],   (0.5, 0.5)),
     ("parents-3",  "parents/3.webp",      (4, 5),  [360, 486],   (0.5, 0.5)),
-    # sem experiência 4/5
-    ("ready",      f"{D}/IMG_0213.HEIC",   (4, 5),  [480, 800],   (0.5, 0.45)),
+    # sem experiência: o recorte do coach sem fundo (PNG/WebP com alfa), de pé na borda da seção
+    ("coach",      "coach/coach.webp",     (599, 616), [480, 800, 1198], (0.5, 0.5)),
     # abertura: fachada 16/9 a 30%
     ("opening",    f"{O}/IMG_0713.HEIC",   (16, 9), [960, 1440, 1920], (0.5, 0.35), 48),
     # fachada 1/1 encostada no pino do mapa

@@ -379,7 +379,7 @@ export const ready = {
   need: ['comfortable clothes', 'to show up', 'curiosity', 'respect for your training partners', 'the courage to walk in the first time'],
   dontLabel: "You don't need",
   dont: ['experience', 'to be in shape', 'strength or flexibility', 'to know anyone', 'to feel ready first'],
-  photoAlt: 'Andre Carepa sitting on the mat with a training partner, mid-conversation, in front of the Gracie Barra wall',
+  photoAlt: 'The head coach in a white Gracie Barra gi and black belt, arms crossed, in front of the red Gracie Barra triangle',
   cta: 'Claim my Founding Member spot',
 }
 

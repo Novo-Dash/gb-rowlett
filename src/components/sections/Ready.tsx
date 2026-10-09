@@ -43,10 +43,10 @@ export function Ready() {
               ))}
             </ul>
           </div>
-          {/* a foto encosta na borda de baixo da seção e leva o botão dentro
-              (vai virar o PNG recortado do professor, de pé sobre a borda) */}
+          {/* o coach recortado, sem fundo, de pé na borda de baixo da seção,
+              com o botão por cima da faixa preta */}
           <figure className="ready__photo">
-            <Pic name="ready" alt={ready.photoAlt} sizes="(min-width: 1024px) 30vw, 92vw" />
+            <Pic name="coach" alt={ready.photoAlt} sizes="(min-width: 1024px) 30vw, 92vw" />
             <div className="ready__cta">
               <Cta origin="faq" who="me" size="block">
                 {ready.cta}

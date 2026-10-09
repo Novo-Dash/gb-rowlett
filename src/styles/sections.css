@@ -2350,28 +2350,19 @@ html.motion .ready__cols .rise {
   transition-delay: calc(var(--i) * 60ms);
 }
 /* a foto: por último no celular, no meio no desktop; sempre na borda de baixo */
+/* o coach recortado (sem fundo): sem moldura e sem véu, de pé na borda de baixo */
 .ready__photo {
   position: relative;
   order: 3;
   justify-self: center;
   width: 100%;
   max-width: 460px;
-  overflow: hidden;
-  border-radius: var(--r) var(--r) 0 0;
 }
 .ready__photo img {
   display: block;
   width: 100%;
-  object-fit: cover;
-  object-position: 50% 100%;
-}
-/* o véu embaixo da foto dá leitura ao botão */
-.ready__photo::after {
-  content: '';
-  position: absolute;
-  inset: 45% 0 0;
-  background: linear-gradient(180deg, rgb(var(--navy-rgb) / 0), rgb(var(--navy-rgb) / 0.7));
-  pointer-events: none;
+  height: auto;
+  filter: drop-shadow(0 24px 40px rgb(var(--navy-rgb) / 0.18));
 }
 .ready__cta {
   position: absolute;
