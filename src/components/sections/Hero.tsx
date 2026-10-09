@@ -124,25 +124,38 @@ export function Hero() {
             {hero.lead}
           </p>
           <div className="hero__act rise rise--load" data-hero-cta="" style={{ ['--d' as string]: '380ms' }}>
-            {/* a oferta em destaque, logo acima do botão */}
-            <p className="hero__offer">
-              <span className="hero__offer-label label">{hero.offer.label}</span>
-              <span className="hero__offer-price">
-                <b className="d">{hero.offer.price}</b>
-                <span className="hero__offer-per">{hero.offer.per}</span>
+            {/* o selo da oferta (pedido do Adryan): anel "Founding Members" girando, $87 no centro */}
+            <p className="hero__seal">
+              <span className="sr-only">
+                {hero.offer.label}: {hero.offer.price} {hero.offer.per}
               </span>
-              <span className="hero__offer-perks">
-                {hero.offer.perks.map((p) => (
-                  <span key={p}>
-                    <Check />
-                    {p}
-                  </span>
-                ))}
+              <svg className="hero__seal-ring" viewBox="0 0 200 200" aria-hidden="true">
+                <defs>
+                  <path id="hero-seal-ring" d="M100 100 m-80 0 a80 80 0 1 1 160 0 a80 80 0 1 1 -160 0" />
+                </defs>
+                <text>
+                  <textPath href="#hero-seal-ring" textLength="500" lengthAdjust="spacing">
+                    {`${hero.offer.label} · ${hero.offer.label} · `}
+                  </textPath>
+                </text>
+              </svg>
+              <span className="hero__seal-core" aria-hidden="true">
+                <b className="d">{hero.offer.price}</b>
+                <span>{hero.offer.per}</span>
               </span>
             </p>
             <Cta origin="hero" size="block">
               {hero.cta}
             </Cta>
+            {/* os benefícios embaixo do botão */}
+            <p className="hero__perks">
+              {hero.offer.perks.map((p) => (
+                <span key={p}>
+                  <Check />
+                  {p}
+                </span>
+              ))}
+            </p>
           </div>
         </div>
       </div>

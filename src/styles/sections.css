@@ -142,93 +142,97 @@
   width: min(100%, 440px);
   margin-top: 22px;
 }
-/* a oferta em DESTAQUE, em PRETO e AZUL, COMPACTA e com vidro leve (pedido do Adryan):
-   à esquerda a etiqueta azul em cima do "$87 every two weeks"; filete; os dois
-   benefícios com o check em círculo azul. Logo acima do botão, na largura dele. */
-.hero__offer {
+/* o SELO da oferta (pedido do Adryan), em preto e azul: disco preto com o aro azul GB,
+   o anel "Founding Members · " girando devagar, o $87 grande no centro e "every two
+   weeks" embaixo; inclinação fixa de -8° (carimbo batido à mão) */
+.hero__seal {
+  --size: clamp(112px, 30vw, 136px);
+  position: relative;
+  justify-self: center;
   display: grid;
-  grid-template-columns: auto 1px auto;
-  justify-content: space-between;
-  align-items: center;
-  column-gap: 16px;
-  width: 100%;
-  padding: 10px 16px 11px;
-  border-radius: var(--r);
-  background: rgb(0 0 0 / 0.38);
-  box-shadow: inset 0 0 0 1px rgb(var(--paper-rgb) / 0.14);
-  -webkit-backdrop-filter: blur(4px);
-  backdrop-filter: blur(4px);
-  text-align: left;
-}
-.hero__offer::after {
-  content: '';
-  grid-row: 1 / 3;
-  grid-column: 2;
-  align-self: stretch;
-  background: rgb(var(--paper-rgb) / 0.2);
-}
-.hero__offer-label {
-  grid-row: 1;
-  grid-column: 1;
-  justify-self: start;
+  place-items: center;
+  width: var(--size);
+  height: var(--size);
   margin-bottom: 4px;
-  padding: 3px 8px 2px;
-  border-radius: 999px;
-  background: var(--gb1);
+  border-radius: 50%;
+  background: rgb(0 0 0 / 0.72);
   color: var(--paper);
-  font-size: 0.6875rem;
+  rotate: -8deg;
+  box-shadow:
+    inset 0 0 0 3px var(--gb1),
+    0 16px 36px -14px rgb(0 0 0 / 0.75);
 }
-.hero__offer-price {
-  grid-row: 2;
-  grid-column: 1;
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
+.hero__seal::before {
+  content: '';
+  position: absolute;
+  inset: 18%;
+  border-radius: 50%;
+  border: 1px solid rgb(var(--paper-rgb) / 0.3);
 }
-.hero__offer-price b {
-  font-size: 2.125rem;
-  line-height: 0.9;
-  color: var(--paper);
+.hero__seal-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
-.hero__offer-per {
-  font-size: 0.8125rem;
-  line-height: 1.15;
-  color: rgb(var(--paper-rgb) / 0.82);
-  white-space: nowrap;
+.hero__seal-ring text {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 17px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  fill: var(--paper);
 }
-.hero__offer-perks {
-  grid-row: 1 / 3;
-  grid-column: 3;
+html.motion .hero__seal-ring {
+  animation: stamp-spin 24s linear infinite;
+}
+.hero__seal-core {
+  position: relative;
   display: grid;
-  gap: 5px;
-  font-size: 0.8125rem;
+  justify-items: center;
+  line-height: 1;
+}
+.hero__seal-core b {
+  font-size: calc(var(--size) * 0.3);
+  line-height: 0.9;
+}
+.hero__seal-core span {
+  margin-top: 2px;
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-style: italic;
+  max-width: calc(var(--size) * 0.56);
+  font-size: max(10px, calc(var(--size) * 0.07));
+  line-height: 1.05;
+  letter-spacing: 0.06em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--paper);
+}
+/* os benefícios, pequenos, embaixo do botão, com o check em círculo azul */
+.hero__perks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 18px;
+  font-size: 0.875rem;
   font-weight: 500;
   color: var(--paper);
 }
-.hero__offer-perks span {
-  display: flex;
+.hero__perks span {
+  display: inline-flex;
   align-items: center;
   gap: 7px;
-  white-space: nowrap;
 }
-.hero__offer-perks svg {
-  width: 14px;
-  height: 14px;
+.hero__perks svg {
+  width: 15px;
+  height: 15px;
   flex: none;
   padding: 2px;
   border-radius: 50%;
   background: var(--gb1);
   color: var(--paper);
-}
-@media (max-width: 380px) {
-  .hero__offer {
-    column-gap: 12px;
-    padding-inline: 12px;
-  }
-  .hero__offer-per {
-    white-space: normal;
-    max-width: 5.5em;
-  }
 }
 /* cena 2: centralizada (rola normalmente — nada trava) */
 .hero__scene--open {
@@ -355,7 +359,7 @@ html:not(.motion) .hero__deep {
     font-size: clamp(3rem, min(calc(var(--u) * 4.4), 9svh), 5.8rem);
   }
   .hero__lead {
-    max-width: 52ch;
+    max-width: 72ch;
     margin-inline: auto;
   }
   .hero__act {
@@ -1705,6 +1709,20 @@ html.motion .sc__grid .rise {
 }
 .sc__closed {
   color: var(--muted);
+}
+/* o texto do hero em DUAS linhas equilibradas (pedido do Adryan), do tablet para cima */
+@media (min-width: 768px) {
+  .hero .hero__lead {
+    max-width: 72ch;
+    text-wrap: balance;
+  }
+}
+/* a nota numa linha só (pedido do Adryan) onde cabe: do tablet para cima */
+@media (min-width: 768px) {
+  .sc__note {
+    max-width: none;
+    white-space: nowrap;
+  }
 }
 @media (min-width: 720px) {
   .sc__grid {
