@@ -142,54 +142,68 @@
   width: min(100%, 440px);
   margin-top: 22px;
 }
-/* o SELO da oferta (pedido do Adryan), em preto e azul: disco preto com o aro azul GB,
-   o anel "Founding Members · " girando devagar, o $87 grande no centro e "every two
-   weeks" embaixo; inclinação fixa de -8° (carimbo batido à mão) */
-.hero__seal {
-  --size: clamp(112px, 30vw, 136px);
+/* o SELO azul (pedido do Adryan, "design similar ao da Collective, mas o nosso selo"):
+   disco cheio azul GB, dois filetes claros, o anel "Founding Members ·" girando (só o
+   anel gira), $87 e "every two weeks" parados no centro, -8° fixo. Batido no canto
+   de cima à direita do título, mordendo a primeira linha. */
+.hero__titlebox {
   position: relative;
-  justify-self: center;
-  display: grid;
-  place-items: center;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+/* celular: ao lado da primeira linha do título (a mais curta), abaixo do "Opening soon" */
+.hero__seal {
+  --size: clamp(68px, 19vw, 84px);
+  position: absolute;
+  top: calc(var(--size) * -0.22);
+  right: calc(var(--gutter) * -0.6);
+  z-index: 2;
   width: var(--size);
   height: var(--size);
-  margin-bottom: 4px;
-  border-radius: 50%;
-  background: rgb(0 0 0 / 0.72);
   color: var(--paper);
   rotate: -8deg;
-  box-shadow:
-    inset 0 0 0 3px var(--gb1),
-    0 16px 36px -14px rgb(0 0 0 / 0.75);
+  filter: drop-shadow(0 12px 22px rgb(0 0 0 / 0.5));
 }
-.hero__seal::before {
-  content: '';
-  position: absolute;
-  inset: 18%;
-  border-radius: 50%;
-  border: 1px solid rgb(var(--paper-rgb) / 0.3);
-}
-.hero__seal-ring {
-  position: absolute;
-  inset: 0;
+.hero__seal svg {
   width: 100%;
   height: 100%;
+  overflow: visible;
 }
-.hero__seal-ring text {
+.hero__seal-disc {
+  fill: var(--gb1);
+}
+.hero__seal-line {
+  fill: none;
+  stroke: var(--paper);
+  stroke-width: 0.8;
+  opacity: 0.35;
+}
+.hero__seal-ring {
+  transform-origin: 50px 50px;
+}
+html.motion .hero__seal-ring {
+  animation: seal-spin 24s linear infinite;
+}
+@keyframes seal-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.hero__seal text {
   font-family: var(--f-display);
   font-weight: 700;
   font-style: italic;
-  font-size: 17px;
-  letter-spacing: 0.06em;
+  font-size: 7.4px;
+  letter-spacing: 1.1px;
   text-transform: uppercase;
   fill: var(--paper);
 }
-html.motion .hero__seal-ring {
-  animation: stamp-spin 24s linear infinite;
-}
 .hero__seal-core {
-  position: relative;
+  position: absolute;
+  inset: 0;
   display: grid;
+  place-content: center;
   justify-items: center;
   line-height: 1;
 }
@@ -199,16 +213,34 @@ html.motion .hero__seal-ring {
 }
 .hero__seal-core span {
   margin-top: 2px;
+  max-width: calc(var(--size) * 0.5);
   font-family: var(--f-display);
   font-weight: 700;
   font-style: italic;
-  max-width: calc(var(--size) * 0.56);
-  font-size: max(10px, calc(var(--size) * 0.07));
+  font-size: max(8px, calc(var(--size) * 0.075));
   line-height: 1.05;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-align: center;
   text-transform: uppercase;
-  color: var(--paper);
+  opacity: 0.85;
+}
+/* o carimbo assenta: entra 6% maior e mais girado */
+html.motion .hero__seal {
+  animation: seal-in 0.8s var(--ease) 0.6s both;
+}
+@keyframes seal-in {
+  from {
+    opacity: 0;
+    scale: 1.06;
+    rotate: -14deg;
+  }
+}
+@media (min-width: 1024px) {
+  .hero__seal {
+    --size: clamp(104px, calc(var(--u) * 8), 136px);
+    top: calc(var(--size) * -0.55);
+    right: calc(var(--size) * -0.6);
+  }
 }
 /* os benefícios, pequenos, embaixo do botão, com o check em círculo azul */
 .hero__perks {

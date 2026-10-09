@@ -119,31 +119,38 @@ export function Hero() {
               {hero.eyebrow}
             </Eyebrow>
           </div>
-          <Lines as="h1" id="hero-title" onLoad className="d h1 hero__title" parts={hero.title} />
-          <p className="hero__lead rise rise--load" style={{ ['--d' as string]: '300ms' }}>
-            {hero.lead}
-          </p>
-          <div className="hero__act rise rise--load" data-hero-cta="" style={{ ['--d' as string]: '380ms' }}>
-            {/* o selo da oferta (pedido do Adryan): anel "Founding Members" girando, $87 no centro */}
+          {/* o título com o SELO azul batido no canto de cima à direita (gramática do
+              carimbo da Collective, com o nosso selo): disco cheio azul GB, anel
+              "Founding Members" girando, $87 no centro */}
+          <div className="hero__titlebox">
+            <Lines as="h1" id="hero-title" onLoad className="d h1 hero__title" parts={hero.title} />
             <p className="hero__seal">
               <span className="sr-only">
                 {hero.offer.label}: {hero.offer.price} {hero.offer.per}
               </span>
-              <svg className="hero__seal-ring" viewBox="0 0 200 200" aria-hidden="true">
+              <svg viewBox="0 0 100 100" aria-hidden="true">
                 <defs>
-                  <path id="hero-seal-ring" d="M100 100 m-80 0 a80 80 0 1 1 160 0 a80 80 0 1 1 -160 0" />
+                  <path id="hero-seal-ring" d="M50 12a38 38 0 1 1 0 76 38 38 0 1 1 0-76" fill="none" />
                 </defs>
-                <text>
-                  <textPath href="#hero-seal-ring" textLength="500" lengthAdjust="spacing">
-                    {`${hero.offer.label} · ${hero.offer.label} · `}
-                  </textPath>
-                </text>
+                <circle cx="50" cy="50" r="50" className="hero__seal-disc" />
+                <circle cx="50" cy="50" r="44" className="hero__seal-line" />
+                <circle cx="50" cy="50" r="31" className="hero__seal-line" />
+                <g className="hero__seal-ring">
+                  <text>
+                    <textPath href="#hero-seal-ring" textLength="236" lengthAdjust="spacing">{`${hero.offer.label} · ${hero.offer.label} · `}</textPath>
+                  </text>
+                </g>
               </svg>
               <span className="hero__seal-core" aria-hidden="true">
                 <b className="d">{hero.offer.price}</b>
                 <span>{hero.offer.per}</span>
               </span>
             </p>
+          </div>
+          <p className="hero__lead rise rise--load" style={{ ['--d' as string]: '300ms' }}>
+            {hero.lead}
+          </p>
+          <div className="hero__act rise rise--load" data-hero-cta="" style={{ ['--d' as string]: '380ms' }}>
             <Cta origin="hero" size="block">
               {hero.cta}
             </Cta>
