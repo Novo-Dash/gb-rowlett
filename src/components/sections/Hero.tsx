@@ -1,14 +1,13 @@
 /* ════════════════════════════════════════════════════════════════════
    Hero — o card no filme (gramática da Lindale v2, leitura da Rowlett).
 
-   CENA 1 · o card: o poster (ou o b-roll, quando chegar) num card de
-   cantos retos sob a nav, com as duas mordidas (triângulo GB, topo-esq.
-   e base-dir.). O texto vai DIRETO sobre o filme, embaixo à esquerda,
+   CENA 1 · o poster (ou o b-roll, quando chegar) preenche o hero inteiro,
+   de ponta a ponta e por trás da nav — sem card, sem margem branca, sem
+   mordidas (decisão do Adryan). O texto vai DIRETO sobre o filme, embaixo à esquerda,
    sobre o véu marinho: eyebrow, H1 ("never trained." em vermelho vivo com
    duplicado), lead, a linha da oferta e o CTA. Decisões do Adryan em
    9 out 2026: sem placa/ingresso branco, sem micro-itens, sem carimbo.
-   CENA 2 · rolando, o card ABRE até a tela (--k 1 → 0: recuos, mordidas
-   e triângulos encolhem juntos), o marinho desce e a frase da oferta
+   CENA 2 · rolando, o filme assenta (escala 1,1 → 1), o marinho desce e a frase da oferta
    ("Join before we open." pequena; "Pay less than everyone / who joins
    after." grandes) SOBE DE BAIXO, linha a linha, com o botão apontando
    para a oferta.
@@ -88,7 +87,7 @@ export function Hero() {
 
   return (
     <section ref={root} id="top" className="hero" aria-labelledby="hero-title">
-      {/* O filme das duas cenas: sticky, recortado pelo card (--k) */}
+      {/* O filme das duas cenas: sticky, de ponta a ponta */}
       <div className="hero__sticky" aria-hidden="true">
         <div className="hero__media">
           <Pic name="film-m" alt="" priority sizes="100vw" className="hero__poster" art={{ name: 'film', media: '(min-width: 768px)', sizes: '100vw' }} />
@@ -96,8 +95,6 @@ export function Hero() {
           <span className="hero__veil" />
           <span className="hero__deep" />
         </div>
-        <span className="hero__bite hero__bite--tl" />
-        <span className="hero__bite hero__bite--br" />
       </div>
 
       {/* CENA 1 · o texto direto sobre o filme, embaixo à esquerda */}

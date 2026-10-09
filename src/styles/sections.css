@@ -228,19 +228,15 @@ html.bk-open .nav {
   }
 }
 
-/* ════════ HERO — o ingresso no filme (duas cenas sobre o mesmo filme) ════════
-   O filme é sticky. --k (1 → 0) recorta o card: recuos do quadro de 1920,
-   as duas mordidas e os triângulos encolhem juntos até o filme tomar a tela.
-   --p (0 → 1) = progresso da abertura. --s = entrada da cena 2. */
+/* ════════ HERO — a foto de ponta a ponta, duas cenas sobre o mesmo filme ════════
+   Decisão do Adryan (9 out 2026): sem card, sem margem branca, sem mordidas —
+   a imagem preenche o hero inteiro, por trás da nav. O filme é sticky.
+   --k (1 → 0) assenta o filme (escala 1,1 → 1) e apaga o véu da cena 1;
+   --p (0 → 1) desce o marinho da cena 2; --s = entrada da frase da cena 2. */
 .hero {
   --k: 1;
   --p: 0;
   --s: 0;
-  --it: var(--nav-h);
-  --ix: max(calc(var(--gutter) * 0.5), calc((100% - var(--max)) / 2 + var(--gutter) * 0.5));
-  --ib: calc(var(--gutter) * 0.5);
-  --bite: clamp(64px, calc(var(--u) * 6.8), 132px);
-  --sv: 0px;
   --hp: clamp(28px, calc(var(--u) * 4.4), 84px);
   position: relative;
   color: var(--paper);
@@ -248,10 +244,6 @@ html.bk-open .nav {
 }
 @media (max-width: 639px) {
   .hero {
-    --ix: 8px;
-    --ib: 8px;
-    --bite: clamp(56px, 16vw, 80px);
-    --sv: calc(100lvh - 100svh);
     --hp: 20px;
   }
 }
@@ -264,22 +256,10 @@ html.bk-open .nav {
   pointer-events: none;
 }
 .hero__media {
-  --t: calc(var(--k) * var(--it));
-  --x: calc(var(--k) * var(--ix));
-  --b: calc(var(--k) * (var(--ib) + var(--sv)));
-  --m: calc(var(--k) * var(--bite));
   position: absolute;
   inset: 0;
   overflow: hidden;
   background: var(--night);
-  clip-path: polygon(
-    calc(var(--x) + var(--m)) var(--t),
-    calc(100% - var(--x)) var(--t),
-    calc(100% - var(--x)) calc(100% - var(--b) - var(--m)),
-    calc(100% - var(--x) - var(--m)) calc(100% - var(--b)),
-    var(--x) calc(100% - var(--b)),
-    var(--x) calc(var(--t) + var(--m))
-  );
 }
 .hero__poster,
 .hero__poster img,
@@ -318,34 +298,6 @@ html.bk-open .nav {
   background: radial-gradient(ellipse at 50% 50%, rgb(var(--navy-rgb) / 0.55), rgb(var(--navy-rgb) / 0.82) 80%);
   opacity: var(--p);
 }
-.hero__bite {
-  position: absolute;
-  width: calc(var(--bite) - 12px);
-  height: calc(var(--bite) - 12px);
-  background: var(--red);
-}
-.hero__bite--br {
-  right: var(--ix);
-  bottom: calc(var(--ib) + var(--sv));
-  clip-path: polygon(100% 0, 100% 100%, 0 100%);
-  transform-origin: 100% 100%;
-  transform: translate(calc((1 - var(--k)) * var(--ix)), calc((1 - var(--k)) * (var(--ib) + var(--sv)))) scale(var(--k));
-}
-.hero__bite--tl {
-  left: var(--ix);
-  top: var(--it);
-  clip-path: polygon(0 0, 100% 0, 0 100%);
-  transform-origin: 0 0;
-  transform: translate(calc((var(--k) - 1) * var(--ix)), calc((var(--k) - 1) * var(--it))) scale(var(--k));
-}
-html.motion .hero__bite {
-  animation: bite-in 0.9s var(--ease) 0.9s both;
-}
-@keyframes bite-in {
-  from {
-    scale: 0;
-  }
-}
 .hero__scene {
   position: relative;
   z-index: 1;
@@ -355,12 +307,11 @@ html.motion .hero__bite {
 .hero__scene--card {
   margin-top: min(-600px, -100lvh);
   align-items: flex-end;
-  padding: calc(var(--nav-h) + var(--bite)) 0 calc(var(--ib) + var(--hp));
+  padding: calc(var(--nav-h) + 48px) 0 var(--hp);
 }
 .hero__copy {
   position: relative;
-  /* a borda do card fica meia margem para fora da grade; o texto entra --hp */
-  padding-inline: calc(var(--gutter) * 0.5 + var(--hp));
+  padding-inline: max(var(--gutter), var(--hp));
   /* recua e some enquanto o card abre (depois do LCP: pode mexer na opacidade) */
   transform: translateY(calc(var(--p) * -80px));
   opacity: clamp(0, 1 - var(--p) * 1.8, 1);
@@ -414,7 +365,7 @@ html.motion .hero__bite {
 }
 @media (max-width: 639px) {
   .hero__copy {
-    padding-inline: calc(var(--ix) + var(--hp));
+    padding-inline: var(--gutter);
   }
 }
 /* cena 2: centralizada (rola normalmente — nada trava) */
