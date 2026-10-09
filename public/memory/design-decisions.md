@@ -173,3 +173,4 @@ A tabela viva é a §20 do `prd-GBR-001.md` (23 itens). Resumo do que trava o mo
 - **Navbar no celular (Adryan):** abaixo de 768px o selo fica à esquerda (abre o formulário) e o menu à direita; o telefone sai da barra e fica só dentro do menu (grupo Visit).
 - **Rodapé com o selo da navbar (Adryan):** o selo redondo (badge) substitui o logo antigo no rodapé.
 - **Rodapé:** sai do site o aviso "Landmark, parking, nearby cities…" (Adryan); vai para publishWarnings.
+- **Formulário quebrado (corrigido):** o diálogo do kit nd é montado fora do .gbr, e os tokens de cor só existiam no .gbr; todas as cores do formulário resolviam para vazio (fundo transparente sobre a página). Os tokens agora valem para .gbr e .nd.

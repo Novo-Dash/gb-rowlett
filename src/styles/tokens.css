@@ -6,9 +6,12 @@
    Receita: branco + tinta + UM vermelho (com os dois irmãos para fundo
    escuro) + UM marinho (com o irmão noite). Nenhuma terceira cor. A cor
    viva vem das fotos (tatame, kimonos).
+   O formulário (kit nd) é montado FORA do .gbr, então recebe os mesmos
+   tokens pelo .nd: sem isso todas as cores dele ficam vazias (transparente).
    ════════════════════════════════════════════════════════════════════ */
 
-.gbr {
+.gbr,
+.nd {
   /* O pattern das seções brancas: o triângulo GB em contorno marinho a 8,5%,
      grade intercalada de 220px (dois logos por bloco). */
   --pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' fill='none' stroke='%2319286d' stroke-opacity='0.085'%3E%3Cpath transform='translate(28 30) scale(0.0510)' d='M837.405 483.729H556.004L484.971 592.954H766.372L793.692 650.297H233.623L515.024 218.858L665.286 434.578H812.816L515.024 14.061L15.0596 754.061H1004.06L837.405 483.729Z' stroke-width='27' stroke-linejoin='miter'/%3E%3Cpath transform='translate(138 140) scale(0.0510)' d='M837.405 483.729H556.004L484.971 592.954H766.372L793.692 650.297H233.623L515.024 218.858L665.286 434.578H812.816L515.024 14.061L15.0596 754.061H1004.06L837.405 483.729Z' stroke-width='27' stroke-linejoin='miter'/%3E%3C/svg%3E");
