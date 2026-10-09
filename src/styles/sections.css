@@ -78,9 +78,11 @@ html.bk-open .nav {
   min-height: 44px;
   margin-right: auto;
 }
+/* o selo redondo da academia (o mesmo do Instagram) */
 .nav__logo {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
   object-fit: contain;
 }
 @media (min-width: 520px) {
@@ -223,8 +225,8 @@ html.bk-open .nav {
     padding: 0 8px;
   }
   .nav__logo {
-    width: 46px;
-    height: 46px;
+    width: 52px;
+    height: 52px;
   }
 }
 

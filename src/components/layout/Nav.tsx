@@ -78,7 +78,7 @@ export function Nav() {
 
           {/* o selo abre o formulário: o caminho mais curto para a vaga */}
           <button type="button" className="nav__brand" aria-label={nav.logoLabel} onClick={() => book()}>
-            <img src="/img/logo-112.webp" srcSet="/img/logo-112.webp 1x, /img/logo-160.webp 2x" alt="" width={56} height={56} className="nav__logo" />
+            <img src="/img/badge-56.webp" srcSet="/img/badge-56.webp 1x, /img/badge-112.webp 2x, /img/badge-150.webp 3x" alt="" width={56} height={56} className="nav__logo" />
           </button>
 
           <div className="nav__actions">

@@ -29,7 +29,7 @@ export const site = {
   email: 'info@gbrowlett.com', // [CONFIRMAR domínio da LP] (§20 #16)
   url: 'https://gbrowlett.com',
   /** [CONFIRMAR] @gbrowlett existe? null = pendência, nunca ícone vazio. (§20 #15) */
-  socials: { instagram: null as string | null, facebook: null as string | null },
+  socials: { instagram: 'https://www.instagram.com/gbrowlett/' as string | null, facebook: null as string | null },
   /** [CONFIRMAR] data e hora da abertura. null = contador não aparece. (§20 #1) */
   openingISO: null as string | null,
   openingLabel: null as string | null,
@@ -468,7 +468,6 @@ export const footer = {
   mapTitle: [{ text: 'Right here in Rowlett' }],
   mapIframeTitle: 'Map: Gracie Barra Rowlett, 3503 Rowlett Rd, Bldg K, Suite 302, Rowlett, TX 75088',
   landmarkPending: 'Landmark, parking, nearby cities (suggested: Garland, Sachse, Rockwall)',
-  socialPending: 'Instagram handle (@gbrowlett?) to confirm',
   facadeAlt: 'The Gracie Barra Rowlett storefront with the sign installed',
   marquee: 'Gracie Barra Rowlett',
   copyright: '© 2026 Gracie Barra Rowlett',

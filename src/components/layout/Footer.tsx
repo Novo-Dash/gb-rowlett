@@ -87,11 +87,7 @@ export function Footer() {
               <a className="foot__social" href={site.socials.instagram} target="_blank" rel="noopener noreferrer">
                 Instagram
               </a>
-            ) : (
-              <p>
-                <Pending>{footer.socialPending}</Pending>
-              </p>
-            )}
+            ) : null}
           </div>
 
           <div>
