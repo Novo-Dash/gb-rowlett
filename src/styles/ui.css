@@ -402,6 +402,21 @@ html.motion [data-in] .stamp {
   height: 10px;
   flex: none;
 }
+/* no azul do ingresso: o mesmo marinho claro do canhoto */
+.pending--navy {
+  border-color: rgb(var(--paper-rgb) / 0.16);
+  background: var(--navy-2);
+  color: var(--paper);
+}
+.pending--navy svg {
+  color: var(--red-hi);
+}
+/* no lado vermelho: o vermelho do card I, texto branco */
+.pending--red {
+  border-color: rgb(var(--paper-rgb) / 0.22);
+  background: var(--red);
+  color: var(--paper);
+}
 
 /* ── Slot de vídeo ── */
 .vslot {

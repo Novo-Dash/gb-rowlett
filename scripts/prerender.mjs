@@ -32,7 +32,7 @@ const client = uxMode === 'client'
 let head = `    <link rel="preload" as="image" type="image/avif" media="(max-width: 767px)"
       imagesrcset="/img/film-m-540.avif 540w, /img/film-m-760.avif 760w" imagesizes="100vw" fetchpriority="high" />
     <link rel="preload" as="image" type="image/avif" media="(min-width: 768px)"
-      imagesrcset="/img/film-1280.avif 1280w, /img/film-1920.avif 1920w" imagesizes="100vw" fetchpriority="high" />
+      imagesrcset="/img/hero-d-1280.avif 1280w, /img/hero-d-1920.avif 1920w, /img/hero-d-2560.avif 2560w" imagesizes="100vw" fetchpriority="high" />
 `
 if (openingISO) {
   head += `    <meta name="opening-at" content="${openingISO}" />

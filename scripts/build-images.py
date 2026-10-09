@@ -29,7 +29,8 @@ F = "drive/fotos"
 # nome, origem (relativa a brand/), (w, h), larguras, foco (x, y), [q_avif]
 IMAGES = [
     # hero: poster do filme (o b-roll IMG_1600/1601.MOV ainda não chegou — >10 MB no conector)
-    ("film",       f"{D}/IMG_0196.HEIC",   (16, 9), [1280, 1920], (0.5, 0.42), 50),
+    # desktop: o Andre ensinando no terço direito; a parede livre à esquerda recebe o texto
+    ("hero-d",     f"{D}/IMG_0201.HEIC",   (16, 9), [1280, 1920, 2560], (0.5, 0.40), 50),
     ("film-m",     f"{D}/IMG_0192.HEIC",   (9, 16), [540, 760],   (0.5, 0.42), 46),
     ("logo",       "logo/gb-mark.png",     (1, 1),  [112, 160],   (0.5, 0.5)),
     # programas 3/4 — LC1 e Juniors: fotos da GB Lindale, [CONFIRMAR autorização]

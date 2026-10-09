@@ -8,10 +8,12 @@
 import { UX } from '@/lib/ux'
 import { Tri } from './Icons'
 
-export function Pending({ children, className }: { children: React.ReactNode; className?: string }) {
+/** `tone`: a cor do marcador acompanha a superfície onde ele mora
+    (padrão = vermelho sobre --red-wash; navy = no azul do ingresso; red = no vermelho). */
+export function Pending({ children, className, tone }: { children: React.ReactNode; className?: string; tone?: 'navy' | 'red' }) {
   if (UX.client) return null
   return (
-    <span className={['pending', className].filter(Boolean).join(' ')}>
+    <span className={['pending', tone && `pending--${tone}`, className].filter(Boolean).join(' ')}>
       <Tri />
       <span>{children}</span>
     </span>

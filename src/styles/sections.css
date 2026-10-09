@@ -281,14 +281,14 @@ html.bk-open .nav {
 .hero__video[data-on] {
   opacity: 1;
 }
-/* cena 1: overlay leve e uniforme no filme inteiro + um reforço embaixo,
-   só o necessário para o texto (que mora embaixo, à esquerda) */
+/* cena 1 (celular): o rosto fica limpo em cima; o véu escurece só a metade de baixo,
+   onde mora o texto */
 .hero__veil {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(0deg, rgb(var(--navy-rgb) / 0.7) 0%, rgb(var(--navy-rgb) / 0.34) 42%, rgb(var(--navy-rgb) / 0) 68%),
-    rgb(var(--navy-rgb) / 0.34);
+    linear-gradient(0deg, rgb(var(--navy-rgb) / 0.92) 0%, rgb(var(--navy-rgb) / 0.78) 34%, rgb(var(--navy-rgb) / 0.2) 62%, rgb(var(--navy-rgb) / 0) 78%),
+    rgb(var(--navy-rgb) / 0.12);
   opacity: var(--k);
 }
 /* cena 2: o filme inteiro sob o marinho, para o texto centralizado */
@@ -338,30 +338,26 @@ html.bk-open .nav {
   color: rgb(var(--paper-rgb) / 0.92);
   text-wrap: pretty;
 }
-.hero__offer {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin-top: 14px;
-  font-family: var(--f-display);
-  font-weight: 700;
-  font-style: italic;
-  font-size: clamp(1.0625rem, calc(var(--u) * 1.25), 1.375rem);
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: var(--paper);
-}
-.hero__offer svg {
-  width: 12px;
-  height: 12px;
-  flex: none;
-  margin-top: 0.22em;
-  color: var(--red-glow);
-}
 .hero__act {
   display: grid;
-  gap: 18px;
+  gap: 12px;
   margin-top: 22px;
+}
+/* a oferta: pequena, discreta, logo abaixo do botão */
+.hero__note {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: rgb(var(--paper-rgb) / 0.78);
+}
+.hero__note svg {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  margin-top: 0.42em;
+  color: var(--red-glow);
 }
 @media (max-width: 639px) {
   .hero__copy {
@@ -424,18 +420,43 @@ html:not(.motion) .hero__deep {
   opacity: 0.6;
 }
 @media (min-width: 1024px) {
+  /* duas colunas: o texto na esquerda, sobre a parede; o professor na direita */
+  .hero__veil {
+    background:
+      linear-gradient(90deg, rgb(var(--navy-rgb) / 0.86) 0%, rgb(var(--navy-rgb) / 0.66) 34%, rgb(var(--navy-rgb) / 0.12) 56%, rgb(var(--navy-rgb) / 0) 66%),
+      rgb(var(--navy-rgb) / 0.1);
+  }
+  .hero__scene--card {
+    align-items: center;
+    padding: calc(var(--nav-h) + 24px) 0 48px;
+  }
+  /* a foto ancorada na esquerda (e o zoom de entrada crescendo dali): o professor
+     escorrega para a coluna da direita, longe do título */
+  /* o Andre fica no terço direito em qualquer proporção: a foto corta pela
+     esquerda nas telas estreitas e por baixo nas ultralargas, nunca a cabeça */
+  .hero__poster img,
+  .hero__video {
+    object-position: 72% 20%;
+    transform-origin: 72% 20%;
+  }
+  /* .hero .hero__copy: vence o width:100% do .shell */
+  .hero .hero__copy {
+    --x0: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
+    width: calc(var(--x0) + min(42vw, 760px));
+    max-width: none;
+    margin-inline: 0;
+    padding-left: var(--x0);
+    padding-right: 0;
+  }
   .hero__title {
-    max-width: 12em;
-    font-size: clamp(3.4rem, min(calc(var(--u) * 5.6), 10.5svh), 7.2rem);
+    max-width: 11em;
+    font-size: clamp(3rem, min(calc(var(--u) * 4.4), 9svh), 5.8rem);
   }
   .hero__lead {
-    max-width: 44ch;
+    max-width: 40ch;
   }
   .hero__act {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 20px 40px;
+    justify-items: start;
     margin-top: 28px;
   }
   .hero__need {
@@ -963,42 +984,43 @@ html.motion .pass__pill--open i {
 .tk__blur {
   display: grid;
   gap: 8px;
-  filter: blur(6px);
-  opacity: 0.85;
+  filter: blur(14px);
+  opacity: 0.45;
   pointer-events: none;
   user-select: none;
 }
 .tk--next .tk__bar {
   background: rgb(var(--paper-rgb) / 0.18);
 }
+/* o selo do centro, minimalista: só o cadeado em traço fino e o rótulo */
 .tk__soon {
   position: absolute;
   left: 50%;
   top: 50%;
   display: grid;
   justify-items: center;
-  gap: 12px;
+  gap: 10px;
   transform: translate(-50%, -50%);
   text-align: center;
 }
 .tk__lock {
   display: grid;
   place-items: center;
-  width: 64px;
-  height: 64px;
-  background: var(--paper);
-  color: var(--navy);
-  box-shadow: 0 18px 30px -16px rgb(0 0 0 / 0.6);
+  color: var(--paper);
 }
 .tk__lock svg {
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
+  stroke-width: 1.5;
 }
 .tk__soont {
+  font-family: var(--f-display);
+  font-weight: 700;
   font-style: italic;
-  font-size: clamp(1.5rem, 6vw, 2rem);
-  letter-spacing: 0.02em;
-  color: var(--paper);
+  font-size: var(--t-label);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgb(var(--paper-rgb) / 0.9);
   white-space: nowrap;
 }
 .tk__price {

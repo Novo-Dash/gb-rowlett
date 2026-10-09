@@ -138,7 +138,7 @@ function OpenHalf({ tier, days }: { tier: Tier; days: number | null }) {
           <span>{offer.compare.per}</span>
           <span className="pass__plus">{offer.compare.plus}</span>
         </p>
-        {days === null ? <Pending>{offer.stampPending}</Pending> : null}
+        {days === null ? <Pending tone="red">{offer.stampPending}</Pending> : null}
       </div>
     </div>
   )
@@ -178,12 +178,12 @@ function NextHalf({ tier }: { tier: Tier }) {
           <span className="tk__lock">
             <Lock />
           </span>
-          <span className="tk__soont d">{offer.comingSoon}</span>
+          <span className="tk__soont">{offer.comingSoon}</span>
         </span>
       </article>
       <div className="pass__foot">
         <p className="pass__note">{tier.note}</p>
-        {tier.seats === null ? <Pending>{offer.seatsPending}</Pending> : null}
+        {tier.seats === null ? <Pending tone="navy">{offer.seatsPending}</Pending> : null}
       </div>
     </div>
   )
