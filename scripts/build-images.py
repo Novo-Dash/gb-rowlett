@@ -33,11 +33,11 @@ IMAGES = [
     ("hero-d",     f"{D}/IMG_0201.HEIC",   (16, 9), [1280, 1920, 2560], (0.5, 0.40), 50),
     ("film-m",     f"{D}/IMG_0192.HEIC",   (9, 16), [540, 760],   (0.5, 0.42), 46),
     ("logo",       "logo/gb-mark.png",     (1, 1),  [112, 160],   (0.5, 0.5)),
-    # programas 3/4 — LC1 e Juniors: fotos da GB Lindale, [CONFIRMAR autorização]
-    ("p-lc1",      "lindale/kids.webp",    (3, 4),  [360, 600],   (0.5, 0.45)),
-    ("p-lc2",      f"{F}/6T7A0276.JPG",    (3, 4),  [360, 600],   (0.5, 0.86)),
-    ("p-juniors",  "lindale/inside-5.webp",(3, 4),  [360, 600],   (0.5, 0.4)),
-    ("p-adults",   f"{D}/IMG_0224.HEIC",   (3, 4),  [360, 600],   (0.5, 0.5)),
+    # programas 3/4: fotos novas do Adryan (9 out 2026), já tratadas, 394px de origem
+    ("p-lc1",      "programs/p-lc1.webp",     (3, 4),  [360, 600],   (0.5, 0.5)),
+    ("p-lc2",      "programs/p-lc2.webp",     (3, 4),  [360, 600],   (0.5, 0.5)),
+    ("p-juniors",  "programs/p-juniors.webp", (3, 4),  [360, 600],   (0.5, 0.5)),
+    ("p-adults",   "programs/p-adults.webp",  (3, 4),  [360, 600],   (0.5, 0.5)),
     # a obra 4/5 — fotos reais de Obras GB (sem filtro que pareça render)
     ("build-1",    f"{O}/IMG_0704.HEIC",   (4, 5),  [360, 640],   (0.5, 0.45)),
     ("build-2",    f"{O}/IMG_1605.HEIC",   (4, 5),  [360, 640],   (0.5, 0.5)),
@@ -55,8 +55,8 @@ IMAGES = [
 ]
 
 # Fotos de celular e de câmera convivem: a mesma curva (contraste +6, saturação −8).
-# As da obra ficam cruas (são prova). O logo não é foto.
-RAW = {"logo", "build-1", "build-2", "build-3", "build-4", "build-5", "opening", "visit"}
+# As da obra ficam cruas (são prova); as dos programas já chegaram tratadas. O logo não é foto.
+RAW = {"p-lc1", "p-lc2", "p-juniors", "p-adults", "logo", "build-1", "build-2", "build-3", "build-4", "build-5", "opening", "visit"}
 
 
 def crop_to(im: Image.Image, ratio, focus):
