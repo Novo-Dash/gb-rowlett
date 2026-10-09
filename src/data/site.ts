@@ -288,12 +288,6 @@ export const build = {
     { id: 'doors', image: 'build-4', title: 'New walls and a doorway, drywall still unpainted' },
     { id: 'front', image: 'build-5', title: 'The storefront with the Gracie Barra Jiu-Jitsu & Self-Defense sign installed' },
   ] as const,
-  /** A galeria em tela cheia. */
-  zoom: 'View photo',
-  galleryLabel: 'The build, in photos',
-  prev: 'Previous photo',
-  next: 'Next photo',
-  close: 'Close',
   /** As razões de "why us", só o título (tópicos). */
   plates: ['Beginners are the plan, not the exception.', 'One trip for the whole family.'],
   cta: 'Claim my Founding Member spot',

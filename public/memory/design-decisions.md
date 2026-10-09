@@ -184,3 +184,8 @@ A tabela viva é a §20 do `prd-GBR-001.md` (23 itens). Resumo do que trava o mo
   - **Galeria da obra amplia:** cada foto é um botão que abre a galeria em tela cheia com a foto INTEIRA (build-N-full, 1200×1600, sem o recorte 4:5), setas, teclado (← → Esc) e clique fora fecha.
   - **Horários no padrão GB (formato da GB Charleston, pedido do Adryan):** abas (All classes · Kids · Adults + Teens) e um card por turma com a régua na cor oficial do programa e o selo oficial (GBK verde nos kids, GB1 azul nos adultos), dias + horário por linha, "Claim a spot" sempre visível. Selos em public/img/gb (da Charleston); cores --gbk/--gb1 em tokens.css.
   - **Azul como cor principal:** a seção "How to reserve" fica marinho; o card do passo atual, o botão e o tatame com a faixa seguem vermelhos (o accent).
+- **Revisão do Adryan sobre os ajustes do João:**
+  - **Navbar:** volta o cartão branco flutuante de antes (a barra marinho saiu).
+  - **How to reserve:** seção BRANCA de novo; os cards e o tatame atrás da faixa em AZUL (card do passo atual em marinho, números e selos em marinho, o tatame marinho); só o botão segue vermelho.
+  - **Oferta do hero em preto e azul:** vidro preto, etiqueta "Founding Members" em pílula azul GB, $87 grande à esquerda, filete, benefícios com check em círculo azul. Sem vermelho nem marinho.
+  - **Galeria da obra sem abrir a foto:** sai a galeria em tela cheia; no desktop com mouse a fila vira um acordeão e a foto apontada CRESCE (≈ metade da fila), as outras se apertam. Fotos da obra agora também em 1280px. No celular/toque a fila segue estática.

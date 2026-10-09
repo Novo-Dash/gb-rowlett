@@ -69,13 +69,6 @@ export const Lock = ({ className }: P) => (
   </svg>
 )
 
-/** Ampliar: os quatro cantos para fora. */
-export const Expand = ({ className }: P) => (
-  <svg {...base} className={className} strokeWidth={2}>
-    <path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5" />
-  </svg>
-)
-
 export const Close = ({ className }: P) => (
   <svg {...base} className={className} strokeWidth={2}>
     <path d="M6 6l12 12M18 6L6 18" />

@@ -76,10 +76,10 @@ export function Reserve() {
   const on = (i: number) => !live || i <= step
 
   return (
-    <section ref={root} id="reserve" className="how on-dark" aria-labelledby="how-title">
+    <section ref={root} id="reserve" className="how" aria-labelledby="how-title">
       <div className="how__stage">
         <div className="shell how__head">
-          <Eyebrow tone="light">{reserve.eyebrow}</Eyebrow>
+          <Eyebrow>{reserve.eyebrow}</Eyebrow>
           <Lines id="how-title" className="d h2 how__title" parts={reserve.title} />
         </div>
 

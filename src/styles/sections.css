@@ -6,73 +6,60 @@
    Nenhum hex: tudo em tokens.css.
    ════════════════════════════════════════════════════════════════════ */
 
-/* ════════ NAV — a barra marinho, reta, de borda a borda ════════
-   Pedido do João Vitor (9 out 2026): sem o cartão branco flutuante, mais simples;
-   o azul é a cor principal da GB. Selo à esquerda (abre o formulário), telefone e
-   menu à direita; no celular o telefone mora dentro do menu. O menu abre a própria
-   barra para baixo, em três colunas de links, sem cartões. */
+/* ════════ NAV — o cartão flutuante ════════ */
 .nav {
-  --bar: var(--nav-h);
+  --bar: 52px;
   position: fixed;
   inset: 0 0 auto;
   z-index: 60;
+  display: grid;
+  justify-items: center;
+  padding: 6px 10px 0;
   pointer-events: none;
   transition: transform 0.5s var(--ease);
 }
 .nav[data-hidden],
 html.bk-open .nav {
-  transform: translateY(-100%);
+  transform: translateY(calc(-100% - 12px));
 }
 .nav__card {
   position: relative;
   z-index: 2;
   width: 100%;
-  background: var(--navy);
-  color: var(--on-dark);
-  box-shadow: 0 1px 0 rgb(var(--paper-rgb) / 0.08), 0 10px 30px -18px rgb(0 0 0 / 0.6);
+  max-width: 880px;
+  overflow: hidden;
+  border: 1px solid rgb(var(--navy-rgb) / 0.08);
+  border-radius: var(--r-nav);
+  background: rgb(var(--paper-rgb) / 0.94);
+  box-shadow: 0 10px 30px -14px rgb(var(--navy-rgb) / 0.28);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
   pointer-events: auto;
 }
+@supports not (backdrop-filter: blur(1px)) {
+  .nav__card {
+    background: rgb(var(--paper-rgb) / 0.96);
+  }
+}
 .nav__bar {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 8px;
-  width: min(100%, calc(var(--max) + 2 * var(--gutter)));
+  justify-content: space-between;
   height: var(--bar);
-  margin-inline: auto;
-  padding: 0 calc(var(--gutter) - 6px);
-}
-.nav__brand {
-  order: 0;
-  display: inline-flex;
-  align-items: center;
-  min-width: 44px;
-  min-height: 44px;
-  margin-right: auto;
-}
-/* o selo redondo da academia (o mesmo do Instagram) */
-.nav__logo {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  object-fit: contain;
-}
-.nav__actions {
-  order: 1;
-  display: flex;
-  align-items: center;
+  padding: 0 4px 0 2px;
 }
 .nav__burger {
-  order: 2;
   display: grid;
   place-content: center;
   gap: 6px;
   width: 44px;
   height: 44px;
-  color: var(--paper);
+  color: var(--ink);
 }
 .nav__burger i {
   display: block;
-  width: 24px;
+  width: 22px;
   height: 2px;
   background: currentColor;
   transition: transform 0.3s var(--ease);
@@ -83,6 +70,49 @@ html.bk-open .nav {
 .nav[data-open] .nav__burger i:last-child {
   transform: translateY(-4px) rotate(-45deg);
 }
+.nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  margin-right: auto;
+}
+/* o selo redondo da academia (o mesmo do Instagram) */
+.nav__logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: contain;
+}
+/* celular: o selo à esquerda (abre o formulário) e o menu à direita; o telefone
+   sai da barra e fica dentro do menu (grupo Visit) */
+@media (max-width: 767px) {
+  .nav__brand {
+    order: 0;
+    margin-left: 4px;
+  }
+  .nav__burger {
+    order: 2;
+  }
+  .nav .nav__actions {
+    display: none;
+  }
+}
+@media (min-width: 768px) {
+  .nav__brand {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: 0;
+    transform: translate(-50%, -50%);
+  }
+}
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
 .nav__call {
   display: inline-flex;
   align-items: center;
@@ -91,7 +121,7 @@ html.bk-open .nav {
   min-width: 44px;
   height: 44px;
   padding: 0 12px;
-  color: var(--paper);
+  color: var(--ink);
   font-family: var(--f-display);
   font-weight: 700;
   font-style: italic;
@@ -104,20 +134,13 @@ html.bk-open .nav {
   width: 19px;
   height: 19px;
   flex: none;
-  color: var(--red-hi);
+  color: var(--red);
 }
 @media (hover: hover) and (pointer: fine) {
   .nav__call:hover {
-    color: var(--red-hi);
+    color: var(--red);
   }
 }
-/* celular: só o selo e o menu; o telefone fica dentro do menu */
-@media (max-width: 767px) {
-  .nav .nav__actions {
-    display: none;
-  }
-}
-/* o menu: a barra abre para baixo, três colunas de links sobre o mesmo marinho */
 .nav__menu {
   display: grid;
   grid-template-rows: 0fr;
@@ -132,19 +155,17 @@ html.bk-open .nav {
 }
 .nav__cards {
   display: grid;
-  gap: 4px;
-  width: min(100%, calc(var(--max) + 2 * var(--gutter)));
-  margin-inline: auto;
-  padding: 4px var(--gutter) 20px;
-  border-top: 1px solid rgb(var(--paper-rgb) / 0.12);
+  gap: 8px;
+  padding: 4px 8px 8px;
 }
 .nav__group {
   display: grid;
-  align-content: start;
-  gap: 2px;
-  padding: 14px 0 6px;
+  gap: 6px;
+  padding: 14px 16px 12px;
+  border-radius: var(--r);
+  background: var(--paper-2);
   opacity: 0;
-  transform: translateY(12px);
+  transform: translateY(16px);
   transition: transform 0.4s var(--ease), opacity 0.3s var(--ease);
 }
 .nav[data-open] .nav__group {
@@ -152,14 +173,20 @@ html.bk-open .nav {
   transform: none;
   transition-delay: calc(0.1s + var(--k) * 0.06s);
 }
+.nav__group--dark {
+  background: var(--navy);
+  color: var(--paper);
+}
 .nav__label {
-  margin-bottom: 4px;
   font-family: var(--f-display);
   font-weight: 700;
   font-style: italic;
   font-size: var(--t-label);
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  color: var(--red);
+}
+.nav__group--dark .nav__label {
   color: var(--red-hi);
 }
 .nav__link {
@@ -169,10 +196,9 @@ html.bk-open .nav {
   gap: 12px;
   width: 100%;
   min-height: 44px;
-  border-bottom: 1px solid rgb(var(--paper-rgb) / 0.08);
   font-size: 1rem;
   font-weight: 500;
-  color: var(--paper);
+  color: inherit;
   text-align: left;
 }
 .nav__link svg {
@@ -192,19 +218,29 @@ html.bk-open .nav {
   position: fixed;
   inset: 0;
   z-index: 1;
-  background: rgb(0 0 0 / 0.35);
+  background: rgb(var(--navy-rgb) / 0.18);
   pointer-events: auto;
 }
 @media (min-width: 640px) {
   .nav__cards {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    column-gap: clamp(24px, calc(var(--u) * 4), 72px);
+  }
+  .nav__group {
+    align-content: start;
+    min-height: 196px;
   }
 }
 @media (min-width: 1024px) {
+  .nav {
+    --bar: 60px;
+    padding-top: 10px;
+  }
+  .nav__bar {
+    padding: 0 8px;
+  }
   .nav__logo {
-    width: 56px;
-    height: 56px;
+    width: 52px;
+    height: 52px;
   }
 }
 
@@ -324,29 +360,44 @@ html.bk-open .nav {
   width: min(100%, 440px);
   margin-top: 22px;
 }
-/* a oferta em DESTAQUE (pedido do João Vitor): vidro marinho com a régua vermelha,
-   o preço grande na display, os dois benefícios ao lado; logo acima do botão */
+/* a oferta em DESTAQUE (pedido do João Vitor), em PRETO e AZUL (pedido do Adryan):
+   vidro preto, a etiqueta azul GB em pílula, o preço grande à esquerda e, depois de
+   um filete, os dois benefícios com o check azul; logo acima do botão */
 .hero__offer {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto 1px 1fr;
   align-items: center;
   column-gap: 18px;
-  row-gap: 4px;
+  row-gap: 12px;
   width: 100%;
-  padding: 14px 18px 14px 16px;
-  border-left: 4px solid var(--red);
-  border-radius: var(--r);
-  background: rgb(var(--navy-rgb) / 0.72);
-  box-shadow: 0 18px 40px -24px rgb(0 0 0 / 0.7), inset 0 0 0 1px rgb(var(--paper-rgb) / 0.1);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  padding: 16px 20px 18px;
+  border-radius: calc(var(--r) * 1.5);
+  background: rgb(0 0 0 / 0.68);
+  box-shadow:
+    inset 0 0 0 1px rgb(var(--paper-rgb) / 0.12),
+    0 24px 48px -28px rgb(0 0 0 / 0.8);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   text-align: left;
+}
+.hero__offer::after {
+  content: '';
+  grid-row: 2;
+  grid-column: 2;
+  align-self: stretch;
+  background: rgb(var(--paper-rgb) / 0.18);
 }
 .hero__offer-label {
   grid-column: 1 / -1;
-  color: var(--red-hi);
+  justify-self: start;
+  padding: 5px 10px 4px;
+  border-radius: 999px;
+  background: var(--gb1);
+  color: var(--paper);
 }
 .hero__offer-price {
+  grid-row: 2;
+  grid-column: 1;
   display: flex;
   align-items: baseline;
   gap: 8px;
@@ -360,12 +411,13 @@ html.bk-open .nav {
   max-width: 7.5em;
   font-size: 0.9375rem;
   line-height: 1.15;
-  color: rgb(var(--paper-rgb) / 0.85);
+  color: rgb(var(--paper-rgb) / 0.8);
 }
 .hero__offer-perks {
+  grid-row: 2;
+  grid-column: 3;
   display: grid;
-  gap: 4px;
-  justify-self: end;
+  gap: 6px;
   font-size: 0.9375rem;
   font-weight: 500;
   color: var(--paper);
@@ -373,28 +425,31 @@ html.bk-open .nav {
 .hero__offer-perks span {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   white-space: nowrap;
 }
 .hero__offer-perks svg {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   flex: none;
-  color: var(--red-hi);
+  padding: 3px;
+  border-radius: 50%;
+  background: var(--gb1);
+  color: var(--paper);
 }
 @media (max-width: 400px) {
   .hero__offer {
     grid-template-columns: 1fr;
   }
-  .hero__offer-perks {
-    justify-self: start;
-    grid-auto-flow: column;
-    gap: 14px;
+  .hero__offer::after {
+    display: none;
   }
-}
-@media (max-width: 639px) {
-  .hero__copy {
-    padding-inline: var(--gutter);
+  .hero__offer-perks {
+    grid-row: 3;
+    grid-column: 1;
+    grid-auto-flow: column;
+    justify-content: start;
+    gap: 14px;
   }
 }
 /* cena 2: centralizada (rola normalmente — nada trava) */
@@ -1598,137 +1653,6 @@ html.motion .programs__wrap[data-in] .pcard__btn {
   object-fit: cover;
   transition: transform 0.9s var(--ease);
 }
-/* a foto é um botão que amplia: cursor de lupa, o ícone de ampliar no canto */
-.build__zoom {
-  display: block;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  cursor: zoom-in;
-}
-.build__plus {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: rgb(var(--navy-rgb) / 0.78);
-  color: var(--paper);
-  opacity: 0.85;
-  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
-}
-.build__plus svg {
-  width: 16px;
-  height: 16px;
-}
-@media (hover: hover) and (pointer: fine) {
-  .build__plus {
-    opacity: 0;
-  }
-  .build__zoom:hover .build__plus,
-  .build__zoom:focus-visible .build__plus {
-    opacity: 1;
-    transform: scale(1.06);
-  }
-}
-/* a galeria em tela cheia */
-.lbx {
-  position: fixed;
-  inset: 0;
-  z-index: 90;
-  display: grid;
-  place-items: center;
-  padding: 56px 16px 24px;
-  background: rgb(0 0 0 / 0.94);
-  outline: none;
-  animation: lbx-in 0.25s var(--ease) both;
-}
-@keyframes lbx-in {
-  from {
-    opacity: 0;
-  }
-}
-.lbx__fig {
-  display: grid;
-  justify-items: center;
-  gap: 12px;
-  max-height: 100%;
-  pointer-events: none;
-}
-.lbx__img {
-  width: auto;
-  max-width: min(100%, 1200px);
-  height: auto;
-  max-height: calc(100svh - 140px);
-  border-radius: var(--r);
-  object-fit: contain;
-  pointer-events: auto;
-}
-.lbx__cap {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  max-width: 60ch;
-  font-size: 0.9375rem;
-  line-height: 1.4;
-  color: rgb(var(--paper-rgb) / 0.85);
-  text-align: center;
-}
-.lbx__cap .label {
-  flex: none;
-  color: var(--red-hi);
-}
-.lbx__btn,
-.lbx__close {
-  position: absolute;
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: rgb(var(--paper-rgb) / 0.12);
-  color: var(--paper);
-  transition: background-color 0.2s var(--ease);
-}
-.lbx__btn svg,
-.lbx__close svg {
-  width: 20px;
-  height: 20px;
-}
-.lbx__btn {
-  top: 50%;
-  transform: translateY(-50%);
-}
-.lbx__btn--prev {
-  left: clamp(8px, 2vw, 32px);
-}
-.lbx__btn--prev svg {
-  transform: rotate(180deg);
-}
-.lbx__btn--next {
-  right: clamp(8px, 2vw, 32px);
-}
-.lbx__close {
-  top: 12px;
-  right: 12px;
-}
-@media (hover: hover) and (pointer: fine) {
-  .lbx__btn:hover,
-  .lbx__close:hover {
-    background: var(--red);
-  }
-}
-@media (max-width: 639px) {
-  .lbx__btn {
-    top: auto;
-    bottom: 16px;
-    transform: none;
-  }
-}
 /* o véu marinho a 18% que sai no hover/foco; as vizinhas caem a 45% */
 .build__veil {
   position: absolute;
@@ -1739,11 +1663,10 @@ html.motion .programs__wrap[data-in] .pcard__btn {
 }
 @media (hover: hover) and (pointer: fine) {
   .build__row:hover > .build__cell:not(:hover) {
-    opacity: 0.45;
+    opacity: 0.6;
   }
   .build__cell:hover {
     z-index: 2;
-    transform: translateY(-6px) scale(1.03);
     box-shadow: 0 40px 70px -40px rgb(var(--navy-rgb) / 0.7);
   }
   .build__cell:hover .build__veil {
@@ -1755,7 +1678,27 @@ html.motion .programs__wrap[data-in] .pcard__btn {
 }
 html.motion .build__cell {
   clip-path: inset(0 0 100% 0);
-  transition: clip-path 1s var(--ease) calc(var(--k) * 90ms), transform 0.5s var(--ease), opacity 0.5s var(--ease), box-shadow 0.5s var(--ease);
+  transition: clip-path 1s var(--ease) calc(var(--k) * 90ms), transform 0.5s var(--ease), opacity 0.5s var(--ease), box-shadow 0.5s var(--ease), flex-grow 0.7s var(--ease);
+}
+/* desktop com mouse: a fila vira um acordeão. A foto apontada CRESCE e fica gigante
+   (quase metade da fila), sem abrir nada (pedido do Adryan); as outras se apertam */
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+  .build .build__row {
+    display: flex;
+    height: clamp(380px, 38vw, 640px);
+  }
+  .build .build__cell {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  .build .build__cell img,
+  .build .build__cell:nth-child(5) img {
+    aspect-ratio: auto;
+    height: 100%;
+  }
+  .build .build__cell:hover {
+    flex-grow: 4.2;
+  }
 }
 html.motion .build__row[data-in] .build__cell {
   clip-path: inset(0);
@@ -2439,13 +2382,9 @@ html.motion .ready__cols .rise {
 }
 
 /* ════════ [IX] COMO RESERVAR — três passos lado a lado, a faixa embaixo ════════ */
-/* a seção em MARINHO (pedido do João Vitor: "o azul é a cor principal da GB, o
-   vermelho é o accent"); o card do passo atual, o botão e o tatame seguem vermelhos */
+/* seção BRANCA; os cards e o tatame atrás da faixa em AZUL GB, só o botão vermelho
+   (pedido do Adryan, depois da revisão do João Vitor: azul é a cor principal da GB) */
 .how {
-  background:
-    radial-gradient(120% 70% at 50% 0%, rgb(var(--paper-rgb) / 0.06), transparent 60%),
-    var(--navy);
-  color: var(--on-dark);
   --x0: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
   --bh: clamp(64px, 11svh, 124px);
   position: relative;
@@ -2501,7 +2440,7 @@ html.motion .ready__cols .rise {
 .how__n {
   font-size: clamp(2.6rem, 11vw, 3.2rem);
   line-height: 0.82;
-  color: var(--red);
+  color: var(--navy);
   transition:
     color 0.5s var(--ease),
     -webkit-text-stroke-color 0.5s var(--ease);
@@ -2538,15 +2477,15 @@ html.motion .ready__cols .rise {
 }
 /* feito */
 .how__step.is-done .how__chip {
-  background: var(--red-wash);
-  color: var(--red);
+  background: rgb(var(--navy-rgb) / 0.07);
+  color: var(--navy);
 }
 /* agora: o card vermelho */
 .how__step.is-now {
-  background: linear-gradient(180deg, var(--btn-top), var(--btn-bottom));
+  background: linear-gradient(180deg, var(--navy-2), var(--navy));
   box-shadow:
-    0 0 0 1px rgb(var(--red-rgb) / 0.4),
-    0 34px 56px -30px rgb(var(--red-rgb) / 0.75);
+    0 0 0 1px rgb(var(--navy-rgb) / 0.4),
+    0 34px 56px -30px rgb(var(--navy-rgb) / 0.8);
   transform: translateY(-6px);
 }
 .how__step.is-now .how__n,
@@ -2558,7 +2497,7 @@ html.motion .ready__cols .rise {
 }
 .how__step.is-now .how__chip {
   background: var(--paper);
-  color: var(--red);
+  color: var(--navy);
 }
 /* depois: vazado */
 .how__step.is-next {
@@ -2592,7 +2531,7 @@ html.motion .ready__cols .rise {
   overflow: hidden;
   background:
     linear-gradient(180deg, rgb(0 0 0 / 0.12), transparent 30%),
-    var(--red);
+    var(--navy);
 }
 /* levemente em diagonal: gira pela ponta da direita e passa da borda esquerda */
 .how__belt {
@@ -2611,7 +2550,7 @@ html.motion .ready__cols .rise {
     var(--belt-white);
   box-shadow:
     0 0 0 1px rgb(0 0 0 / 0.08),
-    0 24px 28px -18px rgb(60 0 10 / 0.6);
+    0 24px 28px -18px rgb(0 0 0 / 0.55);
 }
 .how__bar {
   position: absolute;
@@ -2712,37 +2651,6 @@ html.motion .ready__cols .rise {
   .how__b {
     font-size: clamp(1rem, calc(var(--u) * 1.05), 1.125rem);
   }
-}
-
-/* no marinho: título branco, cards feitos brancos, os que faltam em contorno claro */
-.how .how__title {
-  color: var(--paper);
-}
-.how__step {
-  box-shadow:
-    0 0 0 1px rgb(var(--paper-rgb) / 0.12),
-    0 26px 44px -30px rgb(0 0 0 / 0.6);
-}
-.how__step.is-next {
-  box-shadow: inset 0 0 0 1.5px rgb(var(--paper-rgb) / 0.28);
-}
-.how__step.is-next .how__n {
-  -webkit-text-stroke-color: rgb(var(--paper-rgb) / 0.55);
-}
-.how__step.is-next .how__t {
-  color: rgb(var(--paper-rgb) / 0.8);
-}
-.how__step.is-next .how__b {
-  color: rgb(var(--paper-rgb) / 0.62);
-}
-.how__step.is-next .how__chip {
-  box-shadow: inset 0 0 0 1px rgb(var(--paper-rgb) / 0.35);
-  color: rgb(var(--paper-rgb) / 0.75);
-}
-.how__step.is-now {
-  box-shadow:
-    0 0 0 1px rgb(var(--red-rgb) / 0.5),
-    0 34px 56px -28px rgb(0 0 0 / 0.65);
 }
 
 /* ════════ [X] ABERTURA — a única banda escura ════════ */

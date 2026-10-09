@@ -1,13 +1,16 @@
 /* ════════════════════════════════════════════════════════════════════
-   Nav — a barra marinho, reta, de borda a borda (pedido do João Vitor:
-   sem o cartão branco flutuante, mais simples; o azul é a cor da GB).
+   Nav — o cartão branco flutuante (a gramática da Lindale v2).
 
-     [selo GB]                              ☎ (945) 385-9359    ≡
+     ( ≡    [selo GB]    ☎ (945) 385-9359 )
 
-   • Selo à esquerda abre o formulário; telefone escrito e menu à direita.
-     No celular, só selo e menu (o telefone fica dentro do menu).
-   • O menu abre a barra para baixo em três colunas de links: Classes (cada
-     turma abre o formulário com ela marcada), Schedule e Visit.
+   • Cartão de 880px máx, 52/60px, raio 14px (a ÚNICA exceção ao canto reto,
+     por ser objeto flutuante), backdrop-filter (o único vidro da página).
+   • Menu à esquerda abre o próprio cartão para baixo (grid 0fr → 1fr) em
+     três cards: Classes (cada turma abre o formulário com ela marcada),
+     Schedule (rola até a seção) e Visit (ligar, rota, reservar).
+   • Logo no centro abre o formulário. À direita, só o telefone, como ação
+     escrita e com o número sempre visível (pedido do Adryan: sem botão e sem
+     o nome escrito na nav).
    • Some rolando para baixo (depois de 1 tela) e volta rolando para cima;
      com o menu aberto, fica; com o formulário aberto (html.bk-open), some.
    ════════════════════════════════════════════════════════════════════ */
@@ -116,7 +119,7 @@ export function Nav() {
                   ))}
                 </ul>
               </section>
-              <section className="nav__group" style={{ ['--k' as string]: 2 }}>
+              <section className="nav__group nav__group--dark on-dark" style={{ ['--k' as string]: 2 }}>
                 <p className="nav__label">{m.visit.label}</p>
                 <ul>
                   <li>
