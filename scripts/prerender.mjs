@@ -29,6 +29,14 @@ const { render, openingISO, uxMode, tracking, publishWarnings, ghl } = await imp
 const appHtml = render()
 const client = uxMode === 'client'
 
+// Endereço absoluto da página (og:image, og:url, canonical, schema). Open Graph exige URL
+// absoluta: apontar para o domínio final antes de ele existir deixa o preview SEM imagem.
+// SITE_URL manda; senão, no build client, o domínio final; no prospect da Vercel, o
+// endereço de produção do projeto (gb-rowlett.vercel.app); fora da Vercel, o domínio final.
+const FINAL_ORIGIN = 'https://gbrowlett.com'
+const vercelHost = process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL
+const origin = (process.env.SITE_URL || (client ? FINAL_ORIGIN : vercelHost ? `https://${vercelHost}` : FINAL_ORIGIN)).replace(/\/$/, '')
+
 // Publicação sem o webhook do lead = leads que somem do CRM em silêncio (especificação do
 // calendário, §0 item 4). O build client PARA até o uuid do [ND] Primary Workflow entrar.
 if (client && (!ghl?.locationId || !ghl?.leadWebhookUuid)) {
@@ -98,6 +106,8 @@ let page = tpl
   .replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`)
   .replace('</body>', `  ${loader}\n  </body>`)
 
+if (origin !== FINAL_ORIGIN) page = page.replaceAll(`${FINAL_ORIGIN}/`, `${origin}/`)
+
 if (client) {
   if (!page.includes('<meta name="robots" content="noindex, nofollow" />')) throw new Error('prerender: meta robots não encontrada')
   page = page.replace('<meta name="robots" content="noindex, nofollow" />', '<meta name="robots" content="index, follow" />')
@@ -129,4 +139,4 @@ if (client && warnings.length) {
   warnings.forEach((w, i) => console.warn(`\x1b[33m  ${i + 1}. ${w}\x1b[0m`))
   console.warn(`\x1b[33m${bar}\x1b[0m\n`)
 }
-console.log(`prerender: index.html ${(page.length / 1024).toFixed(1)} KB (raiz ${(appHtml.length / 1024).toFixed(1)} KB) · modo ${client ? 'client' : 'prospect'}`)
+console.log(`prerender: index.html ${(page.length / 1024).toFixed(1)} KB (raiz ${(appHtml.length / 1024).toFixed(1)} KB) · modo ${client ? 'client' : 'prospect'} · ${origin}`)

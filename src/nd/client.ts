@@ -3,7 +3,9 @@
 //
 // GB Rowlett = "Gracie Barra - Rowlett TX" (novodash-tools.clients). O `locationId` é o
 // ghl_location_id da sub-account (público; a private key NUNCA entra aqui). Com ele e
-// turmas ativas no GHL o modal agenda; sem turmas, fica o pré-cadastro. Em modo prospect
+// turmas ativas no GHL o modal agenda; sem turmas, fica o pré-cadastro. `leadOnly: true`
+// (como no Collective) trava o pré-cadastro até a abertura em dezembro: o GHL não é
+// consultado e o passo de dia e horário não aparece. Em modo prospect
 // nenhum webhook sai. `leadWebhookUuid`: o id do trigger "Inbound Webhook" do
 // [ND] Primary Workflow; vazio = o build client PARA (lead sem webhook some em silêncio).
 // Apelidos (programOverrides): só o nome que o visitante lê, iguais aos da página;
@@ -20,7 +22,7 @@ export default {
   },
   "ghl": {
     "locationId": "tSFdGfOzOGpfMR97gufl",
-    "leadWebhookUuid": ""
+    "leadWebhookUuid": "jQzgFnMtiWeM5IaFK40N"
   },
   "copy": {
     "eyebrow": "Founding Members",
@@ -34,15 +36,15 @@ export default {
   "source": "Landing Page - Founding Members",
   "tracking": {
     "pixel": "",
-    "ga4": "",
-    "ads": "",
-    "adsLeadLabel": "",
-    "adsBookedLabel": "",
+    "ga4": "G-Y6KM08G190",
+    "ads": "AW-18496862973",
+    "adsLeadLabel": "X42ECMCW85cdEP31_vNE",
+    "adsBookedLabel": "ppqxCMOW85cdEP31_vNE",
     "clarity": ""
   },
   "booking": {
     "audience": null,
-    "leadOnly": false,
+    "leadOnly": true,
     "programOverrides": {
       "SYRWWAObqgjo2BLOJ2Ho": {
         "label": "Little Champions 1 (Ages 4-6)"

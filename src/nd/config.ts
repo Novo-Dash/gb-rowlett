@@ -33,6 +33,9 @@ export const BOOKING_WEBHOOK = 'https://n8n.novodash.com/webhook/landing-page-bo
 // dia e horário → Webhook 2). Sem isso (antes da abertura), fica o pré-cadastro
 // de Founding Member, só com o Webhook 1. Ver Booking.tsx.
 
+/** Backup of both steps in the Novo Dash app (client_leads), fixed for every academy; only stores, never touches GHL. */
+export const LEAD_BACKUP_WEBHOOK = 'https://n8n.novodash.com/webhook/client-lp-lead'
+
 /** Webhook 1: the [ND] Primary Workflow inbound trigger of the academy's sub-account. */
 export const LEAD_WEBHOOK =
   client.ghl.locationId && client.ghl.leadWebhookUuid

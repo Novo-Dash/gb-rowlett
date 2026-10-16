@@ -60,7 +60,7 @@ export function Build() {
       <ul ref={row} className="build__row" aria-label="The build, in photos">
         {build.stages.map((s, i) => (
           <li key={s.id} className="build__cell" style={{ ['--k' as string]: i }}>
-            <Pic name={s.image} alt={s.title} sizes="(min-width: 768px) 20vw, 50vw" />
+            <Pic name={s.image} alt={s.title} sizes="(min-width: 1024px) 45vw, (min-width: 768px) 20vw, 50vw" />
             <span className="build__veil" aria-hidden="true" />
           </li>
         ))}
@@ -76,3 +76,4 @@ export function Build() {
     </section>
   )
 }
+

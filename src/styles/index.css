@@ -82,6 +82,32 @@ html.is-book body {
   background: var(--nd-surface, #f3f2ee);
 }
 
+/* ── Barra de rolagem na identidade da página: fina, polegar vermelho, trilho claro.
+   Firefox lê scrollbar-color; Chrome, Edge e Safari, os pseudo-elementos. Vale para a
+   página e para as áreas que rolam dentro dela (o formulário, o trilho de programas). ── */
+html {
+  scrollbar-color: var(--sb-thumb) var(--sb-track);
+  scrollbar-width: thin;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--sb-track);
+}
+::-webkit-scrollbar-thumb {
+  border: 2px solid var(--sb-track);
+  border-radius: 999px;
+  background: var(--sb-thumb);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sb-thumb-hover);
+}
+::-webkit-scrollbar-corner {
+  background: var(--sb-track);
+}
+
 /* ── Raiz ── */
 .gbr {
   position: relative;

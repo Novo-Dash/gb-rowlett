@@ -25,7 +25,7 @@ import { hero, site } from '@/data/site'
 import { clamp01, docTop, prefersReducedMotion, useScrollTick } from '@/motion/scroll'
 import { Cta } from '../ui/Cta'
 import { Eyebrow } from '../ui/Eyebrow'
-import { Tri } from '../ui/Icons'
+import { Check } from '../ui/Icons'
 import { Lines } from '../ui/Lines'
 import { Pic } from '../ui/Pic'
 
@@ -112,10 +112,41 @@ export function Hero() {
       {/* CENA 1 · o texto direto sobre a foto: embaixo à esquerda no celular, centralizado no desktop */}
       <div ref={card} className="hero__scene hero__scene--card on-dark">
         <div className="shell hero__copy">
-          <Eyebrow tone="light" className="hero__eb">
-            {hero.eyebrow}
-          </Eyebrow>
-          <Lines as="h1" id="hero-title" onLoad className="d h1 hero__title" parts={hero.title} />
+          {/* o selo da academia à esquerda do "Opening soon" (a página não tem navbar) */}
+          <div className="hero__brand">
+            <img src="/img/badge-112.webp" srcSet="/img/badge-112.webp 1x, /img/badge-150.webp 2x" alt={site.name} width={56} height={56} className="hero__logo" />
+            <Eyebrow tone="light" className="hero__eb">
+              {hero.eyebrow}
+            </Eyebrow>
+          </div>
+          {/* o título com o SELO azul batido no canto de cima à direita (gramática do
+              carimbo da Collective, com o nosso selo): disco cheio azul GB, anel
+              "Founding Members" girando, $87 no centro */}
+          <div className="hero__titlebox">
+            <Lines as="h1" id="hero-title" onLoad className="d h1 hero__title" parts={hero.title} />
+            <p className="hero__seal">
+              <span className="sr-only">
+                {hero.offer.label}: {hero.offer.price} {hero.offer.per}
+              </span>
+              <svg viewBox="0 0 100 100" aria-hidden="true">
+                <defs>
+                  <path id="hero-seal-ring" d="M50 12a38 38 0 1 1 0 76 38 38 0 1 1 0-76" fill="none" />
+                </defs>
+                <circle cx="50" cy="50" r="50" className="hero__seal-disc" />
+                <circle cx="50" cy="50" r="44" className="hero__seal-line" />
+                <circle cx="50" cy="50" r="31" className="hero__seal-line" />
+                <g className="hero__seal-ring">
+                  <text>
+                    <textPath href="#hero-seal-ring" textLength="236" lengthAdjust="spacing">{`${hero.offer.label} · ${hero.offer.label} · `}</textPath>
+                  </text>
+                </g>
+              </svg>
+              <span className="hero__seal-core" aria-hidden="true">
+                <b className="d">{hero.offer.price}</b>
+                <span>{hero.offer.per}</span>
+              </span>
+            </p>
+          </div>
           <p className="hero__lead rise rise--load" style={{ ['--d' as string]: '300ms' }}>
             {hero.lead}
           </p>
@@ -123,10 +154,14 @@ export function Hero() {
             <Cta origin="hero" size="block">
               {hero.cta}
             </Cta>
-            {/* a oferta embaixo do botão, pequena e discreta */}
-            <p className="hero__note">
-              <Tri />
-              <span>{hero.offerLine}</span>
+            {/* os benefícios embaixo do botão */}
+            <p className="hero__perks">
+              {hero.offer.perks.map((p) => (
+                <span key={p}>
+                  <Check />
+                  {p}
+                </span>
+              ))}
             </p>
           </div>
         </div>

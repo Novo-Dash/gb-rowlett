@@ -1,6 +1,6 @@
 import { UX } from '@/lib/ux'
 import { getAttribution, getSourceLabel, isGhlReturnVisit, toE164 } from './attribution'
-import { BOOKING_WEBHOOK, LEAD_WEBHOOK, client } from './config'
+import { BOOKING_WEBHOOK, LEAD_BACKUP_WEBHOOK, LEAD_WEBHOOK, client } from './config'
 import { timeLabel, type Program } from './programs'
 import type { Audience } from './types'
 
@@ -31,13 +31,18 @@ function post(url: string, payload: unknown) {
   }).catch(() => {})
 }
 
+/** Backup copy of a webhook body in the Novo Dash app, so a lead survives a GHL outage. Fire and forget. */
+export function backupLead(payload: Record<string, unknown>) {
+  post(LEAD_BACKUP_WEBHOOK, { ...payload, location_id: client.ghl.locationId })
+}
+
 /** Webhook 1: the lead, the moment someone leaves step 1. */
 export function sendLead(data: BookingData, program: Program | null, source: string, extra: Record<string, unknown> = {}) {
   if (isGhlReturnVisit()) return
   const [first = '', ...rest] = data.fullName.trim().split(/\s+/)
   const audience = program?.audience ?? data.preferredAudience
   const child = data.childName.trim()
-  post(LEAD_WEBHOOK, {
+  const payload = {
     event: 'lead_captured',
     name: data.fullName.trim(),
     firstName: first,
@@ -52,7 +57,9 @@ export function sendLead(data: BookingData, program: Program | null, source: str
     source: getSourceLabel(source),
     ...getAttribution(),
     ...extra,
-  })
+  }
+  post(LEAD_WEBHOOK, payload)
+  backupLead(payload)
 }
 
 /**
@@ -61,7 +68,7 @@ export function sendLead(data: BookingData, program: Program | null, source: str
  */
 export function sendBooking(data: BookingData, program: Program, source: string) {
   const child = data.childName.trim()
-  post(BOOKING_WEBHOOK, {
+  const payload = {
     parent_name: data.fullName.trim(),
     ...(program.audience === 'kids' && child ? { child_name: child } : {}),
     email: data.email.trim(),
@@ -72,5 +79,7 @@ export function sendBooking(data: BookingData, program: Program, source: string)
     appointment_date: data.date,
     appointment_time: timeLabel(data.time),
     source,
-  })
+  }
+  post(BOOKING_WEBHOOK, payload)
+  backupLead(payload)
 }
