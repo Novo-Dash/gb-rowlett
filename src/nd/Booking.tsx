@@ -32,7 +32,7 @@ import { captureAttribution, formatPhone, getAttribution, getSourceLabel, isGhlR
 import { LEAD_WEBHOOK, client } from './config'
 import { dateKey, fetchPrograms, groupPrograms, isWaitlist, labelOf, longDate, noteOf, optionHint, parseKey, shortName, timeLabel, type Program } from './programs'
 import { adsConversion, fbTrack, gaTrack, identify } from './tracking'
-import { sendBooking, sendLead as sendLiveLead, type BookingData } from './webhook'
+import { backupLead, sendBooking, sendLead as sendLiveLead, type BookingData } from './webhook'
 
 type Ctx = { open: (hint?: BookingHint) => void; close: () => void; isOpen: boolean }
 const BookingContext = createContext<Ctx | null>(null)
@@ -798,6 +798,7 @@ async function sendFoundingLead(d: Data, origin: string): Promise<boolean> {
     return true
   }
   if (isGhlReturnVisit()) return true
+  backupLead(payload)
   try {
     const r = await fetch(LEAD_WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), keepalive: true })
     return r.ok

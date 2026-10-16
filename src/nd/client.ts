@@ -22,7 +22,7 @@ export default {
   },
   "ghl": {
     "locationId": "tSFdGfOzOGpfMR97gufl",
-    "leadWebhookUuid": ""
+    "leadWebhookUuid": "jQzgFnMtiWeM5IaFK40N"
   },
   "copy": {
     "eyebrow": "Founding Members",
@@ -36,10 +36,10 @@ export default {
   "source": "Landing Page - Founding Members",
   "tracking": {
     "pixel": "",
-    "ga4": "",
-    "ads": "",
-    "adsLeadLabel": "",
-    "adsBookedLabel": "",
+    "ga4": "G-Y6KM08G190",
+    "ads": "AW-18496862973",
+    "adsLeadLabel": "X42ECMCW85cdEP31_vNE",
+    "adsBookedLabel": "ppqxCMOW85cdEP31_vNE",
     "clarity": ""
   },
   "booking": {
