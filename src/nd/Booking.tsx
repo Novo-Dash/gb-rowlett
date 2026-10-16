@@ -59,8 +59,9 @@ export function BookingProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     captureAttribution()
-    // aquece a lista de turmas: o modal abre com ela pronta (sem Location ID, volta vazia na hora)
-    fetchPrograms().catch(() => {})
+    // aquece a lista de turmas: o modal abre com ela pronta (sem Location ID, volta vazia na hora).
+    // Em leadOnly (pré-abertura) o GHL nem é consultado: o funil é só o pré-cadastro.
+    if (!client.booking.leadOnly) fetchPrograms().catch(() => {})
   }, [])
 
   const value = useMemo(() => ({ open, close, isOpen: hint !== null }), [open, close, hint])
