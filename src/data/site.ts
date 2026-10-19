@@ -30,9 +30,10 @@ export const site = {
   url: 'https://gbrowlett.com',
   /** [CONFIRMAR] @gbrowlett existe? null = pendência, nunca ícone vazio. (§20 #15) */
   socials: { instagram: 'https://www.instagram.com/gbrowlett/' as string | null, facebook: null as string | null },
-  /** [CONFIRMAR] data e hora da abertura. null = contador não aparece. (§20 #1) */
-  openingISO: null as string | null,
-  openingLabel: null as string | null,
+  /** Abertura: 7 de dezembro de 2026, 9h (Chicago). Liga o contador, o carimbo de dias
+      na oferta e o desligamento automático da oferta depois da data (prerender). (§20 #1) */
+  openingISO: '2026-12-07T09:00:00-06:00' as string | null,
+  openingLabel: 'December 7' as string | null,
   /** [CONFIRMAR] primeira aula. (§20 #1) */
   firstClassesLabel: null as string | null,
   /** O filme do hero: o b-roll da obra existe (IMG_1600/1601.MOV em Obras GB) mas
@@ -374,9 +375,9 @@ export const opening = {
   eyebrow: 'Opening day',
   title: [{ text: 'The doors open in' }],
   units: ['days', 'hours', 'min', 'sec'] as const,
-  /** [CONFIRMAR] contador PROVISÓRIO de 30 dias (pedido do Adryan em 09/10/2026), só nesta seção:
-      não liga a data de abertura do site (site.openingISO), que segue null. Trocar pela data real. */
-  countdownISO: '2026-11-08T09:00:00-06:00',
+  /** Reserva do contador quando site.openingISO for null (foi o provisório de 30 dias até 8 nov 2026);
+      com a data real em site.openingISO, a seção usa a real. Mantido igual à abertura. */
+  countdownISO: '2026-12-07T09:00:00-06:00',
   countdownPending: 'Provisional 30-day countdown · confirm the real opening date',
   register: [
     { term: 'Address', value: '3503 Rowlett Rd, Bldg K, Suite 302' },
@@ -522,8 +523,6 @@ export const form = {
    Resolveu um item? Tire daqui.
    ════════════════════════════════════════════════════════════════════ */
 export const publishWarnings: string[] = [
-  'Opening date: set site.openingISO. Until then the offer has no day counter and never switches off by itself.',
-  'Opening countdown runs to a PROVISIONAL date (opening.countdownISO, 30 days from 9 Oct 2026): replace it with the real opening.',
   'Founding Class seat limit (tiers: seats).',
   'Does the $87 hold for as long as the member keeps training? (pricing.permanent)',
   'Step 2 of "How to reserve": how soon the confirmation text goes out.',
