@@ -362,6 +362,6 @@ html.motion .gbr > .pattern::before {
   color: var(--paper);
   font-weight: 500;
 }
-.gbr .skip:focus {
+.gbr .skip:focus-visible {
   top: 12px;
 }

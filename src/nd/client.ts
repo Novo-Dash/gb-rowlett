@@ -16,7 +16,7 @@ export default {
     "name": "Gracie Barra Rowlett",
     "phone": "(945) 381-1909",
     "address": "3503 Rowlett Rd, Bldg K, Suite 302, Rowlett, TX 75088",
-    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=3503+Rowlett+Rd+Bldg+K+Suite+302%2C+Rowlett%2C+TX+75088",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Gracie+Barra+Rowlett%2C+3503+Rowlett+Rd+Bldg+K+Suite+302%2C+Rowlett%2C+TX+75088",
     "logo": "/img/logo-160.webp",
     "photo": "/img/build-2-640.webp"
   },

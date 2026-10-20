@@ -39,11 +39,12 @@ export const site = {
   /** O filme do hero: o b-roll da obra existe (IMG_1600/1601.MOV em Obras GB) mas
       ainda não chegou em brand/video (>10 MB no conector). Poster AVIF até lá. (§20 #19) */
   heroFilm: { mobile: null as string | null, desktop: null as string | null },
-  /** Embed do Maps no endereço exato (destino final do redirect, responde 200). */
-  mapsEmbedSrc:
-    'https://www.google.com/maps/embed?origin=mfe&pb=!1m3!2m1!1s3503+Rowlett+Rd+Bldg+K+Suite+302,+Rowlett,+TX+75088!6i16',
+  /** Mapa e rota pelo PERFIL DA EMPRESA no Google ("Gracie Barra Rowlett"), não pelo
+      endereço: o endereço cai na Rowlett Rd, e a academia faz frente para a Miller Rd
+      (pedido do cliente, 20 out 2026). O pino do perfil quem controla é o dono. */
+  mapsEmbedSrc: 'https://www.google.com/maps/embed?origin=mfe&pb=!1m3!2m1!1sGracie+Barra+Rowlett,+Rowlett,+TX!6i16',
   directionsHref:
-    'https://www.google.com/maps/dir/?api=1&destination=3503+Rowlett+Rd+Bldg+K+Suite+302,+Rowlett,+TX+75088',
+    'https://www.google.com/maps/dir/?api=1&destination=Gracie+Barra+Rowlett%2C+3503+Rowlett+Rd+Bldg+K+Suite+302%2C+Rowlett%2C+TX+75088',
   coachName: 'Andre Carepa',
   coachYears: 27,
 }
@@ -51,7 +52,7 @@ export const site = {
 /* ── A oferta ──────────────────────────────────────────────────────── */
 export const pricing = {
   founding: { amount: 87, period: 'every two weeks', enrollment: 0 },
-  standard: { amount: 107, period: 'every two weeks', enrollment: 47 },
+  standard: { amount: 107, period: 'every two weeks', enrollment: 47, uniform: 199 },
   adultsAccess: 'unlimited',
   kidsAccess: 'unlimited',
   /** [CONFIRMAR] preço da família, com número. (§20 #7) */
@@ -85,7 +86,7 @@ export const tiers: Tier[] = [
     seats: 50,
     claimed: 3, // vagas já tomadas (Adryan, 9 out 2026); atualizar à mão conforme entram
     perk: { title: 'Gracie Barra uniform included', short: 'Uniform included' },
-    perks: ['$87 every two weeks', 'No enrollment fee', 'Gracie Barra uniform included'],
+    perks: ['$87 every two weeks', '$0 enrollment fee (save $47)', 'Gracie Barra uniform included ($199 value)'],
     note: 'The first fifty people to join before the doors open.',
   },
   {
@@ -148,24 +149,37 @@ export const marquee = {
 
 /* ── II · Oferta de fundação ───────────────────────────────────────── */
 export const offer = {
-  eyebrow: 'The founding offer',
-  title: [{ text: 'Founding Members' }],
-  body: 'Founding Members pay $87 every two weeks with no enrollment fee. Once we open, the standard rate is $107 every two weeks plus a $47 enrollment fee. Adults and kids train unlimited.',
+  /* Copy do cliente (20 out 2026), sem travessões. Três alavancas: exclusividade
+     (só para membros fundadores), valor percebido (uniforme de $199 + matrícula de $47
+     eliminada) e contraste (o que custa depois da abertura, já somado). */
+  eyebrow: 'Founding members only',
+  title: [{ text: 'The first 50 spots.' }],
+  body: 'Join before the doors open and lock in the founding member rate. Adults and kids train unlimited.',
   passLabel: 'Founding Member pass: The First 50 and The Founding Class',
   openPill: 'Open now',
   lockedPill: 'Opens next',
   seatsLabel: (n: number) => `${n} seats`,
-  takenLabel: (c: number, s: number) => `${c} of ${s} taken`,
-  leftLabel: (n: number) => `${n} left`,
+  claimedLabel: (c: number, s: number) => `${c} of ${s} claimed`,
+  leftLabel: (n: number) => `${n} spots remaining`,
+  seatsIntro: 'Only 50 founding member spots available',
   claimedPending: 'First 50 spots already taken: number to confirm',
-  ticketCta: 'Claim a First 50 spot',
+  ticketCta: 'Claim your founding member spot',
   /** O canhoto II: o preço é o mesmo; o que muda é o perk. */
   lockedSamePrice: 'Same $87 every two weeks · No enrollment fee',
   comingSoon: 'Coming soon',
   priceLine: '$87',
   pricePer: 'every two weeks',
+  rateLine: 'Lock in our founding member rate',
   enrollmentLine: 'No enrollment fee',
-  compare: { label: 'After opening', founding: '$87', standard: '$107', per: 'every two weeks', plus: '+ $47 enrollment fee' },
+  /** Cada benefício com o valor ao lado: o visitante não precisa fazer conta. */
+  value: [
+    { text: 'Gracie Barra uniform included', tag: '$199 value' },
+    { text: '$0 enrollment fee', tag: 'Save $47' },
+    { text: 'Special founding member pricing', tag: null },
+  ] as Array<{ text: string; tag: string | null }>,
+  valueTotal: { label: 'Get', amount: '$246', rest: 'in upfront value' },
+  compare: { label: 'After opening', standard: '$107', per: 'every two weeks', plus: '+ $47 enrollment fee + $199 uniform' },
+  fine: 'Founding member offer available for a limited number of spots.',
   stamp: { ring: 'Doors open in · ', label: 'days', sr: 'days to opening' },
 }
 
@@ -257,6 +271,15 @@ export const build = {
     { id: 'doors', image: 'build-4', title: 'New walls and a doorway, drywall still unpainted' },
     { id: 'front', image: 'build-5', title: 'The storefront with the Gracie Barra Jiu-Jitsu & Self-Defense sign installed' },
   ] as const,
+  /** A fase da pintura (fotos do cliente, 20 out 2026): a fileira de cima, a mais recente. */
+  latest: [
+    { id: 'painted', image: 'build-6', title: 'The main training room with the ceiling painted black and the walls white' },
+    { id: 'painter', image: 'build-7', title: 'A painter on a scaffold spraying the ceiling black' },
+    { id: 'wide', image: 'build-8', title: 'The open training floor with scaffolds and paint buckets, ceiling freshly painted' },
+    { id: 'spray', image: 'build-9', title: 'Painting the ceiling while the floor is still covered' },
+    { id: 'black-doors', image: 'build-10', title: 'New doors painted black, tape still on the frames' },
+  ] as const,
+  rowsLabel: { latest: 'The build now: painting', earlier: 'The build earlier: sign, walls and drywall' },
   /** As razões de "why us", só o título (tópicos). */
   plates: ['Beginners are the plan, not the exception.', 'One trip for the whole family.'],
   cta: 'Claim my Founding Member spot',
@@ -408,7 +431,7 @@ export const faq = {
     { q: 'Am I locked into a contract? What if I need to pause?', a: null, pending: 'Contract, cancellation notice, pause rule (§20 #6)' },
     { q: 'Am I charged when I pre-register? When do you open?', a: "We're opening soon in Rowlett, and Founding Members hear the date first.", pending: 'Is anything charged at pre-registration? (§20 #5)' },
     { q: "My teen is 15. Kids' class or adults'?", a: '15- and 16-year-olds train in the adult class, learning the same curriculum.', pending: 'Sparring pairing rule for teens (§20 #12)' },
-    { q: "Do you have a women's class?", a: "Not at launch, but it's in our plans. Women are welcome in Adults All Levels, and you can tell us you're interested on the form.", pending: 'Andre approves this answer (§20 #13)' },
+    { q: "Do you have a women's class?", a: "Not at launch, but it's in our plans. Women are welcome in Adults All Levels.", pending: 'Andre approves this answer (§20 #13)' },
     { q: 'How much does a family pay?', a: null, pending: 'Family price, with the number (§20 #7)' },
   ] satisfies FaqItem[],
   cta: 'Claim my Founding Member spot',
@@ -465,8 +488,6 @@ export const form = {
     namePlaceholder: 'Your full name',
     phonePlaceholder: '(555) 555-0100',
     emailPlaceholder: 'you@email.com',
-    women: "I'm interested in a future women's class", // [CONFIRMAR] (§20 #13)
-    womenPending: "Women's-class interest field: Andre approves",
     errors: {
       name: 'Please enter your full name.',
       email: 'Please enter a valid email address.',

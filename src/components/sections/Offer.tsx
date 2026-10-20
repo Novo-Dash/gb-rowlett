@@ -28,7 +28,7 @@ import { useInView } from '@/motion/inview'
 import { trackViewContent } from '@/track'
 import { Cta } from '../ui/Cta'
 import { Eyebrow } from '../ui/Eyebrow'
-import { Lock, Tri } from '../ui/Icons'
+import { Lock, Tri, Check } from '../ui/Icons'
 import { Lines } from '../ui/Lines'
 import { Pending } from '../ui/Pending'
 import { Stamp } from '../ui/Stamp'
@@ -91,16 +91,30 @@ function OpenHalf({ tier, days }: { tier: Tier; days: number | null }) {
           <span className="tk__amount d">{offer.priceLine}</span>
           <span className="tk__per">{offer.pricePer}</span>
         </p>
-        <p className="tk__enroll d">{offer.enrollmentLine}</p>
-        <p className="tk__perk">
-          <Tri />
-          <span>{tier.perk.title}</span>
+        <p className="tk__rate d">{offer.rateLine}</p>
+        {/* o valor de cada benefício ao lado, e o total como numa nota: sem conta de cabeça */}
+        <ul className="tk__value">
+          {offer.value.map((v) => (
+            <li key={v.text}>
+              <span className="tk__check" aria-hidden="true">
+                <Check />
+              </span>
+              <span className="tk__vtext">{v.text}</span>
+              {v.tag ? <span className="tk__tag label">{v.tag}</span> : null}
+            </li>
+          ))}
+        </ul>
+        <p className="tk__total">
+          <span className="label">{offer.valueTotal.label}</span>
+          <b className="d">{offer.valueTotal.amount}</b>
+          <span className="d">{offer.valueTotal.rest}</span>
         </p>
         <div className="tk__seats">
+          <p className="tk__seatintro">{offer.seatsIntro}</p>
           <div className="tk__seatrow label">
             {tier.seats !== null && tier.claimed !== null ? (
               <>
-                <span>{offer.takenLabel(tier.claimed, tier.seats)}</span>
+                <span>{offer.claimedLabel(tier.claimed, tier.seats)}</span>
                 <span>{offer.leftLabel(left ?? 0)}</span>
               </>
             ) : (
@@ -128,11 +142,11 @@ function OpenHalf({ tier, days }: { tier: Tier; days: number | null }) {
       <div className="pass__foot">
         <p className="pass__compare">
           <span className="label">{offer.compare.label}</span>
-          <s className="pass__was d">{offer.compare.founding}</s>
           <b className="d">{offer.compare.standard}</b>
           <span>{offer.compare.per}</span>
           <span className="pass__plus">{offer.compare.plus}</span>
         </p>
+        <p className="pass__fine">{offer.fine}</p>
       </div>
     </div>
   )

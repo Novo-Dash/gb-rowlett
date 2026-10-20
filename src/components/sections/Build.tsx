@@ -18,12 +18,10 @@ import { Eyebrow } from '../ui/Eyebrow'
 import { Tri } from '../ui/Icons'
 import { Lines } from '../ui/Lines'
 import { Pending } from '../ui/Pending'
-import { Pic } from '../ui/Pic'
+import { Pic, type MediaName } from '../ui/Pic'
 
 export function Build() {
-  const row = useRef<HTMLUListElement>(null)
   const plates = useRef<HTMLUListElement>(null)
-  useInView(row)
   useInView(plates)
 
   return (
@@ -57,14 +55,9 @@ export function Build() {
         </ul>
       </div>
 
-      <ul ref={row} className="build__row" aria-label="The build, in photos">
-        {build.stages.map((s, i) => (
-          <li key={s.id} className="build__cell" style={{ ['--k' as string]: i }}>
-            <Pic name={s.image} alt={s.title} sizes="(min-width: 1024px) 45vw, (min-width: 768px) 20vw, 50vw" />
-            <span className="build__veil" aria-hidden="true" />
-          </li>
-        ))}
-      </ul>
+      {/* duas fileiras: a pintura (a mais recente) em cima, a obra de antes embaixo */}
+      <PhotoRow label={build.rowsLabel.latest} stages={build.latest} />
+      <PhotoRow label={build.rowsLabel.earlier} stages={build.stages} />
 
       <div className="shell">
         <div className="build__cta">
@@ -77,3 +70,20 @@ export function Build() {
   )
 }
 
+type Stage = { id: string; image: MediaName; title: string }
+
+/** Uma fileira de fotos; no desktop com mouse, a apontada cresce (acordeão). */
+function PhotoRow({ label, stages }: { label: string; stages: readonly Stage[] }) {
+  const row = useRef<HTMLUListElement>(null)
+  useInView(row)
+  return (
+    <ul ref={row} className="build__row" aria-label={label}>
+      {stages.map((s, i) => (
+        <li key={s.id} className="build__cell" style={{ ['--k' as string]: i }}>
+          <Pic name={s.image} alt={s.title} sizes="(min-width: 1024px) 45vw, (min-width: 768px) 20vw, 50vw" />
+          <span className="build__veil" aria-hidden="true" />
+        </li>
+      ))}
+    </ul>
+  )
+}

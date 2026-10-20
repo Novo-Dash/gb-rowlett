@@ -230,7 +230,6 @@ function LiveForm({ list, hint, onDone }: { list: Program[]; hint: BookingHint; 
     time: '',
     preferredAudience: '',
   }))
-  const [women, setWomen] = useState(false)
   const leadSent = useRef(false)
   const patch = (next: Partial<BookingData>) => setData((prev) => ({ ...prev, ...next }))
   const program = list.find((p) => p.calendar_id === data.calendarId) ?? null
@@ -282,14 +281,12 @@ function LiveForm({ list, hint, onDone }: { list: Program[]; hint: BookingHint; 
       data={data}
       list={list}
       program={program}
-      women={women}
-      onWomen={setWomen}
       onChange={patch}
       onNext={() => {
         if (!leadSent.current) {
           // Webhook 1 uma vez por sessão; identify antes do Lead (Advanced Matching / Enhanced Conversions)
           leadSent.current = true
-          sendLiveLead(data, program, client.source, { women_interest: women, cta_origin: hint.origin, page: form.page, tier: openTier.id })
+          sendLiveLead(data, program, client.source, { cta_origin: hint.origin, page: form.page, tier: openTier.id })
           if (UX.client) {
             identify(user())
             fbTrack('Lead', { content_category: program?.audience }, user())
@@ -306,14 +303,12 @@ function LiveForm({ list, hint, onDone }: { list: Program[]; hint: BookingHint; 
 }
 
 function LiveStep1({
-  scope, data, list, program, women, onWomen, onChange, onNext,
+  scope, data, list, program, onChange, onNext,
 }: {
   scope: string
   data: BookingData
   list: Program[]
   program: Program | null
-  women: boolean
-  onWomen: (v: boolean) => void
   onChange: (p: Partial<BookingData>) => void
   onNext: () => void
 }) {
@@ -388,10 +383,6 @@ function LiveStep1({
       {needsChild ? (
         <Field ref={childRef} id={`${scope}-child`} label={form.live.child} hint={form.live.childHint} value={data.childName} error={errors.childName} onChange={(e) => edit({ childName: e.target.value })} />
       ) : null}
-      <label className="nd-check">
-        <input type="checkbox" checked={women} onChange={(e) => onWomen(e.target.checked)} />
-        <span>{form.contact.women}</span>
-      </label>
       <div className="nd-stack-xs">
         <button type="submit" className="nd-button">
           {form.live.continue} <Arrow />
@@ -570,7 +561,7 @@ function LiveSuccess({
 
 /* ── FOUNDING: o pré-cadastro da pré-abertura (sem turmas no GHL) ───────── */
 
-type Data = { who: Who | ''; programs: ProgramKey[]; fullName: string; email: string; phone: string; women: boolean; hp: string }
+type Data = { who: Who | ''; programs: ProgramKey[]; fullName: string; email: string; phone: string; hp: string }
 type Step = 1 | 2 | 3 | 'done'
 
 const whoDefaultPrograms = (who: Who, hinted?: ProgramKey): ProgramKey[] => {
@@ -588,7 +579,6 @@ function FoundingForm({ hint, onDone }: { hint: BookingHint; onDone?: () => void
     ...prefillFromUrl(),
     who: hintedWho,
     programs: hintedWho ? whoDefaultPrograms(hintedWho, hint.program) : hint.program ? [hint.program] : [],
-    women: false,
     hp: '',
   }))
   const [errors, setErrors] = useState<Record<string, string>>({})
@@ -745,11 +735,6 @@ function FoundingForm({ hint, onDone }: { hint: BookingHint; onDone?: () => void
           <label htmlFor={`${scope}-hp`}>Company</label>
           <input id={`${scope}-hp`} type="text" tabIndex={-1} autoComplete="off" value={data.hp} onChange={(e) => patch({ hp: e.target.value })} />
         </div>
-        <label className="nd-check">
-          <input type="checkbox" checked={data.women} onChange={(e) => patch({ women: e.target.checked })} />
-          <span>{form.contact.women}</span>
-        </label>
-        <Pending>{form.contact.womenPending}</Pending>
       </div>
       <div className="nd-stack-xs">
         <button type="submit" className="nd-button" disabled={status === 'sending'} aria-busy={status === 'sending'}>
@@ -785,7 +770,6 @@ async function sendFoundingLead(d: Data, origin: string): Promise<boolean> {
     program: d.programs.map((k) => cards.cards.find((p) => p.key === k)?.title ?? k).join(', '),
     audience: d.who === 'me' ? 'adults' : 'kids',
     tier: openTier.id,
-    women_interest: d.women,
     cta_origin: origin,
     page: form.page,
     tags: ['founding-member', `tier-${openTier.id}`, ...d.programs.map((k) => `program-${k}`), 'source'],
