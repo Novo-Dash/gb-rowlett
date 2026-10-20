@@ -52,7 +52,7 @@ export const pricing = {
   founding: { amount: 87, period: 'every two weeks', enrollment: 0 },
   standard: { amount: 107, period: 'every two weeks', enrollment: 47 },
   adultsAccess: 'unlimited',
-  kidsPerWeek: 3,
+  kidsAccess: 'unlimited',
   /** [CONFIRMAR] preço da família, com número. (§20 #7) */
   family: null as string | null,
   /** [CONFIRMAR] o $87 vale enquanto o membro treinar? (§20 #4) */
@@ -149,7 +149,7 @@ export const marquee = {
 export const offer = {
   eyebrow: 'The founding offer',
   title: [{ text: 'Founding Members' }],
-  body: 'Founding Members pay $87 every two weeks with no enrollment fee. Once we open, the standard rate is $107 every two weeks plus a $47 enrollment fee. Adults train unlimited. Kids train 3 classes a week.',
+  body: 'Founding Members pay $87 every two weeks with no enrollment fee. Once we open, the standard rate is $107 every two weeks plus a $47 enrollment fee. Adults and kids train unlimited.',
   passLabel: 'Founding Member pass: The First 50 and The Founding Class',
   openPill: 'Open now',
   lockedPill: 'Opens next',
