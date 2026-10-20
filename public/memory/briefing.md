@@ -3,7 +3,7 @@
 ## Cliente
 
 **Gracie Barra Rowlett** — unidade afiliada Gracie Barra, **ainda não aberta**.
-3503 Rowlett Rd, Bldg K, Suite 302, Rowlett, TX 75088 · (945) 385-9359 · info@gbrowlett.com `[CONFIRMAR domínio]`.
+3503 Rowlett Rd, Bldg K, Suite 302, Rowlett, TX 75088 · (945) 381-1909 · info@gbrowlett.com `[CONFIRMAR domínio]`.
 Instrutor: **Andre Carepa**, 27 anos de jiu-jitsu. Nas fotos do Drive (pasta `10-08`, 7 out 2026) ele aparece de **faixa-preta** num tatame Gracie Barra; faixa, linhagem e datas continuam `[CONFIRMAR]` por escrito.
 
 Sem site, sem reviews, sem alunos. O que existe: a obra (fachada com letreiro instalado, salão em drywall), o instrutor, a grade de horários e uma oferta de fundação com preço publicado.

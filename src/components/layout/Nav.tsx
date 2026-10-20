@@ -1,7 +1,7 @@
 /* ════════════════════════════════════════════════════════════════════
    Nav — o cartão branco flutuante (a gramática da Lindale v2).
 
-     ( ≡    [selo GB]    ☎ (945) 385-9359 )
+     ( ≡    [selo GB]    ☎ (945) 381-1909 )
 
    • Cartão de 880px máx, 52/60px, raio 14px (a ÚNICA exceção ao canto reto,
      por ser objeto flutuante), backdrop-filter (o único vidro da página).
