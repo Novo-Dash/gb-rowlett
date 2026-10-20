@@ -35,12 +35,12 @@ export default {
   },
   "source": "Landing Page - Founding Members",
   "tracking": {
-    "pixel": "",
+    "pixel": "1470877374939480",
     "ga4": "G-Y6KM08G190",
     "ads": "AW-18496862973",
     "adsLeadLabel": "X42ECMCW85cdEP31_vNE",
     "adsBookedLabel": "ppqxCMOW85cdEP31_vNE",
-    "clarity": ""
+    "clarity": "z0utcbndzc"
   },
   "booking": {
     "audience": null,
