@@ -23,9 +23,9 @@ export const site = {
     line2: 'Rowlett, TX 75088',
     full: '3503 Rowlett Rd, Bldg K, Suite 302, Rowlett, TX 75088',
   },
-  phone: '(945) 385-9359',
-  phoneHref: 'tel:+19453859359',
-  smsHref: 'sms:+19453859359',
+  phone: '(945) 381-1909',
+  phoneHref: 'tel:+19453811909',
+  smsHref: 'sms:+19453811909',
   email: 'info@gbrowlett.com', // [CONFIRMAR domínio da LP] (§20 #16)
   url: 'https://gbrowlett.com',
   /** [CONFIRMAR] @gbrowlett existe? null = pendência, nunca ícone vazio. (§20 #15) */
@@ -486,7 +486,7 @@ export const form = {
     channelPending: 'Confirmation channel and timing (§20 #9)',
     done: 'Done',
   },
-  error: "That didn't go through. Call or text (945) 385-9359 and we'll hold your spot.",
+  error: "That didn't go through. Call or text (945) 381-1909 and we'll hold your spot.",
   close: 'Close',
   page: 'gbr-grand-opening',
   /** Com turmas ativas no GHL (Location ID configurado): o agendamento da especificação
